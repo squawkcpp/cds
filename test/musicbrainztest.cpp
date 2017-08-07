@@ -13,12 +13,11 @@
     License along with this library; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-
 #include <string>
 #include <map>
 
-#include "../_utils.h"
-#include "../modules/mod_albums.h"
+#include "../src/_utils.h"
+#include "../src/modules/mod_albums.h"
 
 #include <gtest/gtest.h>
 

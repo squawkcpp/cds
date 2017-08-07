@@ -22,6 +22,12 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     add_definitions(-std=c++14)
 endif()
 
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    add_definitions(-DSPDLOG_TRACE_ON)
+    add_definitions(-DSPDLOG_DEBUG_ON)
+    add_definitions(-DDEBUG)
+endif(CMAKE_BUILD_TYPE MATCHES Debug)
+
 #add headers for editor
 FILE(GLOB_RECURSE HeaderFiles "${PROJECT_SOURCE_DIR}/src/*.h")
 add_custom_target(cds_headers SOURCES ${HeaderFiles})
@@ -36,7 +42,6 @@ include(cmake/external/re2.cmake)
 include(cmake/external/gtest.cmake)
 include(cmake/external/asio.cmake)
 include(cmake/external/fmt.cmake)
-include(cmake/external/easylogging.cmake)
 include(cmake/external/lightning.cmake)
 include(cmake/external/rapidjson.cmake)
 include(cmake/external/rapidxml_ns.cmake)
@@ -46,9 +51,8 @@ include(cmake/external/spdlog.cmake)
 include(cmake/external/easyexif.cmake)
 
 SET( INCLUDES ${INCLUDES} ${GTEST_INCLUDE_DIR} ${FMT_INCLUDE_DIR}
-            ${EASYLOGGING_INCLUDE_DIR} ${RE2_INCLUDE_DIR} ${ASIO_INCLUDE_DIR}
-            ${LIGHTNING_INCLUDE_DIR} ${RAPIDJSON_INCLUDE_DIR} ${RAPIDXML_INCLUDE_DIR}
-            ${LIBAV_INCLUDE_DIR}
+            ${RE2_INCLUDE_DIR} ${ASIO_INCLUDE_DIR} ${LIGHTNING_INCLUDE_DIR}
+            ${RAPIDJSON_INCLUDE_DIR} ${RAPIDXML_INCLUDE_DIR} ${LIBAV_INCLUDE_DIR}
             ${LIB_IMAGE_INCLUDE_DIR} ${CXXOPTS_INCLUDE_DIR} ${REDOX_INCLUDE_DIR}
             ${SPDLOG_INCLUDE_DIR} ${EXIF_INCLUDE_DIR})
 
@@ -56,31 +60,26 @@ SET( INCLUDES ${INCLUDES} ${GTEST_INCLUDE_DIR} ${FMT_INCLUDE_DIR}
 # -----------------------   Find Dependencies       -----------------------
 # -------------------------------------------------------------------------
 find_package(Boost 1.54.0 COMPONENTS filesystem system)
-#find_package(CURLpp REQUIRED)
 find_package(CURL REQUIRED)
 find_package(PCRE++ REQUIRED)
-find_package(LibXml2 REQUIRED)
-find_package(Sqlite3 REQUIRED)
 find_package(Imlib2 REQUIRED)
 find_package(LibAVCodec COMPONENTS avformat avcodec avfilter avresample avutil )
 find_package(Poppler REQUIRED cpp)
 find_package(OpenSSL REQUIRED)
 find_package(Flac++ REQUIRED)
 find_package(LibArchive REQUIRED)
-find_package(LibSigc++ REQUIRED)
-find_package( OpenCV REQUIRED )
+find_package(OpenCV REQUIRED )
 find_package(Hiredis)
 find_package(Libev)
 find_package(LibMagic)
 find_package(Musicbrainz5)
 
 SET( LIBS ${LIBS}
-    ${Boost_LIBRARIES} ${CURL_LIBRARIES}
-    ${LIBXML2_LIBRARIES} ${SQLITE3_LIBRARY} ${IMLIB2_LIBRARIES}
+    ${Boost_LIBRARIES} ${CURL_LIBRARIES} ${IMLIB2_LIBRARIES}
     ${AVCODEC_LIBRARIES} ${POPPLER_LIBRARIES} ${OPENSSL_LIBRARIES}
     ${FLAC++_LIBRARIES} ${LIBSIGCXX2_LIBRARIES} ${LibArchive_LIBRARIES}
     ${CPP_REDIS_LIBRARIES} ${LIBHIREDIS_LIBRARIES} ${LIBEV_LIBRARIES}
-    ${LibMagic_LIBRARY} ${MUSICBRAINZ5_LIBRARIES}
+    ${LibMagic_LIBRARY} ${MUSICBRAINZ5_LIBRARIES} ${OpenCV_LIBS}
     -lpcrecpp -lpthread -luuid -lswresample -lm -lz
 )
 if(build_tests)
@@ -102,18 +101,18 @@ aux_source_directory( ${PROJECT_SOURCE_DIR}/src CDS_SOURCES )
 aux_source_directory( src/modules/ CDS_SOURCES_MODULES )
 aux_source_directory( src/utils/ CDS_SOURCES_UTILS )
 include_directories( ${INCLUDES} ${GTEST_INCLUDE_DIR})
-add_executable(cds ${UPNP_SOURCES} ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
+add_executable(cds ${PROJECT_SOURCE_DIR}/main.cpp ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
 target_link_libraries(cds re2 lightning redox fmt spdlog LibAvCpp LibImageCpp exif ${LIBS})
 
 # -------------------------------------------------------------------------
 # -----------------------   Manage Test Cases       -----------------------
 # -------------------------------------------------------------------------
 if (build_tests)
-    aux_source_directory( test/ CDS_SOURCES_TEST )
+    aux_source_directory( ${PROJECT_SOURCE_DIR}/test CDS_SOURCES_TEST )
     enable_testing()
     include_directories(${ROOT} ${INCLUDES} ${GTEST_INCLUDE_DIR})
     add_executable(test_cds ${CDS_SOURCES_TEST} ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
     target_link_libraries(test_cds ${GTEST_MAIN_PATH} cxxopts re2 lightning rapidjson rapidxml
         LibAvCpp LibImageCpp redox fmt exif spdlog gtest ${LIBS} )
-    add_test(cds-tests test_cds)
+    add_test(cds_tests test_cds)
 endif()

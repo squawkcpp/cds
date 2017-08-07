@@ -12,8 +12,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef MOD_SERIES_H
-#define MOD_SERIES_H
+#ifndef MOD_IMAGES_H
+#define MOD_IMAGES_H
 
 #include <string>
 
@@ -22,22 +22,14 @@
 
 namespace cds {
 namespace mod {
-
-class ModSeries {
+/** @brief load image information. */
+class ModImages {
 public:
+    /** @brief import and store image. */
     static void import ( data::redis_ptr rdx, const config_ptr config );
-
 private:
-    ModSeries() {}
-
-    static std::string import ( data::redis_ptr rdx, const config_ptr config, const std::string& serie_key, const std::string& serie );
-
-    static std::string tmdb_get ( const std::string& api_key, const std::string& name );
-    static std::string tmdb_episode ( const std::string& api_key, const std::string& serie_id, const std::string& season, const std::string& episode );
-    static std::vector < std::map<std::string, std::string > > tmdb_parse ( const std::string& result );
-    static std::map<std::string, std::string> tmdb_parse_episode ( const config_ptr config, const std::string& result );
-    static void tmdb_fetch ( const std::string& uri, const std::string& path );
+    ModImages() {}
 };
 }//namespace mod
 }//namespace cds
-#endif // MOD_SERIES_H
+#endif // MOD_IMAGES_H

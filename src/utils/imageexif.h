@@ -12,24 +12,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef MOD_MOVIES_H
-#define MOD_MOVIES_H
+#ifndef IMAGEEXIF_H
+#define IMAGEEXIF_H
 
+#include <map>
 #include <string>
 
 #include "../datastore.h"
-#include "../config.h"
 
-namespace cds {
-namespace mod {
-
-class ModMovies {
-public:
-    static void import ( data::redis_ptr redis, const config_ptr config );
-
-private:
-    ModMovies() {}
-};
-}//namespace mod
-}//namespace cds
-#endif // MOD_MOVIES_H
+namespace utils {
+/** @brief load exif information from image and store in node_t. */
+void exif( cds::data::node_t& node /** @param image node to process. */ );
+}//namespace utils
+#endif // IMAGEEXIF_H

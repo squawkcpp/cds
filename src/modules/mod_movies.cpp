@@ -1,3 +1,17 @@
+/*
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "mod_movies.h"
 
 #include "format.h"
@@ -5,40 +19,37 @@
 
 namespace cds {
 namespace mod {
-void ModMovies::import( data::redox_ptr rdx ) {
-    redox::Command<std::unordered_set< std::string > >& c =
-        rdx->commandSync<std::unordered_set< std::string > >( { "SMEMBERS", "type:movie" } );
+void ModMovies::import ( data::redis_ptr redis, const config_ptr config ) {
 
-    if( c.ok() ) {
-        for( const std::string& __c : c.reply() ) {
-            std::map< std::string, std::string > _file = data::node( rdx, __c );
-            std::cout << "parse movie:" << _file[PARAM_PATH] << std::endl;
 
-            //Get the track information
-            av::Format _format( _file[PARAM_PATH] );
-            if( !!_format )
-            {
-                throw _format.errc();
-            }
+    data::nodes ( redis, NodeType::movie, [redis, config] ( const std::string & key ) {
+        data::node_t _node = data::node ( redis, key );
 
-            auto codec = _format.find_codec( av::CODEC_TYPE::VIDEO );
-            rdx->command( {"HMSET",  make_key( KEY_FS, __c ),
-//               av::Metadata::name( av::Metadata::ARTIST ), _artist,
-//               av::Metadata::name( av::Metadata::ARTIST ), _artist,
-//               av::Metadata::name( av::Metadata::ALBUM ), _album,
-//               av::Metadata::name( av::Metadata::YEAR ), _year,
-//               av::Metadata::name( av::Metadata::TRACK ), _track,
-//               av::Metadata::name( av::Metadata::DISC ), _disc,
-//               av::Metadata::name( av::Metadata::GENRE ), _genre,
-                           KEY_BITRATE, std::to_string( codec->bitrate() ),
-                           KEY_BPS, std::to_string( codec->bits_per_sample() ),
-                           KEY_CHANNELS, std::to_string( codec->channels() ),
-                           KEY_WIDTH, std::to_string( codec->width() ),
-                           KEY_HEIGHT, std::to_string( codec->height() )
-                          } );
-            rdx->command( {"SADD",  "fs:movie:list", __c } );
+        //Get the track information
+        av::Format _format ( _node[PARAM_PATH] );
+
+        if ( !!_format ) {
+            spdlog::get ( LOGGER )->warn ( "Can not open movie file:{} ({})",
+                                           _format.errc().message(),
+                                           _node[PARAM_PATH] );
+        } else {
+            auto codec = _format.find_codec ( av::CODEC_TYPE::VIDEO );
+            redis->command ( { REDIS_SET,  data::make_key_node ( key ),
+                //               av::Metadata::name( av::Metadata::ARTIST ), _artist,
+                //               av::Metadata::name( av::Metadata::ARTIST ), _artist,
+                //               av::Metadata::name( av::Metadata::ALBUM ), _album,
+                //               av::Metadata::name( av::Metadata::YEAR ), _year,
+                //               av::Metadata::name( av::Metadata::TRACK ), _track,
+                //               av::Metadata::name( av::Metadata::DISC ), _disc,
+                //               av::Metadata::name( av::Metadata::GENRE ), _genre,
+                KEY_BITRATE, std::to_string ( codec->bitrate() ),
+                KEY_BPS, std::to_string ( codec->bits_per_sample() ),
+                KEY_CHANNELS, std::to_string ( codec->channels() ),
+                KEY_WIDTH, std::to_string ( codec->width() ),
+                KEY_HEIGHT, std::to_string ( codec->height() )
+            });
         }
-    }
+    });
 }
 }//namespace mod
 }//namespace cds

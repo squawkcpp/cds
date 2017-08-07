@@ -17,8 +17,8 @@
 #include <string>
 #include <map>
 
-#include "../_utils.h"
-#include "../utils/amazon.h"
+#include "../src/_utils.h"
+#include "../src/utils/amazon.h"
 
 #include <gtest/gtest.h>
 

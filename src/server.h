@@ -1,3 +1,17 @@
+/*
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #ifndef SERVER_H
 #define SERVER_H
 
@@ -18,28 +32,39 @@
 /** @brief Content Directory Server (CDS) and API implementation. */
 namespace cds {
 
-/** @brief The CDS Server class. */
+/** @brief Content directory server */
 class Server {
 public:
     /** @brief The CDS Server CTOR. */
-    Server( std::shared_ptr< http::Server< http::HttpServer > > web_server, /** @param web_server the server to attach the API uri's. */
-            const std::string& redis, /** @param redis redis host */
-            const short port, /** @param port the redis port. */
-            const std::string& tmp_directory, /** @param tmp_directory temporary directorie for the images */
-            const std::string& tmdb_key, /** @param tmdb_key tmdb API key */
-            const std::string& amazon_access_key, /** @param amazon_access_key amazon access key */
-            const std::string& amazon_key, /** @param tmdb_key amazon API key */
-            const std::vector< std::string >& media /** @param media directories to use for the content directory. */ );
+    Server ( const std::string& redis, /** @param redis redis host */
+             const short port /** @param port the redis port. */ );
+
+    /** @brief get configuration. */
+    http::http_status config ( http::Request& request, http::Response& response );
+    /** @brief rescan media directories. */
+    http::http_status rescan ( http::Request& request, http::Response& response );
+    /** @brief get content directory status. */
+    http::http_status status ( http::Request& request, http::Response& response );
+
+    /** @brief get node item. */
+    http::http_status node ( http::Request& request, http::Response& response );
+    /** @brief get node list. */
+    http::http_status nodes ( http::Request& request, http::Response& response );
+    /** @brief get module node list */
+    http::http_status mod ( http::Request& request, http::Response& response );
+
+    /** @brief get keywords list */
+    http::http_status keywords ( http::Request& request, http::Response& response );
+
+private:
+    data::redis_ptr redis_;
+    config_ptr config_;
+    std::mutex rescan_mutex_;
+    std::unique_ptr< std::thread > scanner_thread_ = nullptr;
+    redox::Subscriber sub_;
 
     /** @brief Rescan the content directory. */
-    void rescan ( CdsConfig& c /** @param c the configuration to use. */, bool flush /** @param flush flush data before scan. */ );
-private:
-    data::redox_ptr redis_;
-    const std::string redis_ip_;
-    const short redis_port_;
-    std::mutex rescan_mutex_;
-    redox::Subscriber sub_;
-    CdsConfig config_;
+    void rescan_ ( bool flush /** @param flush flush data before scan. */ );
 };
 }//namespace cds
 #endif // SERVER_H

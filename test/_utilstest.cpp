@@ -3,9 +3,20 @@
 
 #include <gtest/gtest.h>
 
-#include "../_utils.h"
+#include "../src/_utils.h"
 
 namespace cds {
+
+TEST(UtilsTest, image_scale_factor ) {
+    EXPECT_EQ( .5, image_scale( ECoverSizes::TN, 320, 320 ) );
+    EXPECT_EQ( .5, image_scale( ECoverSizes::TN, 300, 320 ) );
+    EXPECT_EQ( .5, image_scale( ECoverSizes::TN, 320, 300 ) );
+}
+
+TEST(UtilsTest, image_scale_result ) {
+    float _res = image_scale( ECoverSizes::TN, 320, 320 );
+    EXPECT_EQ( 160, (float)320*_res );
+}
 
 TEST(UtilsTest, clean_isbn ) {
     EXPECT_EQ( "123123123123", clean_isbn( "123-123-123-123" ) );
@@ -22,7 +33,7 @@ TEST( UtilsTest, menu ) {
         EXPECT_FALSE( __mod.empty() );
         ++count;
     }
-    EXPECT_EQ( 6, count );
+    EXPECT_EQ( 7, count );
 }
 
 TEST( UtilsTest, is_mod ) {
