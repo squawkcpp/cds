@@ -31,20 +31,31 @@
 
 namespace cds {
 
-//TODO
-static const bool CDS_DEBUG = true;
+#ifdef DEBUG
+    static const bool CDS_DEBUG = true;
+#else
+static const bool CDS_DEBUG = false;
+#endif
 
 static const std::string LOGGER = "cds";
+static const std::string VERSION = CDS_VERSION;
 
-static const std::string REDIS_ADD = "SADD";
-static const std::string REDIS_REM = "SREM";
-static const std::string REDIS_SET = "HMSET";
-static const std::string REDIS_MEMBERS = "SMEMBERS";
-static const std::string REDIS_HGETALL = "HGETALL";
+//TODO move to datastore
+
 static const std::string REDIS_HGET = "HGET";
+static const std::string REDIS_HGETALL = "HGETALL";
+static const std::string REDIS_SET = "HMSET";
+static const std::string REDIS_ADD = "SADD";
 static const std::string REDIS_SCARD = "SCARD";
-static const std::string REDIS_UNION = "SUNION";
+static const std::string REDIS_MEMBERS = "SMEMBERS";
+static const std::string REDIS_SUNION = "SUNION";
+static const std::string REDIS_REM = "SREM";
+static const std::string REDIS_ZADD = "ZADD";
+static const std::string REDIS_ZCARD = "ZCARD";
 static const std::string REDIS_ZRANGE = "ZRANGE";
+static const std::string REDIS_ZREM = "ZREM";
+
+
 
 static const std::string KEY_FS = "fs";
 static const std::string KEY_LIST = "list";
@@ -53,9 +64,11 @@ static const std::string KEY_MIME_LIST = "fs:mime";
 
 static const std::string EVENT_SCANNER = "cds:scanner";
 static const std::string EVENT_RESCAN = "cds:rescan";
+static const std::string EVENT_START = "start";
+static const std::string EVENT_END = "end";
 
-static const std::string VALUE_ROOT = "root";
-static const std::string VALUE_FOLDER = "folder";
+//static const std::string VALUE_ROOT = "root";
+//static const std::string VALUE_FOLDER = "folder";
 
 
 
@@ -186,54 +199,54 @@ private:
 };
 
 //TODO move to utils/image
-// --------------------------------------------------------------------------------------------------
-// --------------------------          image manipulation methods          --------------------------
-// --------------------------------------------------------------------------------------------------
+//// --------------------------------------------------------------------------------------------------
+//// --------------------------          image manipulation methods          --------------------------
+//// --------------------------------------------------------------------------------------------------
 
-///@cond DOC_INTERNAL
-inline double image_scale ( ECoverSizes::Enum type, double width, double height ) {
-    if ( width >= height ) {
-        return ECoverSizes::size( type ) / width;
-    } else { return ECoverSizes::size( type ) / height; }
-}
+/////@cond DOC_INTERNAL
+//inline double image_scale ( ECoverSizes::Enum type, double width, double height ) {
+//    if ( width >= height ) {
+//        return ECoverSizes::size( type ) / width;
+//    } else { return ECoverSizes::size( type ) / height; }
+//}
 
-inline std::string make_cover_uri ( const ECoverSizes::Enum& type, const std::string& key ) {
-    return fmt::format ( "/img/{}_{}.jpg", ECoverSizes::str ( type ), key );
-}
+//inline std::string make_cover_uri ( const ECoverSizes::Enum& type, const std::string& key ) {
+//    return fmt::format ( "/img/{}_{}.jpg", ECoverSizes::str ( type ), key );
+//}
 
-inline std::string make_cover_path ( const std::string& path, const ECoverSizes::Enum& type, const std::string& key ) {
-    return fmt::format ( "{0}/{1}_{2}.jpg", path, ECoverSizes::str ( type ), key );
-}
-///@endcond DOC_INTERNAL
+//inline std::string make_cover_path ( const std::string& path, const ECoverSizes::Enum& type, const std::string& key ) {
+//    return fmt::format ( "{0}/{1}_{2}.jpg", path, ECoverSizes::str ( type ), key );
+//}
+/////@endcond DOC_INTERNAL
 
-/** @brief scale image and keep ratio. */
-inline std::string /** @return image uri */ scale(
-        auto& image /** @param image source image */,
-        const std::string& path /** @param path temporary folder to put images to */,
-        const ECoverSizes::Enum& type /** /@param type target the image type */,
-        const std::string& key /** @param key storage key */ ) {
+///** @brief scale image and keep ratio. */
+//inline std::string /** @return image uri */ scale(
+//        auto& image /** @param image source image */,
+//        const std::string& path /** @param path temporary folder to put images to */,
+//        const ECoverSizes::Enum& type /** /@param type target the image type */,
+//        const std::string& key /** @param key storage key */ ) {
 
-    try {
-        auto _cover_path = make_cover_path( path, type, key );
+//    try {
+//        auto _cover_path = make_cover_path( path, type, key );
 
-        double _width = image.cols;
-        double _height = image.rows;
+//        double _width = image.cols;
+//        double _height = image.rows;
 
-        double _scale = image_scale( type, _width, _height );
-        double _target_width = _width * _scale;
-        double _target_height = _height * _scale;
+//        double _scale = image_scale( type, _width, _height );
+//        double _target_width = _width * _scale;
+//        double _target_height = _height * _scale;
 
-        cv::Mat _target_image;
-        auto _s = cv::Size( _target_width, _target_height );
-        cv::resize( image, _target_image, _s );
-        cv::imwrite( _cover_path, _target_image );
-        return make_cover_uri( type, key );
+//        cv::Mat _target_image;
+//        auto _s = cv::Size( _target_width, _target_height );
+//        cv::resize( image, _target_image, _s );
+//        cv::imwrite( _cover_path, _target_image );
+//        return make_cover_uri( type, key );
 
-    } catch( ... ) {
-        spdlog::get ( LOGGER )->warn ( "error opening image (key:{0})", key );
-        return "/404.jpg"; //TODO
-    }
-}
+//    } catch( ... ) {
+//        spdlog::get ( LOGGER )->warn ( "error opening image (key:{0})", key );
+//        return "/404.jpg"; //TODO
+//    }
+//}
 
 inline std::string remove_skip_list ( const std::vector< std::string >& words, const std::string& s ) {
     std::string _return_value = s;

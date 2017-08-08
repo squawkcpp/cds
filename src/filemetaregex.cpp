@@ -26,7 +26,6 @@ namespace cds {
 
 #define REG_PRE "^(/.*)*/"
 #define REG_TRACK "([A-Z]?[0-9]+)"
-//#define REG_TRACK "[:digit:+|[[:alpha:][:digit:]+]"
 #define REG_ARTIST "(.*)"
 #define REG_ALBUM "(.*)"
 #define REG_YEAR "([0-9]+)"

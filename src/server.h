@@ -59,12 +59,12 @@ public:
 private:
     data::redis_ptr redis_;
     config_ptr config_;
-    std::mutex rescan_mutex_;
+    std::atomic<bool> rescanning_;
     std::unique_ptr< std::thread > scanner_thread_ = nullptr;
     redox::Subscriber sub_;
 
     /** @brief Rescan the content directory. */
-    void rescan_ ( bool flush /** @param flush flush data before scan. */ );
+    void rescan_ ( bool flush, std::function<void( std::error_code& )> fn );
 };
 }//namespace cds
 #endif // SERVER_H

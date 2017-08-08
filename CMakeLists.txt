@@ -22,6 +22,9 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     add_definitions(-std=c++14)
 endif()
 
+add_definitions(-DASIO_STANDALONE)
+add_definitions(-DCDS_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
+
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     add_definitions(-DSPDLOG_TRACE_ON)
     add_definitions(-DSPDLOG_DEBUG_ON)
@@ -116,3 +119,15 @@ if (build_tests)
         LibAvCpp LibImageCpp redox fmt exif spdlog gtest ${LIBS} )
     add_test(cds_tests test_cds)
 endif()
+
+# -------------------------------------------------------------------------
+# -----------------------   Doxygen                 -----------------------
+# -------------------------------------------------------------------------
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+add_custom_target(doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Generating API documentation with Doxygen" VERBATIM
+)
+endif(DOXYGEN_FOUND)

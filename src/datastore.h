@@ -68,30 +68,32 @@ inline redis_ptr make_connection ( const std::string db /** @param db database h
         throw std::system_error ( std::error_code ( 300, std::generic_category() ),
                                   "unable to connect to database on localhost." );
     }
-
-    return std::move ( _redis );
+    return _redis;
 }
+
+/** @brief flush content with prefix */
+inline void flush(  redis_ptr redis /** @param redix the database pointer. */, const std::string& prefix /** @param prefix the prefix. */ )
+{ redis->command ( {"EVAL", "return redis.call('del', unpack(redis.call('keys', ARGV[1])))", "0", fmt::format( "{}:*", prefix ) } ); }
+
 
 /** @brief make node key */
 inline std::string make_key_node ( const std::string& key /** @param key node key. */ ) {
     return make_key ( KEY_FS, key );
 }
 /** @brief make type list key (fs:KEY:TYPE (SET:KEY) ) */
-inline std::string make_key_types ( const std::string& key /** @param key node key. */,
-                                    const NodeType::Enum& type /** @param type node type. */ ) {
-    return cds::make_key ( KEY_FS, key, cds::NodeType::str ( type ) );
+inline std::string make_key_types ( const std::string& key /** @param key node key. */ ) {
+    return cds::make_key( KEY_FS, key, KEY_LIST );
 }
 /** @brief make node list key (fs:TYPE:list (KEY) ) */
 inline std::string make_key_nodes ( const NodeType::Enum& type /** @param type node type. */ ) {
-    return cds::make_key ( KEY_FS, cds::NodeType::str ( type ), KEY_LIST );
+    return cds::make_key( KEY_FS, cds::NodeType::str ( type ), KEY_LIST );
 }
 /** @brief make type list key (fs:TYPE:parent (PARENT KEY) ) */
 inline std::string make_key_folders ( const NodeType::Enum& type /** @param type node type. */ ) {
-    return make_key ( KEY_FS, cds::NodeType::str ( type ), PARAM_PARENT );
+    return make_key( KEY_FS, cds::NodeType::str ( type ), PARAM_PARENT );
 }
 
 inline std::string get( redis_ptr redis, const std::string& key, const std::string param ) {
-
     auto& _item = redis->commandSync< std::string > (
         {REDIS_HGET, data::make_key_node ( key ), param} );
 
@@ -99,6 +101,26 @@ inline std::string get( redis_ptr redis, const std::string& key, const std::stri
         return _item.reply();
 
     return "NaN";
+}
+
+//TODO one of those  is not used
+template< class Fn >
+inline void children( redis_ptr redis, const std::string& key, Fn fn ) {
+    //TOODO COUNTER
+    redox::Command< nodes_t >& _c = redis->commandSync< nodes_t >( {cds::REDIS_ZRANGE, make_key_types( key ), "0", "-1" } );
+    if( _c.ok() ) {
+        for( const std::string& __c : _c.reply() ) {
+            fn( __c );
+        }
+    }
+}
+inline int children_count( redis_ptr redis, const std::string& key ) {
+    redox::Command< int >& _c = redis->commandSync< int >(
+        { cds::REDIS_ZCARD, make_key_types( key ) }
+    );
+    if( _c.ok() )
+    { return _c.reply(); }
+    return 0;
 }
 
 template< class Fn >
@@ -110,26 +132,34 @@ inline void nodes( redis_ptr redis, cds::NodeType::Enum type, Fn fn ) {
         }
     }
 }
+inline int nodes_count( redis_ptr redis, cds::NodeType::Enum type ) {
+    redox::Command< int >& _c = redis->commandSync< int >(
+        { cds::REDIS_ZCARD, make_key_nodes( type ) }
+    );
+    if( _c.ok() )
+    { return _c.reply(); }
+    return 0;
+}
 
 /** @brief add node to parents type list */
-inline void add_types( redis_ptr redis, cds::NodeType::Enum type, const std::string& parent, const std::string& key )
-{ redis->command( {REDIS_ADD,  data::make_key_types( parent, type ), hash( key ) } ); }
+inline void add_types( redis_ptr redis, cds::NodeType::Enum type /* TODO remove*/, const std::string& parent, const std::string& key ) //TODO add score
+{ redis->command( {REDIS_ZADD, data::make_key_types( parent ), "0", hash( key ) } ); }
 /** @brief remove node from parents type list */
-inline void rem_types( redis_ptr redis, cds::NodeType::Enum type, const std::string& parent, const std::string& key )
-{ redis->command( {REDIS_REM,  data::make_key_types( parent, type ), hash( key ) } ); }
+inline void rem_types( redis_ptr redis, cds::NodeType::Enum type /* TODO remove */, const std::string& parent, const std::string& key )
+{ redis->command( {REDIS_ZREM, data::make_key_types( parent ), hash( key ) } ); }
 
 /** @brief add node to global nodes list */
-inline void add_nodes( redis_ptr redis, cds::NodeType::Enum type, const std::string& key )
-{ redis->command( {REDIS_ADD,  data::make_key_nodes( type ), key } ); }
+inline void add_nodes( redis_ptr redis, cds::NodeType::Enum type, const std::string& key ) //TODO add score
+{ redis->command( {REDIS_ZADD,  data::make_key_nodes( type ), "0", key } ); }
 /** @brief remove node from global nodes list */
 inline void rem_nodes( redis_ptr redis, cds::NodeType::Enum type, const std::string& key )
-{ redis->command( {REDIS_REM,  data::make_key_nodes( type ), key } ); }
+{ redis->command( {REDIS_ZREM,  data::make_key_nodes( type ), key } ); }
 
 /** @brief count nodes in set. */
 inline size_t count ( redis_ptr redis /** @param redis redis database pointer. */,
                       const std::string& key /** @param key the node key. */ ) {
 
-    auto& _item = redis->commandSync<int> ( { REDIS_SCARD, key } );
+    auto& _item = redis->commandSync<int> ( { REDIS_ZCARD, key } );
     if ( !_item.ok() )
     { return 0; }
     return ( _item.reply() );

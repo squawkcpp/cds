@@ -113,9 +113,9 @@ void ModAlbums::import ( data::redis_ptr rdx, const config_ptr config ) {
                         boost::to_lower ( _filename );
 
                         if ( std::find (  album_cover_names.begin(),  album_cover_names.end(), _filename ) !=  album_cover_names.end() ) {
-                            rdx->command ( {REDIS_SET, data::make_key_node ( __c ), PARAM_THUMB,
-                                            make_cover_uri ( ECoverSizes::TN, hash ( __file[PARAM_PATH] ) )
-                                           } );
+//TODO                            rdx->command ( {REDIS_SET, data::make_key_node ( __c ), PARAM_THUMB,
+//                                            make_cover_uri ( ECoverSizes::TN, hash ( __file[PARAM_PATH] ) )
+//                                           } );
                         }
 
 
@@ -131,7 +131,7 @@ void ModAlbums::import ( data::redis_ptr rdx, const config_ptr config ) {
                         data::add_types( rdx, NodeType::cover, __c, hash( __file[PARAM_PATH] ) );
                         data::rem_types( rdx, NodeType::image, __c, hash( __file[PARAM_PATH] ) );
                         data::rem_nodes( rdx, NodeType::image, hash( __file[PARAM_PATH] ) );
-                        rdx->command( {REDIS_REM,  data::make_key_types( __c , NodeType::image ), hash( __file[PARAM_PATH] ) } );
+                        //TODO it is the same objet!   rdx->command( {REDIS_REM,  data::make_key_types( __c , hash( __file[PARAM_PATH] ) } );
                     }
                 } else { spdlog::get ( LOGGER )->debug ( "OTHER TYPE: {}", NodeType::str ( __type.first ) ); }
 
@@ -157,10 +157,10 @@ void ModAlbums::import ( data::redis_ptr rdx, const config_ptr config ) {
 
 void ModAlbums::import ( data::redis_ptr rdx, const std::string& key, std::map< NodeType::Enum, std::vector< data::node_t > >& files ) {
     std::vector< std::string > _command;
-    _command.push_back ( REDIS_UNION );
+    _command.push_back ( REDIS_SUNION );
 
     for ( auto& __type : NodeTypes )
-    {  _command.push_back ( data::make_key_types ( key, __type ) ); }
+    {  _command.push_back ( data::make_key_types ( key ) ); }
 
     redox::Command< data::nodes_t >& c =
         rdx->commandSync< data::nodes_t > ( _command );
@@ -198,7 +198,7 @@ void ModAlbums::import ( data::redis_ptr rdx, const std::string& album_key, cons
     //        }
     //    }
     rdx->command ( _commands );
-    rdx->command ( { REDIS_ADD, data::make_key_types ( hash ( _clean_string ), NodeType::album ), hash ( album_key ) } );
+//TODO is is the same object    rdx->command ( { REDIS_ADD, data::make_key_types ( hash ( _clean_string ), NodeType::album ), hash ( album_key ) } );
     rdx->command ( { REDIS_ADD, data::make_key_nodes ( NodeType::artist ), hash ( _clean_string ) } );
 }
 

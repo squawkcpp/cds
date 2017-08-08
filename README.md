@@ -6,6 +6,14 @@
 
 ## restful api:
 
+The REST API allows you to query the content of the directory server.
+
+### Base URL
+
+All URLs referenced in the documentation have the following base:
+
+http://<YOUR_SERVER_IP>:<PORT>
+
 ## databases:
 
 for information retrievel the following database services can be used:

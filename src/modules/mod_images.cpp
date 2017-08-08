@@ -14,8 +14,7 @@
 */
 #include "mod_images.h"
 
-#include <opencv2/opencv.hpp>
-
+#include "../utils/image.h"
 #include "../utils/imageexif.h"
 
 namespace cds {
@@ -24,14 +23,16 @@ void ModImages::import ( data::redis_ptr redis, const config_ptr config ) {
     try {
         data::new_items( redis, NodeType::image, [redis,config]( const std::string& key, data::node_t _node ) {
 
-            cv::Mat _image = cv::imread ( _node[PARAM_PATH], CV_LOAD_IMAGE_COLOR );
+            auto _image = utils::Image( _node[PARAM_PATH] );
 
             //store values
             utils::exif( _node );
-            _node[KEY_WIDTH] = std::to_string ( _image.cols );
-            _node[KEY_HEIGHT] = std::to_string ( _image.rows );
-            _node[ECoverSizes::str ( ECoverSizes::MED )] = scale ( _image, config->tmp_directory, ECoverSizes::MED, key );
-            _node[ECoverSizes::str ( ECoverSizes::TN )] = scale ( _image, config->tmp_directory, ECoverSizes::TN, key );
+
+            _node[KEY_WIDTH] = std::to_string ( _image.width() );
+            _node[KEY_HEIGHT] = std::to_string ( _image.height() );
+            _node[ECoverSizes::str ( ECoverSizes::MED )] = _image.scale( config->tmp_directory, ECoverSizes::MED, key );
+            _node[ECoverSizes::str ( ECoverSizes::TN )] = _image.scale( config->tmp_directory, ECoverSizes::TN, key );
+
             data::save( redis, key, _node );
             data::add_nodes( redis, NodeType::image, key );
 
@@ -39,11 +40,7 @@ void ModImages::import ( data::redis_ptr redis, const config_ptr config ) {
             if( _node.find( PARAM_MAKE ) != _node.end() && !_node[PARAM_MAKE].empty() )
             { data::keyword( redis, PARAM_MAKE, _node[PARAM_MAKE], NodeType::image, key, 0 ); }
             //save parent name keyword
-            std::string _name = data::get( redis, _node[PARAM_PARENT], PARAM_NAME );
-            data::keyword( redis,
-                             PARAM_NAME,
-                             _name,
-                             NodeType::image, key, 0 );
+            data::keyword( redis, PARAM_NAME, data::get( redis, _node[PARAM_PARENT], PARAM_NAME ), NodeType::image, key, 0 );
         });
     } catch ( ... ) {
         spdlog::get ( LOGGER )->error ( "exception mod images." );
