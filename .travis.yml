@@ -4,10 +4,14 @@ nguage: cpp
 addons:
   apt:
     sources: 
+      - george-edison55-precise-backports
       - ubuntu-toolchain-r-test
     packages:
+      - cmake
+      - cmake-data
       - g++-4.9
       - g++-5
+
   coverity_scan:
     project:
       name: "ChaiScript/ChaiScript"
