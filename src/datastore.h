@@ -143,7 +143,7 @@ inline int nodes_count( redis_ptr redis, cds::NodeType::Enum type ) {
 
 /** @brief add node to parents type list */
 inline void add_types( redis_ptr redis, cds::NodeType::Enum type /* TODO remove*/, const std::string& parent, const std::string& key ) //TODO add score
-{ redis->command( {REDIS_ZADD, data::make_key_types( parent ), "0", hash( key ) } ); }
+{ redis->command( {REDIS_ZADD, data::make_key_types( parent ), "0", key } ); }
 /** @brief remove node from parents type list */
 inline void rem_types( redis_ptr redis, cds::NodeType::Enum type /* TODO remove */, const std::string& parent, const std::string& key )
 { redis->command( {REDIS_ZREM, data::make_key_types( parent ), hash( key ) } ); }
@@ -175,7 +175,7 @@ inline node_t node ( redis_ptr redis /** @param redis redis database pointer. */
 }
 
 inline void save( redis_ptr redis, const std::string& key, node_t& node ) {
-    types_t _command = { REDIS_SET, make_key_node ( key ) };
+    types_t _command = { REDIS_SET, make_key_node ( key) };
     for ( auto __i : node ) {
         _command.push_back ( __i.first );
         _command.push_back ( __i.second );
@@ -239,7 +239,7 @@ inline void new_items( redis_ptr redis, const NodeType::Enum type, auto fn ) {
 
     if( _c.ok() ) {
         for( const std::string& __c : _c.reply() ) {
-            fn( __c,  data::node ( redis, __c ) );
+            fn( __c );
             redis->command( {REDIS_REM, make_key( KEY_FS, "new", NodeType::str( type ) ), __c } );
         }
     }

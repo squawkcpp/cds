@@ -21,8 +21,8 @@ namespace cds {
 namespace mod {
 void ModImages::import ( data::redis_ptr redis, const config_ptr config ) {
     try {
-        data::new_items( redis, NodeType::image, [redis,config]( const std::string& key, data::node_t _node ) {
-
+        data::new_items( redis, NodeType::image, [redis,config]( const std::string& key ) {
+            data::node_t _node = data::node( redis, key );
             auto _image = utils::Image( _node[PARAM_PATH] );
 
             //store values

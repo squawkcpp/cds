@@ -98,10 +98,9 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
             _node[KEY_EXTENSION] = boost::filesystem::extension ( itr->path() );
             _node[KEY_SIZE] = std::to_string ( boost::filesystem::file_size ( itr->path() ) );
             _node[KEY_MIME_TYPE] = _mime_type;
+
             data::save( redis, hash( _item_filepath ), _node );
-
             data::incr_mime ( redis, _mime_type );
-
             data::new_item(redis, cds::hash ( parent_key ), cds::hash ( _item_filepath ), _type );
 
         } else if ( boost::filesystem::is_directory ( itr->status() ) ) {
