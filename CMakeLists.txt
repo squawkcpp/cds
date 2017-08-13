@@ -1,5 +1,5 @@
 # -------------------------------------------------------------------------
-# Build content directory server
+# Build squawk content directory server
 # -------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.3)
 
