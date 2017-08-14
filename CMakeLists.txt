@@ -75,14 +75,14 @@ find_package(OpenCV REQUIRED )
 find_package(Hiredis)
 find_package(Libev)
 find_package(LibMagic)
-find_package(Musicbrainz5)
+# find_package(Musicbrainz5)
 
 SET( LIBS ${LIBS}
     ${Boost_LIBRARIES} ${CURL_LIBRARIES} ${IMLIB2_LIBRARIES}
     ${AVCODEC_LIBRARIES} ${POPPLER_LIBRARIES} ${OPENSSL_LIBRARIES}
     ${FLAC++_LIBRARIES} ${LIBSIGCXX2_LIBRARIES} ${LibArchive_LIBRARIES}
     ${CPP_REDIS_LIBRARIES} ${LIBHIREDIS_LIBRARIES} ${LIBEV_LIBRARIES}
-    ${LibMagic_LIBRARY} ${MUSICBRAINZ5_LIBRARIES} ${OpenCV_LIBS}
+    ${LibMagic_LIBRARY} ${OpenCV_LIBS} #${MUSICBRAINZ5_LIBRARIES}
     -lpcrecpp -lpthread -luuid -lswresample -lm -lz
 )
 if(build_tests)
@@ -94,7 +94,7 @@ SET( INCLUDES ${INCLUDES}
     ${SQLITE3_INCLUDE_DIR} ${IMLIB2_INCLUDE_DIR} ${AVCODEC_INCLUDES}
     ${OPENSSL_INCLUDES} ${FLAC++_INCLUDE_DIR} ${PCREPP_INCLUDE_DIR}
     ${LIBSIGCXX2_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS}
-    ${LibMagic_INCLUDE_DIR} ${MUSICBRAINZ5_INCLUDE_DIRS}
+    ${LibMagic_INCLUDE_DIR} #${MUSICBRAINZ5_INCLUDE_DIRS}
 )
 
 # -------------------------------------------------------------------------
