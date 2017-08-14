@@ -46,10 +46,10 @@ matrix:
 
 
 before_install:
- - sudo apt-get -qq update
- - sudo apt-get install -qq libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavresample-dev libavcodec-extra libsdl2-dev libboost-all-dev libao-dev libimlib2-dev libsqlite3-dev libxml++-dev libpcre++-dev libxml2-dev libmp3lame-dev libflac++-dev libpoppler-cpp-dev libcurl4-openssl-dev libcurlpp-dev libzmq-dev libsigc++-2.0-dev libssl-dev libarchive-dev uuid-dev libhiredis-dev libev-dev libwxbase3.0-dev libwxgtk-media3.0-dev libwxgtk-webview3.0-dev libwxgtk3.0-dev libmagic-dev libopencv-dev
+    - sudo apt-get -qq update
+    - sudo apt-get install -qq libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavresample-dev libavcodec-extra libsdl2-dev libboost-all-dev libao-dev libimlib2-dev libsqlite3-dev libxml++-dev libpcre++-dev libxml2-dev libmp3lame-dev libflac++-dev libpoppler-cpp-dev libcurl4-openssl-dev libcurlpp-dev libzmq-dev libsigc++-2.0-dev libssl-dev libarchive-dev uuid-dev libhiredis-dev libev-dev libwxbase3.0-dev libwxgtk-media3.0-dev libwxgtk-webview3.0-dev libwxgtk3.0-dev libmagic-dev libopencv-dev
  
- install:
+install:
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
   - |
