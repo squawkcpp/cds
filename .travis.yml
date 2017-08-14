@@ -47,7 +47,7 @@ matrix:
 
 before_install:
     - sudo apt-get -qq update
-    - sudo apt-get install -qq libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavresample-dev libavcodec-extra libavutil-dev libsdl2-dev libboost-all-dev libao-dev libimlib2-dev libsqlite3-dev libxml++-dev libpcre++-dev libxml2-dev libmp3lame-dev libflac++-dev libpoppler-cpp-dev libcurl4-openssl-dev libcurlpp-dev libzmq-dev libsigc++-2.0-dev libssl-dev libarchive-dev uuid-dev libhiredis-dev libev-dev libmagic-dev libopencv-dev libmusicbrainz3-dev doxygen
+    - sudo apt-get install -qq libsdl2-dev libboost-all-dev libao-dev libimlib2-dev libsqlite3-dev libxml++-dev libpcre++-dev libxml2-dev libmp3lame-dev libflac++-dev libpoppler-cpp-dev libcurl4-openssl-dev libcurlpp-dev libzmq-dev libsigc++-2.0-dev libssl-dev libarchive-dev uuid-dev libhiredis-dev libev-dev libmagic-dev libopencv-dev libmusicbrainz3-dev doxygen
  
 install:
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
@@ -60,6 +60,10 @@ install:
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       which cmake || brew install cmake
     fi
+    - wget http://www.ffmpeg.org/releases/ffmpeg-2.8.11.tar.bz2
+    - tar xf ffmpeg-2.8.11.tar.bz2
+    - cd ffmpeg-2.8.11 && ./configure --prefix=/usr --disable-static --enable-shared --disable-everything --disable-avdevice --disable-doc --disable-htmlpages --disable-manpages --disable-programs --disable-encoders --disable-muxers --disable-decoders --enable-swscale --disable-yasm --enable-protocol=file --enable-protocol=http --enable-iconv  && make -j4 && sudo make install
+    - cd ..
 
 before_script:
   - export CXX=${COMPILER}
