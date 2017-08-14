@@ -1,76 +1,12 @@
+sudo: required 
 language: cpp
-sudo: true
-
-matrix:
-  include:
-
-    # Linux C++14 GCC builds
-    - os: linux
-      compiler: gcc
-      addons: &gcc6
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-6']
-      env: COMPILER='g++-6' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc6
-      env: COMPILER='g++-6' BUILD_TYPE='Debug'
-
-    # Linux C++14 Clang builds
-    - os: linux
-      compiler: clang
-      addons: &clang38
-        apt:
-          sources: ['llvm-toolchain-precise-3.8', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.8']
-      env: COMPILER='clang++-3.8' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: clang
-      addons: *clang38
-      env: COMPILER='clang++-3.8' BUILD_TYPE='Debug'
-
-    # OSX C++14 Clang Builds
-
-    - os: osx
-      osx_image: xcode8.3
-      compiler: clang
-      env: COMPILER='clang++' BUILD_TYPE='Debug'
-
-    - os: osx
-      osx_image: xcode8.3
-      compiler: clang
-      env: COMPILER='clang++' BUILD_TYPE='Release'
-
-
+services:
+  - docker
 before_install:
-    - sudo apt-get -qq update
-    - sudo apt-get install -qq libsdl2-dev libboost-all-dev libao-dev libimlib2-dev libsqlite3-dev libxml++-dev libpcre++-dev libxml2-dev libmp3lame-dev libflac++-dev libpoppler-cpp-dev libcurl4-openssl-dev libcurlpp-dev libzmq-dev libsigc++-2.0-dev libssl-dev libarchive-dev uuid-dev libhiredis-dev libev-dev libmagic-dev libopencv-dev libmusicbrainz3-dev doxygen yasm
- 
-install:
-  - wget http://www.ffmpeg.org/releases/ffmpeg-2.8.11.tar.bz2
-  - tar xf ffmpeg-2.8.11.tar.bz2
-  - cd ffmpeg-2.8.11 && ./configure --prefix=/usr --enable-avresample && make -j4 && sudo make install
-  - cd ..
-  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-  - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
-  - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      CMAKE_URL="http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz"
-      mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-      export PATH=${DEPS_DIR}/cmake/bin:${PATH}
-    elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      which cmake || brew install cmake
-    fi
-
-before_script:
-  - export CXX=${COMPILER}
-  - cd ${TRAVIS_BUILD_DIR}
-  - cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -Wdev
-  - cd Build
-
+  - docker pull qbradq/example-build:latest
+  - docker run -itd --name build qbradq/example-build
+  - docker exec build git clone https://github.com/qbradq/docker-build-example.git /repo
 script:
-  - make -j 2
-  - ctest -V -j 2
+  - docker exec build cmake -H/repo -B/build
+  - docker exec build cmake --build /build
+  - docker exec build cmake --build /build --target test
