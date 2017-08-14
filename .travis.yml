@@ -52,7 +52,7 @@ before_install:
 install:
   - wget http://www.ffmpeg.org/releases/ffmpeg-2.8.11.tar.bz2
   - tar xf ffmpeg-2.8.11.tar.bz2
-  - cd ffmpeg-2.8.11 && ./configure --prefix=/usr && make -j4 && sudo make install
+  - cd ffmpeg-2.8.11 && ./configure --prefix=/usr --enable-avresample && make -j4 && sudo make install
   - cd ..
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
