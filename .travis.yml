@@ -60,10 +60,10 @@ install:
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       which cmake || brew install cmake
     fi
-    - wget http://www.ffmpeg.org/releases/ffmpeg-2.8.11.tar.bz2
-    - tar xf ffmpeg-2.8.11.tar.bz2
-    - cd ffmpeg-2.8.11 && ./configure --prefix=/usr --disable-static --enable-shared --disable-everything --disable-avdevice --disable-doc --disable-htmlpages --disable-manpages --disable-programs --disable-encoders --disable-muxers --disable-decoders --enable-swscale --disable-yasm --enable-protocol=file --enable-protocol=http --enable-iconv  && make -j4 && sudo make install
-    - cd ..
+    wget http://www.ffmpeg.org/releases/ffmpeg-2.8.11.tar.bz2
+    tar xf ffmpeg-2.8.11.tar.bz2
+    cd ffmpeg-2.8.11 && ./configure --prefix=/usr --disable-static --enable-shared --disable-everything --disable-avdevice --disable-doc --disable-htmlpages --disable-manpages --disable-programs --disable-encoders --disable-muxers --disable-decoders --enable-swscale --disable-yasm --enable-protocol=file --enable-protocol=http --enable-iconv  && make -j4 && sudo make install
+    cd ..
 
 before_script:
   - export CXX=${COMPILER}
