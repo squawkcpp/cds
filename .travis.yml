@@ -52,7 +52,7 @@ before_install:
 install:
   - wget http://www.ffmpeg.org/releases/ffmpeg-2.8.11.tar.bz2
   - tar xf ffmpeg-2.8.11.tar.bz2
-  - cd ffmpeg-2.8.11 && ./configure --prefix=/usr --disable-static --enable-shared --enable-avresample --enable-avdevice --disable-doc --disable-htmlpages --disable-manpages --disable-programs --enable-encoders --enable-muxers --enable-decoders --enable-swscale --disable-yasm --enable-protocol=file --enable-protocol=http --enable-iconv  && make -j4 && sudo make install
+  - cd ffmpeg-2.8.11 && ./configure --prefix=/usr --enable-static --disable-shared --enable-avresample --enable-avdevice --disable-doc --disable-htmlpages --disable-manpages --disable-programs --enable-encoders --enable-muxers --enable-decoders --enable-swscale --disable-yasm --enable-protocol=file --enable-protocol=http --enable-iconv  && make -j4 && sudo make install
   - cd ..
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
