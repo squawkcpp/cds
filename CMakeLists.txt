@@ -105,7 +105,7 @@ aux_source_directory( src/modules/ CDS_SOURCES_MODULES )
 aux_source_directory( src/utils/ CDS_SOURCES_UTILS )
 include_directories( ${INCLUDES} ${GTEST_INCLUDE_DIR})
 add_executable(cds ${PROJECT_SOURCE_DIR}/main.cpp ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
-target_link_libraries(cds re2 lightning redox fmt spdlog LibAvCpp LibImageCpp exif ${LIBS})
+target_link_libraries(cds re2 lightning redox fmt spdlog LibAvCpp LibImageCpp asio exif ${LIBS})
 
 # -------------------------------------------------------------------------
 # -----------------------   Manage Test Cases       -----------------------
@@ -116,7 +116,7 @@ if (build_tests)
     include_directories(${ROOT} ${INCLUDES} ${GTEST_INCLUDE_DIR})
     add_executable(test_cds ${CDS_SOURCES_TEST} ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
     target_link_libraries(test_cds ${GTEST_MAIN_PATH} cxxopts re2 lightning rapidjson rapidxml
-        LibAvCpp LibImageCpp redox fmt exif spdlog gtest ${LIBS} )
+        LibAvCpp LibImageCpp redox fmt exif spdlog asio gtest ${LIBS} )
     add_test(cds_tests test_cds)
 endif()
 
