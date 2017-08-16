@@ -105,7 +105,7 @@ aux_source_directory( src/modules/ CDS_SOURCES_MODULES )
 aux_source_directory( src/utils/ CDS_SOURCES_UTILS )
 include_directories( ${INCLUDES} ${GTEST_INCLUDE_DIR})
 add_executable(cds ${PROJECT_SOURCE_DIR}/main.cpp ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
-target_link_libraries(cds re2 lightning redox fmt spdlog LibAvCpp LibImageCpp asio exif ${LIBS})
+target_link_libraries(cds re2 lightning redox fmt spdlog LibAvCpp LibImageCpp exif asio ${LIBS})
 
 # -------------------------------------------------------------------------
 # -----------------------   Manage Test Cases       -----------------------
