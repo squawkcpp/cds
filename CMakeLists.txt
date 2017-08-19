@@ -106,6 +106,7 @@ aux_source_directory( src/utils/ CDS_SOURCES_UTILS )
 include_directories( ${INCLUDES} ${GTEST_INCLUDE_DIR})
 add_executable(cds ${PROJECT_SOURCE_DIR}/main.cpp ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
 target_link_libraries(cds re2 lightning redox fmt spdlog LibAvCpp LibImageCpp exif asio ${LIBS})
+install(TARGETS cds RUNTIME DESTINATION bin)
 
 # -------------------------------------------------------------------------
 # -----------------------   Manage Test Cases       -----------------------
@@ -131,3 +132,34 @@ add_custom_target(doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
     COMMENT "Generating API documentation with Doxygen" VERBATIM
 )
 endif(DOXYGEN_FOUND)
+
+# -------------------------------------------------------------------------
+# -----------------------   Generate Package        -----------------------
+# -------------------------------------------------------------------------
+IF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
+INCLUDE(InstallRequiredSystemLibraries)
+
+SET(CPACK_SET_DESTDIR "on")
+SET(CPACK_PACKAGING_INSTALL_PREFIX "/tmp")
+SET(CPACK_GENERATOR "DEB")
+
+set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
+
+SET(CPACK_PACKAGE_DESCRIPTION "loudlabs media server")
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "squawk content directory server.")
+SET(CPACK_PACKAGE_VENDOR "loudlabs")
+SET(CPACK_PACKAGE_CONTACT "squawkcpp@gmail.com")
+SET(CPACK_PACKAGE_VERSION_MAJOR "${MAJOR_VERSION}")
+SET(CPACK_PACKAGE_VERSION_MINOR "${MINOR_VERSION}")
+SET(CPACK_PACKAGE_VERSION_PATCH "${PATCH_VERSION}")
+SET(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}_${MAJOR_VERSION}.${MINOR_VERSION}.${CPACK_PACKAGE_VERSION_PATCH}")
+SET(CPACK_SOURCE_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}_${MAJOR_VERSION}.${MINOR_VERSION}.${CPACK_PACKAGE_VERSION_PATCH}")
+
+SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libpcrecpp0v5, libimlib2, libavcodec-ffmpeg56, libavformat-ffmpeg56, libavutil-ffmpeg54, libpoppler-cpp0, libboost-filesystem1.58.0")
+SET(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
+SET(CPACK_DEBIAN_PACKAGE_SECTION "media")
+SET(CPACK_DEBIAN_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
+SET(CPACK_COMPONENTS_ALL applications Libraries ApplicationData)
+INCLUDE(CPack)
+
+ENDIF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
