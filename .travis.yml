@@ -11,6 +11,7 @@ script:
   - docker exec build cmake -H/repo -B/build
   - docker exec build cmake --build /build
   - docker exec build /build/test_cds
+  - cd build
   - docker exec build cpack
 deploy:
   provider: releases
