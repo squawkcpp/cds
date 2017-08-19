@@ -12,7 +12,7 @@ script:
   - docker exec build cmake -H/repo -B/build
   - docker exec build cmake --build /build
   - docker exec build /build/test_cds
-  - docker exec build --build /build --target package
+  - docker exec build cmake --build /build --target package
   - ls $(pwd)/build
 deploy:
   provider: releases
