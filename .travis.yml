@@ -10,4 +10,4 @@ before_install:
 script:
   - docker exec build cmake -H/repo -B/build
   - docker exec build cmake --build /build
-  - docker exec build cmake --build /build --target test
+  - docker exec build /build/test_cds
