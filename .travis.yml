@@ -3,15 +3,17 @@ language: cpp
 services:
   - docker
 before_install:
+  - mkdir $(pwd)/build
   - docker pull spielhuus/buildimage:latest
-  -  sudo docker run -itd --name build -v $(pwd)/cds:/repo  -e EXTRA_PACKAGES="libsdl2-dev libboost-all-dev libao-dev libimlib2-dev libsqlite3-dev libxml++-dev libpcre++-dev libxml2-dev libmp3lame-dev libflac++-dev libpoppler-cpp-dev libcurl4-openssl-dev libcurlpp-dev libzmq-dev libsigc++-2.0-dev libssl-dev libarchive-dev uuid-dev libhiredis-dev libev-dev libmagic-dev libopencv-dev libmusicbrainz5-dev libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavresample-dev libavcodec-extra" spielhuus/buildimage
+  -  sudo docker run -itd --name build -v $(pwd)/cds:/repo -v $(pwd)/build:/build -e EXTRA_PACKAGES="libsdl2-dev libboost-all-dev libao-dev libimlib2-dev libsqlite3-dev libxml++-dev libpcre++-dev libxml2-dev libmp3lame-dev libflac++-dev libpoppler-cpp-dev libcurl4-openssl-dev libcurlpp-dev libzmq-dev libsigc++-2.0-dev libssl-dev libarchive-dev uuid-dev libhiredis-dev libev-dev libmagic-dev libopencv-dev libmusicbrainz5-dev libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavresample-dev libavcodec-extra" spielhuus/buildimage
   - sleep 2m
   - docker exec build git clone https://github.com/squawkcpp/cds.git /repo
 script:
   - docker exec build cmake -H/repo -B/build
   - docker exec build cmake --build /build
   - docker exec build /build/test_cds
-  - docker exec build cmake --package -H/repo -B/build
+  - docker exec build --build /build --target package
+  - ls $(pwd)/build
 deploy:
   provider: releases
   api_key:
