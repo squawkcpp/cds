@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/squawkcpp/cds.svg?branch=master)](https://travis-ci.org/squawkcpp/cds)
+
 # Content Directory Server (CDS)
 
 ## about:
