@@ -40,7 +40,16 @@ beside of the class specific attributes, the node will always contain the **`key
 
 #### load the child elements of a node.
 
-```**<code>GET</code> /[root|file|ebook|movie|album|serie|artist|image|{digit}]/nodes?{name}={value}**```
+```GET /{node}/nodes
+```
+
+##### parameters:
+
+name | value | description
+------------ | ------------- | -------------
+node | {key} | select from which parent node the list is created. root, for the keys **file**, **ebook**, **movie**, **album**, **serie**, **artist** and **image** the type collection is returned.
+
+##### query paremeters:
 
  name | value | description
  ------------ | ------------- | -------------
