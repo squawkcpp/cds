@@ -65,7 +65,7 @@ Server::Server ( const std::string& redis, /** @param redis redis host */
     }
 }
 
-http::http_status Server::config ( http::Request& request, http::Response& response ) {
+http::http_status Server::config ( http::Request&, http::Response& response ) {
     response << data::config ( redis_ );
     response.parameter ( http::header::CONTENT_TYPE, http::mime::mime_type ( http::mime::JSON ) );
     response.parameter ( "Access-Control-Allow-Origin", "*" );
@@ -84,7 +84,7 @@ http::http_status Server::rescan ( http::Request& request, http::Response& respo
     return http::http_status::ACCEPTED;
 }
 
-http::http_status Server::status ( http::Request& request, http::Response& response ) {
+http::http_status Server::status ( http::Request&, http::Response& response ) {
     using namespace rapidjson;
     StringBuffer sb;
     PrettyWriter<StringBuffer> writer ( sb );

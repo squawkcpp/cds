@@ -16,20 +16,33 @@ The REST API allows you to query the content of the directory server.
 
 ### Base URL
 
-All URLs referenced in the documentation have the following base:
+all the requests have the base url of your server:
+
+```http://<SERVER_IP>:<PORT>```
 
 ### access the directory
 
-- **[<code>GET</code> nodes](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)** \[sort=alpha,timestamp|order=asc,desc|filter=keyword\]
-- **[<code>GET</code> node](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
-- **[<code>GET</code> nodes](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
+#### node list
+**<code>GET</code> /[root|file|ebook|movie|album|serie|artist|image|{digit}]/nodes**
+#####Parameters:
+name | value | description
+------------ | ------------- | -------------
+sort | alpha, timestamp | sort list alphanumerical or by last access timestamp.
+order | asc, desc | sort ascending or descending. default ist ascending.
+filter | tag | filter results by tag.
+index | {digit} | start index of the result list.
+count | {digit} | number of results in the result list.
+
+#### node
+**<code>GET</code> /{digit}**
+
+#### keywords
+**<code>GET</code> /[ebook|movie|album|serie|artist|image]/name|{keyword}**
 
 ### manage the server
 
 - **[<code>GET</code> config](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
 - **[<code>GET</code> status](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
-
-http://<YOUR_SERVER_IP>:<PORT>
 
 ## remote metadata providers:
 
