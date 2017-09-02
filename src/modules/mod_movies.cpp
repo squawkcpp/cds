@@ -14,6 +14,8 @@
 */
 #include "mod_movies.h"
 
+#include <boost/filesystem.hpp>
+
 #include "format.h"
 #include "codec.h"
 
@@ -21,8 +23,7 @@ namespace cds {
 namespace mod {
 void ModMovies::import ( data::redis_ptr redis, const config_ptr config ) {
 
-
-    data::nodes ( redis, NodeType::movie, [redis, config] ( const std::string & key ) {
+    data::new_items( redis, NodeType::movie, [redis,config]( const std::string& key ) {
         data::node_t _node = data::node ( redis, key );
 
         //Get the track information
@@ -35,19 +36,14 @@ void ModMovies::import ( data::redis_ptr redis, const config_ptr config ) {
         } else {
             auto codec = _format.find_codec ( av::CODEC_TYPE::VIDEO );
             redis->command ( { REDIS_SET,  data::make_key_node ( key ),
-                //               av::Metadata::name( av::Metadata::ARTIST ), _artist,
-                //               av::Metadata::name( av::Metadata::ARTIST ), _artist,
-                //               av::Metadata::name( av::Metadata::ALBUM ), _album,
-                //               av::Metadata::name( av::Metadata::YEAR ), _year,
-                //               av::Metadata::name( av::Metadata::TRACK ), _track,
-                //               av::Metadata::name( av::Metadata::DISC ), _disc,
-                //               av::Metadata::name( av::Metadata::GENRE ), _genre,
                 KEY_BITRATE, std::to_string ( codec->bitrate() ),
                 KEY_BPS, std::to_string ( codec->bits_per_sample() ),
                 KEY_CHANNELS, std::to_string ( codec->channels() ),
                 KEY_WIDTH, std::to_string ( codec->width() ),
                 KEY_HEIGHT, std::to_string ( codec->height() )
             });
+            auto _last_write_time = boost::filesystem::last_write_time( data::path( redis, key ) );
+            redis->command ( {REDIS_ZADD, data::make_key_nodes ( NodeType::movie ), std::to_string( _last_write_time ), key } );
         }
     });
 }

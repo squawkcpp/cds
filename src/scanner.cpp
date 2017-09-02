@@ -71,8 +71,8 @@ void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
     mod::ModAlbums::import ( redis, config );
     mod::ModImages::import ( redis, config );
     mod::ModMovies::import ( redis, config );
-//    mod::ModSeries::import ( redis, config );
-//    mod::ModEbooks::import ( redis, config );
+    mod::ModSeries::import ( redis, config );
+    mod::ModEbooks::import ( redis, config );
 }
 void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const std::string& parent_key, const std::string& path ) {
     //get files in folder
@@ -84,35 +84,31 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
 
         if ( boost::filesystem::is_regular_file ( itr->status() ) ) {
 
-            if( data::timestamp( redis, cds::hash ( _item_filepath ), boost::filesystem::last_write_time( itr->path() ) ) ) {
-                std::cout << "is timestamp " << path << std::endl; //TODO
+            if( ! data::timestamp( redis, cds::hash ( _item_filepath ), boost::filesystem::last_write_time( itr->path() ) ) ) {
+
+                const char* _mime_type = magic_file ( _magic, _item_filepath.c_str() );
+                data::node_t _node;
+                _node[PARAM_NAME] = filename ( _item_filepath, false );
+                NodeType::Enum _type = FileMetaRegex::parse ( _mime_type, _item_filepath.c_str(), _node );
+                _node[PARAM_PARENT] = hash( parent_key );
+                _node[PARAM_PATH] = _item_filepath;
+                _node[PARAM_CLASS] = cds::NodeType::str ( _type );
+                _node[KEY_EXTENSION] = boost::filesystem::extension ( itr->path() );
+                _node[KEY_SIZE] = std::to_string ( boost::filesystem::file_size ( itr->path() ) );
+                _node[KEY_MIME_TYPE] = _mime_type;
+
+                data::save( redis, hash( _item_filepath ), _node );
+                data::incr_mime ( redis, _mime_type );
+                data::new_item(redis, cds::hash ( parent_key ), cds::hash ( _item_filepath ), _type );
             }
-
-            const char* _mime_type = magic_file ( _magic, _item_filepath.c_str() );
-            data::node_t _node;
-            _node[PARAM_NAME] = filename ( _item_filepath, false );
-            NodeType::Enum _type = FileMetaRegex::parse ( _mime_type, _item_filepath.c_str(), _node );
-            _node[PARAM_PARENT] = hash( parent_key );
-            _node[PARAM_PATH] = _item_filepath;
-            _node[PARAM_CLASS] = cds::NodeType::str ( _type );
-            _node[KEY_EXTENSION] = boost::filesystem::extension ( itr->path() );
-            _node[KEY_SIZE] = std::to_string ( boost::filesystem::file_size ( itr->path() ) );
-            _node[KEY_MIME_TYPE] = _mime_type;
-
-            data::save( redis, hash( _item_filepath ), _node );
-            data::incr_mime ( redis, _mime_type );
-            data::new_item(redis, cds::hash ( parent_key ), cds::hash ( _item_filepath ), _type );
-
         } else if ( boost::filesystem::is_directory ( itr->status() ) ) {
 
-            //TODO check if is new...
             data::node_t _node {
                 { PARAM_NAME, filename ( _item_filepath, false ) },
                 { PARAM_PARENT, hash( path ) },
                 { PARAM_PATH, _item_filepath },
                 { PARAM_CLASS, cds::NodeType::str ( NodeType::folder ) } };
             data::save( redis, hash( _item_filepath ), _node );
-
             import_directory ( redis, _magic, _item_filepath, _item_filepath );
         }
     }

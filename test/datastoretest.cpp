@@ -5,14 +5,14 @@
 
 #include "../src/datastore.h"
 
-namespace cds { //TODO
+namespace cds {
 namespace data {
 
 TEST(DatastoreTest, key_node ) {
     EXPECT_EQ( "fs:node_id", make_key_node( "node_id" ) );
 }
 TEST(DatastoreTest, key_types ) {
-    EXPECT_EQ( "fs:node_id:list", make_key_types( "node_id" ) );
+    EXPECT_EQ( "fs:node_id:list", make_key_list( "node_id" ) );
 }
 TEST(DatastoreTest, key_list ) {
     EXPECT_EQ( "fs:album:list", make_key_nodes( NodeType::album ) );

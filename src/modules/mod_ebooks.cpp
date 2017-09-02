@@ -18,6 +18,8 @@
 #include <iostream>
 #include <time.h>
 
+#include <boost/filesystem.hpp>
+
 #include "poppler/cpp/poppler-document.h"
 #include "poppler/cpp/poppler-page.h"
 #include "re2/re2.h"
@@ -33,54 +35,51 @@ namespace mod {
 
 ModEbooks::ModEbooks() {}
 
-void ModEbooks::import ( data::redis_ptr rdx, const config_ptr config ) {
-    redox::Command< data::nodes_t >& c =
-        rdx->commandSync< data::nodes_t > ( { REDIS_MEMBERS, data::make_key_nodes ( NodeType::ebook ) } );
+void ModEbooks::import ( data::redis_ptr redis, const config_ptr config ) {
+    data::new_items( redis, NodeType::ebook, [redis,config]( const std::string& key ) {
+        data::node_t _file = data::node ( redis, key );
+        std::string _isbn = parsePdf ( _file[PARAM_PATH] );
+        auto _res = utils::Amazon::bookByIsbn ( config->amazon_access_key, config->amazon_key, _isbn );
+        data::node_t _book_meta;
 
-    if ( c.ok() ) {
-        for ( const std::string& __c : c.reply() ) {
-            data::node_t _file = data::node ( rdx, __c );
-            std::string _isbn = parsePdf ( _file[PARAM_PATH] );
-            auto _res = utils::Amazon::bookByIsbn ( config->amazon_access_key, config->amazon_key, _isbn );
-            data::node_t _book_meta;
-
-            for ( auto& __j : _res.results ) {
-                if ( _book_meta.empty() || __j[PARAM_NAME] == _file[PARAM_NAME] ) {
-                    _book_meta = __j;
-                }
-            }
-
-            if ( !_book_meta.empty() ) {
-                //save image
-                std::string _cover_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, hash ( _book_meta[PARAM_COVER] ) );
-                std::string _thumb_path = fmt::format ( "{}/tn_{}.jpg", config->tmp_directory, hash ( _book_meta[PARAM_COVER] ) );
-                std::ofstream _ofs ( _cover_path, std::ofstream::out );
-                http::get ( _book_meta[PARAM_COVER], _ofs );
-                image::Image image_meta_ ( _cover_path );
-                rdx->command ( {"HMSET",  make_key ( KEY_FS, hash ( _cover_path ) ),
-                                PARAM_PARENT, __c,
-                                PARAM_CLASS, NodeType::str ( NodeType::cover ),
-                                KEY_WIDTH, std::to_string ( image_meta_.width() ),
-                                KEY_HEIGHT, std::to_string ( image_meta_.height() )
-                               } );
-                image_meta_.scale ( 160, 160, _thumb_path );
-                rdx->command ( { REDIS_ADD,
-                                 make_key ( KEY_FS, hash ( _book_meta[PARAM_COVER] ), "cover" ),
-                                 make_key ( KEY_FS, hash ( _cover_path ) )
-                               } );
-                //save ebook
-                rdx->command ( {"HMSET",  make_key ( KEY_FS, __c ),
-                                PARAM_NAME, _book_meta[PARAM_NAME],
-                                PARAM_COMMENT, _book_meta[PARAM_COMMENT],
-                                PARAM_PUBLISHER, _book_meta[PARAM_PUBLISHER],
-                                PARAM_DATE, _book_meta[PARAM_DATE],
-                                PARAM_ISBN, _book_meta[PARAM_ISBN],
-                                PARAM_AUTHOR, _book_meta[PARAM_AUTHOR],
-                                PARAM_THUMB, fmt::format ( "/img/tn_{}.jpg", hash ( _book_meta[PARAM_COVER] ) ),
-                               } );
+        for ( auto& __j : _res.results ) {
+            if ( _book_meta.empty() || __j[PARAM_NAME] == _file[PARAM_NAME] ) {
+                _book_meta = __j;
             }
         }
-    }
+
+        if ( !_book_meta.empty() ) {
+            //save image
+            std::string _cover_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, hash ( _book_meta[PARAM_COVER] ) );
+            std::string _thumb_path = fmt::format ( "{}/tn_{}.jpg", config->tmp_directory, hash ( _book_meta[PARAM_COVER] ) );
+            std::ofstream _ofs ( _cover_path, std::ofstream::out );
+            http::get ( _book_meta[PARAM_COVER], _ofs );
+            image::Image image_meta_ ( _cover_path );
+            redis->command ( {"HMSET",  make_key ( KEY_FS, hash ( _cover_path ) ),
+                            PARAM_PARENT, key,
+                            PARAM_CLASS, NodeType::str ( NodeType::cover ),
+                            KEY_WIDTH, std::to_string ( image_meta_.width() ),
+                            KEY_HEIGHT, std::to_string ( image_meta_.height() )
+                           } );
+            image_meta_.scale ( 160, 160, _thumb_path );
+            redis->command ( { REDIS_ADD,
+                             make_key ( KEY_FS, hash ( _book_meta[PARAM_COVER] ), "cover" ),
+                             make_key ( KEY_FS, hash ( _cover_path ) )
+                           } );
+            //save ebook
+            redis->command ( {"HMSET",  make_key ( KEY_FS, key ),
+                            PARAM_NAME, _book_meta[PARAM_NAME],
+                            PARAM_COMMENT, _book_meta[PARAM_COMMENT],
+                            PARAM_PUBLISHER, _book_meta[PARAM_PUBLISHER],
+                            PARAM_DATE, _book_meta[PARAM_DATE],
+                            PARAM_ISBN, _book_meta[PARAM_ISBN],
+                            PARAM_AUTHOR, _book_meta[PARAM_AUTHOR],
+                            PARAM_THUMB, fmt::format ( "/img/tn_{}.jpg", hash ( _book_meta[PARAM_COVER] ) ),
+            } );
+        }
+        auto _last_write_time = boost::filesystem::last_write_time( data::path( redis, key ) );
+        redis->command ( {REDIS_ZADD, data::make_key_nodes ( NodeType::ebook ), std::to_string( _last_write_time ), key } );
+    } );
 }
 
 const std::string ModEbooks::remove_special_characters ( const std::string& body ) {
@@ -100,8 +99,8 @@ const std::string ModEbooks::remove_special_characters ( const std::string& body
 const std::string ModEbooks::find_isbn ( const std::string& body ) {
     std::string _body = body;
     static std::array< std::regex, 2 > _reg_list = std::array< std::regex, 2 > ( {
-        std::regex ( "([\\d]+[- ·]?[\\d]*[- ·]{1}[\\d]*[- ·]{1}[\\d]*[- ·]{1}[\\dX]*)" ),
-        std::regex ( "([\\d]{10,13})" )
+        { std::regex ( "([\\d]+[- ·]?[\\d]*[- ·]{1}[\\d]*[- ·]{1}[\\d]*[- ·]{1}[\\dX]*)" ),
+          std::regex ( "([\\d]{10,13})" ) }
     } );
     boost::to_upper ( _body );
     size_t _isbn_pos = _body.find ( "ISBN" );
@@ -130,7 +129,7 @@ std::string ModEbooks::parsePdf ( const std::string& filename ) {
     { return ""; }
 
     for ( size_t i = 0U; i < static_cast< size_t > ( doc->pages() ); i++ ) {
-        poppler::page* p = doc->create_page ( i );
+        poppler::page* p = doc->create_page ( static_cast< int >( i ) );
         std::string _page_string = p->text().to_latin1();
         std::string _isbn = find_isbn ( _page_string );
 

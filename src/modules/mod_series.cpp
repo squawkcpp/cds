@@ -30,43 +30,38 @@
 namespace cds {
 namespace mod {
 
-void ModSeries::import ( data::redis_ptr rdx, const config_ptr config ) {
-    redox::Command< data::nodes_t >& c =
-        rdx->commandSync< data::nodes_t > ( { REDIS_MEMBERS, data::make_key_nodes ( NodeType::episode ) } );
+void ModSeries::import ( data::redis_ptr redis, const config_ptr config ) {
+    data::new_items( redis, NodeType::episode, [redis,config]( const std::string& key ) {
+        data::node_t _file = data::node ( redis, key );
+        //Get the track information
+        av::Format _format ( _file[PARAM_PATH] );
 
-    if ( c.ok() ) {
-        for ( const std::string& __c : c.reply() ) {
-            data::node_t _file = data::node ( rdx, __c );
-            //Get the track information
-            av::Format _format ( _file[PARAM_PATH] );
+        if ( !!_format ) {
+            spdlog::get ( LOGGER )->warn ( "Can not open serie file:{} ({})",
+                                           _format.errc().message(),
+                                           _file[PARAM_PATH] );
+        } else {
 
-            if ( !!_format ) {
-                spdlog::get ( LOGGER )->warn ( "Can not open serie file:{} ({})",
-                                               _format.errc().message(),
-                                               _file[PARAM_PATH] );
-            } else {
-
-                //construct the episode name if empty
-                std::string _episode_name = _file[PARAM_SERIE];
-                _episode_name.append ( " S" ).append ( _file[PARAM_SEASON] )
-                .append ( " E" ).append ( _file[PARAM_EPISODE] );
-                auto codec = _format.find_codec ( av::CODEC_TYPE::VIDEO );
-                auto _tmdb_id = import ( rdx, config, __c, _file[PARAM_SERIE] );
-                auto _tmdb_result = tmdb_episode ( config->tmdb_key, _tmdb_id, _file[PARAM_SEASON], _file[PARAM_EPISODE] );
-                auto _episodes = tmdb_parse_episode ( config, _tmdb_result );
-                rdx->command ( {REDIS_SET,  data::make_key_node ( __c ),
-                                PARAM_NAME, ( _episodes[PARAM_NAME].empty() ? _episode_name : _episodes[PARAM_NAME] ),
-                                PARAM_DATE, _episodes[PARAM_DATE],
-                                PARAM_TMDB_ID, _episodes[PARAM_TMDB_ID],
-                                PARAM_COMMENT, _episodes[PARAM_COMMENT],
-                                PARAM_STILL_IMAGE, _episodes[PARAM_STILL_IMAGE],
-                                KEY_PLAYTIME, std::to_string ( _format.playtime() ),
-                                KEY_WIDTH, std::to_string ( codec->width() ),
-                                KEY_HEIGHT, std::to_string ( codec->height() )
-                });
-            }
+            //construct the episode name if empty
+            std::string _episode_name = _file[PARAM_SERIE];
+            _episode_name.append ( " S" ).append ( _file[PARAM_SEASON] )
+            .append ( " E" ).append ( _file[PARAM_EPISODE] );
+            auto codec = _format.find_codec ( av::CODEC_TYPE::VIDEO );
+            auto _tmdb_id = import ( redis, config, key, _file[PARAM_SERIE] );
+            auto _tmdb_result = tmdb_episode ( config->tmdb_key, _tmdb_id, _file[PARAM_SEASON], _file[PARAM_EPISODE] );
+            auto _episodes = tmdb_parse_episode ( config, _tmdb_result );
+            redis->command ( {REDIS_SET,  data::make_key_node ( key ),
+                            PARAM_NAME, ( _episodes[PARAM_NAME].empty() ? _episode_name : _episodes[PARAM_NAME] ),
+                            PARAM_DATE, _episodes[PARAM_DATE],
+                            PARAM_TMDB_ID, _episodes[PARAM_TMDB_ID],
+                            PARAM_COMMENT, _episodes[PARAM_COMMENT],
+                            PARAM_STILL_IMAGE, _episodes[PARAM_STILL_IMAGE],
+                            KEY_PLAYTIME, std::to_string ( _format.playtime() ),
+                            KEY_WIDTH, std::to_string ( codec->width() ),
+                            KEY_HEIGHT, std::to_string ( codec->height() )
+            });
         }
-    }
+    } );
 }
 
 std::string ModSeries::import ( data::redis_ptr rdx, const config_ptr config, const std::string& serie_key, const std::string& serie ) {
@@ -104,8 +99,7 @@ std::string ModSeries::import ( data::redis_ptr rdx, const config_ptr config, co
                                } );
             }
         }
-
-        rdx->command ( { "SADD", "fs:serie:list", hash ( _clean_string ) } );
+        rdx->command ( {REDIS_ZADD, data::make_key_nodes ( NodeType::serie ), "0" /* TODO/*/, hash ( _clean_string ) } );
     }
 
     rdx->command ( { "SADD", make_key ( KEY_FS, hash ( _clean_string ), PARAM_SERIE ), serie_key } );

@@ -152,14 +152,6 @@ int main(int argc, char* argv[]) {
         http::mod::Exec( std::bind( &cds::Server::nodes, _container.server, _1, _2 ) ),
         http::mod::Http() );
 
-//    _container.www->bind( http::mod::Match<std::string>( "^\\/+(root|file|[[:digit:]]+)\\/+nodes$", cds::PARAM_KEY ),
-//        http::mod::Exec( std::bind( &cds::Server::nodes, _container.server, _1, _2 ) ),
-//        http::mod::Http() );
-
-//    _container.www->bind( http::mod::Match<std::string>( "^\\/+(ebook|movie|album|serie|artist|image)\\/+nodes$", cds::PARAM_KEY ),
-//        http::mod::Exec( std::bind( &cds::Server::mod, _container.server, _1, _2 ) ),
-//        http::mod::Http() );
-
     _container.www->bind( http::mod::Match< std::string, std::string >( "^\\/+(ebook|movie|album|serie|artist|image)\\/+(.*)$", cds::PARAM_TYPE, cds::PARAM_NAME ),
         http::mod::Exec( std::bind( &cds::Server::keywords, _container.server, _1, _2 ) ),
         http::mod::Http()

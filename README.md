@@ -2,7 +2,11 @@
 
 ## about:
 
+the squawk content directory server (CDS) serves mediafiles from the local storage. the mediafile are enriched with local and remote metadata.
+
 ## usage:
+
+
 
 ## restful api:
 
@@ -12,9 +16,20 @@ The REST API allows you to query the content of the directory server.
 
 All URLs referenced in the documentation have the following base:
 
+### access the directory
+
+- **[<code>GET</code> nodes](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)** \[sort=alpha,timestamp|order=asc,desc|filter=keyword\]
+- **[<code>GET</code> node](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
+- **[<code>GET</code> nodes](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
+
+### manage the server
+
+- **[<code>GET</code> config](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
+- **[<code>GET</code> status](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
+
 http://<YOUR_SERVER_IP>:<PORT>
 
-## databases:
+## remote metadata providers:
 
 for information retrievel the following database services can be used:
 [amazon]()

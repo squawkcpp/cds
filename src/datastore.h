@@ -81,7 +81,7 @@ inline std::string make_key_node ( const std::string& key /** @param key node ke
     return make_key ( KEY_FS, key );
 }
 /** @brief make type list key (fs:KEY:TYPE (SET:KEY) ) */
-inline std::string make_key_types ( const std::string& key /** @param key node key. */ ) {
+inline std::string make_key_list ( const std::string& key /** @param key node key. */ ) {
     return cds::make_key( KEY_FS, key, KEY_LIST );
 }
 /** @brief make node list key (fs:TYPE:list (KEY) ) */
@@ -107,7 +107,8 @@ inline std::string get( redis_ptr redis, const std::string& key, const std::stri
 template< class Fn >
 inline void children( redis_ptr redis, const std::string& key, Fn fn ) {
     //TOODO COUNTER
-    redox::Command< nodes_t >& _c = redis->commandSync< nodes_t >( {cds::REDIS_ZRANGE, make_key_types( key ), "0", "-1" } );
+    //TODO use defined type
+    redox::Command< std::vector< std::string > >& _c = redis->commandSync< std::vector< std::string > >( {cds::REDIS_ZRANGE, make_key_list( key ), "0", "-1" } );
     if( _c.ok() ) {
         for( const std::string& __c : _c.reply() ) {
             fn( __c );
@@ -116,7 +117,7 @@ inline void children( redis_ptr redis, const std::string& key, Fn fn ) {
 }
 inline int children_count( redis_ptr redis, const std::string& key ) {
     redox::Command< int >& _c = redis->commandSync< int >(
-        { cds::REDIS_ZCARD, make_key_types( key ) }
+        { cds::REDIS_ZCARD, make_key_list( key ) }
     );
     if( _c.ok() )
     { return _c.reply(); }
@@ -142,11 +143,11 @@ inline int nodes_count( redis_ptr redis, cds::NodeType::Enum type ) {
 }
 
 /** @brief add node to parents type list */
-inline void add_types( redis_ptr redis, cds::NodeType::Enum type /* TODO remove*/, const std::string& parent, const std::string& key ) //TODO add score
-{ redis->command( {REDIS_ZADD, data::make_key_types( parent ), "0", key } ); }
+inline void add_types( redis_ptr redis, cds::NodeType::Enum type /* TODO remove*/, const std::string& path, const std::string& key ) //TODO add score
+{ redis->command( {REDIS_ZADD, data::make_key_list( path ), "0", key } ); }
 /** @brief remove node from parents type list */
 inline void rem_types( redis_ptr redis, cds::NodeType::Enum type /* TODO remove */, const std::string& parent, const std::string& key )
-{ redis->command( {REDIS_ZREM, data::make_key_types( parent ), hash( key ) } ); }
+{ redis->command( {REDIS_ZREM, data::make_key_list( parent ), hash( key ) } ); }
 
 /** @brief add node to global nodes list */
 inline void add_nodes( redis_ptr redis, cds::NodeType::Enum type, const std::string& key ) //TODO add score

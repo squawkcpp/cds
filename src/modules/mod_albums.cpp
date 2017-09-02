@@ -14,9 +14,10 @@
 */
 #include "mod_albums.h"
 
+#include <boost/filesystem.hpp>
+
 #include "spdlog/spdlog.h"
 
-// #include "image.h"
 #include "format.h"
 #include "codec.h"
 
@@ -28,22 +29,17 @@
 
 #include "http/httpclient.h"
 
-//TODO set album name and artist also parent (album)
 //TODO store genre as tag
-//TODO import images
 
 namespace cds {
 namespace mod {
 void ModAlbums::import ( data::redis_ptr rdx, const config_ptr config ) {
-//    redox::Command< data::nodes_t >& c =
-//        rdx->commandSync< data::nodes_t > ( { REDIS_MEMBERS, data::make_key_folders ( NodeType::audio ) } );
-
-//    if ( c.ok() ) {
-//        for ( const std::string& __c : c.reply() ) {
     data::new_items( rdx, NodeType::audio, [rdx,config]( const std::string& key ) {
             std::map< NodeType::Enum, std::vector< data::node_t > > _files;
             import ( rdx, key, _files );
             std::string _artist = "", _album = "", _year = "", _track = "", _disc = "", _genre = "";
+            bool _cover_found = false;
+            std::string _last_cover = "";
 
             for ( auto& __type : _files ) {
                 if ( __type.first == NodeType::audio ) {
@@ -81,8 +77,7 @@ void ModAlbums::import ( data::redis_ptr rdx, const config_ptr config ) {
                             if ( !_metadata.get ( av::Metadata::GENRE ).empty() )
                             { _genre = _metadata.get ( av::Metadata::GENRE ); }
 
-                            //load musicbrainz information
-
+                            //TODO load musicbrainz information
                             auto codec = _format.find_codec ( av::CODEC_TYPE::AUDIO );
                             rdx->command ( {REDIS_SET,  data::make_key_node ( hash ( __file[PARAM_PATH] ) ),
                                             PARAM_PARENT, key,
@@ -98,7 +93,9 @@ void ModAlbums::import ( data::redis_ptr rdx, const config_ptr config ) {
                                             KEY_SAMPLERATE, std::to_string ( codec->sample_rate() ),
                                             KEY_PLAYTIME, std::to_string ( _format.playtime() )
                                            } );
-                            //TODO update relation with track as score
+
+                            //update relation with track as score
+                            rdx->command ( {REDIS_ZADD, data::make_key_list ( key ), _track, hash ( __file[PARAM_PATH] ) } );
                         }
                     }
 
@@ -114,52 +111,51 @@ void ModAlbums::import ( data::redis_ptr rdx, const config_ptr config ) {
                         auto _filename = filename ( __file[PARAM_PATH], false );
                         boost::to_lower ( _filename );
 
+                        //store cover uri in redis map
+                        _last_cover = utils::make_cover_uri ( ECoverSizes::TN, hash ( __file[PARAM_PATH] ) );
                         if ( std::find (  album_cover_names.begin(),  album_cover_names.end(), _filename ) !=  album_cover_names.end() ) {
-                            rdx->command ( {REDIS_SET, data::make_key_node ( key ), PARAM_THUMB,
-                                            utils::make_cover_uri ( ECoverSizes::TN, hash ( __file[PARAM_PATH] ) )
-                                           } );
+                            _cover_found = true;
+                            rdx->command ( { REDIS_SET, data::make_key_node ( key ), PARAM_THUMB, _last_cover } );
                         }
 
-
-
                         //scale image
-                        //TODO                        float _med_scale = image_scale( IMAGE_MED_SIZE, image_meta_.width(), image_meta_.height() );
-                        //                        float _tn_scale = image_scale( IMAGE_TN_SIZE, image_meta_.width(), image_meta_.height() );
-                        //                        image_meta_.scale ( ((float)image_meta_.width()/_med_scale), ((float)image_meta_.height()/_med_scale),
-                        //                                            make_cover_path( config->tmp_directory, ECoverSizes::MED, hash( __file[PARAM_PATH] ) ) );
-                        //                        image_meta_.scale ( ((float)image_meta_.width()/_tn_scale), ((float)image_meta_.height()/_tn_scale),
-                        //                                            make_cover_path( config->tmp_directory, ECoverSizes::TN, hash( __file[PARAM_PATH] ) ) );
+                        image_meta_.scale ( config->tmp_directory, ECoverSizes::MED, hash( __file[PARAM_PATH] ) );
+                        image_meta_.scale ( config->tmp_directory, ECoverSizes::TN, hash( __file[PARAM_PATH] ) );
 
                         data::add_types( rdx, NodeType::cover, key, hash( __file[PARAM_PATH] ) );
                         data::rem_types( rdx, NodeType::image, key, hash( __file[PARAM_PATH] ) );
                         data::rem_nodes( rdx, NodeType::image, hash( __file[PARAM_PATH] ) );
-                        //TODO it is the same objet!   rdx->command( {REDIS_REM,  data::make_key_types( __c , hash( __file[PARAM_PATH] ) } );
                     }
                 } else { spdlog::get ( LOGGER )->debug ( "OTHER TYPE: {}", NodeType::str ( __type.first ) ); }
-
-                //TODO when no cover is found try to take another image
-
-
-                rdx->command ( {REDIS_SET,  data::make_key_node ( key ),
-                                PARAM_CLASS, NodeType::str ( NodeType::album ),
-                                av::Metadata::name ( av::Metadata::ARTIST ), _artist,
-                                av::Metadata::name ( av::Metadata::ALBUM ), _album,
-                                av::Metadata::name ( av::Metadata::YEAR ), _year,
-                                av::Metadata::name ( av::Metadata::TRACK ), _track,
-                                av::Metadata::name ( av::Metadata::DISC ), _disc,
-                                av::Metadata::name ( av::Metadata::GENRE ), _genre
-                               } );
-                //TODO ordered set
-                rdx->command ( {REDIS_ZADD, data::make_key_nodes ( NodeType::album ), "0", key } );
-                import ( rdx, key, _artist );
             }
+
+            //when no cover is found try to take another image
+            if( !_cover_found ) {
+                std::cout << "found no cover, last_cover = " << _last_cover << std::endl;
+                if( !_last_cover.empty() ) {
+                    rdx->command ( { REDIS_SET, data::make_key_node ( key ), PARAM_THUMB, _last_cover } );
+                }
+            }
+
+            //store folder as album
+            rdx->command ( {REDIS_SET,  data::make_key_node ( key ),
+                            PARAM_CLASS, NodeType::str ( NodeType::album ),
+                            av::Metadata::name ( av::Metadata::ARTIST ), _artist,
+                            av::Metadata::name ( av::Metadata::ALBUM ), _album,
+                            av::Metadata::name ( av::Metadata::YEAR ), _year,
+                            av::Metadata::name ( av::Metadata::GENRE ), _genre
+            } );
+
+            //add album with timestamp as score
+            auto _last_write_time = boost::filesystem::last_write_time( data::path( rdx, key ) );
+            rdx->command ( {REDIS_ZADD, data::make_key_nodes ( NodeType::album ), std::to_string( _last_write_time ), key } );
+            import ( rdx, key, _artist );
         });
-//    }
 }
 
 void ModAlbums::import ( data::redis_ptr rdx, const std::string& key, std::map< NodeType::Enum, std::vector< data::node_t > >& files ) {
 
-    data::types_t _command = { REDIS_ZRANGE, data::make_key_types ( key ), "0", "-1" };
+    data::types_t _command = { REDIS_ZRANGE, data::make_key_list ( key ), "0", "-1" };
     redox::Command< data::nodes_t >& c =
         rdx->commandSync< data::nodes_t > ( _command );
 
@@ -182,24 +178,11 @@ void ModAlbums::import ( data::redis_ptr rdx, const std::string& album_key, cons
         PARAM_CLASS, NodeType::str ( NodeType::artist ),
         av::Metadata::name ( av::Metadata::ARTIST ), artist
     };
-    //get the artist cover
-    //TODO result is multipart encoded
-    //    std::string _mbid = mbid_parse( mbid_get( artist ) );
-    //    if( !_mbid.empty() ) {
-    //        auto _metadata = get_artist_metadata( artist_meta_get( _mbid ) );
-    //        for( auto __m_item : _metadata ) {
-    //            //TODO if( __m_item.first == "image" ) {
-    //            //} else {
-    //                _commands.push_back( __m_item.first );
-    //                _commands.push_back( __m_item.second );
-    //            //}
-    //        }
-    //    }
     rdx->command ( _commands );
-//TODO is is the same object    rdx->command ( { REDIS_ADD, data::make_key_types ( hash ( _clean_string ), NodeType::album ), hash ( album_key ) } );
-    rdx->command ( { REDIS_ADD, data::make_key_nodes ( NodeType::artist ), hash ( _clean_string ) } );
+    rdx->command ( {REDIS_ZADD, data::make_key_nodes ( NodeType::artist ), "0" /* TODO/*/, hash ( _clean_string ) } );
 }
 
+//TODO remove, is unused
 std::string ModAlbums::mbid_get ( const std::string& name ) {
     usleep ( 20000000 ); //TODO
     http::HttpClient< http::Http>  client_ ( "musicbrainz.org", "http" ); //set user agent: https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting

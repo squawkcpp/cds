@@ -53,16 +53,13 @@ Server::Server ( const std::string& redis, /** @param redis redis host */
             spdlog::get ( LOGGER )->debug ( "COMMAND:{}:{}", topic, msg );
             if( !rescanning_ ) {
                 rescanning_ = true;
-                std::cout << "start publish start: " << std::endl;
                 redis_->publish ( EVENT_SCANNER, EVENT_START );
-                std::cout << "end publish end: " << std::endl;
                 scanner_thread_ = std::make_unique< std::thread >( &Server::rescan_, this, msg == "true", [this]( std::error_code& errc ) {
                     spdlog::get( LOGGER )->debug( "scanner fisnished: {}", errc.message() );
                     redis_->publish ( EVENT_SCANNER, EVENT_END );
                     rescanning_ = false;
-            } );
-
-
+            });
+            scanner_thread_->detach();
             } else spdlog::get( LOGGER )->debug( "scanner already running." );
         } );
     }

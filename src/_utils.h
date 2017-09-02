@@ -195,7 +195,8 @@ struct ECoverSizes {
         }
     }
 private:
-    static constexpr double IMAGE_MED_SIZE = 768, IMAGE_TN_SIZE = 160;
+    static constexpr double IMAGE_MED_SIZE = 768;
+    static constexpr double IMAGE_TN_SIZE = 160;
 };
 
 //TODO move to utils/image
