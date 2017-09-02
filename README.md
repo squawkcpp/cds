@@ -8,11 +8,24 @@ the squawk content directory server (CDS) serves mediafiles from the local stora
 
 ## usage:
 
+options to start the server from the command line:
 
+```
+cds [OPTION...]
 
-## restful api:
+    --directory PATH         path to the directory with the mediafiles. Multiple entries will result in a list containing all directories.
+    --listen IP              API Webserver IP-Adress to bind to.
+    --http-port PORT         API Webserver IP Port to bind to.
+    --tmp-directory PATH     temporary folder for the thumbnails.
+    --tmdb-key KEY           API key for tmdb.
+    --amazon-access-key KEY  Access key for amazon.
+    --amazon-key KEY         API key for amazon.
+    --redis HOST             Redis Database (default: localhost) (default: localhost)
+    --redis-port PORT        Redis Database port (default: 6379) (default: 6379)
+    --help                   Print help
+```
 
-The REST API allows you to query the content of the directory server.
+## api:
 
 ### Base URL
 
@@ -22,21 +35,29 @@ all the requests have the base url of your server:
 
 ### access the directory
 
+the directory is structured as a tree. the content can be traversed from the **`root`** node.
+beside of the class specific attributes, the node will always contain the **`key`, `parent`** and **`cls`** attribues.
+
 #### node list
+
 **<code>GET</code> /[root|file|ebook|movie|album|serie|artist|image|{digit}]/nodes**
+
 #####Parameters:
-name | value | description
------------- | ------------- | -------------
-sort | alpha, timestamp | sort list alphanumerical or by last access timestamp.
-order | asc, desc | sort ascending or descending. default ist ascending.
-filter | tag | filter results by tag.
-index | {digit} | start index of the result list.
-count | {digit} | number of results in the result list.
+
+ name | value | description
+ ------------ | ------------- | -------------
+ sort | alpha, timestamp | sort list alphanumerical or by last access timestamp.
+ order | asc, desc | sort ascending or descending. default ist ascending.
+ filter | tag | filter results by tag.
+ index | {digit} | start index of the result list.
+ count | {digit} | number of results in the result list.
 
 #### node
+
 **<code>GET</code> /{digit}**
 
 #### keywords
+
 **<code>GET</code> /[ebook|movie|album|serie|artist|image]/name|{keyword}**
 
 ### manage the server
