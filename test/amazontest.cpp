@@ -88,4 +88,13 @@ TEST(AmazonTest, TestParseWithoutReviews ) {
     auto firstBook = book.results.begin();
     EXPECT_EQ((*firstBook)[cds::PARAM_NAME], std::string("Jamies 15-Minuten-Küche" ) );
 }
+
+TEST(AmazonTest, TestParseErrorResponse ) {
+    std::string response = R"xml(<?xml version="1.0"?>
+<ItemSearchErrorResponse xmlns="http://ecs.amazonaws.com/doc/2009-03-31/"><Error><Code>RequestThrottled</Code><Message>AWS Access Key ID: AKIAJL7OW25HI5DRKZJQ. You are submitting requests too quickly. Please retry your requests at a slower rate.</Message></Error><RequestID>a7075099-03f6-4520-a958-13a6c5fc04ba</RequestID></ItemSearchErrorResponse>)xml";
+
+    auto __response = Amazon::parse( response );
+    EXPECT_EQ( std::string("RequestThrottled" ), __response.status );
+    EXPECT_EQ( std::string( "AWS Access Key ID: AKIAJL7OW25HI5DRKZJQ. You are submitting requests too quickly. Please retry your requests at a slower rate." ), __response.message );
+}
 }//namespace amazon

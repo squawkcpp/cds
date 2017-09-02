@@ -199,56 +199,6 @@ private:
     static constexpr double IMAGE_TN_SIZE = 160;
 };
 
-//TODO move to utils/image
-//// --------------------------------------------------------------------------------------------------
-//// --------------------------          image manipulation methods          --------------------------
-//// --------------------------------------------------------------------------------------------------
-
-/////@cond DOC_INTERNAL
-//inline double image_scale ( ECoverSizes::Enum type, double width, double height ) {
-//    if ( width >= height ) {
-//        return ECoverSizes::size( type ) / width;
-//    } else { return ECoverSizes::size( type ) / height; }
-//}
-
-//inline std::string make_cover_uri ( const ECoverSizes::Enum& type, const std::string& key ) {
-//    return fmt::format ( "/img/{}_{}.jpg", ECoverSizes::str ( type ), key );
-//}
-
-//inline std::string make_cover_path ( const std::string& path, const ECoverSizes::Enum& type, const std::string& key ) {
-//    return fmt::format ( "{0}/{1}_{2}.jpg", path, ECoverSizes::str ( type ), key );
-//}
-/////@endcond DOC_INTERNAL
-
-///** @brief scale image and keep ratio. */
-//inline std::string /** @return image uri */ scale(
-//        auto& image /** @param image source image */,
-//        const std::string& path /** @param path temporary folder to put images to */,
-//        const ECoverSizes::Enum& type /** /@param type target the image type */,
-//        const std::string& key /** @param key storage key */ ) {
-
-//    try {
-//        auto _cover_path = make_cover_path( path, type, key );
-
-//        double _width = image.cols;
-//        double _height = image.rows;
-
-//        double _scale = image_scale( type, _width, _height );
-//        double _target_width = _width * _scale;
-//        double _target_height = _height * _scale;
-
-//        cv::Mat _target_image;
-//        auto _s = cv::Size( _target_width, _target_height );
-//        cv::resize( image, _target_image, _s );
-//        cv::imwrite( _cover_path, _target_image );
-//        return make_cover_uri( type, key );
-
-//    } catch( ... ) {
-//        spdlog::get ( LOGGER )->warn ( "error opening image (key:{0})", key );
-//        return "/404.jpg"; //TODO
-//    }
-//}
-
 inline std::string remove_skip_list ( const std::vector< std::string >& words, const std::string& s ) {
     std::string _return_value = s;
 

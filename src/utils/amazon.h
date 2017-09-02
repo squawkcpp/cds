@@ -57,6 +57,7 @@ private:
     FRIEND_TEST ( AmazonTest, TestCanonicalize );
     FRIEND_TEST ( AmazonTest, TestMac );
     FRIEND_TEST ( AmazonTest, TestParseResponse );
+    FRIEND_TEST ( AmazonTest, TestParseErrorResponse );
 
     Amazon();
     static std::string data;

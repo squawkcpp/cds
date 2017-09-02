@@ -141,92 +141,107 @@ AmazonResult Amazon::parse( const std::string & response ) {
 
     rapidxml_ns::xml_document<> doc;
     doc.parse<0>( const_cast< char* >( response.c_str() ) );
-    auto root_node = doc.first_node( "ItemSearchResponse" );
-    for (rapidxml_ns::xml_node<> * __r_sieblings = root_node->first_node(); __r_sieblings; __r_sieblings = __r_sieblings->next_sibling() ) {
-        if( strcmp( __r_sieblings->name(), "Items" ) == 0 ) {
-            for (rapidxml_ns::xml_node<> * __items_node = __r_sieblings->first_node(); __items_node; __items_node = __items_node->next_sibling() ) {
-                if( strcmp( __items_node->name(), "Request" ) == 0 ) {
-                    for (rapidxml_ns::xml_node<> * __errors_node = __items_node->first_node(); __errors_node; __errors_node = __errors_node->next_sibling() ) {
-                        if( strcmp( __errors_node->name(), "Errors" ) == 0 ) {
-                            for (rapidxml_ns::xml_node<> * __error_node = __errors_node->first_node(); __error_node; __error_node = __error_node->next_sibling() ) {
-                                if( strcmp( __error_node->name(), "Error" ) == 0 ) {
-                                    for (rapidxml_ns::xml_node<> * __error_values = __error_node->first_node(); __error_values; __error_values = __error_values->next_sibling() ) {
-                                        if( strcmp( __error_values->name(), "Code" ) == 0 ) {
-                                            _result_list.status = __error_values->value();
-                                        } else if( strcmp( __error_values->name(), "Message" ) == 0 ) {
-                                            _result_list.message = __error_values->value();
-                                        }
-                                    }
-                                }
-                            }
-                        }
+    auto root_node = doc.first_node();
+    if( strcmp( root_node->name(), "ItemSearchErrorResponse" ) == 0 ) {
+        for (rapidxml_ns::xml_node<> * __r_sieblings = root_node->first_node(); __r_sieblings; __r_sieblings = __r_sieblings->next_sibling() ) {
+            if( strcmp( __r_sieblings->name(), "Error" ) == 0 ) {
+                for (rapidxml_ns::xml_node<> * __items_node = __r_sieblings->first_node(); __items_node; __items_node = __items_node->next_sibling() ) {
+                    if( strcmp( __items_node->name(), "Code" ) == 0 ) {
+                        _result_list.status = __items_node->value();
+                    } else if( strcmp( __items_node->name(), "Message" ) == 0 ) {
+                        _result_list.message = __items_node->value();
                     }
-                } else if( strcmp( __items_node->name(), "Item" ) == 0 ) {
-                    std::map< std::string, std::string > _result_item;
-                    for (rapidxml_ns::xml_node<> * __i_node = __items_node->first_node(); __i_node; __i_node = __i_node->next_sibling() ) {
-                        if( strcmp( __i_node->name(), "EditorialReviews" ) == 0 ) {
-                            for (rapidxml_ns::xml_node<> * __review_node = __i_node->first_node(); __review_node; __review_node = __review_node->next_sibling() ) {
-                                if( strcmp( __review_node->name(), "EditorialReview" ) == 0 ) {
-                                    for (rapidxml_ns::xml_node<> * __review_content_node = __review_node->first_node(); __review_content_node; __review_content_node = __review_content_node->next_sibling() ) {
-                                        if( strcmp( __review_content_node->name(), "Content" ) == 0 ) {
-                                            _result_item[cds::PARAM_COMMENT] = __review_content_node->value();
-                                        }
-                                    }
-                                }
-                            }
-                        } else if( strcmp( __i_node->name(), "SmallImage" ) == 0 ) {
-                            for (rapidxml_ns::xml_node<> * __small_image_node = __i_node->first_node(); __small_image_node; __small_image_node = __small_image_node->next_sibling() ) {
-                                if( strcmp( __small_image_node->name(), "URL" ) == 0 ) {
-                                    small_image = __small_image_node->value();
-                                }
-                            }
-                        } else if( strcmp( __i_node->name(), "MediumImage" ) == 0 ) {
-                            for (rapidxml_ns::xml_node<> * __med_image_node = __i_node->first_node(); __med_image_node; __med_image_node = __med_image_node->next_sibling() ) {
-                                if( strcmp( __med_image_node->name(), "URL" ) == 0 ) {
-                                    med_image = __med_image_node->value();
-                                }
-                            }
-                        } else if( strcmp( __i_node->name(), "LargeImage" ) == 0 ) {
-                            for (rapidxml_ns::xml_node<> * __large_image_node = __i_node->first_node(); __large_image_node; __large_image_node = __large_image_node->next_sibling() ) {
-                                if( strcmp( __large_image_node->name(), "URL" ) == 0 ) {
-                                    large_image = __large_image_node->value();
-                                }
-                            }
-                        } else if( strcmp( __i_node->name(), "ItemAttributes" ) == 0 ) {
-                            for (rapidxml_ns::xml_node<> * __item_attrs_node = __i_node->first_node(); __item_attrs_node; __item_attrs_node = __item_attrs_node->next_sibling() ) {
-                                if( strcmp( __item_attrs_node->name(), "Title" ) == 0 ) {
-                                    _result_item[cds::PARAM_NAME] = __item_attrs_node->value();
-                                } else if( strcmp( __item_attrs_node->name(), "Publisher" ) == 0 ) {
-                                    _result_item[cds::PARAM_PUBLISHER] = __item_attrs_node->value();
-                                } else if( strcmp( __item_attrs_node->name(), "Author" ) == 0 ) {
-                                    if( !author.empty() ) author.append( ", " );
-                                    author.append( __item_attrs_node->value() );
-                                } else if( strcmp( __item_attrs_node->name(), "PublicationDate" ) == 0 ) {
-                                    _result_item[cds::PARAM_DATE] = __item_attrs_node->value();
-                                } else if( strcmp( __item_attrs_node->name(), "ISBN" ) == 0 ) {
-                                    _result_item[cds::PARAM_ISBN] = __item_attrs_node->value();
-                                }
-                            }
-                        }
-                    }
-                    //set the largest cover
-                    if( !large_image.empty() ) {
-                        _result_item[cds::PARAM_COVER] = large_image;
-                    } else if( !med_image.empty() ) {
-                        _result_item[cds::PARAM_COVER] = med_image;
-                    } else if( !small_image.empty() ) {
-                        _result_item[cds::PARAM_COVER] = small_image;
-                    }
-                    _result_item[cds::PARAM_AUTHOR] = author;
-                    _result_list.results.push_back( _result_item );
-
-
-                } else if( strcmp( __items_node->name(), "TotalResults" ) == 0 ) {
-                    _result_list.count = std::atoi( __items_node->value() );
                 }
             }
         }
-    }//for loop
+
+    } else if( strcmp( root_node->name(), "ItemSearchResponse" ) == 0 ) {
+        for (rapidxml_ns::xml_node<> * __r_sieblings = root_node->first_node(); __r_sieblings; __r_sieblings = __r_sieblings->next_sibling() ) {
+            if( strcmp( __r_sieblings->name(), "Items" ) == 0 ) {
+                for (rapidxml_ns::xml_node<> * __items_node = __r_sieblings->first_node(); __items_node; __items_node = __items_node->next_sibling() ) {
+                    if( strcmp( __items_node->name(), "Request" ) == 0 ) {
+                        for (rapidxml_ns::xml_node<> * __errors_node = __items_node->first_node(); __errors_node; __errors_node = __errors_node->next_sibling() ) {
+                            if( strcmp( __errors_node->name(), "Errors" ) == 0 ) {
+                                for (rapidxml_ns::xml_node<> * __error_node = __errors_node->first_node(); __error_node; __error_node = __error_node->next_sibling() ) {
+                                    if( strcmp( __error_node->name(), "Error" ) == 0 ) {
+                                        for (rapidxml_ns::xml_node<> * __error_values = __error_node->first_node(); __error_values; __error_values = __error_values->next_sibling() ) {
+                                            if( strcmp( __error_values->name(), "Code" ) == 0 ) {
+                                                _result_list.status = __error_values->value();
+                                            } else if( strcmp( __error_values->name(), "Message" ) == 0 ) {
+                                                _result_list.message = __error_values->value();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if( strcmp( __items_node->name(), "Item" ) == 0 ) {
+                        std::map< std::string, std::string > _result_item;
+                        for (rapidxml_ns::xml_node<> * __i_node = __items_node->first_node(); __i_node; __i_node = __i_node->next_sibling() ) {
+                            if( strcmp( __i_node->name(), "EditorialReviews" ) == 0 ) {
+                                for (rapidxml_ns::xml_node<> * __review_node = __i_node->first_node(); __review_node; __review_node = __review_node->next_sibling() ) {
+                                    if( strcmp( __review_node->name(), "EditorialReview" ) == 0 ) {
+                                        for (rapidxml_ns::xml_node<> * __review_content_node = __review_node->first_node(); __review_content_node; __review_content_node = __review_content_node->next_sibling() ) {
+                                            if( strcmp( __review_content_node->name(), "Content" ) == 0 ) {
+                                                _result_item[cds::PARAM_COMMENT] = __review_content_node->value();
+                                            }
+                                        }
+                                    }
+                                }
+                            } else if( strcmp( __i_node->name(), "SmallImage" ) == 0 ) {
+                                for (rapidxml_ns::xml_node<> * __small_image_node = __i_node->first_node(); __small_image_node; __small_image_node = __small_image_node->next_sibling() ) {
+                                    if( strcmp( __small_image_node->name(), "URL" ) == 0 ) {
+                                        small_image = __small_image_node->value();
+                                    }
+                                }
+                            } else if( strcmp( __i_node->name(), "MediumImage" ) == 0 ) {
+                                for (rapidxml_ns::xml_node<> * __med_image_node = __i_node->first_node(); __med_image_node; __med_image_node = __med_image_node->next_sibling() ) {
+                                    if( strcmp( __med_image_node->name(), "URL" ) == 0 ) {
+                                        med_image = __med_image_node->value();
+                                    }
+                                }
+                            } else if( strcmp( __i_node->name(), "LargeImage" ) == 0 ) {
+                                for (rapidxml_ns::xml_node<> * __large_image_node = __i_node->first_node(); __large_image_node; __large_image_node = __large_image_node->next_sibling() ) {
+                                    if( strcmp( __large_image_node->name(), "URL" ) == 0 ) {
+                                        large_image = __large_image_node->value();
+                                    }
+                                }
+                            } else if( strcmp( __i_node->name(), "ItemAttributes" ) == 0 ) {
+                                for (rapidxml_ns::xml_node<> * __item_attrs_node = __i_node->first_node(); __item_attrs_node; __item_attrs_node = __item_attrs_node->next_sibling() ) {
+                                    if( strcmp( __item_attrs_node->name(), "Title" ) == 0 ) {
+                                        _result_item[cds::PARAM_NAME] = __item_attrs_node->value();
+                                    } else if( strcmp( __item_attrs_node->name(), "Publisher" ) == 0 ) {
+                                        _result_item[cds::PARAM_PUBLISHER] = __item_attrs_node->value();
+                                    } else if( strcmp( __item_attrs_node->name(), "Author" ) == 0 ) {
+                                        if( !author.empty() ) author.append( ", " );
+                                        author.append( __item_attrs_node->value() );
+                                    } else if( strcmp( __item_attrs_node->name(), "PublicationDate" ) == 0 ) {
+                                        _result_item[cds::PARAM_DATE] = __item_attrs_node->value();
+                                    } else if( strcmp( __item_attrs_node->name(), "ISBN" ) == 0 ) {
+                                        _result_item[cds::PARAM_ISBN] = __item_attrs_node->value();
+                                    }
+                                }
+                            }
+                        }
+                        //set the largest cover
+                        if( !large_image.empty() ) {
+                            _result_item[cds::PARAM_COVER] = large_image;
+                        } else if( !med_image.empty() ) {
+                            _result_item[cds::PARAM_COVER] = med_image;
+                        } else if( !small_image.empty() ) {
+                            _result_item[cds::PARAM_COVER] = small_image;
+                        }
+                        _result_item[cds::PARAM_AUTHOR] = author;
+                        _result_list.results.push_back( _result_item );
+
+
+                    } else if( strcmp( __items_node->name(), "TotalResults" ) == 0 ) {
+                        _result_list.count = std::atoi( __items_node->value() );
+                    }
+                }
+            }
+        }//for loop
+    }//response root node
     return _result_list;
 }
 std::string Amazon::canonicalize( const std::map<std::string, std::string> & sortedParamMap ) {
