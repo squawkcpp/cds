@@ -38,14 +38,10 @@ all the requests have the base url of your server:
 the directory is structured as a tree. the content can be traversed from the **`root`** node.
 beside of the class specific attributes, the node will always contain the **`key`, `parent`** and **`cls`** attributes.
 
-#### node list
+#### load the child elements of a node.
 
-**<code>GET</code> /[root|file|ebook|movie|album|serie|artist|image|{digit}]/nodes**
+```**<code>GET</code> /[root|file|ebook|movie|album|serie|artist|image|{digit}]/nodes?{name}={value}**```
 
-##### parameters:
-
- **<code>GET</code> /[root|file|ebook|movie|album|serie|artist|image|{digit}]/nodes**||
- parameters:||
  name | value | description
  ------------ | ------------- | -------------
  sort | alpha, timestamp | sort list alphanumerical or by last access timestamp.
