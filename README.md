@@ -44,8 +44,8 @@ beside of the class specific attributes, the node will always contain the **`key
 
 ##### parameters:
 
- **<code>GET</code> /[root|file|ebook|movie|album|serie|artist|image|{digit}]/nodes**
- parameters:
+ **<code>GET</code> /[root|file|ebook|movie|album|serie|artist|image|{digit}]/nodes**||
+ parameters:||
  name | value | description
  ------------ | ------------- | -------------
  sort | alpha, timestamp | sort list alphanumerical or by last access timestamp.
