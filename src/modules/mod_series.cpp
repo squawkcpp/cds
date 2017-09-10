@@ -87,6 +87,7 @@ std::string ModSeries::import ( data::redis_ptr rdx, const config_ptr config, co
                 rdx->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ),
                                 data::KEY_CLASS, data::NodeType::str ( data::NodeType::serie ),
                                 data::KEY_NAME, __res[data::KEY_NAME],
+                                data::KEY_PARENT, "serie",
                                 PARAM_TMDB_ID, __res[PARAM_TMDB_ID],
                                 PARAM_COMMENT, __res[PARAM_COMMENT],
                                 PARAM_DATE, __res["first_air_date"],
