@@ -294,7 +294,7 @@ static void children( redis_ptr redis /** @param redis redis database pointer. *
 
     //TODO use defined type
     redox::Command< std::vector< std::string > >& _c = redis->commandSync< std::vector< std::string > >
-            ( {REDIS_ZRANGE, make_key_list( key ), std::to_string( index ), std::to_string( count ) } );
+            ( {REDIS_ZRANGE, make_key_list( key ), std::to_string( index ), std::to_string( index + count ) } );
     if( _c.ok() ) {
         for( const std::string& __c : _c.reply() ) {
             fn( __c );
