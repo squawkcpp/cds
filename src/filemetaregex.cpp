@@ -82,7 +82,7 @@ data::NodeType::Enum FileMetaRegex::parse ( const std::string& mime_type, const 
         return data::NodeType::file;
     }
 
-    spdlog::get ( LOGGER )->info ( "rule not found for mime_type:{0}", mime_type );
+    spdlog::get ( LOGGER )->info ( "rule not found for mime_type:{0}/{1}", mime_type, path );
     return data::NodeType::file;
 }
 

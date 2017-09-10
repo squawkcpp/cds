@@ -72,7 +72,7 @@ void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
     mod::ModAlbums::import ( redis, config );
     mod::ModImages::import ( redis, config );
     mod::ModMovies::import ( redis, config );
-    mod::ModSeries::import ( redis, config );
+    //TODO mod::ModSeries::import ( redis, config );
     mod::ModEbooks::import ( redis, config );
 }
 void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const std::string& parent_key, const std::string& path ) {

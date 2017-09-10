@@ -18,6 +18,7 @@
 #include <iostream>
 #include <time.h>
 
+#include <boost/filesystem.hpp>
 #include "spdlog/spdlog.h"
 #include "rapidjson/document.h"
 
@@ -36,34 +37,42 @@ namespace mod {
 
 void ModSeries::import ( data::redis_ptr redis, const config_ptr config ) {
     data::new_items( redis, data::NodeType::episode, [redis,config]( const std::string& key ) {
-        data::node_t _file = data::node ( redis, key );
-        //Get the track information
-        av::Format _format ( _file[data::KEY_PATH] );
+        try {
+            data::node_t _file = data::node ( redis, key );
+            //Get the track information
+            av::Format _format ( _file[data::KEY_PATH] );
 
-        if ( !!_format ) {
-            spdlog::get ( LOGGER )->warn ( "Can not open serie file:{} ({})",
-                                           _format.errc().message(),
-                                           _file[data::KEY_PATH] );
-        } else {
+            if ( !!_format ) {
+                spdlog::get ( LOGGER )->warn ( "Can not open serie file:{} ({})",
+                                               _format.errc().message(),
+                                               _file[data::KEY_PATH] );
+            } else {
 
-            //construct the episode name if empty
-            std::string _episode_name = _file[data::TYPE_SERIE];
-            _episode_name.append ( " S" ).append ( _file[PARAM_SEASON] )
-            .append ( " E" ).append ( _file[data::TYPE_EPISODE] );
-            auto codec = _format.find_codec ( av::CODEC_TYPE::VIDEO );
-            auto _tmdb_id = import ( redis, config, key, _file[data::TYPE_SERIE] );
-            auto _tmdb_result = tmdb_episode ( config->tmdb_key, _tmdb_id, _file[PARAM_SEASON], _file[data::TYPE_EPISODE] );
-            auto _episodes = tmdb_parse_episode ( config, _tmdb_result );
-            redis->command ( {data::REDIS_HMSET,  data::make_key_node ( key ),
-                            data::KEY_NAME, ( _episodes[data::KEY_NAME].empty() ? _episode_name : _episodes[data::KEY_NAME] ),
-                            PARAM_DATE, _episodes[PARAM_DATE],
-                            PARAM_TMDB_ID, _episodes[PARAM_TMDB_ID],
-                            PARAM_COMMENT, _episodes[PARAM_COMMENT],
-                            PARAM_STILL_IMAGE, _episodes[PARAM_STILL_IMAGE],
-                            KEY_PLAYTIME, std::to_string ( _format.playtime() ),
-                            KEY_WIDTH, std::to_string ( codec->width() ),
-                            KEY_HEIGHT, std::to_string ( codec->height() )
-            });
+                //construct the episode name if empty
+                std::string _episode_name = _file[data::TYPE_SERIE];
+                _episode_name.append ( " S" ).append ( _file[PARAM_SEASON] )
+                .append ( " E" ).append ( _file[data::TYPE_EPISODE] );
+                auto codec = _format.find_codec ( av::CODEC_TYPE::VIDEO );
+                auto _tmdb_id = import ( redis, config, key, _file[data::TYPE_SERIE] );
+                auto _tmdb_result = tmdb_episode ( config->tmdb_key, _tmdb_id, _file[PARAM_SEASON], _file[data::TYPE_EPISODE] );
+                auto _episodes = tmdb_parse_episode ( config, _tmdb_result );
+                redis->command ( {data::REDIS_HMSET,  data::make_key_node ( key ),
+                                data::KEY_NAME, ( _episodes[data::KEY_NAME].empty() ? _episode_name : _episodes[data::KEY_NAME] ),
+                                PARAM_DATE, _episodes[PARAM_DATE],
+                                PARAM_TMDB_ID, _episodes[PARAM_TMDB_ID],
+                                PARAM_COMMENT, _episodes[PARAM_COMMENT],
+                                PARAM_STILL_IMAGE, _episodes[PARAM_STILL_IMAGE],
+                                KEY_PLAYTIME, std::to_string ( _format.playtime() ),
+                                KEY_WIDTH, std::to_string ( codec->width() ),
+                                KEY_HEIGHT, std::to_string ( codec->height() )
+                });
+                auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, data::KEY_PATH ) );
+                redis->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::episode ), std::to_string( _last_write_time ), key } );
+            }
+        } catch( std::error_code& code ) {
+            spdlog::get ( LOGGER )->warn ( "error code in parse series: ({})", code.message() );
+        } catch( ... ) {
+            spdlog::get ( LOGGER )->warn ( "other error in parse series" );
         }
     } );
 }
