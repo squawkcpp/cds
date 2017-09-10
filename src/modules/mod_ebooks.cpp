@@ -59,7 +59,7 @@ void ModEbooks::import ( data::redis_ptr redis, const config_ptr config ) {
             image::Image image_meta_ ( _cover_path );
             redis->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _cover_path ) ),
                             data::KEY_PARENT, key,
-                            PARAM_CLASS, data::NodeType::str ( data::NodeType::cover ),
+                            data::KEY_CLASS, data::NodeType::str ( data::NodeType::cover ),
                             KEY_WIDTH, std::to_string ( image_meta_.width() ),
                             KEY_HEIGHT, std::to_string ( image_meta_.height() )
                            } );

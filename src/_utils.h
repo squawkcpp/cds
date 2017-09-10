@@ -64,7 +64,6 @@ static const char* PARAM_REDIS_PORT         = "redis-port";
 static const std::string PARAM_AUTHOR = "author";
 static const std::string PARAM_BACKDROP = "backdrop";
 static const std::string PARAM_COMMENT = "comment";
-static const std::string PARAM_CLASS = "cls";
 static const std::string PARAM_DATE = "date";
 static const char* PARAM_DIRECTORY = "directory";
 static const std::string PARAM_EXT = "ext";

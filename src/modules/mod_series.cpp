@@ -85,7 +85,7 @@ std::string ModSeries::import ( data::redis_ptr rdx, const config_ptr config, co
                 image_meta_.scale ( 160, 160, fmt::format ( "{0}/tn_{1}.jpg", config->tmp_directory, data::hash ( __res[PARAM_POSTER] ) ) );
                 tmdb_fetch ( __res[PARAM_BACKDROP], _backdrop_path );
                 rdx->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ),
-                                PARAM_CLASS, data::NodeType::str ( data::NodeType::serie ),
+                                data::KEY_CLASS, data::NodeType::str ( data::NodeType::serie ),
                                 data::KEY_NAME, __res[data::KEY_NAME],
                                 PARAM_TMDB_ID, __res[PARAM_TMDB_ID],
                                 PARAM_COMMENT, __res[PARAM_COMMENT],
@@ -98,7 +98,7 @@ std::string ModSeries::import ( data::redis_ptr rdx, const config_ptr config, co
             } else {
                 spdlog::get ( LOGGER )->warn ( "NO TMDB_RESULT: ({})", __res.size() );
                 rdx->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ),
-                                PARAM_CLASS, data::NodeType::str ( data::NodeType::serie ),
+                                data::KEY_CLASS, data::NodeType::str ( data::NodeType::serie ),
                                 data::KEY_NAME, serie,
                                } );
             }

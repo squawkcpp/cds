@@ -48,6 +48,7 @@ static const std::string REDIS_ZCARD = "ZCARD";
 static const std::string REDIS_ZRANGE = "ZRANGE";
 static const std::string REDIS_ZREM = "ZREM";
 
+static const std::string KEY_CLASS = "cls";
 static const std::string KEY_CONFIG = "config:cds";
 static const std::string KEY_FS = "fs";
 static const std::string KEY_KEY = "key";
@@ -61,7 +62,6 @@ static const std::string KEY_PATH = "path";
 static const std::string KEY_TAG = "tag";
 static const std::string KEY_TIMESTAMP = "timestamp";
 static const std::string KEY_TYPE = "type";
-
 static const std::string TYPE_ARTIST = "artist";
 static const std::string TYPE_FOLDER = "folder";
 static const std::string TYPE_AUDIO = "audio";
@@ -140,13 +140,13 @@ public:
 // -----------------------------------------------------------------------------------------------------------
 
 static std::array< std::map< std::string, std::string >, 7 > menu ( {{
-        { {"name", "Music Albums"},  {KEY_TYPE, TYPE_ALBUM} },
-        { {"name", "Music Artists"}, {KEY_TYPE, TYPE_ARTIST} },
-        { {"name", "Photos"},        {KEY_TYPE, TYPE_IMAGE} },
-        { {"name", "Movies"},        {KEY_TYPE, TYPE_MOVIE} },
-        { {"name", "TV Series"},     {KEY_TYPE, TYPE_SERIE} },
-        { {"name", "eBooks"},        {KEY_TYPE, TYPE_EBOOK} },
-        { {"name", "Storage"},       {KEY_TYPE, TYPE_FILE } }
+        { {KEY_NAME, "Music Albums"},  {KEY_TYPE, TYPE_ALBUM} },
+        { {KEY_NAME, "Music Artists"}, {KEY_TYPE, TYPE_ARTIST} },
+        { {KEY_NAME, "Photos"},        {KEY_TYPE, TYPE_IMAGE} },
+        { {KEY_NAME, "Movies"},        {KEY_TYPE, TYPE_MOVIE} },
+        { {KEY_NAME, "TV Series"},     {KEY_TYPE, TYPE_SERIE} },
+        { {KEY_NAME, "eBooks"},        {KEY_TYPE, TYPE_EBOOK} },
+        { {KEY_NAME, "Storage"},       {KEY_TYPE, TYPE_FILE } }
 }});
 
 /** @brief check if path is a mod path */
@@ -289,10 +289,13 @@ static node_t node ( redis_ptr redis /** @param redis redis database pointer. */
 /** @brief get the node children */ //TODO add params sort,order,tags,index,count
 static void children( redis_ptr redis /** @param redis redis database pointer. */,
                       const std::string& key /** @param key the node key. */,
+                      const int& index /** @param index start index. */,
+                      const int& count /** @param count result size. */,
                       async_fn fn /** @param fn the callback function. */ ) {
 
     //TODO use defined type
-    redox::Command< std::vector< std::string > >& _c = redis->commandSync< std::vector< std::string > >( {REDIS_ZRANGE, make_key_list( key ), "0", "-1" } );
+    redox::Command< std::vector< std::string > >& _c = redis->commandSync< std::vector< std::string > >
+            ( {REDIS_ZRANGE, make_key_list( key ), std::to_string( index ), std::to_string( count ) } );
     if( _c.ok() ) {
         for( const std::string& __c : _c.reply() ) {
             fn( __c );

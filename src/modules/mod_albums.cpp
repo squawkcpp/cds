@@ -104,7 +104,7 @@ void ModAlbums::import ( data::redis_ptr rdx, const config_ptr config ) {
                         utils::Image image_meta_ ( __file[data::KEY_PATH] );
                         rdx->command ( {data::REDIS_HMSET,  data::make_key_node ( data::hash ( __file[data::KEY_PATH] ) ),
                                         data::KEY_PARENT, key,
-                                        PARAM_CLASS, data::NodeType::str ( data::NodeType::cover ),
+                                        data::KEY_CLASS, data::NodeType::str ( data::NodeType::cover ),
                                         KEY_WIDTH, std::to_string ( image_meta_.width() ),
                                         KEY_HEIGHT, std::to_string ( image_meta_.height() )
                                        } );
@@ -139,7 +139,7 @@ void ModAlbums::import ( data::redis_ptr rdx, const config_ptr config ) {
 
             //store folder as album
             rdx->command ( {data::REDIS_HMSET,  data::make_key_node ( key ),
-                            PARAM_CLASS, data::NodeType::str ( data::NodeType::album ),
+                            data::KEY_CLASS, data::NodeType::str ( data::NodeType::album ),
                             av::Metadata::name ( av::Metadata::ARTIST ), _artist,
                             av::Metadata::name ( av::Metadata::ALBUM ), _album,
                             av::Metadata::name ( av::Metadata::YEAR ), _year,
@@ -162,9 +162,9 @@ void ModAlbums::import ( data::redis_ptr rdx, const std::string& key, std::map< 
         for ( const std::string& __key : c.reply() ) {
             data::node_t _file = data::node ( rdx, __key );
 
-            if ( _file[PARAM_CLASS] == data::NodeType::str ( data::NodeType::folder ) ) {
+            if ( _file[data::KEY_CLASS] == data::NodeType::str ( data::NodeType::folder ) ) {
                 import ( rdx, _file[data::KEY_PATH], files );
-            } else { files[ data::NodeType::parse ( _file[PARAM_CLASS] ) ].push_back ( _file ); }
+            } else { files[ data::NodeType::parse ( _file[data::KEY_CLASS] ) ].push_back ( _file ); }
         }
     }
 }
@@ -174,7 +174,7 @@ void ModAlbums::import ( data::redis_ptr rdx, const std::string& album_key, cons
 
     auto _clean_string = clean_string ( artist );
     rdx->command ( { data::REDIS_HMSET,  data::make_key_node ( data::hash ( _clean_string ) ),
-                     PARAM_CLASS, data::NodeType::str ( data::NodeType::artist ),
+                     data::KEY_CLASS, data::NodeType::str ( data::NodeType::artist ),
                      av::Metadata::name ( av::Metadata::ARTIST ), artist } );
 
     data::add_types( rdx, _clean_string, album_key, 0 );

@@ -153,6 +153,8 @@ http::http_status Server::nodes ( http::Request& request, http::Response& respon
     if( _key.empty() || _key == "root" )
     { _key = "/"; }
 
+    int _index = 0; //TODO get index from request
+    int _count = -1; //TODO get count from request
     int _result = 0;
     using namespace rapidjson;
     StringBuffer sb;
@@ -162,7 +164,7 @@ http::http_status Server::nodes ( http::Request& request, http::Response& respon
     writer.String ( "nodes" );
     writer.StartArray();
 
-    data::children( redis_, _key, [this,&writer,&_result]( const std::string& key ) {
+    data::children( redis_, _key, _index, _count, [this,&writer,&_result]( const std::string& key ) {
         ++_result;
         writer.StartObject();
         writer.String ( data::KEY_KEY.c_str() );

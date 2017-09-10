@@ -44,7 +44,7 @@ inline void save_folder ( data::redis_ptr redis /** @param redis redis database 
     data::node_t _node {
         { data::KEY_NAME, name },
         { data::KEY_PARENT, parent },
-        { PARAM_CLASS, data::NodeType::str ( data::NodeType::folder ) } };
+        { data::KEY_CLASS, data::NodeType::str ( data::NodeType::folder ) } };
     data::save( redis, key, _node );
 }
 
@@ -62,7 +62,7 @@ void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
         _node[data::KEY_NAME] = filename ( directory, false );
         _node[data::KEY_PARENT] = data::TYPE_FILE;
         _node[data::KEY_PATH] = directory;
-        _node[PARAM_CLASS] = data::NodeType::str ( data::NodeType::folder );
+        _node[data::KEY_CLASS] = data::NodeType::str ( data::NodeType::folder );
         data::save( redis, data::hash( directory ), _node );
         import_directory( redis, _magic, directory, directory );
     }
@@ -93,7 +93,7 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
                 data::NodeType::Enum _type = FileMetaRegex::parse ( _mime_type, _item_filepath.c_str(), _node );
                 _node[data::KEY_PARENT] = data::hash( parent_key );
                 _node[data::KEY_PATH] = _item_filepath;
-                _node[PARAM_CLASS] = data::NodeType::str ( _type );
+                _node[data::KEY_CLASS] = data::NodeType::str ( _type );
                 _node[KEY_EXTENSION] = boost::filesystem::extension ( itr->path() );
                 _node[KEY_SIZE] = std::to_string ( boost::filesystem::file_size ( itr->path() ) );
                 _node[KEY_MIME_TYPE] = _mime_type;
@@ -108,7 +108,7 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
                 { data::KEY_NAME, filename ( _item_filepath, false ) },
                 { data::KEY_PARENT, data::hash( path ) },
                 { data::KEY_PATH, _item_filepath },
-                { PARAM_CLASS, data::NodeType::str ( data::NodeType::folder ) } };
+                { data::KEY_CLASS, data::NodeType::str ( data::NodeType::folder ) } };
             data::save( redis, data::hash( _item_filepath ), _node );
             import_directory ( redis, _magic, _item_filepath, _item_filepath );
         }
