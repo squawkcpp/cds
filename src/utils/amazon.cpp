@@ -28,6 +28,7 @@
 #include "rapidxml_ns.hpp"
 
 #include "../_utils.h"
+#include "../datastore.h"
 
 namespace utils {
 
@@ -209,7 +210,7 @@ AmazonResult Amazon::parse( const std::string & response ) {
                             } else if( strcmp( __i_node->name(), "ItemAttributes" ) == 0 ) {
                                 for (rapidxml_ns::xml_node<> * __item_attrs_node = __i_node->first_node(); __item_attrs_node; __item_attrs_node = __item_attrs_node->next_sibling() ) {
                                     if( strcmp( __item_attrs_node->name(), "Title" ) == 0 ) {
-                                        _result_item[cds::PARAM_NAME] = __item_attrs_node->value();
+                                        _result_item[data::KEY_NAME] = __item_attrs_node->value();
                                     } else if( strcmp( __item_attrs_node->name(), "Publisher" ) == 0 ) {
                                         _result_item[cds::PARAM_PUBLISHER] = __item_attrs_node->value();
                                     } else if( strcmp( __item_attrs_node->name(), "Author" ) == 0 ) {
@@ -225,11 +226,11 @@ AmazonResult Amazon::parse( const std::string & response ) {
                         }
                         //set the largest cover
                         if( !large_image.empty() ) {
-                            _result_item[cds::PARAM_COVER] = large_image;
+                            _result_item[data::TYPE_COVER] = large_image;
                         } else if( !med_image.empty() ) {
-                            _result_item[cds::PARAM_COVER] = med_image;
+                            _result_item[data::TYPE_COVER] = med_image;
                         } else if( !small_image.empty() ) {
-                            _result_item[cds::PARAM_COVER] = small_image;
+                            _result_item[data::TYPE_COVER] = small_image;
                         }
                         _result_item[cds::PARAM_AUTHOR] = author;
                         _result_list.results.push_back( _result_item );

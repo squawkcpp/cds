@@ -35,7 +35,7 @@ using namespace std::placeholders;
 
 struct Container {
     cds::config_ptr config;
-    cds::data::redis_ptr redox;
+    data::redis_ptr redox;
     std::shared_ptr< cds::Server > server;
     std::shared_ptr< http::Server< http::HttpServer > > www;
 };
@@ -72,10 +72,10 @@ int main(int argc, char* argv[]) {
 
     auto& _redis_server = options[cds::PARAM_REDIS].as<std::string>();
     auto& _redis_port = options[cds::PARAM_REDIS_PORT].as<std::string>();
-    _container.redox = cds::data::make_connection( _redis_server, std::stoi( _redis_port ) );
+    _container.redox = data::make_connection( _redis_server, std::stoi( _redis_port ) );
     //load config from database
-    if( cds::data::config_exists( _container.redox ) ) {
-        _container.config = cds::json( cds::data::config( _container.redox ) );
+    if( data::config_exists( _container.redox ) ) {
+        _container.config = cds::json( data::config( _container.redox ) );
     } else _container.config = std::make_shared< cds::Config >();
 
     if ( options.count( cds::PARAM_DIRECTORY ) ) {
@@ -112,7 +112,7 @@ int main(int argc, char* argv[]) {
         std::cerr << std::endl;
         return -1;
     }
-    cds::data::config( _container.redox, cds::json( _container.config ) );
+    data::config( _container.redox, cds::json( _container.config ) );
 
     /* setup logger */
 #ifdef DEBUG
@@ -143,32 +143,33 @@ int main(int argc, char* argv[]) {
         http::mod::Exec( std::bind( &cds::Server::status, _container.server, _1, _2 ) ),
         http::mod::Http() );
 
-    _container.www->bind( http::mod::Match< std::string >( "^\\/+([[:digit:]]+)$", cds::PARAM_KEY ),
+    _container.www->bind( http::mod::Match< std::string >( "^\\/+([[:digit:]]+)$", data::KEY_KEY ),
         http::mod::Exec( std::bind( &cds::Server::node, _container.server, _1, _2 ) ),
         http::mod::Http()
     );
 
-    _container.www->bind( http::mod::Match<std::string>( "^\\/+(root|file|ebook|movie|album|serie|artist|image|[[:digit:]]+)\\/+nodes$", cds::PARAM_KEY ),
+    _container.www->bind( http::mod::Match<std::string>( "^\\/+(root|file|ebook|movie|album|serie|artist|image|[[:digit:]]+)\\/+nodes$", data::KEY_KEY ),
         http::mod::Exec( std::bind( &cds::Server::nodes, _container.server, _1, _2 ) ),
-        http::mod::Http() );
+        http::mod::Http()
+    );
 
-    _container.www->bind( http::mod::Match< std::string, std::string >( "^\\/+(ebook|movie|album|serie|artist|image)\\/+(.*)$", cds::PARAM_TYPE, cds::PARAM_NAME ),
+    _container.www->bind( http::mod::Match< std::string, std::string >( "^\\/+(ebook|movie|album|serie|artist|image)\\/+(.*)$", data::KEY_TYPE, data::KEY_NAME ),
         http::mod::Exec( std::bind( &cds::Server::keywords, _container.server, _1, _2 ) ),
         http::mod::Http()
     );
 
-    _container.www->bind( http::mod::Match< std::string >( "^\\/+img\\/+(.*\\.jpg)$", cds::PARAM_KEY ),
+    _container.www->bind( http::mod::Match< std::string >( "^\\/+img\\/+(.*\\.jpg)$", data::KEY_KEY ),
         http::mod::Exec( [&_container](http::Request& request, http::Response& ) -> http::http_status {
-            request.uri( fmt::format( "{}/{}", _container.config->tmp_directory, request.attribute( cds::PARAM_KEY ) ) );
+            request.uri( fmt::format( "{}/{}", _container.config->tmp_directory, request.attribute( data::KEY_KEY ) ) );
             return http::http_status::OK;
         }),
         http::mod::File( "/" ),
         http::mod::Http()
     );
 
-    _container.www->bind( http::mod::Match< std::string >( "^\\/+res\\/+([[:digit:]]+)\\.(.*)$", cds::PARAM_KEY, cds::PARAM_EXT ),
+    _container.www->bind( http::mod::Match< std::string >( "^\\/+res\\/+([[:digit:]]+)\\.(.*)$", data::KEY_KEY, cds::PARAM_EXT ),
             http::mod::Exec( [&_container](http::Request& request, http::Response& ) -> http::http_status {
-            request.uri( cds::data::path( _container.redox, request.attribute( cds::PARAM_KEY ) ) );
+            request.uri( data::get( _container.redox, request.attribute( data::KEY_KEY ), data::KEY_PATH ) );
             return http::http_status::OK;
         }),
         http::mod::File( "/" ),

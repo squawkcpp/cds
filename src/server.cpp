@@ -34,6 +34,7 @@
 #include "http/mod/match.h"
 #include "http/mod/method.h"
 
+#include "_utils.h"
 #include "config.h"
 #include "datastore.h"
 #include "scanner.h"
@@ -42,7 +43,7 @@ namespace cds {
 
 Server::Server ( const std::string& redis, /** @param redis redis host */
                  const short port /** @param port the redis port. */ )
-    : redis_ ( cds::data::make_connection ( redis, port ) ), config_ ( json ( data::config ( redis_ ) ) ) {
+    : redis_ ( data::make_connection ( redis, port ) ), config_ ( json ( data::config ( redis_ ) ) ) {
     if ( !sub_.connect() ) {
         spdlog::get ( LOGGER )->error ( "can not subscribe to redis queue" );
     } else {
@@ -97,22 +98,22 @@ http::http_status Server::status ( http::Request&, http::Response& response ) {
     writer.String ( "content" );
     writer.StartObject();
 
-    for ( auto& __type : NodeTypes ) {
-        writer.String ( str ( __type ).c_str() );
-        writer.Int ( data::count ( redis_, data::make_key_nodes( __type ) ) );
+    for( auto& __type : data::menu ) { //TODO delete NodeTypes.
+        writer.String( __type[data::KEY_TYPE].c_str() );
+        writer.Int( data::children_count( redis_, __type[data::KEY_TYPE] ) );
     }
 
     writer.EndObject();
     writer.String ( "types" );
     writer.StartObject();
-    std::vector< std::string > _command = { REDIS_MEMBERS, data::make_key_node( KEY_MIME ) };
+    std::vector< std::string > _command = { data::REDIS_MEMBERS, data::make_key_node( data::KEY_MIME ) };
     redox::Command< data::nodes_t >& c =
         redis_->commandSync< data::nodes_t >( _command );
 
     if ( c.ok() ) {
         for ( const std::string& __mime : c.reply() ) {
             writer.String ( __mime.c_str() );
-            auto _res = redis_->get ( make_key ( KEY_FS, KEY_MIME, __mime ) );
+            auto _res = redis_->get ( data::make_key ( data::KEY_FS, data::KEY_MIME, __mime ) );
             writer.String ( _res.c_str() );
         }
     }
@@ -131,7 +132,7 @@ http::http_status Server::node ( http::Request& request, http::Response& respons
     PrettyWriter<StringBuffer> writer ( sb );
     writer.StartObject();
     auto& _item = redis_->commandSync<std::vector< std::string > > (
-    { REDIS_HGETALL, make_key ( KEY_FS, request.attribute ( PARAM_KEY ) ) } );
+    { data::REDIS_HGETALL, data::make_key ( data::KEY_FS, request.attribute ( data::KEY_KEY ) ) } );
 
     if ( _item.ok() ) {
         for ( auto& __i : _item.reply() ) {
@@ -148,7 +149,7 @@ http::http_status Server::node ( http::Request& request, http::Response& respons
 
 http::http_status Server::nodes ( http::Request& request, http::Response& response ) {
 
-    std::string _key = request.attribute ( PARAM_KEY );
+    std::string _key = request.attribute ( data::KEY_KEY );
     if( _key.empty() || _key == "root" )
     { _key = "/"; }
 
@@ -164,7 +165,7 @@ http::http_status Server::nodes ( http::Request& request, http::Response& respon
     data::children( redis_, _key, [this,&writer,&_result]( const std::string& key ) {
         ++_result;
         writer.StartObject();
-        writer.String ( PARAM_KEY.c_str() );
+        writer.String ( data::KEY_KEY.c_str() );
         writer.String ( key.c_str() );
 
         auto n = data::node( redis_, key );
@@ -174,22 +175,6 @@ http::http_status Server::nodes ( http::Request& request, http::Response& respon
         }
         writer.EndObject();
     });
-
-//    std::vector< std::string > _command;
-//    _command.push_back ( REDIS_SUNION );
-//    data::FOR_NODE ( redis_, _command, [&writer] ( const std::string & key, data::node_t n ) {
-//        writer.StartObject();
-//        writer.String ( PARAM_KEY.c_str() );
-//        writer.String ( key.c_str() );
-
-//        for ( auto& __item : n ) {
-//            writer.String ( __item.first.c_str() );
-//            writer.String ( __item.second.c_str() );
-//        }
-
-//        writer.EndObject();
-//    } );
-
     writer.EndArray();
 
     //add counters
@@ -205,55 +190,53 @@ http::http_status Server::nodes ( http::Request& request, http::Response& respon
     return http::http_status::OK;
 }
 
-http::http_status Server::mod ( http::Request& request, http::Response& response ) {
+//http::http_status Server::mod ( http::Request& request, http::Response& response ) {
 
-    int _result = 0;
-    using namespace rapidjson;
-    StringBuffer sb;
-    PrettyWriter<StringBuffer> writer ( sb );
-    writer.StartObject();
-    writer.String ( "nodes" );
-    writer.StartArray();
+//    int _result = 0;
+//    using namespace rapidjson;
+//    StringBuffer sb;
+//    PrettyWriter<StringBuffer> writer ( sb );
+//    writer.StartObject();
+//    writer.String ( "nodes" );
+//    writer.StartArray();
 
-    data::nodes( redis_, NodeType::parse( mod_key ( request.attribute ( PARAM_KEY ) ) ), [this,&writer,&_result]( const std::string& key ) {
-        _result++;
-        data::node_t n = data::node( redis_, key );
-        writer.StartObject();
-        writer.String ( PARAM_KEY.c_str() );
-        writer.String ( key.c_str() );
+//    data::nodes( redis_, data::NodeType::parse( data::mod_key ( request.attribute ( data::PARAM_KEY ) ) ), [this,&writer,&_result]( const std::string& key ) {
+//        _result++;
+//        data::node_t n = data::node( redis_, key );
+//        writer.StartObject();
+//        writer.String ( data::PARAM_KEY.c_str() );
+//        writer.String ( key.c_str() );
 
-        for ( auto& __item : n ) {
-            writer.String ( __item.first.c_str() );
-            writer.String ( __item.second.c_str() );
-        }
+//        for ( auto& __item : n ) {
+//            writer.String ( __item.first.c_str() );
+//            writer.String ( __item.second.c_str() );
+//        }
 
-        writer.EndObject();
-    });
-    writer.EndArray();
+//        writer.EndObject();
+//    });
+//    writer.EndArray();
 
-    writer.String( "count" );
-    writer.Int( data::nodes_count( redis_, NodeType::parse( mod_key ( request.attribute ( PARAM_KEY ) ) ) ) );
-    writer.String( "result" );
-    writer.Int( _result );
+//    writer.String( "count" );
+//    writer.Int( data::nodes_count( redis_, data::NodeType::parse( data::mod_key ( request.attribute ( data::PARAM_KEY ) ) ) ) );
+//    writer.String( "result" );
+//    writer.Int( _result );
 
-    writer.EndObject();
-    response << sb.GetString();
-    response.parameter ( http::header::CONTENT_TYPE, http::mime::mime_type ( http::mime::JSON ) );
-    response.parameter ( "Access-Control-Allow-Origin", "*" );
-    return http::http_status::OK;
-}
+//    writer.EndObject();
+//    response << sb.GetString();
+//    response.parameter ( http::header::CONTENT_TYPE, http::mime::mime_type ( http::mime::JSON ) );
+//    response.parameter ( "Access-Control-Allow-Origin", "*" );
+//    return http::http_status::OK;
+//}
 
 http::http_status Server::keywords ( http::Request& request, http::Response& response ) {
-    std::cout << "keywords " << request.attribute( PARAM_TYPE ) << "=" << request.attribute ( PARAM_NAME ) << std::endl;
+    std::cout << "keywords " << request.attribute( data::KEY_TYPE ) << "=" << request.attribute ( data::KEY_NAME ) << std::endl;
     using namespace rapidjson;
     StringBuffer sb;
     PrettyWriter<StringBuffer> writer ( sb );
     writer.StartArray();
 
-    std::vector< std::string > _command = {
-        REDIS_ZRANGE, make_key ( KEY_FS, request.attribute( PARAM_TYPE ), "keyword", request.attribute ( PARAM_NAME ) ), "0", "-1"
-    };
-    redox::Command< std::set< std::string > >& _c = redis_->commandSync< std::set< std::string > > ( _command );
+    auto& _c = redis_->commandSync< std::set< std::string > > (
+        { data::REDIS_ZRANGE, data::make_key ( data::KEY_FS, request.attribute( data::KEY_TYPE ), data::KEY_TAG, request.attribute ( data::KEY_NAME ) ), "0", "-1" } );
 
     if ( _c.ok() ) {
         for ( const std::string& __c : _c.reply() ) {
@@ -273,7 +256,7 @@ void Server::rescan_ ( bool flush, std::function<void( std::error_code& )> fn ) 
     try {
         //flush database
         if ( flush )
-        { data::flush( redis_, KEY_FS ); }
+        { data::flush( redis_, data::KEY_FS ); }
         //start import
         cds::Scanner::import_files ( redis_, config_ );
 

@@ -24,11 +24,12 @@
 #include "exif.h"
 
 #include "../_utils.h"
+#include "../datastore.h"
 
 namespace utils {
-void exif( cds::data::node_t& node /** @param image node to process. */ ) {
+void exif( data::node_t& node /** @param image node to process. */ ) {
 
-    std::ifstream file( node[cds::PARAM_PATH], std::ios::binary | std::ios::ate );
+    std::ifstream file( node[data::KEY_PATH], std::ios::binary | std::ios::ate );
     std::streamsize size = file.tellg();
     file.seekg( 0, std::ios::beg );
 
@@ -64,7 +65,7 @@ void exif( cds::data::node_t& node /** @param image node to process. */ ) {
         node["GeoLocation.Altitude"] = std::to_string( result.GeoLocation.Altitude );
 
     } else {
-        spdlog::get ( cds::LOGGER )->warn ( "error load exif: {}", node[cds::PARAM_PATH] );
+        spdlog::get ( cds::LOGGER )->warn ( "error load exif: {}", node[data::KEY_PATH] );
     }
 }
 }//namespace utils

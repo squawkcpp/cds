@@ -26,7 +26,7 @@ namespace cds {
 
 /** @brief The RuleItem struct */
 struct RuleItem {
-    NodeType::Enum type;
+    data::NodeType::Enum type;
     std::regex regex;
     std::vector< std::string > names;
 };
@@ -35,7 +35,7 @@ struct RuleItem {
 class FileMetaRegex {
 public:
     /** @brief parse filename and store result in metadata map */
-    static NodeType::Enum parse ( const std::string& mime_type /** @param mime_type mime-type of the item. */,
+    static data::NodeType::Enum parse ( const std::string& mime_type /** @param mime_type mime-type of the item. */,
                                   const std::string& path /** @param path path of the item. */,
                                   data::node_t& metadata /** @param metadata store the meta data. */ );
 private:

@@ -22,6 +22,6 @@
 
 namespace utils {
 /** @brief load exif information from image and store in node_t. */
-void exif( cds::data::node_t& node /** @param image node to process. */ );
+void exif( data::node_t& node /** @param image node to process. */ );
 }//namespace utils
 #endif // IMAGEEXIF_H

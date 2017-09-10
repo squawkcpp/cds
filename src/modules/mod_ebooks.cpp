@@ -28,6 +28,8 @@
 
 #include "http/httpclient.h"
 
+#include "../_utils.h"
+#include "../datastore.h"
 #include "../utils/amazon.h"
 
 namespace cds {
@@ -36,49 +38,49 @@ namespace mod {
 ModEbooks::ModEbooks() {}
 
 void ModEbooks::import ( data::redis_ptr redis, const config_ptr config ) {
-    data::new_items( redis, NodeType::ebook, [redis,config]( const std::string& key ) {
+    data::new_items( redis, data::NodeType::ebook, [redis,config]( const std::string& key ) {
         data::node_t _file = data::node ( redis, key );
-        std::string _isbn = parsePdf ( _file[PARAM_PATH] );
+        std::string _isbn = parsePdf ( _file[data::KEY_PATH] );
         auto _res = utils::Amazon::bookByIsbn ( config->amazon_access_key, config->amazon_key, _isbn );
         data::node_t _book_meta;
 
         for ( auto& __j : _res.results ) {
-            if ( _book_meta.empty() || __j[PARAM_NAME] == _file[PARAM_NAME] ) {
+            if ( _book_meta.empty() || __j[data::KEY_NAME] == _file[data::KEY_NAME] ) {
                 _book_meta = __j;
             }
         }
 
         if ( !_book_meta.empty() ) {
             //save image
-            std::string _cover_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, hash ( _book_meta[PARAM_COVER] ) );
-            std::string _thumb_path = fmt::format ( "{}/tn_{}.jpg", config->tmp_directory, hash ( _book_meta[PARAM_COVER] ) );
+            std::string _cover_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( _book_meta[data::TYPE_COVER] ) );
+            std::string _thumb_path = fmt::format ( "{}/tn_{}.jpg", config->tmp_directory, data::hash ( _book_meta[data::TYPE_COVER] ) );
             std::ofstream _ofs ( _cover_path, std::ofstream::out );
-            http::get ( _book_meta[PARAM_COVER], _ofs );
+            http::get ( _book_meta[data::TYPE_COVER], _ofs );
             image::Image image_meta_ ( _cover_path );
-            redis->command ( {"HMSET",  make_key ( KEY_FS, hash ( _cover_path ) ),
-                            PARAM_PARENT, key,
-                            PARAM_CLASS, NodeType::str ( NodeType::cover ),
+            redis->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _cover_path ) ),
+                            data::KEY_PARENT, key,
+                            PARAM_CLASS, data::NodeType::str ( data::NodeType::cover ),
                             KEY_WIDTH, std::to_string ( image_meta_.width() ),
                             KEY_HEIGHT, std::to_string ( image_meta_.height() )
                            } );
             image_meta_.scale ( 160, 160, _thumb_path );
-            redis->command ( { REDIS_ADD,
-                             make_key ( KEY_FS, hash ( _book_meta[PARAM_COVER] ), "cover" ),
-                             make_key ( KEY_FS, hash ( _cover_path ) )
+            redis->command ( { data::REDIS_ADD,
+                             data::make_key ( data::KEY_FS, data::hash ( _book_meta[data::TYPE_COVER] ), "cover" ),
+                             data::make_key ( data::KEY_FS, data::hash ( _cover_path ) )
                            } );
             //save ebook
-            redis->command ( {"HMSET",  make_key ( KEY_FS, key ),
-                            PARAM_NAME, _book_meta[PARAM_NAME],
+            redis->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, key ),
+                            data::KEY_NAME, _book_meta[data::KEY_NAME],
                             PARAM_COMMENT, _book_meta[PARAM_COMMENT],
                             PARAM_PUBLISHER, _book_meta[PARAM_PUBLISHER],
                             PARAM_DATE, _book_meta[PARAM_DATE],
                             PARAM_ISBN, _book_meta[PARAM_ISBN],
                             PARAM_AUTHOR, _book_meta[PARAM_AUTHOR],
-                            PARAM_THUMB, fmt::format ( "/img/tn_{}.jpg", hash ( _book_meta[PARAM_COVER] ) ),
+                            PARAM_THUMB, fmt::format ( "/img/tn_{}.jpg", data::hash ( _book_meta[data::TYPE_COVER] ) ),
             } );
         }
-        auto _last_write_time = boost::filesystem::last_write_time( data::path( redis, key ) );
-        redis->command ( {REDIS_ZADD, data::make_key_nodes ( NodeType::ebook ), std::to_string( _last_write_time ), key } );
+        auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, data::KEY_PATH ) );
+        redis->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::ebook ), std::to_string( _last_write_time ), key } );
     } );
 }
 

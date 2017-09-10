@@ -1,14 +1,19 @@
 [![Build Status](https://travis-ci.org/squawkcpp/cds.svg?branch=master)](https://travis-ci.org/squawkcpp/cds)
 
+
+** this software is still under development, its not recommended to use it now. **
+
 # Content Directory Server (CDS)
 
 ## about
 
 the squawk content directory server (CDS) serves mediafiles from the local storage. the mediafile are enriched with local and remote metadata.
 
-## install the server:
+## install the server
 
 ### install binary package
+
+
 
 ### use docker image
 
@@ -25,7 +30,7 @@ dependencies must be available to the compiler.
 
 ##### install
 
-## usage:
+## usage
 
 start the content directory server from the command line:
 
@@ -33,7 +38,7 @@ start the content directory server from the command line:
 cds [OPTION...]
 ```
 
-##### options:
+##### options
 
 name | value | description
 ------------ | ------------- | -------------
@@ -48,13 +53,11 @@ name | value | description
 --redis-port|PORT|Redis Database port (default: 6379) (default: 6379)
 --help| |Print help
 
-## api:
+## api
 
 ### Base URL
 
-all the requests have the base url of your server:
-
-```http://<SERVER_IP>:<PORT>```
+all the requests have the base url of your server: `http://<SERVER_IP>:<PORT>`
 
 ### access the directory
 
@@ -117,12 +120,18 @@ for information retrievel the following database services can be used:
 
 ## dependencies:
 
-- [asio](http://think-async.com)
-- [cxxopts](https://github.com/jarro2783/cxxopts)
-- [format::fmt](https://github.com/fmtlib/fmt)
-- [rapidjson](https://github.com/miloyip/rapidjson)
-- [RapidXML NS](https://github.com/svgpp/rapidxml_ns)
-- [re2](https://github.com/google/re2) [redox](https://github.com/hmartiro/redox)
-- [spdlog](https://github.com/gabime/spdlog)
+binary dependencies needs to be installed on the target system.
+
+
+these libraries will be downloaded and staticaly linked during the compile process.
+
+- [asio](http://think-async.com) is a cross-platform C++ library for network and low-level I/O programming that provides developers with a consistent asynchronous model using a modern C++ approach.
+- [cxxopts](https://github.com/jarro2783/cxxopts), lightweight C++ command line option parser
+- [format::fmt](http://fmtlib.net), small, safe and fast formatting library
+- [rapidjson](http://rapidjson.org/), a fast JSON parser/generator for C++ with both SAX/DOM style API
+- [RapidXML NS](https://github.com/svgpp/rapidxml_ns) library - RapidXML with added XML namespaces support
+- [re2](https://github.com/google/re2) is a fast, safe, thread-friendly alternative to backtracking regular expression engines like those used in PCRE, Perl, and Python. It is a C++ library.
+- [redox](https://github.com/hmartiro/redox), modern, asynchronous, and wicked fast C++11 client for Redis
+- [spdlog](https://github.com/gabime/spdlog), super fast C++ logging library.
 
 ## licence:

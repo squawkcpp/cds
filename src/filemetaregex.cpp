@@ -22,6 +22,9 @@
 
 #include "format.h"
 
+#include "_utils.h"
+#include "datastore.h"
+
 namespace cds {
 
 #define REG_PRE "^(/.*)*/"
@@ -33,9 +36,9 @@ namespace cds {
 #define _ " ?- ?"
 #define _TIT " ?\\.?-? ?"
 
-NodeType::Enum FileMetaRegex::parse ( const std::string& mime_type, const std::string& path, data::node_t& metadata ) {
+data::NodeType::Enum FileMetaRegex::parse ( const std::string& mime_type, const std::string& path, data::node_t& metadata ) {
     if ( mime_type == "text/plain" ) {
-        return NodeType::file;
+        return data::NodeType::file;
     }
 
     for ( auto& _mime : rules_ ) {
@@ -60,51 +63,51 @@ NodeType::Enum FileMetaRegex::parse ( const std::string& mime_type, const std::s
     }
 
     if ( mime_type.find ( "audio/" ) == 0 ) {
-        return NodeType::audio;
+        return data::NodeType::audio;
     }
 
     if ( mime_type.find ( "video/" ) == 0 ) {
-        return NodeType::movie;
+        return data::NodeType::movie;
     }
 
     if ( mime_type.find ( "image/" ) == 0 ) {
-        return NodeType::image;
+        return data::NodeType::image;
     }
 
     if ( mime_type == "application/pdf" ) {
-        return NodeType::ebook;
+        return data::NodeType::ebook;
     }
 
     if ( mime_type.find ( "application/octet-stream" ) == 0 ) {
-        return NodeType::file;
+        return data::NodeType::file;
     }
 
     spdlog::get ( LOGGER )->info ( "rule not found for mime_type:{0}", mime_type );
-    return NodeType::file;
+    return data::NodeType::file;
 }
 
 std::map< std::string, std::vector< RuleItem > > FileMetaRegex::rules_ = {
     {
         "audio/", {
             {
-                NodeType::audio,
+                data::NodeType::audio,
                 std::regex ( REG_PRE REG_ARTIST _ REG_YEAR _ REG_ALBUM "/" REG_TRACK _TIT REG_TITLE "$" ),
-                { PARAM_ARTIST, PARAM_YEAR, PARAM_ALBUM, "track", PARAM_NAME }
+                { data::TYPE_ARTIST, PARAM_YEAR, data::TYPE_ALBUM, "track", data::KEY_NAME }
             },
             {
-                NodeType::audio,
+                data::NodeType::audio,
                 std::regex ( REG_PRE REG_ARTIST _ REG_ALBUM "\\(" REG_YEAR "\\) */" REG_TRACK _TIT REG_TITLE "$" ),
-                { PARAM_ARTIST, PARAM_ALBUM, PARAM_YEAR, "track", PARAM_NAME }
+                { data::TYPE_ARTIST, data::TYPE_ALBUM, PARAM_YEAR, "track", data::KEY_NAME }
             },
             {
-                NodeType::audio,
+                data::NodeType::audio,
                 std::regex ( REG_PRE REG_YEAR _ REG_ARTIST _ REG_ALBUM "/" REG_TRACK _TIT REG_TITLE "$" ),
-                { PARAM_YEAR, PARAM_ARTIST, PARAM_ALBUM, "track", PARAM_NAME }
+                { PARAM_YEAR, data::TYPE_ARTIST, data::TYPE_ALBUM, "track", data::KEY_NAME }
             },
             {
-                NodeType::audio,
+                data::NodeType::audio,
                 std::regex ( REG_PRE REG_ARTIST _ REG_ALBUM " */" REG_TRACK _TIT REG_TITLE "$" ),
-                { PARAM_ARTIST, PARAM_ALBUM, "track", PARAM_NAME }
+                { data::TYPE_ARTIST, data::TYPE_ALBUM, "track", data::KEY_NAME }
             },
         }
     },
@@ -112,30 +115,30 @@ std::map< std::string, std::vector< RuleItem > > FileMetaRegex::rules_ = {
         "video/", {
             //SERIE S00E00 TITLE
             {
-                NodeType::episode,
+                data::NodeType::episode,
                 std::regex ( "^(/.*)*/(.*) ?S([0-9]*)E([0-9]*)(.*)$" ),
-                { PARAM_SERIE, PARAM_SEASON, PARAM_EPISODE, PARAM_NAME }
+                { data::TYPE_SERIE, PARAM_SEASON, data::TYPE_EPISODE, data::KEY_NAME }
             },
 
             // /path/SERIE S00E00
             {
-                NodeType::episode,
+                data::NodeType::episode,
                 std::regex ( "^(/.*)*/(.*) ?[S|s]([0-9]*)[E|e]([0-9]*)$" ),
-                { PARAM_SERIE, PARAM_SEASON, PARAM_EPISODE }
+                { data::TYPE_SERIE, PARAM_SEASON, data::TYPE_EPISODE }
             },
 
             //TITLE YEAR
             {
-                NodeType::movie,
+                data::NodeType::movie,
                 std::regex ( "^(/.*)*/(.*) ([0-9]*)$" ),
-                { PARAM_NAME, PARAM_YEAR }
+                { data::KEY_NAME, PARAM_YEAR }
             },
 
             //TITLE
             {
-                NodeType::movie,
+                data::NodeType::movie,
                 std::regex ( "^(/.*)*/(.*)$" ),
-                { PARAM_NAME }
+                { data::KEY_NAME }
             },
 
         }

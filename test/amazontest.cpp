@@ -18,6 +18,7 @@
 #include <map>
 
 #include "../src/_utils.h"
+#include "../src/datastore.h"
 #include "../src/utils/amazon.h"
 
 #include <gtest/gtest.h>
@@ -63,9 +64,9 @@ TEST(AmazonTest, TestParseResponse ) {
     EXPECT_EQ( 1U, book.results.size() );
     auto firstBook = book.results.begin();
 
-    EXPECT_EQ((*firstBook)[cds::PARAM_NAME], std::string("Low & Slow: Master the Art of Barbecue in 5 Easy Lessons" ) );
+    EXPECT_EQ((*firstBook)[data::KEY_NAME], std::string("Low & Slow: Master the Art of Barbecue in 5 Easy Lessons" ) );
     EXPECT_EQ((*firstBook)[cds::PARAM_AUTHOR], std::string("Gary Wiviott, Colleen Rush" ) );
-    EXPECT_EQ((*firstBook)[cds::PARAM_COVER], std::string("http://ecx.images-amazon.com/images/I/51IUbMMktGL.jpg" ) );
+    EXPECT_EQ((*firstBook)[data::TYPE_COVER], std::string("http://ecx.images-amazon.com/images/I/51IUbMMktGL.jpg" ) );
     EXPECT_EQ((*firstBook)[cds::PARAM_COMMENT], std::string("<div><p>Step away from the propane tank. Surrender all of your notions about barbecue. Forget everything you've ever learned about cooking with charcoal and fire. It is all wrong. Get it right with the \"Five Easy Lessons\" program, which includes over 130 recipes and step-by-step instructions for setting up and cooking low and slow on a Weber Smokey Mountain, an offset smoker, or a kettle grill.<P>This program is guided by a singular philosophy: Keep It Simple, Stupid. Do exactly as Gary says, don't even think about opening the lid before it's time, and you will learn:<P>o What gear you do and, more importantly, don't need<BR>o Exactly how to start and maintain a proper fire (without lighter fluid)<BR>o All about marinades, brines, and rubs<BR>o To use your senses and trust your instincts (instead of thermometers)<BR>o How to make delicious, delicious barbecue</p></div>" ) );
 
     EXPECT_EQ((*firstBook)[cds::PARAM_DATE], "2009-08-05" );
@@ -86,7 +87,7 @@ TEST(AmazonTest, TestParseWithoutReviews ) {
 
     auto book = Amazon::parse( response );
     auto firstBook = book.results.begin();
-    EXPECT_EQ((*firstBook)[cds::PARAM_NAME], std::string("Jamies 15-Minuten-Küche" ) );
+    EXPECT_EQ((*firstBook)[data::KEY_NAME], std::string("Jamies 15-Minuten-Küche" ) );
 }
 
 TEST(AmazonTest, TestParseErrorResponse ) {

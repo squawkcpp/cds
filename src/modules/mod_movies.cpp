@@ -19,31 +19,34 @@
 #include "format.h"
 #include "codec.h"
 
+#include "../_utils.h"
+#include "../datastore.h"
+
 namespace cds {
 namespace mod {
 void ModMovies::import ( data::redis_ptr redis, const config_ptr config ) {
 
-    data::new_items( redis, NodeType::movie, [redis,config]( const std::string& key ) {
+    data::new_items( redis, data::NodeType::movie, [redis,config]( const std::string& key ) {
         data::node_t _node = data::node ( redis, key );
 
         //Get the track information
-        av::Format _format ( _node[PARAM_PATH] );
+        av::Format _format ( _node[data::KEY_PATH] );
 
         if ( !!_format ) {
             spdlog::get ( LOGGER )->warn ( "Can not open movie file:{} ({})",
                                            _format.errc().message(),
-                                           _node[PARAM_PATH] );
+                                           _node[data::KEY_PATH] );
         } else {
             auto codec = _format.find_codec ( av::CODEC_TYPE::VIDEO );
-            redis->command ( { REDIS_SET,  data::make_key_node ( key ),
+            redis->command ( { data::REDIS_HMSET,  data::make_key_node ( key ),
                 KEY_BITRATE, std::to_string ( codec->bitrate() ),
                 KEY_BPS, std::to_string ( codec->bits_per_sample() ),
                 KEY_CHANNELS, std::to_string ( codec->channels() ),
                 KEY_WIDTH, std::to_string ( codec->width() ),
                 KEY_HEIGHT, std::to_string ( codec->height() )
             });
-            auto _last_write_time = boost::filesystem::last_write_time( data::path( redis, key ) );
-            redis->command ( {REDIS_ZADD, data::make_key_nodes ( NodeType::movie ), std::to_string( _last_write_time ), key } );
+            auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, data::KEY_PATH ) );
+            redis->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::movie ), std::to_string( _last_write_time ), key } );
         }
     });
 }

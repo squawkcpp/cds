@@ -30,7 +30,7 @@ public:
     static void import ( data::redis_ptr rdx, const config_ptr config );
 private:
     static void import ( data::redis_ptr rdx,
-                         const std::string& key, std::map< NodeType::Enum, std::vector< data::node_t > >& files );
+                         const std::string& key, std::map< data::NodeType::Enum, std::vector< data::node_t > >& files );
     static void import ( data::redis_ptr rdx,
                          const std::string& album_key, const std::string& artist );
 

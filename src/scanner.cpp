@@ -24,6 +24,7 @@
 #include "codec.h"
 
 #include "_utils.h"
+#include "datastore.h"
 
 #include "modules/mod_albums.h"
 #include "modules/mod_ebooks.h"
@@ -41,16 +42,16 @@ inline void save_folder ( data::redis_ptr redis /** @param redis redis database 
                           const std::string& name /** @param name name of the node. */,
                           const std::string& parent /** @param parent parent key. */ ) {
     data::node_t _node {
-        { PARAM_NAME, name },
-        { PARAM_PARENT, parent },
-        { PARAM_CLASS, cds::NodeType::str ( NodeType::folder ) } };
+        { data::KEY_NAME, name },
+        { data::KEY_PARENT, parent },
+        { PARAM_CLASS, data::NodeType::str ( data::NodeType::folder ) } };
     data::save( redis, key, _node );
 }
 
 void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
     //create the content nodes
-    for ( auto& __mod : menu ) {
-        save_folder( redis, __mod[PARAM_KEY], __mod[PARAM_NAME], "/" );
+    for ( auto& __mod : data::menu ) {
+        save_folder( redis, __mod[data::KEY_TYPE], __mod[data::KEY_NAME], "/" );
     }
 
     magic_t _magic = magic_open ( MAGIC_MIME_TYPE );
@@ -58,11 +59,11 @@ void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
 
     for ( auto directory : config->media ) {
         data::node_t _node;
-        _node[PARAM_NAME] = filename ( directory, false );
-        _node[PARAM_PARENT] = PARAM_FILE;
-        _node[PARAM_PATH] = directory;
-        _node[PARAM_CLASS] = cds::NodeType::str ( NodeType::folder );
-        data::save( redis, hash( directory ), _node );
+        _node[data::KEY_NAME] = filename ( directory, false );
+        _node[data::KEY_PARENT] = data::TYPE_FILE;
+        _node[data::KEY_PATH] = directory;
+        _node[PARAM_CLASS] = data::NodeType::str ( data::NodeType::folder );
+        data::save( redis, data::hash( directory ), _node );
         import_directory( redis, _magic, directory, directory );
     }
 
@@ -84,31 +85,31 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
 
         if ( boost::filesystem::is_regular_file ( itr->status() ) ) {
 
-            if( ! data::timestamp( redis, cds::hash ( _item_filepath ), boost::filesystem::last_write_time( itr->path() ) ) ) {
+            if( ! data::timestamp( redis, data::hash ( _item_filepath ), boost::filesystem::last_write_time( itr->path() ) ) ) {
 
                 const char* _mime_type = magic_file ( _magic, _item_filepath.c_str() );
                 data::node_t _node;
-                _node[PARAM_NAME] = filename ( _item_filepath, false );
-                NodeType::Enum _type = FileMetaRegex::parse ( _mime_type, _item_filepath.c_str(), _node );
-                _node[PARAM_PARENT] = hash( parent_key );
-                _node[PARAM_PATH] = _item_filepath;
-                _node[PARAM_CLASS] = cds::NodeType::str ( _type );
+                _node[data::KEY_NAME] = filename ( _item_filepath, false );
+                data::NodeType::Enum _type = FileMetaRegex::parse ( _mime_type, _item_filepath.c_str(), _node );
+                _node[data::KEY_PARENT] = data::hash( parent_key );
+                _node[data::KEY_PATH] = _item_filepath;
+                _node[PARAM_CLASS] = data::NodeType::str ( _type );
                 _node[KEY_EXTENSION] = boost::filesystem::extension ( itr->path() );
                 _node[KEY_SIZE] = std::to_string ( boost::filesystem::file_size ( itr->path() ) );
                 _node[KEY_MIME_TYPE] = _mime_type;
 
-                data::save( redis, hash( _item_filepath ), _node );
+                data::save( redis, data::hash( _item_filepath ), _node );
                 data::incr_mime ( redis, _mime_type );
-                data::new_item(redis, cds::hash ( parent_key ), cds::hash ( _item_filepath ), _type );
+                data::new_item(redis, data::hash ( parent_key ), data::hash ( _item_filepath ), _type );
             }
         } else if ( boost::filesystem::is_directory ( itr->status() ) ) {
 
             data::node_t _node {
-                { PARAM_NAME, filename ( _item_filepath, false ) },
-                { PARAM_PARENT, hash( path ) },
-                { PARAM_PATH, _item_filepath },
-                { PARAM_CLASS, cds::NodeType::str ( NodeType::folder ) } };
-            data::save( redis, hash( _item_filepath ), _node );
+                { data::KEY_NAME, filename ( _item_filepath, false ) },
+                { data::KEY_PARENT, data::hash( path ) },
+                { data::KEY_PATH, _item_filepath },
+                { PARAM_CLASS, data::NodeType::str ( data::NodeType::folder ) } };
+            data::save( redis, data::hash( _item_filepath ), _node );
             import_directory ( redis, _magic, _item_filepath, _item_filepath );
         }
     }
