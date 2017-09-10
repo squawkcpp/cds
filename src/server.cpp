@@ -192,6 +192,11 @@ http::http_status Server::nodes ( http::Request& request, http::Response& respon
     return http::http_status::OK;
 }
 
+void Server::opds( http::Request& request, http::Response& response ) {
+    std::cout << request << std::endl;
+
+}
+
 //http::http_status Server::mod ( http::Request& request, http::Response& response ) {
 
 //    int _result = 0;
