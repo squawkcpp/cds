@@ -30,11 +30,16 @@ TEST( DatastoreTest, menu ) {
     }
     EXPECT_EQ( 7, count );
 }
-
 TEST( DatastoreTest, is_mod ) {
     EXPECT_TRUE( is_mod( TYPE_ALBUM ) );
     EXPECT_TRUE( is_mod( "ebook" ) );
     EXPECT_FALSE( is_mod( "foo" ) );
     EXPECT_FALSE( is_mod( "98837641092380" ) );
+}
+TEST( DatastoreTest, remove_disc ) {
+    EXPECT_EQ( "/ALBUM - 1201 - ALBUMS", remove_disc( "/ALBUM - 1201 - ALBUMS/CD01" ) );
+    EXPECT_EQ( "/ALBUM - 1201 - ALBUMS", remove_disc( "/ALBUM - 1201 - ALBUMS/cd1" ) );
+    EXPECT_EQ( "/ALBUM - 1201 - ALBUMS", remove_disc( "/ALBUM - 1201 - ALBUMS/disc1" ) );
+    EXPECT_EQ( "/ALBUM - 1201 - ALBUMS", remove_disc( "/ALBUM - 1201 - ALBUMS/disk1" ) );
 }
 }//namespace data

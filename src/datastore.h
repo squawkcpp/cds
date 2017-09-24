@@ -17,6 +17,7 @@
 
 #include <functional>
 #include <map>
+#include <regex>
 #include <string>
 #include <vector>
 
@@ -212,6 +213,22 @@ inline std::string make_key_list ( const NodeType::Enum& type /** @param type no
     return make_key( KEY_FS, NodeType::str ( type ), KEY_LIST );
 }
 
+const std::array< std::regex, 3 > _disc_patterns {
+    std::regex("(/.*)/CD[0-9]*", std::regex_constants::icase ),
+    std::regex("(/.*)/DISC[0-9]*", std::regex_constants::icase ),
+    std::regex("(/.*)/DISK[0-9]*", std::regex_constants::icase )
+};
+inline std::string remove_disc( const std::string& path ) {
+
+    for( auto& _regex : _disc_patterns ) {
+        std::smatch matches;
+        if( std::regex_search( path, matches, _regex ) ) {
+            return matches[1];
+        }
+    }
+    return path;
+}
+
 // -----------------------------------------------------------------------------------------------------------
 // --------------------------                    database utils                     --------------------------
 // -----------------------------------------------------------------------------------------------------------
@@ -351,11 +368,12 @@ static bool timestamp( redis_ptr redis /** @param redis redis database pointer. 
 
 /** @brief add new item in datastore. */
 static void new_item( redis_ptr redis /** @param redis redis database pointer. */,
-                      const std::string& parent /** @param parent parent key for audiofiles. */,
+                      const std::string& parent /** @param parent parent path for audiofiles. */,
                       const std::string& key /** @param key key of the node. */,
                       const NodeType::Enum type /** @param type type of the node. */ ) {
     if( type == NodeType::audio ) {
-        redis->command( {REDIS_ADD,  make_key( KEY_FS, KEY_NEW, NodeType::str( type ) ), parent} );
+        //remove disc from path
+        redis->command( {REDIS_ADD,  make_key( KEY_FS, KEY_NEW, NodeType::str( type ) ), hash( remove_disc( parent ) ) } );
     } else {
         redis->command( {REDIS_ADD,  make_key( KEY_FS, KEY_NEW, NodeType::str( type ) ), key} );
     }

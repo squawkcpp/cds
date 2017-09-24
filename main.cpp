@@ -143,6 +143,10 @@ int main(int argc, char* argv[]) {
         http::mod::Exec( std::bind( &cds::Server::status, _container.server, _1, _2 ) ),
         http::mod::Http() );
 
+    _container.www->bind( http::mod::Match<>( "^\\/opds$" ),
+        http::mod::Exec( std::bind( &cds::Server::opds, _container.server, _1, _2 ) ),
+        http::mod::Http() );
+
     _container.www->bind( http::mod::Match< std::string >( "^\\/+([[:digit:]]+)$", data::KEY_KEY ),
         http::mod::Exec( std::bind( &cds::Server::node, _container.server, _1, _2 ) ),
         http::mod::Http()

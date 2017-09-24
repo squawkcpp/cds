@@ -100,7 +100,7 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
 
                 data::save( redis, data::hash( _item_filepath ), _node );
                 data::incr_mime ( redis, _mime_type );
-                data::new_item(redis, data::hash ( parent_key ), data::hash ( _item_filepath ), _type );
+                data::new_item(redis, parent_key, data::hash ( _item_filepath ), _type );
             }
         } else if ( boost::filesystem::is_directory ( itr->status() ) ) {
 

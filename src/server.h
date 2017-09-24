@@ -50,8 +50,12 @@ public:
     http::http_status node ( http::Request& request, http::Response& response );
     /** @brief get node list. */
     http::http_status nodes ( http::Request& request, http::Response& response );
-    /** @brief get module node list */
-    http::http_status mod ( http::Request& request, http::Response& response );
+
+
+    http::http_status opds( http::Request& request, http::Response& response );
+
+//    /** @brief get module node list */
+//    http::http_status mod ( http::Request& request, http::Response& response );
 
     /** @brief get keywords list */
     http::http_status keywords ( http::Request& request, http::Response& response );

@@ -26,6 +26,9 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "rapidxml_ns.hpp"
+#include "rapidxml_ns_print.hpp"
+
 #include "fmt/format.h"
 
 namespace cds {
@@ -216,6 +219,20 @@ inline std::string clean_isbn ( std::string isbn ) {
     } else {
         return isbn;
     }
+}
+
+template< class T >
+inline rapidxml_ns::xml_node<>* element( rapidxml_ns::xml_document<>* doc, T* parent, const std::string& name, const std::string& value ) {
+    rapidxml_ns::xml_node<> *_n = doc->allocate_node(rapidxml_ns::node_element,
+                                                     doc->allocate_string(name.c_str()),
+                                                     doc->allocate_string(value.c_str()) );
+    parent->append_node(_n);
+    return _n;
+}
+template< class T >
+inline void attr( rapidxml_ns::xml_document<>* doc, T* parent, const std::string& name, const std::string& value ) {
+    rapidxml_ns::xml_attribute<> *_attr = doc->allocate_attribute( doc->allocate_string(name.c_str()), doc->allocate_string(value.c_str()) );
+    parent->append_attribute(_attr);
 }
 }//namespace cds
 #endif // _CDS_UTILS_H

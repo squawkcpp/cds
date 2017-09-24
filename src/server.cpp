@@ -21,6 +21,10 @@
 #include <boost/foreach.hpp>
 #include <boost/tokenizer.hpp>
 
+#include "rapidxml_ns.hpp"
+#include "rapidxml_ns_print.hpp"
+#include "rapidxml_ns_utils.hpp"
+
 #include "fmt/format.h"
 #include "spdlog/spdlog.h"
 
@@ -192,9 +196,58 @@ http::http_status Server::nodes ( http::Request& request, http::Response& respon
     return http::http_status::OK;
 }
 
-void Server::opds( http::Request& request, http::Response& response ) {
+http::http_status Server::opds( http::Request& request, http::Response& response ) {
     std::cout << request << std::endl;
 
+    rapidxml_ns::xml_document<> doc_;
+    auto  root_node_ = element<rapidxml_ns::xml_node<>>( &doc_, &doc_, "feed", "" );
+    attr( &doc_, root_node_, "xmlns", "http://www.w3.org/2005/Atom" );
+    attr( &doc_, root_node_, "xmlns:dc", "http://purl.org/dc/terms/" );
+    attr( &doc_, root_node_, "xmlns:opds", "http://opds-spec.org/2010/catalog" );
+
+    element<rapidxml_ns::xml_node<>>( &doc_, root_node_, "id", "uuid:433a5d6a-0b8c-4933-af65-4ca4f02763eb" ); //TODO create uuid
+    element<rapidxml_ns::xml_node<>>( &doc_, root_node_, "title", "Squawk Bookshelf" ); //TODO create uuid
+
+    data::children( redis_, data::TYPE_EBOOK, 0, -1, [this,&doc_,&root_node_](const std::string& key ) {
+        auto n = data::node( redis_, key );
+        rapidxml_ns::xml_node<>*  entry_node_ = element<rapidxml_ns::xml_node<>>( &doc_, root_node_, "entry", "" );
+
+        element<rapidxml_ns::xml_node<>>( &doc_, entry_node_, "title", n.at( "name" ) );
+//            <id>urn:uuid:6409a00b-7bf2-405e-826c-3fdff0fd0734</id>
+//            <updated>2010-01-10T10:01:11Z</updated>
+        if( n.find( "author" ) != n.end() ) {
+            auto _author_n = element<rapidxml_ns::xml_node<>>( &doc_, entry_node_, "author", "" );
+            element<rapidxml_ns::xml_node<>>( &doc_, _author_n, "name", n.at( "author" ) );
+        }
+//            <dc:language>en</dc:language>
+//            <dc:issued>1917</dc:issued>
+//            <category scheme="http://www.bisg.org/standards/bisac_subject/index.html"
+//                      term="FIC020000"
+//                      label="FICTION / Men's Adventure"/>
+
+        if( n.find( "comment" ) != n.end() )
+        { element<rapidxml_ns::xml_node<>>( &doc_, entry_node_, "summary", n.at( "comment" ) ); }
+
+        if( n.find( "thumb" ) != n.end() ) {
+            auto _image_n = element<rapidxml_ns::xml_node<>>( &doc_, entry_node_, "link", "" );
+            attr( &doc_, _image_n, "rel", "http://opds-spec.org/image" );
+            attr( &doc_, _image_n, "href", n.at( "thumb" ) );
+            attr( &doc_, _image_n, "type", "image/jpeg" );
+        }
+//            <link rel="http://opds-spec.org/image/thumbnail"
+//                  href="/covers/4561.thmb.gif"
+//                  type="image/gif"/>
+
+        auto _res_n = element<rapidxml_ns::xml_node<>>( &doc_, entry_node_, "link", "" );
+        attr( &doc_, _res_n, "rel", "http://opds-spec.org/acquisition" );
+        attr( &doc_, _res_n, "href", fmt::format( "/res/{}{}", /*config_->listen_address, config_->http_port,*/ key, n.at( "ext" ) ) );
+        attr( &doc_, _res_n, "type", n.at( "mimeType" ) );
+    });
+
+    response << doc_;
+    response.parameter ( http::header::CONTENT_TYPE, http::mime::mime_type ( http::mime::XML ) );
+    response.parameter ( "Access-Control-Allow-Origin", "*" );
+    return http::http_status::OK;
 }
 
 //http::http_status Server::mod ( http::Request& request, http::Response& response ) {

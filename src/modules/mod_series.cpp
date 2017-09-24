@@ -67,10 +67,14 @@ void ModSeries::import ( data::redis_ptr redis, const config_ptr config ) {
                                 KEY_HEIGHT, std::to_string ( codec->height() )
                 });
                 auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, data::KEY_PATH ) );
-                redis->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::episode ), std::to_string( _last_write_time ), key } );
+                //ZADD ERROR
+                std::cout << "last write time: " << std::to_string( _last_write_time ) << std::endl;
+                redis->command ( {data::REDIS_ZADD,
+                                  data::make_key ( data::KEY_FS, data::hash ( clean_string(_file[data::TYPE_SERIE] ) ), "list" ),
+                                  std::to_string( _last_write_time ), key } );
             }
         } catch( std::error_code& code ) {
-            spdlog::get ( LOGGER )->warn ( "error code in parse series: ({})", code.message() );
+            spdlog::get ( LOGGER )-> warn ( "error code in parse series: ({})", code.message() );
         } catch( ... ) {
             spdlog::get ( LOGGER )->warn ( "other error in parse series" );
         }

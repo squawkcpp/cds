@@ -41,6 +41,9 @@ void ModEbooks::import ( data::redis_ptr redis, const config_ptr config ) {
     data::new_items( redis, data::NodeType::ebook, [redis,config]( const std::string& key ) {
         data::node_t _file = data::node ( redis, key );
         std::string _isbn = parsePdf ( _file[data::KEY_PATH] );
+
+        // we have to wait some time, otherwise amazon blocks the requests.
+        sleep ( 2 ); //sleep 2 seconds
         auto _res = utils::Amazon::bookByIsbn ( config->amazon_access_key, config->amazon_key, _isbn );
         data::node_t _book_meta;
 
