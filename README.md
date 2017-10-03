@@ -64,11 +64,9 @@ all the requests have the base url of your server: `http://<SERVER_IP>:<PORT>`
 the directory is structured as a tree. the content can be traversed from the **`root`** node.
 beside of the class specific attributes, the node will always contain the **`key`, `parent`** and **`cls`** attributes.
 
-#### load the child elements of a node.
+#### **<code>GET</code> /{node}/nodes**
 
-```
-GET /{node}/nodes
-```
+load the child elements of a node.
 
 ##### parameters:
 
@@ -86,13 +84,11 @@ node | {key} | select from which parent node the list is created. root, for the 
  index | {digit} | start index of the result list.
  count | {digit} | number of results in the result list.
 
-#### node
+#### **<code>GET</code> /{digit}**
 
-**<code>GET</code> /{digit}**
+load the node with the key
 
-#### keywords
-
-**<code>GET</code> /[ebook|movie|album|serie|artist|image]/name|{keyword}**
+#### **<code>GET</code> /[ebook|movie|album|serie|artist|image]/name|{keyword}**
 
 ### manage the server
 

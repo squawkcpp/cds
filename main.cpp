@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
         http::mod::Http()
     );
 
-    _container.www->bind( http::mod::Match<std::string>( "^\\/+(root|file|ebook|movie|album|serie|artist|image|[[:digit:]]+)\\/+nodes$", data::KEY_KEY ),
+    _container.www->bind( http::mod::Match<std::string>( "^\\/+(.+)\\/+nodes$", data::KEY_KEY ),
         http::mod::Exec( std::bind( &cds::Server::nodes, _container.server, _1, _2 ) ),
         http::mod::Http()
     );

@@ -60,7 +60,7 @@ std::string /** @return image uri */ Image::scale(
 
     } catch( ... ) {
         spdlog::get ( cds::LOGGER )->warn ( "error opening image (key:{0})", key );
-        return "/404.jpg"; //TODO
+        return "";
     }
 }
 }//namespace utils

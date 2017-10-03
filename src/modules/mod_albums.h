@@ -25,21 +25,17 @@
 namespace cds {
 namespace mod {
 
+/** @brief Audiofile import module. */
 class ModAlbums {
 public:
-    static void import ( data::redis_ptr rdx, const config_ptr config );
+    /** @brief import */
+    static void import ( data::redis_ptr redis /** @param redis redis database pointer. */,
+                         const config_ptr config /** @param config cds configuration pointer. */ );
 private:
     static void import ( data::redis_ptr rdx,
                          const std::string& key, std::map< data::NodeType::Enum, std::vector< data::node_t > >& files );
     static void import ( data::redis_ptr rdx,
                          const std::string& album_key, const std::string& artist );
-
-    FRIEND_TEST ( MusicbrainzTest, parse_artist_mbid );
-    static std::string mbid_parse ( const std::string& artist );
-    FRIEND_TEST ( MusicbrainzTest, parse_artist_metadata );
-    static std::map<std::string, std::string> get_artist_metadata ( const std::string& metadata );
-    static std::string artist_meta_get ( const std::string& mbid );
-    static std::string mbid_get ( const std::string& name );
     ModAlbums() {}
 };
 }//namespace mod

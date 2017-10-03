@@ -36,6 +36,7 @@ namespace data {
 // -----------------------------------------------------------------------------------------------------------
 
 static const std::string REDIS_ADD = "SADD";
+static const std::string REDIS_DEL = "DEL";
 static const std::string REDIS_EXISTS = "EXISTS";
 static const std::string REDIS_HGET = "HGET";
 static const std::string REDIS_HGETALL = "HGETALL";
@@ -47,11 +48,12 @@ static const std::string REDIS_REM = "SREM";
 static const std::string REDIS_ZADD = "ZADD";
 static const std::string REDIS_ZCARD = "ZCARD";
 static const std::string REDIS_ZRANGE = "ZRANGE";
+static const std::string REDIS_ZREVRANGE = "ZREVRANGE";
 static const std::string REDIS_ZREM = "ZREM";
-
 static const std::string KEY_CLASS = "cls";
 static const std::string KEY_CONFIG = "config:cds";
 static const std::string KEY_FS = "fs";
+static const std::string KEY_GENRES = "genres";
 static const std::string KEY_KEY = "key";
 static const std::string KEY_LIST = "list";
 static const std::string KEY_MIME_LIST = "fs:mime";
@@ -62,7 +64,9 @@ static const std::string KEY_PARENT = "parent";
 static const std::string KEY_PATH = "path";
 static const std::string KEY_TAG = "tag";
 static const std::string KEY_TIMESTAMP = "timestamp";
+static const std::string KEY_TITLE = "title";
 static const std::string KEY_TYPE = "type";
+
 static const std::string TYPE_ARTIST = "artist";
 static const std::string TYPE_FOLDER = "folder";
 static const std::string TYPE_AUDIO = "audio";
@@ -279,7 +283,7 @@ static std::string get( redis_ptr redis /** @param redis the database pointer. *
 inline void add_types( redis_ptr redis, const std::string& path, const std::string& key, const int& score )
 { redis->command( {REDIS_ZADD, data::make_key_list( path ), std::to_string( score ), key } ); }
 /** @brief remove node from parents type list */
-inline void rem_types( redis_ptr redis, NodeType::Enum type /* TODO remove */, const std::string& parent, const std::string& key )
+inline void rem_types( redis_ptr redis, const std::string& parent, const std::string& key )
 { redis->command( {REDIS_ZREM, data::make_key_list( parent ), hash( key ) } ); }
 
 /** @brief add node to global nodes list */
@@ -302,16 +306,20 @@ static node_t node ( redis_ptr redis /** @param redis redis database pointer. */
     return( _item.ok() ? to_map( _item.reply() ) : node_t() );
 }
 
-/** @brief get the node children */ //TODO add params sort,order,tags,index,count
+/** @brief get the node children */
 static void children( redis_ptr redis /** @param redis redis database pointer. */,
                       const std::string& key /** @param key the node key. */,
                       const int& index /** @param index start index. */,
                       const int& count /** @param count result size. */,
+                      const std::string& sort /** @param sort sort results [alpha, timestamp]. */,
+                      const std::string& order /** @param order order the results [asc, desc]. */,
+                      const std::string& filter /** @param filter filter results by keyword. */,
                       async_fn fn /** @param fn the callback function. */ ) {
 
     //TODO use defined type
+    //TODO sort and filter
     redox::Command< std::vector< std::string > >& _c = redis->commandSync< std::vector< std::string > >
-            ( {REDIS_ZRANGE, make_key_list( key ), std::to_string( index ), std::to_string( index + count ) } );
+            ( { (order=="desc"?REDIS_ZREVRANGE:REDIS_ZRANGE), make_key_list( key ), std::to_string( index ), std::to_string( index + count ) } );
     if( _c.ok() ) {
         for( const std::string& __c : _c.reply() ) {
             fn( __c );
@@ -335,20 +343,20 @@ static void save( redis_ptr redis, const std::string& key, node_t& node ) {
         _command.push_back ( __i.second );
     }
     redis->command ( _command );
-    add_types( redis, node[KEY_PARENT], key, 0 /*TODO score*/ );
+    add_types( redis, node[KEY_PARENT], key, 0 );
 }
 
 /** @brief create a new tag. */
 static void add_tag( redis_ptr redis /** @param redis redis database pointer. */,
                             const std::string& name /** @param name name of the tag */,
                             const std::string& keyword /** @param keyword the tag */,
-                            const NodeType::Enum& type /** @param type the type for the tag */,
+                            const NodeType::Enum& type /** TODO remove @param type the type for the tag */,
                             const std::string& node /** @param node the node key */,
                             float score /** @param score the score of the node index */ ) {
 
-    redis->command( { REDIS_ZADD, make_key( KEY_FS, NodeType::str( type ), KEY_TAG, KEY_LIST ), std::to_string( score ), name } );
-    redis->command( { REDIS_ZADD, make_key( KEY_FS, NodeType::str( type ), KEY_TAG, name ), std::to_string( score ), keyword } );
-    redis->command( { REDIS_HMSET, make_key( KEY_FS, NodeType::str( type ), KEY_TAG ), keyword, node } );
+    redis->command( { REDIS_ZADD, make_key( KEY_FS, KEY_TAG, KEY_NAME ), std::to_string( score ), name } );
+    redis->command( { REDIS_ZADD, make_key( KEY_FS, KEY_TAG, name ), std::to_string( score ),  keyword } );
+    redis->command( { REDIS_ZADD, make_key( KEY_FS, KEY_TAG, keyword ), std::to_string( score ), node } );
 }
 
 /** @brief check or update the timestamp of the node. */

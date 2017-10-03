@@ -39,6 +39,8 @@ TEST( UtilsTest, path ) {
 }
 
 TEST( UtilsTest, skip_words ) {
+
+    EXPECT_EQ( "xconfessions vol 1 2014", remove_skip_list( trash_words, "xconfessions vol 1 2014  -rarbg" ) );
     EXPECT_EQ( "ALBUM - 1201 - ALBUMS", remove_skip_list( trash_words, "ALBUM - 1201 - ALBUMS [24bit]" ) );
     EXPECT_EQ( "Teho - Jupiter  Traum Schallplatten  -2017/01 - Teho - Jupiter (original mix)",
                remove_skip_list( trash_words, "Teho_-_Jupiter__Traum_Schallplatten__FLAC-2017/01 - Teho - Jupiter (original mix)" ) );
@@ -48,5 +50,12 @@ TEST( UtilsTest, skip_words ) {
                remove_skip_list( trash_words, "Modern.Family.S08E21.Alone.Time.720p.AMZN.WEBRip.DD5.1.x264-NTb[rarbg]/Modern.Family.S08E21.Alone.Time.720p.AMZN.WEBRip.DD5.1.x264-NTb" ) );
     EXPECT_EQ( "The Simpsons S28E20   /The Simpsons S28E20",
                remove_skip_list( trash_words, "The.Simpsons.S28E20.720p.HDTV.x264-AVS[rarbg]/The.Simpsons.S28E20.720p.HDTV.x264-AVS" ) );
+}
+
+TEST( UtilsTest, clean_track_number ) {
+
+    EXPECT_EQ( "1", clean_track_number( "1" ) );
+    EXPECT_EQ( "1", clean_track_number( "01" ) );
+    EXPECT_EQ( "1", clean_track_number( "01/13" ) );
 }
 }//namespace cds

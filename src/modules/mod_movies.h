@@ -20,8 +20,51 @@
 #include "../datastore.h"
 #include "../config.h"
 
+#include "gtest/gtest_prod.h"
+
 namespace cds {
 namespace mod {
+
+struct TmdbMovie {
+
+     std::string backdrop_path;
+     std::vector< std::string > genres;
+     std::string homepage;
+     std::string id;
+     std::string imdb_id;
+     std::string original_language;
+     std::string original_title;
+     std::string overview;
+     std::string poster_path;
+     std::string release_date;
+     std::string runtime;
+     std::string tagline;
+     std::string title;
+
+     friend std::ostream& operator <<(std::ostream &os,const TmdbMovie &obj) {
+         os <<  "TmdbMovie{" <<
+                "backdrop_path:" << obj.backdrop_path <<
+                ", homepage" << obj.homepage <<
+                ", id:" << obj.homepage <<
+                ", imdb_id:" << obj.imdb_id <<
+                ", original_language:" << obj.original_language <<
+                ", original_title:" << obj.original_title <<
+                ", overview:" << obj.overview <<
+                ", poster_path:" << obj.poster_path <<
+                ", release_date:" << obj.release_date <<
+                ", runtime:" << obj.runtime <<
+                ", tagline:" << obj.tagline <<
+                ", title:" << obj.title;
+        os << ", genres[";
+        bool is_first = true;
+         for( const auto &iter : obj.genres ) {
+             if( is_first ) is_first=false; else os << ", ";
+             os << iter;
+         }
+         os << "]}";
+         return os;
+     }
+};
 
 class ModMovies {
 public:
@@ -29,6 +72,13 @@ public:
 
 private:
     ModMovies() {}
+    static std::string tmdb_search ( const std::string& api_key, const std::string& name );
+    static std::string tmdb_movie ( const std::string& api_key, const std::string& movie_id );
+    FRIEND_TEST ( ModMoviesTest, tmdb_parse );
+    static std::vector < std::map<std::string, std::string > > tmdb_parse ( const std::string& result );
+    FRIEND_TEST ( ModMoviesTest, tmdb_parse_movie );
+    static TmdbMovie tmdb_parse_movie ( const std::string& result );
+    static void tmdb_fetch ( const std::string& uri, const std::string& path );
 };
 }//namespace mod
 }//namespace cds

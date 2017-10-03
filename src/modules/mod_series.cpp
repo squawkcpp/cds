@@ -68,7 +68,6 @@ void ModSeries::import ( data::redis_ptr redis, const config_ptr config ) {
                 });
                 auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, data::KEY_PATH ) );
                 //ZADD ERROR
-                std::cout << "last write time: " << std::to_string( _last_write_time ) << std::endl;
                 redis->command ( {data::REDIS_ZADD,
                                   data::make_key ( data::KEY_FS, data::hash ( clean_string(_file[data::TYPE_SERIE] ) ), "list" ),
                                   std::to_string( _last_write_time ), key } );
@@ -89,46 +88,40 @@ std::string ModSeries::import ( data::redis_ptr rdx, const config_ptr config, co
         auto _res_s = tmdb_get ( config->tmdb_key, _clean_string );
         auto _res = tmdb_parse ( _res_s );
 
-        for ( auto& __res : _res ) {
-            if ( clean_string ( __res[data::KEY_NAME] ) == _clean_string ) {
-                std::string _poster_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[PARAM_POSTER] ) ),
-                            _backdrop_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[PARAM_BACKDROP] ) );
-                tmdb_fetch ( __res[PARAM_POSTER], _poster_path );
-                image::Image image_meta_ ( _poster_path );
-                image_meta_.scale ( 160, 160, fmt::format ( "{0}/tn_{1}.jpg", config->tmp_directory, data::hash ( __res[PARAM_POSTER] ) ) );
-                tmdb_fetch ( __res[PARAM_BACKDROP], _backdrop_path );
-                rdx->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ),
-                                data::KEY_CLASS, data::NodeType::str ( data::NodeType::serie ),
-                                data::KEY_NAME, __res[data::KEY_NAME],
-                                data::KEY_PARENT, "serie",
-                                PARAM_TMDB_ID, __res[PARAM_TMDB_ID],
-                                PARAM_COMMENT, __res[PARAM_COMMENT],
-                                PARAM_DATE, __res["first_air_date"],
-                                PARAM_BACKDROP, fmt::format ( "/img/{}.jpg", data::hash ( __res[PARAM_BACKDROP] ) ),
-                                PARAM_POSTER, fmt::format ( "/img/{}.jpg", data::hash ( __res[PARAM_POSTER] ) ),
-                                PARAM_THUMB, fmt::format ( "/img/tn_{}.jpg", data::hash ( __res[PARAM_POSTER] ) ),
-                               } );
-                break;
-            } else {
-                spdlog::get ( LOGGER )->warn ( "NO TMDB_RESULT: ({})", __res.size() );
-                rdx->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ),
-                                data::KEY_CLASS, data::NodeType::str ( data::NodeType::serie ),
-                                data::KEY_NAME, serie,
-                               } );
+        if( !_res.empty() ) {
+            for ( auto& __res : _res ) {
+                if ( clean_string ( __res[data::KEY_NAME] ) == _clean_string ) {
+                    std::string _poster_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[PARAM_POSTER] ) ),
+                                _backdrop_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[PARAM_BACKDROP] ) );
+                    tmdb_fetch ( __res[PARAM_POSTER], _poster_path );
+                    image::Image image_meta_ ( _poster_path );
+                    image_meta_.scale ( 160, 160, fmt::format ( "{0}/tn_{1}.jpg", config->tmp_directory, data::hash ( __res[PARAM_POSTER] ) ) );
+                    tmdb_fetch ( __res[PARAM_BACKDROP], _backdrop_path );
+                    rdx->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ),
+                                    data::KEY_CLASS, data::NodeType::str ( data::NodeType::serie ),
+                                    data::KEY_NAME, __res[data::KEY_NAME],
+                                    data::KEY_PARENT, "serie",
+                                    PARAM_TMDB_ID, __res[PARAM_TMDB_ID],
+                                    PARAM_COMMENT, __res[PARAM_COMMENT],
+                                    PARAM_DATE, __res["first_air_date"],
+                                    PARAM_BACKDROP, fmt::format ( "/img/{}.jpg", data::hash ( __res[PARAM_BACKDROP] ) ),
+                                    PARAM_POSTER, fmt::format ( "/img/{}.jpg", data::hash ( __res[PARAM_POSTER] ) ),
+                                    PARAM_THUMB, fmt::format ( "/img/tn_{}.jpg", data::hash ( __res[PARAM_POSTER] ) ),
+                                   } );
+
+                    //add to serie list
+                    rdx->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::serie ), "0", data::hash ( _clean_string ) } ); //not hash
+                    return( __res[PARAM_TMDB_ID] );
+                }
             }
+        } else {
+            spdlog::get ( LOGGER )->warn ( "NO TMDB_RESULT: ({})", serie );
+            rdx->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ),
+                            data::KEY_CLASS, data::NodeType::str ( data::NodeType::serie ),
+                            data::KEY_NAME, serie } );
         }
-        //TODO
-        rdx->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::serie ), "0" /* TODO/*/, data::hash ( _clean_string ) } );
     }
-
-    rdx->command ( { "SADD" /*TODO*/, data::make_key ( data::KEY_FS, data::hash ( _clean_string ), data::TYPE_SERIE ), serie_key } );
-    //get the tmdb_id
-    redox::Command<std::string>& _get_key = rdx->commandSync<std::string> (
-    { "HGET" /*TODO*/, data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ), PARAM_TMDB_ID } );
-
-    if ( _get_key.ok() ) {
-        return _get_key.reply();
-    } else { throw http::http_status::NOT_FOUND; }
+    return "";
 }
 
 std::string ModSeries::tmdb_get ( const std::string& api_key, const std::string& name ) {

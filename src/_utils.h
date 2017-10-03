@@ -42,6 +42,8 @@ static const bool CDS_DEBUG = false;
 static const std::string LOGGER = "cds";
 static const std::string VERSION = CDS_VERSION;
 
+static const int SLEEP = 2;
+
 static const std::string EVENT_SCANNER = "cds:scanner";
 static const std::string EVENT_RESCAN = "cds:rescan";
 static const std::string EVENT_START = "start";
@@ -96,7 +98,7 @@ static const std::string KEY_SIZE = "size";
 
 static std::vector< std::string > trash_words ( {
     "flac", "24bit", "720p", "1080p", "amzn", "webrip", "dd5.1", "x264", "mkv",
-    "hdtv", "web-dl", "h264", "bdrip", "dts", "bluray", "-hdc", "mp4", "-2hd"
+    "hdtv", "web-dl", "h264", "bdrip", "dts", "bluray", "-hdc", "mp4", "-2hd",
     "-rarbg", "[rarbg]", "-fgt", "-japhson", "-fgt", "-ntb", "-moritz", "-avs",
     "-dumbension", "-it00nz", "-cravers", "-rovers", "[96-24]", "audio fidelity",
                                                     "180g lp", "24-96"
@@ -219,6 +221,12 @@ inline std::string clean_isbn ( std::string isbn ) {
     } else {
         return isbn;
     }
+}
+
+inline std::string clean_track_number( const std::string& track ) {
+    std::string _track = ( track.find( "/" ) == std::string::npos ? track : track.substr( 0, track.find( "/" ) ) );
+    _track.erase( _track.begin(), std::find_if( _track.begin(), _track.end(), std::bind1st( std::not_equal_to<char>(), '0' ) ) );
+    return _track;
 }
 
 template< class T >
