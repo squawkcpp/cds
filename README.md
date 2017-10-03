@@ -55,17 +55,12 @@ name | value | description
 
 ## api
 
-### Base URL
-
 all the requests have the base url of your server: `http://<SERVER_IP>:<PORT>`
-
-### access the directory
 
 the directory is structured as a tree. the content can be traversed from the **`root`** node.
 beside of the class specific attributes, the node will always contain the **`key`, `parent`** and **`cls`** attributes.
 
 #### **<code>GET</code> /{node}/nodes**
-
 load the child elements of a node.
 
 ##### parameters:
@@ -85,21 +80,15 @@ node | {key} | select from which parent node the list is created. root, for the 
  count | {digit} | number of results in the result list.
 
 #### **<code>GET</code> /{digit}**
-
 load the node with the key
 
 #### **<code>GET</code> /[ebook|movie|album|serie|artist|image]/name|{keyword}**
 
-### manage the server
+#### **<code>GET</code> /config**
 
-- **[<code>GET</code> config](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
-- **[<code>GET</code> status](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
+#### **<code>GET</code> /status**
 
-#### rescan the database.
-
-```
-GET rescan
-```
+#### **<code>GET</code> /rescans**
 
 ##### query paremeters:
 

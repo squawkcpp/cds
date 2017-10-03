@@ -48,7 +48,7 @@ namespace cds {
 Server::Server ( const std::string& redis, /** @param redis redis host */
                  const short port /** @param port the redis port. */ )
     : redis_ ( data::make_connection ( redis, port ) ), config_ ( json ( data::config ( redis_ ) ) ) {
-    if ( !sub_.connect() ) {
+    if ( !sub_.connect( redis, port ) ) {
         spdlog::get ( LOGGER )->error ( "can not subscribe to redis queue" );
     } else {
         sub_.subscribe ( EVENT_SCANNER, [] ( const std::string & topic, const std::string & msg ) {
