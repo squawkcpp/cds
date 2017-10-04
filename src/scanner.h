@@ -18,7 +18,6 @@
 #include <string>
 
 #include <magic.h>
-#include <redox.hpp>
 
 #include "config.h"
 #include "datastore.h"

@@ -37,7 +37,7 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config ) {
     data::new_items( redis, data::NodeType::audio, [redis,config]( const std::string& key ) {
             std::map< data::NodeType::Enum, std::vector< data::node_t > > _files;
             import ( redis, key, _files );
-            std::string _artist = "", _album = "", _year = "", _track = "", _disc = "", _genre = "";
+            std::string _artist = "", _album = "", _year = "", _track = "", _disc = "", _genre = "", _title = "";
             bool _cover_found = false;
             std::string _last_cover = "";
 
@@ -58,6 +58,9 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config ) {
                                                            __file[data::KEY_PATH] );
                         } else {
                             av::Metadata _metadata = _format.metadata();
+
+                            if ( !_metadata.get ( av::Metadata::TITLE ).empty() )
+                            { _title = _metadata.get ( av::Metadata::TITLE ); }
 
                             if ( !_metadata.get ( av::Metadata::ARTIST ).empty() )
                             { _artist = _metadata.get ( av::Metadata::ARTIST ); }
@@ -94,7 +97,7 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config ) {
                                            } );
 
                             //update relation with track as score
-                            redis->command ( {data::REDIS_ZADD, data::make_key_list ( key ), _track, data::hash ( __file[data::KEY_PATH] ) } );
+                            redis->command ( {data::REDIS_ZADD, data::make_key_list ( key ), std::to_string( data::time_millis() ), data::hash ( __file[data::KEY_PATH] ) } );
                         }
                     }
 
@@ -141,8 +144,9 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config ) {
             //store folder as album
             redis->command ( {data::REDIS_HMSET,  data::make_key_node ( key ),
                             data::KEY_CLASS, data::NodeType::str ( data::NodeType::album ),
+                            data::KEY_NAME, _album,
+                            data::KEY_CLEAN_STRING, clean_string( _album ),
                             av::Metadata::name ( av::Metadata::ARTIST ), _artist,
-                            av::Metadata::name ( av::Metadata::ALBUM ), _album,
                             av::Metadata::name ( av::Metadata::YEAR ), _year,
                             av::Metadata::name ( av::Metadata::GENRE ), _genre
             } );
@@ -150,8 +154,7 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config ) {
             data::add_tag( redis, "genre", _genre, data::NodeType::movie, key, 0 );
 
             //add album with timestamp as score
-            auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, data::KEY_PATH ) );
-            redis->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::album ), std::to_string( _last_write_time ), key } );
+            redis->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::album ), std::to_string( data::time_millis() ), key } );
             import ( redis, key, _artist );
         });
 }
@@ -187,8 +190,8 @@ void ModAlbums::import ( data::redis_ptr rdx, const std::string& album_key, cons
                      data::KEY_PARENT, album_key,
                      data::KEY_NAME, artist } );
 
-    rdx->command ( {data::REDIS_ZADD, data::make_key_list( data::NodeType::str( data::NodeType::artist ) ), "0", _clean_string } );
-    rdx->command ( {data::REDIS_ZADD, data::make_key_list( _clean_string ), "0", album_key } );
+    rdx->command ( {data::REDIS_ZADD, data::make_key_list( data::NodeType::str( data::NodeType::artist ) ), std::to_string( data::time_millis() ), _clean_string } );
+    rdx->command ( {data::REDIS_ZADD, data::make_key_list( _clean_string ), std::to_string( data::time_millis() ), album_key } );
 }
 }//namespace mod
 }//namespace cds

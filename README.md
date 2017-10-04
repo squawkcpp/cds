@@ -79,6 +79,12 @@ node | {key} | select from which parent node the list is created. root, for the 
  index | {digit} | start index of the result list.
  count | {digit} | number of results in the result list.
 
+#### **<code>GET</code> /{node}/sort**
+get the elements sort criterias.
+
+#### **<code>GET</code> /{node}/path**
+get path brief path elements for the node referenced by key.
+
 #### **<code>GET</code> /{digit}**
 load the node with the key
 

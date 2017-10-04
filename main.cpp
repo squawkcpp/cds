@@ -147,8 +147,18 @@ int main(int argc, char* argv[]) {
         http::mod::Exec( std::bind( &cds::Server::opds, _container.server, _1, _2 ) ),
         http::mod::Http() );
 
-    _container.www->bind( http::mod::Match< std::string >( "^\\/+([[:digit:]]+)$", data::KEY_KEY ),
+    _container.www->bind( http::mod::Match< std::string >( "^\\/+((root|file|ebook|movie|album|serie|artist|image)|[[:digit:]]+)$", data::KEY_KEY ),
         http::mod::Exec( std::bind( &cds::Server::node, _container.server, _1, _2 ) ),
+        http::mod::Http()
+    );
+
+    _container.www->bind( http::mod::Match<std::string>( "^\\/+(.+)\\/+sort$", data::KEY_KEY ),
+        http::mod::Exec( std::bind( &cds::Server::sort, _container.server, _1, _2 ) ),
+        http::mod::Http()
+    );
+
+    _container.www->bind( http::mod::Match<std::string>( "^\\/+(.+)\\/+path$", data::KEY_KEY ),
+        http::mod::Exec( std::bind( &cds::Server::path, _container.server, _1, _2 ) ),
         http::mod::Http()
     );
 

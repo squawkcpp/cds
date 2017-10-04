@@ -110,7 +110,7 @@ http::http_status Server::status ( http::Request&, http::Response& response ) {
     writer.EndObject();
     writer.String ( "types" );
     writer.StartObject();
-    std::vector< std::string > _command = { data::REDIS_MEMBERS, data::make_key_node( data::KEY_MIME ) };
+    data::command_t _command = { data::REDIS_MEMBERS, data::make_key_node( data::KEY_MIME ) };
     redox::Command< data::nodes_t >& c =
         redis_->commandSync< data::nodes_t >( _command );
 
@@ -131,13 +131,17 @@ http::http_status Server::status ( http::Request&, http::Response& response ) {
 }
 
 http::http_status Server::node ( http::Request& request, http::Response& response ) {
+    SPDLOG_DEBUG(spdlog::get ( LOGGER ), "HTTP>/node (key={})", request.attribute ( data::KEY_KEY ) );
     using namespace rapidjson;
     StringBuffer sb;
     PrettyWriter<StringBuffer> writer ( sb );
     writer.StartObject();
-    auto& _item = redis_->commandSync<std::vector< std::string > > (
-    { data::REDIS_HGETALL, data::make_key ( data::KEY_FS, request.attribute ( data::KEY_KEY ) ) } );
+    writer.String ( data::KEY_KEY.c_str() );
+    writer.String ( request.attribute ( data::KEY_KEY ).c_str() );
 
+    auto& _item = redis_->commandSync<data::command_t>({
+        data::REDIS_HGETALL, data::make_key ( data::KEY_FS, request.attribute ( data::KEY_KEY ) )
+    });
     if ( _item.ok() ) {
         for ( auto& __i : _item.reply() ) {
             writer.String ( __i.c_str() );
@@ -151,12 +155,64 @@ http::http_status Server::node ( http::Request& request, http::Response& respons
     return http::http_status::OK;
 }
 
+http::http_status Server::path ( http::Request& request, http::Response& response ) {
+    std::string _key = request.attribute ( data::KEY_KEY );
+    std::vector< std::map< std::string, std::string > > values;
+
+    const std::string _name = data::get( redis_, _key, data::KEY_NAME );
+    values.insert( values.begin(), { {"key", _key}, {"name", _name} } );
+    while( _key != "root" ) {
+        const std::string _parent = data::get( redis_, _key, data::KEY_PARENT );
+        const std::string _name = data::get( redis_, _parent, data::KEY_NAME );
+        values.insert( values.begin(), { {"key", _parent}, {"name", _name} } );
+        _key = _parent;
+    }
+
+    using namespace rapidjson;
+    StringBuffer sb;
+    PrettyWriter<StringBuffer> writer ( sb );
+
+    writer.StartArray();
+    for( auto& __c : values ) {
+        writer.StartObject();
+        writer.String ( "key" );
+        writer.String ( __c["key"].c_str() );
+        writer.String ( "name" );
+        writer.String ( __c["name"].c_str() );
+        writer.EndObject();
+    }
+    writer.EndArray();
+    response << sb.GetString();
+    response.parameter ( http::header::CONTENT_TYPE, http::mime::mime_type ( http::mime::JSON ) );
+    response.parameter ( "Access-Control-Allow-Origin", "*" );
+    return http::http_status::OK;
+}
+
+http::http_status Server::sort ( http::Request& request, http::Response& response ) {
+    const std::string _key = request.attribute ( data::KEY_KEY );
+
+    using namespace rapidjson;
+    StringBuffer sb;
+    PrettyWriter<StringBuffer> writer ( sb );
+
+    writer.StartArray();
+    redox::Command<data::command_t>& _c = redis_->commandSync< data::command_t >(
+        { data::REDIS_MEMBERS, data::make_key( "fs", _key, "list", "sort" ) } );
+    if( _c.ok() ) {
+        for( const std::string& __c : _c.reply() ) {
+            writer.String ( __c.c_str() );
+        }
+    }
+    writer.EndArray();
+    response << sb.GetString();
+    response.parameter ( http::header::CONTENT_TYPE, http::mime::mime_type ( http::mime::JSON ) );
+    response.parameter ( "Access-Control-Allow-Origin", "*" );
+    return http::http_status::OK;
+}
+
 http::http_status Server::nodes ( http::Request& request, http::Response& response ) {
 
     std::string _key = request.attribute ( data::KEY_KEY );
-    if( _key.empty() || _key == "root" )
-    { _key = "/"; }
-
     int _index = ( request.contains_attribute( "index" ) &&
                    ( request.attribute( "index" ).find_first_not_of( "0123456789" ) == std::string::npos) ?
                        std::stoi( request.attribute( "index" ) ) : 0 );
@@ -164,8 +220,8 @@ http::http_status Server::nodes ( http::Request& request, http::Response& respon
                    ( request.attribute( "count" ).find_first_not_of( "0123456789" ) == std::string::npos) &&
                    std::stoi( request.attribute( "count" ) ) < 8192 ?
                        std::stoi( request.attribute( "count" ) ) : -1 );
-    std::string _sort = ( request.contains_attribute( "sort" ) && ( request.attribute( "sort" )=="alpha" || request.attribute( "sort" )=="timestamp" ) ?
-                             request.attribute( "sort" ) : "timestamp" );
+    std::string _sort = ( request.contains_attribute( "sort" ) && !request.attribute( "sort" ).empty() ?
+                             request.attribute( "sort" ) : "default" );
     std::string _order = ( request.contains_attribute( "order" ) && ( request.attribute( "order" )=="asc" || request.attribute( "order" )=="desc" ) ?
                               request.attribute( "order" ) : "asc" );
     std::string _filter = ( request.contains_attribute( "filter" ) ? request.attribute( "filter" ) : "" );

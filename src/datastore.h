@@ -41,6 +41,7 @@ static const std::string REDIS_EXISTS = "EXISTS";
 static const std::string REDIS_HGET = "HGET";
 static const std::string REDIS_HGETALL = "HGETALL";
 static const std::string REDIS_HMSET = "HMSET";
+static const std::string REDIS_LRANGE = "LRANGE";
 static const std::string REDIS_SCARD = "SCARD";
 static const std::string REDIS_MEMBERS = "SMEMBERS";
 static const std::string REDIS_SUNION = "SUNION";
@@ -50,6 +51,8 @@ static const std::string REDIS_ZCARD = "ZCARD";
 static const std::string REDIS_ZRANGE = "ZRANGE";
 static const std::string REDIS_ZREVRANGE = "ZREVRANGE";
 static const std::string REDIS_ZREM = "ZREM";
+
+static const std::string KEY_CLEAN_STRING = "clean_string";
 static const std::string KEY_CLASS = "cls";
 static const std::string KEY_CONFIG = "config:cds";
 static const std::string KEY_FS = "fs";
@@ -83,8 +86,14 @@ typedef std::shared_ptr< redox::Redox > redis_ptr;
 typedef std::map< std::string, std::string > node_t;
 typedef std::set< std::string > nodes_t;
 typedef std::function< void(const std::string&) > async_fn;
+typedef std::vector< std::string > command_t;
 
 ///@cond DOC_INTERNAL
+inline unsigned long time_millis() {
+    return
+        std::chrono::system_clock::now().time_since_epoch() /
+        std::chrono::milliseconds(1);
+}
 static const std::vector< std::string > __NAMES = std::vector< std::string> (
 { TYPE_FOLDER, TYPE_AUDIO, TYPE_MOVIE, TYPE_SERIE, TYPE_IMAGE, TYPE_EBOOK,
   TYPE_FILE, TYPE_ALBUM, TYPE_COVER, TYPE_EPISODE, TYPE_ARTIST } );
@@ -206,7 +215,7 @@ inline std::string make_key (
 
 /** @brief make node key */
 inline std::string make_key_node ( const std::string& key /** @param key node key. */ ) {
-    return make_key ( KEY_FS, key );
+    return make_key ( KEY_FS, key ); //TODO add node
 }
 /** @brief make type list key (fs:KEY:TYPE (SET:KEY) ) */
 inline std::string make_key_list ( const std::string& key /** @param key node key. */ ) {
@@ -239,14 +248,12 @@ inline std::string remove_disc( const std::string& path ) {
 
 /** @brief Make redis connection. */
 
-static std::map< std::string, std::string > to_map ( std::vector< std::string > in ) {
+static std::map< std::string, std::string > to_map ( command_t in ) {
     std::map< std::string, std::string > _map;
     assert ( in.size() % 2 == 0 );
-
     for ( size_t i = 0; i < in.size(); ++++i ) {
         _map[ in.at ( i ) ] = in.at ( i + 1 );
     }
-
     return _map;
 }
 
@@ -260,10 +267,6 @@ static redis_ptr make_connection ( const std::string db /** @param db database h
     }
     return _redis;
 }
-
-/** @brief flush content with the given prefix. */ //TODO key with wildcard ':*'
-static void flush(  redis_ptr redis /** @param redis the database pointer. */, const std::string& prefix /** @param prefix the prefix. */ )
-{ redis->command ( { "EVAL", "local keys = redis.call('keys', ARGV[1]) \n for i=1,#keys,5000 do \n redis.call('del', unpack(keys, i, math.min(i+4999, #keys))) \n end \n return keys", "0", fmt::format( "{}:*", prefix ) } ); }
 
 /** @brief get the node attribute value. */
 static std::string get( redis_ptr redis /** @param redis the database pointer. */,
@@ -280,7 +283,7 @@ static std::string get( redis_ptr redis /** @param redis the database pointer. *
 // -----------------------------------------------------------------------------------------------------------
 
 /** @brief add node to parents type list */
-inline void add_types( redis_ptr redis, const std::string& path, const std::string& key, const int& score )
+inline void add_types( redis_ptr redis, const std::string& path, const std::string& key, const unsigned long& score )
 { redis->command( {REDIS_ZADD, data::make_key_list( path ), std::to_string( score ), key } ); }
 /** @brief remove node from parents type list */
 inline void rem_types( redis_ptr redis, const std::string& parent, const std::string& key )
@@ -316,10 +319,14 @@ static void children( redis_ptr redis /** @param redis redis database pointer. *
                       const std::string& filter /** @param filter filter results by keyword. */,
                       async_fn fn /** @param fn the callback function. */ ) {
 
-    //TODO use defined type
     //TODO sort and filter
-    redox::Command< std::vector< std::string > >& _c = redis->commandSync< std::vector< std::string > >
-            ( { (order=="desc"?REDIS_ZREVRANGE:REDIS_ZRANGE), make_key_list( key ), std::to_string( index ), std::to_string( index + count ) } );
+    command_t _redis_command;
+    if( sort == "default" ) {
+        _redis_command = { (order=="desc"?REDIS_ZREVRANGE:REDIS_ZRANGE), make_key_list( key ), std::to_string( index ), std::to_string( index + count ) };
+    } else {
+        _redis_command ={ REDIS_LRANGE, make_key( make_key_list( key ), sort, order ), std::to_string( index ), std::to_string( index + count ) };
+    }
+    redox::Command< std::vector< std::string > >& _c = redis->commandSync< std::vector< std::string > >( _redis_command );
     if( _c.ok() ) {
         for( const std::string& __c : _c.reply() ) {
             fn( __c );
@@ -343,7 +350,31 @@ static void save( redis_ptr redis, const std::string& key, node_t& node ) {
         _command.push_back ( __i.second );
     }
     redis->command ( _command );
-    add_types( redis, node[KEY_PARENT], key, 0 );
+    add_types( redis, node[KEY_PARENT], key,  time_millis() );
+}
+
+/** @brief store folder */
+inline void save_folder ( data::redis_ptr redis /** @param redis redis database pointer. */,
+                          const std::string& key /** @param path path of the node. */,
+                          const std::string& name /** @param name name of the node. */,
+                          const std::string& parent /** @param parent parent key. */ ) {
+    data::node_t _node {
+        { data::KEY_NAME, name },
+        { data::KEY_PARENT, parent },
+        { data::KEY_CLASS, data::NodeType::str ( data::NodeType::folder ) },
+        { data::KEY_TIMESTAMP, std::to_string( time_millis() ) },
+    };
+    save( redis, key, _node );
+}
+
+/** @brief flush content with the given prefix. */ //TODO key with wildcard ':*'
+static void flush(  redis_ptr redis /** @param redis the database pointer. */, const std::string& prefix /** @param prefix the prefix. */ ) {
+    redis->command ( { "EVAL", "local keys = redis.call('keys', ARGV[1]) \n for i=1,#keys,5000 do \n redis.call('del', unpack(keys, i, math.min(i+4999, #keys))) \n end \n return keys", "0", fmt::format( "{}:*", prefix ) } );
+    //create the content nodes
+    save_folder( redis, "root", "root", "" );
+    for ( auto& __mod : data::menu ) {
+        save_folder( redis, __mod[data::KEY_TYPE], __mod[data::KEY_NAME], "root" );
+    }
 }
 
 /** @brief create a new tag. */
@@ -362,17 +393,27 @@ static void add_tag( redis_ptr redis /** @param redis redis database pointer. */
 /** @brief check or update the timestamp of the node. */
 static bool timestamp( redis_ptr redis /** @param redis redis database pointer. */,
                        const std::string& key /** @param key key of the node. */,
-                       size_t timestamp /** @param timestamp the last write timestamp. */ ) {
+                       unsigned long timestamp /** @param timestamp the last write timestamp. */ ) {
 
-    auto& _exist = redis->commandSync< int > ( { REDIS_EXISTS, make_key ( KEY_FS, key, KEY_TIMESTAMP ) } );
+    auto& _exist = redis->commandSync< int > ( { REDIS_EXISTS, make_key ( KEY_FS, key ) } );
     if( _exist.ok() && _exist.reply() == 1 ) {
-        size_t _timestamp = std::stoul( redis->get( make_key ( KEY_FS, key, KEY_TIMESTAMP ) ) );
+        auto _timestamp = std::stoul( get( redis, make_key ( KEY_FS, key ), KEY_TIMESTAMP ) );
         if(  _timestamp == timestamp )
-        { return true; }
+        { std::cout << ">>timestamp exist: " << key << std::endl; return true; }
     }
-    redis->set( make_key ( KEY_FS, key, KEY_TIMESTAMP ), std::to_string( timestamp ) );
     return false;
 }
+
+//    auto& _exist = redis->commandSync< int > ( { REDIS_EXISTS, make_key ( KEY_FS, key, KEY_TIMESTAMP ) } );
+//    if( _exist.ok() && _exist.reply() == 1 ) {
+//        size_t _timestamp = std::stoul( redis->get( make_key ( KEY_FS, key, KEY_TIMESTAMP ) ) );
+//        if(  _timestamp == timestamp )
+//        { std::cout << ">>timestamp exist: " << key << std::endl; return true; }
+//    }
+//    //TDOO is this correct.
+//    redis->set( make_key ( KEY_FS, key, KEY_TIMESTAMP ), std::to_string( timestamp ) );
+//    return false;
+//}
 
 /** @brief add new item in datastore. */
 static void new_item( redis_ptr redis /** @param redis redis database pointer. */,
