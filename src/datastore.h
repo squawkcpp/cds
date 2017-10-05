@@ -397,23 +397,11 @@ static bool timestamp( redis_ptr redis /** @param redis redis database pointer. 
 
     auto& _exist = redis->commandSync< int > ( { REDIS_EXISTS, make_key ( KEY_FS, key ) } );
     if( _exist.ok() && _exist.reply() == 1 ) {
-        auto _timestamp = std::stoul( get( redis, make_key ( KEY_FS, key ), KEY_TIMESTAMP ) );
-        if(  _timestamp == timestamp )
-        { std::cout << ">>timestamp exist: " << key << std::endl; return true; }
+        auto _timestamp = std::stoul( get( redis, key, KEY_TIMESTAMP ) );
+        if( _exist.ok() && _timestamp == timestamp ) { return true; }
     }
     return false;
 }
-
-//    auto& _exist = redis->commandSync< int > ( { REDIS_EXISTS, make_key ( KEY_FS, key, KEY_TIMESTAMP ) } );
-//    if( _exist.ok() && _exist.reply() == 1 ) {
-//        size_t _timestamp = std::stoul( redis->get( make_key ( KEY_FS, key, KEY_TIMESTAMP ) ) );
-//        if(  _timestamp == timestamp )
-//        { std::cout << ">>timestamp exist: " << key << std::endl; return true; }
-//    }
-//    //TDOO is this correct.
-//    redis->set( make_key ( KEY_FS, key, KEY_TIMESTAMP ), std::to_string( timestamp ) );
-//    return false;
-//}
 
 /** @brief add new item in datastore. */
 static void new_item( redis_ptr redis /** @param redis redis database pointer. */,

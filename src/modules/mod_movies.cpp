@@ -94,7 +94,7 @@ void ModMovies::import ( data::redis_ptr redis, const config_ptr config ) {
                     "imdb_id", _tmdb_movie.imdb_id,
                     "original_language", _tmdb_movie.original_language,
                     "original_title", _tmdb_movie.original_title,
-                    "overview", _tmdb_movie.overview,
+                    PARAM_COMMENT, _tmdb_movie.overview,
                     "poster_path", fmt::format ( "/img/{}.jpg", _poster_key ),
                     "release_date", _tmdb_movie.release_date,
                     "runtime", _tmdb_movie.runtime,

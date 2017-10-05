@@ -185,10 +185,11 @@ void ModAlbums::import ( data::redis_ptr rdx, const std::string& key, std::map< 
 void ModAlbums::import ( data::redis_ptr rdx, const std::string& album_key, const std::string& artist ) {
 
     auto _clean_string = clean_string ( artist );
-    rdx->command ( { data::REDIS_HMSET,  data::make_key_node ( _clean_string ),
+    rdx->command ( { data::REDIS_HMSET,  data::make_key_node ( _clean_string ), //TODO hash
                      data::KEY_CLASS, data::NodeType::str ( data::NodeType::artist ),
                      data::KEY_PARENT, album_key,
-                     data::KEY_NAME, artist } );
+                     data::KEY_NAME, artist,
+                     data::KEY_TIMESTAMP, _clean_string } );
 
     rdx->command ( {data::REDIS_ZADD, data::make_key_list( data::NodeType::str( data::NodeType::artist ) ), std::to_string( data::time_millis() ), _clean_string } );
     rdx->command ( {data::REDIS_ZADD, data::make_key_list( _clean_string ), std::to_string( data::time_millis() ), album_key } );
