@@ -26,7 +26,7 @@ namespace mod {
 class ModImages {
 public:
     /** @brief import and store image. */
-    static void import ( data::redis_ptr rdx, const config_ptr config );
+    static void import ( data::redis_ptr rdx, const config_ptr config, const std::string& key );
 private:
     ModImages() {}
 };

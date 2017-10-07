@@ -92,22 +92,22 @@ std::map< std::string, std::vector< RuleItem > > FileMetaRegex::rules_ = {
             {
                 data::NodeType::audio,
                 std::regex ( REG_PRE REG_ARTIST _ REG_YEAR _ REG_ALBUM "/" REG_TRACK _TIT REG_TITLE "$" ),
-                { data::TYPE_ARTIST, PARAM_YEAR, data::TYPE_ALBUM, "track", data::KEY_NAME }
+                { param::ARTIST, param::YEAR, param::ALBUM, param::TRACK, param::NAME }
             },
             {
                 data::NodeType::audio,
                 std::regex ( REG_PRE REG_ARTIST _ REG_ALBUM "\\(" REG_YEAR "\\) */" REG_TRACK _TIT REG_TITLE "$" ),
-                { data::TYPE_ARTIST, data::TYPE_ALBUM, PARAM_YEAR, "track", data::KEY_NAME }
+                { param::ARTIST, param::ALBUM, param::YEAR, param::TRACK, param::NAME }
             },
             {
                 data::NodeType::audio,
                 std::regex ( REG_PRE REG_YEAR _ REG_ARTIST _ REG_ALBUM "/" REG_TRACK _TIT REG_TITLE "$" ),
-                { PARAM_YEAR, data::TYPE_ARTIST, data::TYPE_ALBUM, "track", data::KEY_NAME }
+                { param::YEAR, param::ARTIST, param::ALBUM, param::TRACK, param::NAME }
             },
             {
                 data::NodeType::audio,
                 std::regex ( REG_PRE REG_ARTIST _ REG_ALBUM " */" REG_TRACK _TIT REG_TITLE "$" ),
-                { data::TYPE_ARTIST, data::TYPE_ALBUM, "track", data::KEY_NAME }
+                { param::ARTIST, param::ALBUM, param::TRACK, param::NAME }
             },
         }
     },
@@ -117,28 +117,28 @@ std::map< std::string, std::vector< RuleItem > > FileMetaRegex::rules_ = {
             {
                 data::NodeType::episode,
                 std::regex ( "^(/.*)*/(.*) ?S([0-9]*)E([0-9]*)(.*)$" ),
-                { data::TYPE_SERIE, PARAM_SEASON, data::TYPE_EPISODE, data::KEY_NAME }
+                { param::SERIE, param::SEASON, param::EPISODE, param::NAME }
             },
 
             // /path/SERIE S00E00
             {
                 data::NodeType::episode,
                 std::regex ( "^(/.*)*/(.*) ?[S|s]([0-9]*)[E|e]([0-9]*)$" ),
-                { data::TYPE_SERIE, PARAM_SEASON, data::TYPE_EPISODE }
+                { param::SERIE, param::SEASON, param::EPISODE }
             },
 
             //TITLE YEAR
             {
                 data::NodeType::movie,
                 std::regex ( "^(/.*)*/(.*) ([0-9]*)$" ),
-                { data::KEY_NAME, PARAM_YEAR }
+                { param::NAME, param::YEAR }
             },
 
             //TITLE
             {
                 data::NodeType::movie,
                 std::regex ( "^(/.*)*/(.*)$" ),
-                { data::KEY_NAME }
+                { param::NAME }
             },
 
         }

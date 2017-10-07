@@ -25,7 +25,7 @@ namespace mod {
 
 class ModEbooks {
 public:
-    static void import ( data::redis_ptr rdx, const config_ptr config  );
+    static void import ( data::redis_ptr rdx, const config_ptr config, const std::string& key  );
 private:
     ModEbooks();
     static const std::string isbn_regex;

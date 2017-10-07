@@ -184,7 +184,7 @@ AmazonResult Amazon::parse( const std::string & response ) {
                                     if( strcmp( __review_node->name(), "EditorialReview" ) == 0 ) {
                                         for (rapidxml_ns::xml_node<> * __review_content_node = __review_node->first_node(); __review_content_node; __review_content_node = __review_content_node->next_sibling() ) {
                                             if( strcmp( __review_content_node->name(), "Content" ) == 0 ) {
-                                                _result_item[cds::PARAM_COMMENT] = __review_content_node->value();
+                                                _result_item[param::COMMENT] = __review_content_node->value();
                                             }
                                         }
                                     }
@@ -210,29 +210,29 @@ AmazonResult Amazon::parse( const std::string & response ) {
                             } else if( strcmp( __i_node->name(), "ItemAttributes" ) == 0 ) {
                                 for (rapidxml_ns::xml_node<> * __item_attrs_node = __i_node->first_node(); __item_attrs_node; __item_attrs_node = __item_attrs_node->next_sibling() ) {
                                     if( strcmp( __item_attrs_node->name(), "Title" ) == 0 ) {
-                                        _result_item[data::KEY_NAME] = __item_attrs_node->value();
+                                        _result_item[param::NAME] = __item_attrs_node->value();
                                     } else if( strcmp( __item_attrs_node->name(), "Publisher" ) == 0 ) {
-                                        _result_item[cds::PARAM_PUBLISHER] = __item_attrs_node->value();
+                                        _result_item[param::PUBLISHER] = __item_attrs_node->value();
                                     } else if( strcmp( __item_attrs_node->name(), "Author" ) == 0 ) {
                                         if( !author.empty() ) author.append( ", " );
                                         author.append( __item_attrs_node->value() );
                                     } else if( strcmp( __item_attrs_node->name(), "PublicationDate" ) == 0 ) {
-                                        _result_item[cds::PARAM_DATE] = __item_attrs_node->value();
+                                        _result_item[param::DATE] = __item_attrs_node->value();
                                     } else if( strcmp( __item_attrs_node->name(), "ISBN" ) == 0 ) {
-                                        _result_item[cds::PARAM_ISBN] = __item_attrs_node->value();
+                                        _result_item[param::ISBN] = __item_attrs_node->value();
                                     }
                                 }
                             }
                         }
                         //set the largest cover
                         if( !large_image.empty() ) {
-                            _result_item[data::TYPE_COVER] = large_image;
+                            _result_item[param::COVER] = large_image;
                         } else if( !med_image.empty() ) {
-                            _result_item[data::TYPE_COVER] = med_image;
+                            _result_item[param::COVER] = med_image;
                         } else if( !small_image.empty() ) {
-                            _result_item[data::TYPE_COVER] = small_image;
+                            _result_item[param::COVER] = small_image;
                         }
-                        _result_item[cds::PARAM_AUTHOR] = author;
+                        _result_item[param::AUTHOR] = author;
                         _result_list.results.push_back( _result_item );
 
 

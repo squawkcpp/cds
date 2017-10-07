@@ -30,6 +30,7 @@
 #include "src/config.h"
 #include "src/datastore.h"
 #include "src/server.h"
+#include "src/icons.h"
 
 using namespace std::placeholders;
 
@@ -147,46 +148,65 @@ int main(int argc, char* argv[]) {
         http::mod::Exec( std::bind( &cds::Server::opds, _container.server, _1, _2 ) ),
         http::mod::Http() );
 
-    _container.www->bind( http::mod::Match< std::string >( "^\\/+((root|file|ebook|movie|album|serie|artist|image)|[[:digit:]]+)$", data::KEY_KEY ),
+    _container.www->bind( http::mod::Match< std::string >( "^\\/+((root|file|ebook|movie|album|serie|artist|image)|[[:digit:]]+)$", key::KEY ),
         http::mod::Exec( std::bind( &cds::Server::node, _container.server, _1, _2 ) ),
         http::mod::Http()
     );
 
-    _container.www->bind( http::mod::Match<std::string>( "^\\/+(.+)\\/+sort$", data::KEY_KEY ),
+    _container.www->bind( http::mod::Match<std::string>( "^\\/+(.+)\\/+sort$", key::KEY ),
         http::mod::Exec( std::bind( &cds::Server::sort, _container.server, _1, _2 ) ),
         http::mod::Http()
     );
 
-    _container.www->bind( http::mod::Match<std::string>( "^\\/+(.+)\\/+path$", data::KEY_KEY ),
+    _container.www->bind( http::mod::Match<std::string>( "^\\/+(.+)\\/+path$", key::KEY ),
         http::mod::Exec( std::bind( &cds::Server::path, _container.server, _1, _2 ) ),
         http::mod::Http()
     );
 
-    _container.www->bind( http::mod::Match<std::string>( "^\\/+(.+)\\/+nodes$", data::KEY_KEY ),
+    _container.www->bind( http::mod::Match<std::string>( "^\\/+(.+)\\/+nodes$", key::KEY ),
         http::mod::Exec( std::bind( &cds::Server::nodes, _container.server, _1, _2 ) ),
         http::mod::Http()
     );
 
-    _container.www->bind( http::mod::Match< std::string, std::string >( "^\\/+(ebook|movie|album|serie|artist|image)\\/+(.*)$", data::KEY_TYPE, data::KEY_NAME ),
+    _container.www->bind( http::mod::Match< std::string, std::string >( "^\\/+(ebook|movie|album|serie|artist|image)\\/+(.*)$", key::TYPE, param::NAME ),
         http::mod::Exec( std::bind( &cds::Server::keywords, _container.server, _1, _2 ) ),
         http::mod::Http()
     );
 
-    _container.www->bind( http::mod::Match< std::string >( "^\\/+img\\/+(.*\\.jpg)$", data::KEY_KEY ),
+    _container.www->bind( http::mod::Match< std::string >( "^\\/+img\\/+(.*\\.jpg)$", key::KEY ),
         http::mod::Exec( [&_container](http::Request& request, http::Response& ) -> http::http_status {
-            request.uri( fmt::format( "{}/{}", _container.config->tmp_directory, request.attribute( data::KEY_KEY ) ) );
+            request.uri( fmt::format( "{}/{}", _container.config->tmp_directory, request.attribute( key::KEY ) ) );
             return http::http_status::OK;
         }),
         http::mod::File( "/" ),
         http::mod::Http()
     );
 
-    _container.www->bind( http::mod::Match< std::string >( "^\\/+res\\/+([[:digit:]]+)\\.(.*)$", data::KEY_KEY, cds::PARAM_EXT ),
+    _container.www->bind( http::mod::Match< std::string >( "^\\/+res\\/+([[:digit:]]+)\\.(.*)$", key::KEY, param::EXT ),
             http::mod::Exec( [&_container](http::Request& request, http::Response& ) -> http::http_status {
-            request.uri( data::get( _container.redox, request.attribute( data::KEY_KEY ), data::KEY_PATH ) );
+            request.uri( data::get( _container.redox, request.attribute( key::KEY ), param::PATH ) );
             return http::http_status::OK;
         }),
         http::mod::File( "/" ),
+        http::mod::Http()
+    );
+
+    _container.www->bind( http::mod::Match< std::string >( "^\\/+squawk([[:digit:]]+).png$", key::KEY ),
+        http::mod::Exec( [&_container](http::Request& request, http::Response& response ) -> http::http_status {
+            if( request.attribute( key::KEY ) == "120" )
+            { response.write( (char *)squawk120_png, squawk120_png_len ); }
+            else if( request.attribute( key::KEY ) == "64" )
+            { response.write( (char *)squawk64_png, squawk64_png_len ); }
+            else if( request.attribute( key::KEY ) == "48" )
+            { response.write( (char *)squawk48_png, squawk48_png_len ); }
+            else if( request.attribute( key::KEY ) == "32" )
+            { response.write( (char *)squawk32_png, squawk32_png_len ); }
+            else /* if( request.attribute( key::KEY_KEY ) == "16" ) */
+            { response.write( (char *)squawk16_png, squawk16_png_len ); }
+
+            response.parameter ( http::header::CONTENT_TYPE, http::mime::mime_type ( http::mime::PNG ) );
+            return http::http_status::OK;
+        }),
         http::mod::Http()
     );
 

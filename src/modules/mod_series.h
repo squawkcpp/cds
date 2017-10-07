@@ -25,12 +25,12 @@ namespace mod {
 
 class ModSeries {
 public:
-    static void import ( data::redis_ptr rdx, const config_ptr config );
+    static void import ( data::redis_ptr rdx, const config_ptr config, const std::string& key );
 
 private:
     ModSeries() {}
 
-    static std::string import ( data::redis_ptr rdx, const config_ptr config, const std::string& serie_key, const std::string& serie );
+    static std::string import_serie ( data::redis_ptr rdx, const config_ptr config, const std::string& serie_key, const std::string& serie );
 
     static std::string tmdb_get ( const std::string& api_key, const std::string& name );
     static std::string tmdb_episode ( const std::string& api_key, const std::string& serie_id, const std::string& season, const std::string& episode );

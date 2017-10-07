@@ -29,7 +29,7 @@
 namespace utils {
 void exif( data::node_t& node /** @param image node to process. */ ) {
 
-    std::ifstream file( node[data::KEY_PATH], std::ios::binary | std::ios::ate );
+    std::ifstream file( node[param::PATH], std::ios::binary | std::ios::ate );
     std::streamsize size = file.tellg();
     file.seekg( 0, std::ios::beg );
 
@@ -65,7 +65,7 @@ void exif( data::node_t& node /** @param image node to process. */ ) {
         node["GeoLocation.Altitude"] = std::to_string( result.GeoLocation.Altitude );
 
     } else {
-        spdlog::get ( cds::LOGGER )->warn ( "error load exif: {}", node[data::KEY_PATH] );
+        spdlog::get ( cds::LOGGER )->warn ( "error load exif: {}", node[param::PATH] );
     }
 }
 }//namespace utils

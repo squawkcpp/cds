@@ -102,22 +102,22 @@ http::http_status Server::status ( http::Request&, http::Response& response ) {
     writer.String ( "content" );
     writer.StartObject();
 
-    for( auto& __type : data::menu ) {
-        writer.String( __type[data::KEY_TYPE].c_str() );
-        writer.Int( data::children_count( redis_, __type[data::KEY_TYPE] ) );
+    for( auto& __type : _internal::menu ) {
+        writer.String( __type.at( key::TYPE ).c_str() );
+        writer.Int( data::children_count( redis_, __type.at( key::TYPE ) ) );
     }
 
     writer.EndObject();
     writer.String ( "types" );
     writer.StartObject();
-    data::command_t _command = { data::REDIS_MEMBERS, data::make_key_node( data::KEY_MIME ) };
+    data::command_t _command = { redis::SMEMBERS, key::MIME };
     redox::Command< data::nodes_t >& c =
         redis_->commandSync< data::nodes_t >( _command );
 
     if ( c.ok() ) {
         for ( const std::string& __mime : c.reply() ) {
             writer.String ( __mime.c_str() );
-            auto _res = redis_->get ( data::make_key ( data::KEY_FS, data::KEY_MIME, __mime ) );
+            auto _res = redis_->get ( data::make_key( key::MIME, __mime ) );
             writer.String ( _res.c_str() );
         }
     }
@@ -131,16 +131,16 @@ http::http_status Server::status ( http::Request&, http::Response& response ) {
 }
 
 http::http_status Server::node ( http::Request& request, http::Response& response ) {
-    SPDLOG_DEBUG(spdlog::get ( LOGGER ), "HTTP>/node (key={})", request.attribute ( data::KEY_KEY ) );
+    SPDLOG_DEBUG(spdlog::get ( LOGGER ), "HTTP>/node (key={})", request.attribute ( key::KEY ) );
     using namespace rapidjson;
     StringBuffer sb;
     PrettyWriter<StringBuffer> writer ( sb );
     writer.StartObject();
-    writer.String ( data::KEY_KEY.c_str() );
-    writer.String ( request.attribute ( data::KEY_KEY ).c_str() );
+    writer.String ( key::KEY.c_str() );
+    writer.String ( request.attribute ( key::KEY ).c_str() );
 
     auto& _item = redis_->commandSync<data::command_t>({
-        data::REDIS_HGETALL, data::make_key ( data::KEY_FS, request.attribute ( data::KEY_KEY ) )
+        redis::HGETALL, data::make_key_node ( request.attribute ( key::KEY ) )
     });
     if ( _item.ok() ) {
         for ( auto& __i : _item.reply() ) {
@@ -156,14 +156,14 @@ http::http_status Server::node ( http::Request& request, http::Response& respons
 }
 
 http::http_status Server::path ( http::Request& request, http::Response& response ) {
-    std::string _key = request.attribute ( data::KEY_KEY );
+    std::string _key = request.attribute ( key::KEY );
     std::vector< std::map< std::string, std::string > > values;
 
-    const std::string _name = data::get( redis_, _key, data::KEY_NAME );
+    const std::string _name = data::get( redis_, _key, param::NAME );
     values.insert( values.begin(), { {"key", _key}, {"name", _name} } );
-    while( _key != "root" ) {
-        const std::string _parent = data::get( redis_, _key, data::KEY_PARENT );
-        const std::string _name = data::get( redis_, _parent, data::KEY_NAME );
+    while( _key != param::ROOT ) {
+        const std::string _parent = data::get( redis_, _key, param::PARENT );
+        const std::string _name = data::get( redis_, _parent, param::NAME );
         values.insert( values.begin(), { {"key", _parent}, {"name", _name} } );
         _key = _parent;
     }
@@ -189,7 +189,7 @@ http::http_status Server::path ( http::Request& request, http::Response& respons
 }
 
 http::http_status Server::sort ( http::Request& request, http::Response& response ) {
-    const std::string _key = request.attribute ( data::KEY_KEY );
+    const std::string _key = request.attribute ( key::KEY );
 
     using namespace rapidjson;
     StringBuffer sb;
@@ -197,7 +197,7 @@ http::http_status Server::sort ( http::Request& request, http::Response& respons
 
     writer.StartArray();
     redox::Command<data::command_t>& _c = redis_->commandSync< data::command_t >(
-        { data::REDIS_MEMBERS, data::make_key( "fs", _key, "list", "sort" ) } );
+        { redis::SMEMBERS, data::make_key( "fs", _key, "list", "sort" ) } );
     if( _c.ok() ) {
         for( const std::string& __c : _c.reply() ) {
             writer.String ( __c.c_str() );
@@ -212,7 +212,7 @@ http::http_status Server::sort ( http::Request& request, http::Response& respons
 
 http::http_status Server::nodes ( http::Request& request, http::Response& response ) {
 
-    std::string _key = request.attribute ( data::KEY_KEY );
+    std::string _key = request.attribute ( key::KEY );
     int _index = ( request.contains_attribute( "index" ) &&
                    ( request.attribute( "index" ).find_first_not_of( "0123456789" ) == std::string::npos) ?
                        std::stoi( request.attribute( "index" ) ) : 0 );
@@ -240,7 +240,7 @@ http::http_status Server::nodes ( http::Request& request, http::Response& respon
     data::children( redis_, _key, _index, _count, _sort, _order, _filter, [this,&writer,&_result]( const std::string& key ) {
         ++_result;
         writer.StartObject();
-        writer.String ( data::KEY_KEY.c_str() );
+        writer.String ( key::KEY.c_str() );
         writer.String ( key.c_str() );
 
         auto n = data::node( redis_, key );
@@ -277,7 +277,7 @@ http::http_status Server::opds( http::Request& request, http::Response& response
     element<rapidxml_ns::xml_node<>>( &doc_, root_node_, "id", "uuid:433a5d6a-0b8c-4933-af65-4ca4f02763eb" ); //TODO create uuid
     element<rapidxml_ns::xml_node<>>( &doc_, root_node_, "title", "Squawk Bookshelf" ); //TODO create uuid
 
-    data::children( redis_, data::TYPE_EBOOK, 0, -1, "", "", "", [this,&doc_,&root_node_](const std::string& key ) {
+    data::children( redis_, param::EBOOK, 0, -1, "", "", "", [this,&doc_,&root_node_](const std::string& key ) {
         auto n = data::node( redis_, key );
         rapidxml_ns::xml_node<>*  entry_node_ = element<rapidxml_ns::xml_node<>>( &doc_, root_node_, "entry", "" );
 
@@ -320,14 +320,14 @@ http::http_status Server::opds( http::Request& request, http::Response& response
 }
 
 http::http_status Server::keywords ( http::Request& request, http::Response& response ) {
-    std::cout << "keywords " << request.attribute( data::KEY_TYPE ) << "=" << request.attribute ( data::KEY_NAME ) << std::endl;
+    std::cout << "keywords " << request.attribute( key::TYPE ) << "=" << request.attribute ( param::NAME ) << std::endl;
     using namespace rapidjson;
     StringBuffer sb;
     PrettyWriter<StringBuffer> writer ( sb );
     writer.StartArray();
 
     auto& _c = redis_->commandSync< std::set< std::string > > (
-        { data::REDIS_ZRANGE, data::make_key ( data::KEY_FS, data::KEY_TAG, request.attribute ( data::KEY_NAME ) ), "0", "-1" } );
+        { redis::ZRANGE, data::make_key ( key::FS, key::TAG, request.attribute ( param::NAME ) ), "0", "-1" } );
 
     if ( _c.ok() ) {
         for ( const std::string& __c : _c.reply() ) {
@@ -347,7 +347,7 @@ void Server::rescan_ ( bool flush, std::function<void( std::error_code& )> fn ) 
     try {
         //flush database
         if ( flush )
-        { data::flush( redis_, data::KEY_FS ); }
+        { Scanner::flush( redis_ ); }
         //start import
         cds::Scanner::import_files ( redis_, config_ );
 

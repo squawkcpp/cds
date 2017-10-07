@@ -37,54 +37,56 @@ namespace mod {
 
 ModEbooks::ModEbooks() {}
 
-void ModEbooks::import ( data::redis_ptr redis, const config_ptr config ) {
-    data::new_items( redis, data::NodeType::ebook, [redis,config]( const std::string& key ) {
+void ModEbooks::import ( data::redis_ptr redis, const config_ptr config, const std::string& key ) {
+    try {
         data::node_t _file = data::node ( redis, key );
-        std::string _isbn = parsePdf ( _file[data::KEY_PATH] );
+        std::string _isbn = parsePdf ( _file[param::PATH] );
 
         // we have to wait some time, otherwise amazon blocks the requests.
-        sleep ( 2 ); //sleep 2 seconds
+        sleep ( SLEEP );
         auto _res = utils::Amazon::bookByIsbn ( config->amazon_access_key, config->amazon_key, _isbn );
         data::node_t _book_meta;
 
         for ( auto& __j : _res.results ) {
-            if ( _book_meta.empty() || __j[data::KEY_NAME] == _file[data::KEY_NAME] ) {
+            if ( _book_meta.empty() || __j[param::NAME] == _file[param::NAME] ) {
                 _book_meta = __j;
             }
         }
 
         if ( !_book_meta.empty() ) {
             //save image
-            std::string _cover_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( _book_meta[data::TYPE_COVER] ) );
-            std::string _thumb_path = fmt::format ( "{}/tn_{}.jpg", config->tmp_directory, data::hash ( _book_meta[data::TYPE_COVER] ) );
+            std::string _cover_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( _book_meta[param::COVER] ) );
+            std::string _thumb_path = fmt::format ( "{}/tn_{}.jpg", config->tmp_directory, data::hash ( _book_meta[param::COVER] ) );
             std::ofstream _ofs ( _cover_path, std::ofstream::out );
-            http::get ( _book_meta[data::TYPE_COVER], _ofs );
+            http::get ( _book_meta[param::COVER], _ofs );
             image::Image image_meta_ ( _cover_path );
-            redis->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _cover_path ) ),
-                            data::KEY_PARENT, key,
-                            data::KEY_CLASS, data::NodeType::str ( data::NodeType::cover ),
-                            KEY_WIDTH, std::to_string ( image_meta_.width() ),
-                            KEY_HEIGHT, std::to_string ( image_meta_.height() )
-                           } );
+            data::save ( redis, data::hash ( _cover_path ), {
+                { param::PARENT, key },
+                { param::CLASS, data::NodeType::str ( data::NodeType::cover ) },
+                { param::WIDTH, std::to_string ( image_meta_.width() ) },
+                { param::HEIGHT, std::to_string ( image_meta_.height() ) }
+            });
             image_meta_.scale ( 160, 160, _thumb_path );
-            redis->command ( { data::REDIS_ADD,
-                             data::make_key ( data::KEY_FS, data::hash ( _book_meta[data::TYPE_COVER] ), "cover" ),
-                             data::make_key ( data::KEY_FS, data::hash ( _cover_path ) )
-                           } );
+    //TODO            redis->command ( { redis::SADD,
+    //                             data::make_key_node ( data::hash ( _book_meta[param::COVER] ), "cover" ),
+    //                             data::make_key_node ( data::hash ( _cover_path ) )
+    //                           } );
             //save ebook
-            redis->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, key ),
-                            data::KEY_NAME, _book_meta[data::KEY_NAME],
-                            PARAM_COMMENT, _book_meta[PARAM_COMMENT],
-                            PARAM_PUBLISHER, _book_meta[PARAM_PUBLISHER],
-                            PARAM_DATE, _book_meta[PARAM_DATE],
-                            PARAM_ISBN, _book_meta[PARAM_ISBN],
-                            PARAM_AUTHOR, _book_meta[PARAM_AUTHOR],
-                            PARAM_THUMB, fmt::format ( "/img/tn_{}.jpg", data::hash ( _book_meta[data::TYPE_COVER] ) ),
-            } );
+            data::save ( redis, key, {
+                { param::NAME, _book_meta[param::NAME] },
+                { param::COMMENT, _book_meta[param::COMMENT] },
+                { param::PUBLISHER, _book_meta[param::PUBLISHER] },
+                { param::DATE, _book_meta[param::DATE] },
+                { param::ISBN, _book_meta[param::ISBN] },
+                { param::AUTHOR, _book_meta[param::AUTHOR] },
+                { param::THUMB, fmt::format ( "/img/tn_{}.jpg", data::hash ( _book_meta[param::COVER] ) ) },
+            });
         }
-        auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, data::KEY_PATH ) );
-        redis->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::ebook ), std::to_string( _last_write_time ), key } );
-    } );
+        auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, param::PATH ) );
+        data::add_nodes( redis, data::NodeType::ebook, key, _last_write_time );
+    } catch ( ... ) {
+        spdlog::get ( LOGGER )->error ( "exception mod ebooks." );
+    }
 }
 
 const std::string ModEbooks::remove_special_characters ( const std::string& body ) {

@@ -49,58 +49,21 @@ static const std::string EVENT_RESCAN = "cds:rescan";
 static const std::string EVENT_START = "start";
 static const std::string EVENT_END = "end";
 
-//static const std::string VALUE_ROOT = "root";
-//static const std::string VALUE_FOLDER = "folder";
-
-
-
-
-
-
-
 static const char* PARAM_TMP_DIRECTORY      = "tmp-directory";
 static const char* PARAM_TMDB_KEY           = "tmdb-key";
 static const char* PARAM_AMAZON_KEY         = "amazon-key";
 static const char* PARAM_AMAZON_ACCESS_KEY  = "amazon-access-key";
 static const char* PARAM_REDIS              = "redis";
 static const char* PARAM_REDIS_PORT         = "redis-port";
-
-
-static const std::string PARAM_AUTHOR = "author";
-static const std::string PARAM_BACKDROP = "backdrop";
-static const std::string PARAM_COMMENT = "comment";
-static const std::string PARAM_DATE = "date";
-static const char* PARAM_DIRECTORY = "directory";
-static const std::string PARAM_EXT = "ext";
-static const char* PARAM_HTTP_PORT = "http-port";
-static const std::string PARAM_ISBN = "isbn";
-static const char* PARAM_LISTEN_ADDRESS = "listen";
-static const std::string PARAM_MAKE = "Make";
-static const std::string PARAM_POSTER = "poster";
-static const std::string PARAM_PUBLISHER = "publisher";
-static const std::string PARAM_SEASON = "season";
-static const std::string PARAM_STILL_IMAGE = "still_image";
-static const std::string PARAM_THUMB = "thumb";
-static const std::string PARAM_TMDB_ID = "tmdb_id";
-static const std::string PARAM_TMP = "tmp";
-static const std::string PARAM_TYPES = "types";
-static const std::string PARAM_YEAR = "year";
-static const std::string KEY_MIME_TYPE = "mimeType";
-static const std::string KEY_BITRATE = "bitrate";
-static const std::string KEY_BPS = "bps";
-static const std::string KEY_CHANNELS = "channels";
-static const std::string KEY_SAMPLERATE = "samplerate";
-static const std::string KEY_PLAYTIME = "playlength";
-static const std::string KEY_WIDTH = "width";
-static const std::string KEY_HEIGHT = "height";
-static const std::string KEY_EXTENSION = "ext";
-static const std::string KEY_SIZE = "size";
+static const char* PARAM_LISTEN_ADDRESS     = "listen";
+static const char* PARAM_HTTP_PORT          = "http-port";
+static const char* PARAM_DIRECTORY          = "directory";
 
 static std::vector< std::string > trash_words ( {
     "flac", "24bit", "720p", "1080p", "amzn", "webrip", "dd5.1", "x264", "mkv",
     "hdtv", "web-dl", "h264", "bdrip", "dts", "bluray", "-hdc", "mp4", "-2hd",
     "-rarbg", "[rarbg]", "-fgt", "-japhson", "-fgt", "-ntb", "-moritz", "-avs",
-    "-dumbension", "-it00nz", "-cravers", "-rovers", "[96-24]", "audio fidelity",
+    "-dumbension", "-it00nz", "-cravers", "-rovers", "-sparks", "[96-24]", "audio fidelity",
                                                     "180g lp", "24-96"
 });
 

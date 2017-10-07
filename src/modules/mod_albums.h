@@ -20,8 +20,6 @@
 #include "../config.h"
 #include "../datastore.h"
 
-#include "gtest/gtest_prod.h"
-
 namespace cds {
 namespace mod {
 
@@ -30,11 +28,12 @@ class ModAlbums {
 public:
     /** @brief import */
     static void import ( data::redis_ptr redis /** @param redis redis database pointer. */,
-                         const config_ptr config /** @param config cds configuration pointer. */ );
+                         const config_ptr config /** @param config cds configuration pointer. */,
+                         const std::string& key );
 private:
-    static void import ( data::redis_ptr rdx,
+    static void import_files ( data::redis_ptr rdx,
                          const std::string& key, std::map< data::NodeType::Enum, std::vector< data::node_t > >& files );
-    static void import ( data::redis_ptr rdx,
+    static void import_artist ( data::redis_ptr rdx,
                          const std::string& album_key, const std::string& artist );
     ModAlbums() {}
 };

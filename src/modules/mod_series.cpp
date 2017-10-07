@@ -35,54 +35,50 @@
 namespace cds {
 namespace mod {
 
-void ModSeries::import ( data::redis_ptr redis, const config_ptr config ) {
-    data::new_items( redis, data::NodeType::episode, [redis,config]( const std::string& key ) {
-        try {
-            data::node_t _file = data::node ( redis, key );
-            //Get the track information
-            av::Format _format ( _file[data::KEY_PATH] );
+void ModSeries::import ( data::redis_ptr redis, const config_ptr config, const std::string& key ) {
+    try {
+        data::node_t _file = data::node ( redis, key );
+        //Get the track information
+        av::Format _format ( _file[param::PATH] );
 
-            if ( !!_format ) {
-                spdlog::get ( LOGGER )->warn ( "Can not open serie file:{} ({})",
-                                               _format.errc().message(),
-                                               _file[data::KEY_PATH] );
-            } else {
+        if ( !!_format ) {
+            spdlog::get ( LOGGER )->warn ( "Can not open serie file:{} ({})",
+                                           _format.errc().message(),
+                                           _file[param::PATH] );
+        } else {
 
-                //construct the episode name if empty
-                std::string _episode_name = _file[data::TYPE_SERIE];
-                _episode_name.append ( " S" ).append ( _file[PARAM_SEASON] )
-                .append ( " E" ).append ( _file[data::TYPE_EPISODE] );
-                auto codec = _format.find_codec ( av::CODEC_TYPE::VIDEO );
-                auto _tmdb_id = import ( redis, config, key, _file[data::TYPE_SERIE] );
-                auto _tmdb_result = tmdb_episode ( config->tmdb_key, _tmdb_id, _file[PARAM_SEASON], _file[data::TYPE_EPISODE] );
-                auto _episodes = tmdb_parse_episode ( config, _tmdb_result );
-                redis->command ( {data::REDIS_HMSET,  data::make_key_node ( key ),
-                                data::KEY_NAME, ( _episodes[data::KEY_NAME].empty() ? _episode_name : _episodes[data::KEY_NAME] ),
-                                PARAM_DATE, _episodes[PARAM_DATE],
-                                PARAM_TMDB_ID, _episodes[PARAM_TMDB_ID],
-                                PARAM_COMMENT, _episodes[PARAM_COMMENT],
-                                PARAM_STILL_IMAGE, _episodes[PARAM_STILL_IMAGE],
-                                KEY_PLAYTIME, std::to_string ( _format.playtime() ),
-                                KEY_WIDTH, std::to_string ( codec->width() ),
-                                KEY_HEIGHT, std::to_string ( codec->height() )
-                });
-                auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, data::KEY_PATH ) );
-                //ZADD ERROR
-                redis->command ( {data::REDIS_ZADD,
-                                  data::make_key ( data::KEY_FS, data::hash ( clean_string(_file[data::TYPE_SERIE] ) ), "list" ),
-                                  std::to_string( _last_write_time ), key } );
-            }
-        } catch( std::error_code& code ) {
-            spdlog::get ( LOGGER )-> warn ( "error code in parse series: ({})", code.message() );
-        } catch( ... ) {
-            spdlog::get ( LOGGER )->warn ( "other error in parse series" );
+            //construct the episode name if empty
+            std::string _episode_name = _file[param::SERIE];
+            _episode_name.append ( " S" ).append ( _file[param::SEASON] )
+            .append ( " E" ).append ( _file[param::EPISODE] );
+            auto codec = _format.find_codec ( av::CODEC_TYPE::VIDEO );
+            auto _tmdb_id = import_serie ( redis, config, key, _file[param::SERIE] );
+            auto _tmdb_result = tmdb_episode ( config->tmdb_key, _tmdb_id, _file[param::SEASON], _file[param::EPISODE] );
+            auto _episodes = tmdb_parse_episode ( config, _tmdb_result );
+            data::save ( redis, key, {
+                { param::NAME, ( _episodes[param::NAME].empty() ? _episode_name : _episodes[param::NAME] ) },
+                { param::PARENT, data::hash ( clean_string(_file[param::SERIE] ) ) },
+                { param::DATE, _episodes[param::DATE] },
+                { param::TMDB_ID, _episodes[param::TMDB_ID] },
+                { param::COMMENT, _episodes[param::COMMENT] },
+                { param::STILL_IMAGE, _episodes[param::STILL_IMAGE] },
+                { param::PLAYTIME, std::to_string ( _format.playtime() ) },
+                { param::WIDTH, std::to_string ( codec->width() ) },
+                { param::HEIGHT, std::to_string ( codec->height() ) },
+            });
+            auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, param::PATH ) );
+            data::add_types( redis, data::hash ( clean_string(_file[param::SERIE] ) ), key, _last_write_time );
         }
-    } );
+    } catch( std::error_code& code ) {
+        spdlog::get ( LOGGER )-> warn ( "error code in parse series: ({})", code.message() );
+    } catch( ... ) {
+        spdlog::get ( LOGGER )->warn ( "other error in parse series" );
+    }
 }
 
-std::string ModSeries::import ( data::redis_ptr rdx, const config_ptr config, const std::string& serie_key, const std::string& serie ) {
+std::string ModSeries::import_serie ( data::redis_ptr rdx, const config_ptr config, const std::string& serie_key, const std::string& serie ) {
     auto _clean_string = clean_string ( serie );
-    redox::Command<int>& c = rdx->commandSync<int> ( { data::REDIS_EXISTS, data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ) } );
+    redox::Command<int>& c = rdx->commandSync<int> ( { redis::EXISTS, data::make_key_node ( data::hash ( _clean_string ) ) } );
 
     if ( c.ok() && c.reply() == 0 ) {
         auto _res_s = tmdb_get ( config->tmdb_key, _clean_string );
@@ -90,35 +86,37 @@ std::string ModSeries::import ( data::redis_ptr rdx, const config_ptr config, co
 
         if( !_res.empty() ) {
             for ( auto& __res : _res ) {
-                if ( clean_string ( __res[data::KEY_NAME] ) == _clean_string ) {
-                    std::string _poster_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[PARAM_POSTER] ) ),
-                                _backdrop_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[PARAM_BACKDROP] ) );
-                    tmdb_fetch ( __res[PARAM_POSTER], _poster_path );
+                if ( clean_string ( __res[param::NAME] ) == _clean_string ) {
+                    std::string _poster_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[param::POSTER_PATH] ) ),
+                                _backdrop_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[param::BACKDROP_PATH] ) );
+                    sleep( SLEEP );
+                    tmdb_fetch ( __res[param::POSTER_PATH], _poster_path );
                     image::Image image_meta_ ( _poster_path );
-                    image_meta_.scale ( 160, 160, fmt::format ( "{0}/tn_{1}.jpg", config->tmp_directory, data::hash ( __res[PARAM_POSTER] ) ) );
-                    tmdb_fetch ( __res[PARAM_BACKDROP], _backdrop_path );
-                    rdx->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ),
-                                    data::KEY_CLASS, data::NodeType::str ( data::NodeType::serie ),
-                                    data::KEY_NAME, __res[data::KEY_NAME],
-                                    data::KEY_PARENT, "serie",
-                                    PARAM_TMDB_ID, __res[PARAM_TMDB_ID],
-                                    PARAM_COMMENT, __res[PARAM_COMMENT],
-                                    PARAM_DATE, __res["first_air_date"],
-                                    PARAM_BACKDROP, fmt::format ( "/img/{}.jpg", data::hash ( __res[PARAM_BACKDROP] ) ),
-                                    PARAM_POSTER, fmt::format ( "/img/{}.jpg", data::hash ( __res[PARAM_POSTER] ) ),
-                                    PARAM_THUMB, fmt::format ( "/img/tn_{}.jpg", data::hash ( __res[PARAM_POSTER] ) ),
-                                   } );
-
+                    image_meta_.scale ( 160, 160, fmt::format ( "{0}/tn_{1}.jpg", config->tmp_directory, data::hash ( __res[param::POSTER_PATH] ) ) );
+                    tmdb_fetch ( __res[param::BACKDROP_PATH], _backdrop_path );
+                    data::save ( rdx,  data::hash ( _clean_string ), {
+                        { param::CLASS, data::NodeType::str ( data::NodeType::serie ) },
+                        { param::NAME, __res[param::NAME] },
+                        { param::PARENT, param::SERIE },
+                        { param::TMDB_ID, __res[param::TMDB_ID] },
+                        { param::COMMENT, __res[param::COMMENT] },
+                        { param::DATE, __res[param::DATE] },
+                        { param::BACKDROP_PATH, fmt::format ( "/img/{}.jpg", data::hash ( __res[param::BACKDROP_PATH] ) ) },
+                        { param::POSTER_PATH, fmt::format ( "/img/{}.jpg", data::hash ( __res[param::POSTER_PATH] ) ) },
+                        { param::THUMB, fmt::format ( "/img/tn_{}.jpg", data::hash ( __res[param::THUMB] ) ) },
+                    });
                     //add to serie list
-                    rdx->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::serie ), "0", data::hash ( _clean_string ) } ); //not hash
-                    return( __res[PARAM_TMDB_ID] );
+                    data::add_nodes( rdx, data::NodeType::serie, data::hash ( __res[param::POSTER_PATH] ), data::time_millis() );
+                    return( __res[param::TMDB_ID] );
                 }
             }
         } else {
             spdlog::get ( LOGGER )->warn ( "NO TMDB_RESULT: ({})", serie );
-            rdx->command ( {data::REDIS_HMSET,  data::make_key ( data::KEY_FS, data::hash ( _clean_string ) ),
-                            data::KEY_CLASS, data::NodeType::str ( data::NodeType::serie ),
-                            data::KEY_NAME, serie } );
+            data::save ( rdx, data::hash ( _clean_string ), {
+                { param::CLASS, data::NodeType::str ( data::NodeType::serie ) },
+                { param::NAME, serie }
+            });
+            data::add_nodes( rdx, data::NodeType::serie, data::hash ( _clean_string ), data::time_millis() );
         }
     }
     return "";
@@ -153,13 +151,13 @@ std::vector < std::map<std::string, std::string > > ModSeries::tmdb_parse ( cons
 
         for ( auto _obj = itr->MemberBegin(); _obj != itr->MemberEnd(); ++_obj ) {
             if ( strcmp ( _obj->name.GetString(), "backdrop_path" ) == 0 && _obj->value.IsString() ) {
-                _serie[PARAM_BACKDROP] = _obj->value.GetString();
+                _serie[param::BACKDROP_PATH] = _obj->value.GetString();
             } else if ( strcmp ( _obj->name.GetString(), "overview" ) == 0 && _obj->value.IsString() ) {
-                _serie[PARAM_COMMENT] = _obj->value.GetString();
+                _serie[param::COMMENT] = _obj->value.GetString();
             } else if ( strcmp ( _obj->name.GetString(), "poster_path" ) == 0 && _obj->value.IsString() ) {
-                _serie[PARAM_POSTER] = _obj->value.GetString();
+                _serie[param::POSTER_PATH] = _obj->value.GetString();
             } else if ( strcmp ( _obj->name.GetString(), "id" ) == 0 && _obj->value.IsInt() ) {
-                _serie[PARAM_TMDB_ID] = std::to_string ( _obj->value.GetInt() );
+                _serie[param::TMDB_ID] = std::to_string ( _obj->value.GetInt() );
             } else if ( strcmp ( _obj->name.GetString(), "first_air_date" ) == 0 && _obj->value.IsString() ) {
                 struct tm _tm = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -167,10 +165,10 @@ std::vector < std::map<std::string, std::string > > ModSeries::tmdb_parse ( cons
                     spdlog::get ( LOGGER )->warn ( "tmdb date is invalid ({})", _obj->value.GetString() );
                 } else {
                     time_t tmp_time_ = mktime ( &_tm );
-                    _serie[PARAM_DATE] = tmp_time_;
+                    _serie[param::DATE] = tmp_time_;
                 }
-            } else if ( strcmp ( _obj->name.GetString(), data::KEY_NAME.c_str() ) == 0 && _obj->value.IsString() ) {
-                _serie[data::KEY_NAME] = _obj->value.GetString();
+            } else if ( strcmp ( _obj->name.GetString(), param::NAME.c_str() ) == 0 && _obj->value.IsString() ) {
+                _serie[param::NAME] = _obj->value.GetString();
             }
         }
 
@@ -186,34 +184,34 @@ std::map<std::string, std::string > ModSeries::tmdb_parse_episode ( const config
     std::map<std::string, std::string > _episode;
 
     if ( document.HasMember ( "air_date" ) && document["air_date"].IsString() ) {
-        _episode[PARAM_DATE] = document["air_date"].GetString();
+        _episode[param::DATE] = document["air_date"].GetString();
     }
 
     if ( document.HasMember ( "episode_number" ) && document["episode_number"].IsInt() ) {
-        _episode[data::TYPE_EPISODE] = std::to_string ( document["episode_number"].GetInt() );
+        _episode[param::EPISODE] = std::to_string ( document["episode_number"].GetInt() );
     }
 
-    if ( document.HasMember ( data::KEY_NAME.c_str() ) && document[data::KEY_NAME.c_str()].IsString() ) {
-        _episode[data::KEY_NAME] = document[data::KEY_NAME.c_str()].GetString();
+    if ( document.HasMember ( param::NAME.c_str() ) && document[param::NAME.c_str()].IsString() ) {
+        _episode[param::NAME] = document[param::NAME.c_str()].GetString();
     }
 
     if ( document.HasMember ( "overview" ) && document["overview"].IsString() ) {
-        _episode[PARAM_COMMENT] = document["overview"].GetString();
+        _episode[param::COMMENT] = document["overview"].GetString();
     }
 
     if ( document.HasMember ( "id" ) && document["id"].IsInt() ) {
-        _episode[PARAM_TMDB_ID] = std::to_string ( document["id"].GetInt() );
+        _episode[param::TMDB_ID] = std::to_string ( document["id"].GetInt() );
     }
 
     if ( document.HasMember ( "season_number" ) && document["season_number"].IsInt() ) {
-        _episode[PARAM_SEASON] = std::to_string ( document["season_number"].GetInt() );
+        _episode[param::SEASON] = std::to_string ( document["season_number"].GetInt() );
     }
 
     if ( document.HasMember ( "still_path" ) && document["still_path"].IsString() ) {
         auto _still_key = data::hash ( document["still_path"].GetString() );
         auto _still_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, _still_key );
         tmdb_fetch ( document["still_path"].GetString(), _still_path );
-        _episode[PARAM_STILL_IMAGE] = fmt::format ( "/img/{}.jpg", _still_key );
+        _episode[param::STILL_IMAGE] = fmt::format ( "/img/{}.jpg", _still_key );
     }
 
     return _episode;

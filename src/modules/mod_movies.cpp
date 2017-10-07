@@ -29,32 +29,30 @@
 
 namespace cds {
 namespace mod {
-void ModMovies::import ( data::redis_ptr redis, const config_ptr config ) {
-
-    data::new_items( redis, data::NodeType::movie, [redis,config]( const std::string& key ) {
+void ModMovies::import ( data::redis_ptr redis, const config_ptr config, const std::string& key ) {
+    try {
         data::node_t _node = data::node ( redis, key );
 
         //Get the track information
-        av::Format _format ( _node[data::KEY_PATH] );
+        av::Format _format ( _node[param::PATH] );
 
         if ( !!_format ) {
             spdlog::get ( LOGGER )->warn ( "Can not open movie file:{} ({})",
                                            _format.errc().message(),
-                                           _node[data::KEY_PATH] );
+                                           _node[param::PATH] );
         } else {
 
             //get the movie metadata from tmdb
-            auto _clean_string = clean_string ( remove_skip_list ( trash_words, _node[data::KEY_NAME] ) );
+            auto _clean_string = clean_string ( remove_skip_list ( trash_words, _node[param::NAME] ) );
 
             sleep ( SLEEP );
-            std::cout << "search movie: " << _clean_string << std::endl;
             auto _tmdb_result = tmdb_search( config->tmdb_key, _clean_string );
             auto _tmdb_movie_list = tmdb_parse( _tmdb_result );
             if( !_tmdb_movie_list.empty() ) {
                 bool _found = false;
                 std::string _movie_id;
                 for( auto& __movie : _tmdb_movie_list ) {
-                    if( __movie.at( data::KEY_TITLE ) == _clean_string ) {
+                    if( __movie.at( param::TITLE ) == _clean_string ) {
                         _found = true;
                         _movie_id = __movie.at( "id" );
                         break;
@@ -67,7 +65,11 @@ void ModMovies::import ( data::redis_ptr redis, const config_ptr config ) {
                 auto _tmdb_movie_result = tmdb_movie( config->tmdb_key, _movie_id );
                 auto _tmdb_movie = tmdb_parse_movie( _tmdb_movie_result );
 
+                int _width = 0, _height = 0, _playtime = 0;
                 auto codec = _format.find_codec ( av::CODEC_TYPE::VIDEO );
+//TODO                    _width = codec->width();
+//                    _height = codec->height();
+//                    _playtime = _format.playtime();
 
                 //get backdrop image
                 auto _backdrop_key = data::hash ( _tmdb_movie.backdrop_path );
@@ -82,39 +84,39 @@ void ModMovies::import ( data::redis_ptr redis, const config_ptr config ) {
                 image_meta_.scale ( config->tmp_directory, ECoverSizes::TN, key );
                 image_meta_.scale ( config->tmp_directory, ECoverSizes::MED, key );
 
-                redis->command ( { data::REDIS_HMSET,  data::make_key_node ( key ),
-                    KEY_BITRATE, std::to_string ( codec->bitrate() ),
-                    KEY_BPS, std::to_string ( codec->bits_per_sample() ),
-                    KEY_CHANNELS, std::to_string ( codec->channels() ),
-                    KEY_WIDTH, std::to_string ( codec->width() ),
-                    KEY_HEIGHT, std::to_string ( codec->height() ),
-                    "backdrop_path", fmt::format ( "/img/{}.jpg", _backdrop_key ),
-                    "homepage", _tmdb_movie.homepage,
-                    "id", _tmdb_movie.id,
-                    "imdb_id", _tmdb_movie.imdb_id,
-                    "original_language", _tmdb_movie.original_language,
-                    "original_title", _tmdb_movie.original_title,
-                    PARAM_COMMENT, _tmdb_movie.overview,
-                    "poster_path", fmt::format ( "/img/{}.jpg", _poster_key ),
-                    "release_date", _tmdb_movie.release_date,
-                    "runtime", _tmdb_movie.runtime,
-                    "tagline", _tmdb_movie.tagline,
-                    data::KEY_TITLE, _tmdb_movie.title,
-                    PARAM_THUMB, fmt::format ( "/img/tn_{}.jpg", key ),
+                data::save ( redis, key, {
+                    { param::WIDTH, std::to_string ( _width ) },
+                    { param::HEIGHT, std::to_string ( _height ) },
+                    { param::PLAYTIME, std::to_string ( _playtime ) },
+                    { param::BACKDROP_PATH, fmt::format ( "/img/{}.jpg", _backdrop_key ) },
+                    { param::HOMEPAGE, _tmdb_movie.homepage },
+                    { param::TMDB_ID, _tmdb_movie.id },
+                    { param::IMDB_ID, _tmdb_movie.imdb_id },
+                    { param::LANGUAGE, _tmdb_movie.original_language },
+                    { param::TITLE, _tmdb_movie.original_title },
+                    { param::COMMENT, _tmdb_movie.overview },
+                    { param::POSTER_PATH, fmt::format ( "/img/{}.jpg", _poster_key ) },
+                    { param::DATE, _tmdb_movie.release_date },
+                    { param::PLAYTIME, _tmdb_movie.runtime },
+                    { "tagline", _tmdb_movie.tagline }, //TODO
+                    { param::TITLE, _tmdb_movie.title },
+                    { param::THUMB, fmt::format ( "/img/tn_{}.jpg", key ) },
                 });
 
                 //save genre tags
                 for( auto& __tag : _tmdb_movie.genres ) {
-                    data::add_tag( redis, "genre", __tag, data::NodeType::movie, key, 0 );
+                    data::add_tag( redis, param::GENRE, __tag, data::NodeType::movie, key, 0 );
                 }
 
             } else { //TODO get cover from movie
-                std::cout << "no tmdb result: " << _clean_string << std::endl;
+                spdlog::get ( LOGGER )->warn ( "NO TMDB_RESULT: ({})", _clean_string );
             }
-            auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, data::KEY_PATH ) );
-            redis->command ( {data::REDIS_ZADD, data::make_key_list ( data::NodeType::movie ), std::to_string( _last_write_time ), key } );
+            auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, param::PATH ) );
+            data::add_nodes( redis, data::NodeType::movie, key, _last_write_time );
         }
-    });
+    } catch ( ... ) {
+        spdlog::get ( LOGGER )->error ( "exception mod movies." );
+    }
 }
 std::string ModMovies::tmdb_search ( const std::string& api_key, const std::string& name ) {
     http::HttpClient< http::Http>  client_ ( "api.themoviedb.org", "http" );
@@ -145,8 +147,8 @@ std::vector < std::map<std::string, std::string > > ModMovies::tmdb_parse ( cons
         for ( auto _obj = itr->MemberBegin(); _obj != itr->MemberEnd(); ++_obj ) {
             if (  strcmp ( _obj->name.GetString(), "id" ) == 0 && _obj->value.IsInt() ) {
                 _movie["id"] = std::to_string( _obj->value.GetInt() );
-            } else if ( strcmp ( _obj->name.GetString(), data::KEY_TITLE.c_str() ) == 0 && _obj->value.IsString() ) {
-                _movie[data::KEY_TITLE] = _obj->value.GetString();
+            } else if ( strcmp ( _obj->name.GetString(), param::TITLE.c_str() ) == 0 && _obj->value.IsString() ) {
+                _movie[param::TITLE] = _obj->value.GetString();
             }
         }
 
@@ -160,11 +162,11 @@ TmdbMovie ModMovies::tmdb_parse_movie ( const std::string& result ) {
     document.Parse ( result.c_str() );
     TmdbMovie _movie;
 
-    if ( document.HasMember ( "backdrop_path" ) && document["backdrop_path"].IsString() ) {
-        _movie.backdrop_path = document["backdrop_path"].GetString();
+    if ( document.HasMember ( param::BACKDROP_PATH.c_str() ) && document[param::BACKDROP_PATH.c_str()].IsString() ) {
+        _movie.backdrop_path = document[param::BACKDROP_PATH.c_str()].GetString();
     }
-    if ( document.HasMember ( "homepage" ) && document["homepage"].IsString() ) {
-        _movie.homepage = document["homepage"].GetString();
+    if ( document.HasMember ( param::HOMEPAGE.c_str() ) && document[param::HOMEPAGE.c_str()].IsString() ) {
+        _movie.homepage = document[param::HOMEPAGE.c_str()].GetString();
     }
     if ( document.HasMember ( "id" ) && document["id"].IsInt() ) {
         _movie.id = std::to_string( document["id"].GetInt() );
@@ -193,11 +195,11 @@ TmdbMovie ModMovies::tmdb_parse_movie ( const std::string& result ) {
     if ( document.HasMember ( "tagline" ) && document["tagline"].IsString() ) {
         _movie.tagline = document["tagline"].GetString();
     }
-    if ( document.HasMember ( data::KEY_TITLE.c_str() ) && document[data::KEY_TITLE.c_str()].IsString() ) {
-        _movie.title = document[data::KEY_TITLE.c_str()].GetString();
+    if ( document.HasMember ( param::TITLE.c_str() ) && document[param::TITLE.c_str()].IsString() ) {
+        _movie.title = document[param::TITLE.c_str()].GetString();
     }
-    if ( document.HasMember ( data::KEY_GENRES.c_str() ) && document[data::KEY_GENRES.c_str()].IsArray() ) {
-        for( auto& __genre : document[data::KEY_GENRES.c_str()].GetArray() ) {
+    if ( document.HasMember ( key::GENRES.c_str() ) && document[key::GENRES.c_str()].IsArray() ) {
+        for( auto& __genre : document[key::GENRES.c_str()].GetArray() ) {
             if ( __genre.HasMember ( "name" ) && __genre["name"].IsString() ) {
                 _movie.genres.push_back( __genre["name"].GetString() );
             }

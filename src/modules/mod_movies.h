@@ -68,7 +68,7 @@ struct TmdbMovie {
 
 class ModMovies {
 public:
-    static void import ( data::redis_ptr redis, const config_ptr config );
+    static void import ( data::redis_ptr redis, const config_ptr config, const std::string& key );
 
 private:
     ModMovies() {}

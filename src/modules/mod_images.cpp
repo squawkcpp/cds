@@ -21,29 +21,27 @@
 
 namespace cds {
 namespace mod {
-void ModImages::import ( data::redis_ptr redis, const config_ptr config ) {
+void ModImages::import ( data::redis_ptr redis, const config_ptr config, const std::string& key ) {
     try {
-        data::new_items( redis, data::NodeType::image, [redis,config]( const std::string& key ) {
-            data::node_t _node = data::node( redis, key );
-            auto _image = utils::Image( _node[data::KEY_PATH] );
+        data::node_t _node = data::node( redis, key );
+        auto _image = utils::Image( _node[param::PATH] );
 
-            //store values
-            utils::exif( _node );
+        //store values
+        utils::exif( _node );
 
-            _node[KEY_WIDTH] = std::to_string ( _image.width() );
-            _node[KEY_HEIGHT] = std::to_string ( _image.height() );
-            _node[ECoverSizes::str ( ECoverSizes::MED )] = _image.scale( config->tmp_directory, ECoverSizes::MED, key );
-            _node[ECoverSizes::str ( ECoverSizes::TN )] = _image.scale( config->tmp_directory, ECoverSizes::TN, key );
+        _node[param::WIDTH] = std::to_string ( _image.width() );
+        _node[param::HEIGHT] = std::to_string ( _image.height() );
+        _node[ECoverSizes::str ( ECoverSizes::MED )] = _image.scale( config->tmp_directory, ECoverSizes::MED, key );
+        _node[ECoverSizes::str ( ECoverSizes::TN )] = _image.scale( config->tmp_directory, ECoverSizes::TN, key );
 
-            data::save( redis, key, _node );
-            data::add_nodes( redis, data::NodeType::image, key );
+        data::save( redis, key, _node );
+        data::add_nodes( redis, data::NodeType::image, key, data::time_millis() );
 
-            //save camera keyword
-            if( _node.find( PARAM_MAKE ) != _node.end() && !_node[PARAM_MAKE].empty() )
-            { data::add_tag( redis, PARAM_MAKE, _node[PARAM_MAKE], data::NodeType::image, key, 0 ); }
-            //save parent name keyword
-            data::add_tag( redis, data::KEY_NAME, data::get( redis, _node[data::KEY_PARENT], data::KEY_NAME ), data::NodeType::image, key, 0 );
-        });
+        //save camera keyword
+        if( _node.find( param::MAKE ) != _node.end() && !_node[param::MAKE].empty() )
+        { data::add_tag( redis, param::MAKE, _node[param::MAKE], data::NodeType::image, key, 0 ); }
+        //save parent name keyword
+        data::add_tag( redis, param::NAME, data::get( redis, _node[param::PARENT], param::NAME ), data::NodeType::image, key, 0 );
     } catch ( ... ) {
         spdlog::get ( LOGGER )->error ( "exception mod images." );
     }
