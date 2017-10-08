@@ -50,10 +50,16 @@ public:
     http::http_status node ( http::Request& request, http::Response& response );
     /** @brief get node list. */
     http::http_status nodes ( http::Request& request, http::Response& response );
+    /** @brief get file list. */
+    http::http_status files ( http::Request& request, http::Response& response );
+
+
     /** @brief get sort criterias for the given node. */
     http::http_status sort ( http::Request& request, http::Response& response );
     /** @brief get the complete path for the given node. */
     http::http_status path ( http::Request& request, http::Response& response );
+    /** @brief get the autocomplete items for the given string. */
+    http::http_status sug ( http::Request& request, http::Response& response );
 
     http::http_status opds( http::Request& request, http::Response& response );
 

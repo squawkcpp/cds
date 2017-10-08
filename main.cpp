@@ -168,6 +168,16 @@ int main(int argc, char* argv[]) {
         http::mod::Http()
     );
 
+    _container.www->bind( http::mod::Match<std::string, std::string>( "^\\/+(.+)\\/+type\\/+((ebook|movie|album|audio|serie|artist|image))$", key::KEY, param::CLASS ),
+        http::mod::Exec( std::bind( &cds::Server::files, _container.server, _1, _2 ) ),
+        http::mod::Http()
+    );
+
+    _container.www->bind( http::mod::Match< std::string >( "^\\/+sug\\/+(.*)$", param::NAME ),
+        http::mod::Exec( std::bind( &cds::Server::sug, _container.server, _1, _2 ) ),
+        http::mod::Http()
+    );
+
     _container.www->bind( http::mod::Match< std::string, std::string >( "^\\/+(ebook|movie|album|serie|artist|image)\\/+(.*)$", key::TYPE, param::NAME ),
         http::mod::Exec( std::bind( &cds::Server::keywords, _container.server, _1, _2 ) ),
         http::mod::Http()
@@ -209,6 +219,16 @@ int main(int argc, char* argv[]) {
         }),
         http::mod::Http()
     );
+
+#ifdef DEBUG
+    _container.www->bind( http::mod::Match<>( ".*" ),
+        http::mod::Exec( [&_container](http::Request& request, http::Response& response ) -> http::http_status {
+        spdlog::get ( "cds" )->warn ( "HTTP 404: {}", request.uri() );
+            return http::http_status::NOT_FOUND;
+        }),
+        http::mod::Http()
+    );
+#endif
 
     // register signal SIGINT and signal handler
     signal(SIGINT, signalHandler);

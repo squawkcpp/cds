@@ -265,6 +265,57 @@ http::http_status Server::nodes ( http::Request& request, http::Response& respon
     return http::http_status::OK;
 }
 
+http::http_status Server::files ( http::Request& request, http::Response& response ) {
+
+    data::NodeType::Enum _class = data::NodeType::parse( request.attribute ( param::CLASS ) );
+    std::string _parent = request.attribute ( key::KEY );
+    int _index = ( request.contains_attribute( "index" ) &&
+                   ( request.attribute( "index" ).find_first_not_of( "0123456789" ) == std::string::npos) ?
+                       std::stoi( request.attribute( "index" ) ) : 0 );
+    int _count = ( request.contains_attribute( "count" ) &&
+                   ( request.attribute( "count" ).find_first_not_of( "0123456789" ) == std::string::npos) &&
+                   std::stoi( request.attribute( "count" ) ) < 8192 ?
+                       std::stoi( request.attribute( "count" ) ) : -1 );
+
+    SPDLOG_DEBUG(spdlog::get ( LOGGER ), "HTTP>/files (key={}, class={})", _parent, data::NodeType::str( _class ) );
+
+    int _result = 0;
+    using namespace rapidjson;
+    StringBuffer sb;
+    PrettyWriter<StringBuffer> writer ( sb );
+    writer.StartObject();
+
+    writer.String ( "nodes" );
+    writer.StartArray();
+
+    data::files( redis_, _parent, _class, _index, _count, [this,&writer,&_result]( const std::string& key ) {
+        ++_result;
+        writer.StartObject();
+        writer.String ( key::KEY.c_str() );
+        writer.String ( key.c_str() );
+
+        auto n = data::node( redis_, key );
+        for ( auto& __item : n ) {
+            writer.String ( __item.first.c_str() );
+            writer.String ( __item.second.c_str() );
+        }
+        writer.EndObject();
+    });
+    writer.EndArray();
+
+    //add counters
+    writer.String( "count" );
+    writer.Int( data::files_count( redis_, _parent, _class ) );
+    writer.String( "result" );
+    writer.Int( _result );
+
+    writer.EndObject();
+    response << sb.GetString();
+    response.parameter ( http::header::CONTENT_TYPE, http::mime::mime_type ( http::mime::JSON ) );
+    response.parameter ( "Access-Control-Allow-Origin", "*" );
+    return http::http_status::OK;
+}
+
 http::http_status Server::opds( http::Request& request, http::Response& response ) {
     std::cout << request << std::endl;
 
@@ -315,6 +366,28 @@ http::http_status Server::opds( http::Request& request, http::Response& response
 
     response << doc_;
     response.parameter ( http::header::CONTENT_TYPE, http::mime::mime_type ( http::mime::XML ) );
+    response.parameter ( "Access-Control-Allow-Origin", "*" );
+    return http::http_status::OK;
+}
+
+http::http_status Server::sug ( http::Request& request, http::Response& response ) {
+    using namespace rapidjson;
+    StringBuffer sb;
+    PrettyWriter<StringBuffer> writer ( sb );
+    writer.StartArray();
+
+    auto& _c = redis_->commandSync< std::set< std::string > > (
+        { "FT.SUGGET", "autocomplete", request.attribute( param::NAME ) } );
+
+    if ( _c.ok() ) {
+        for ( const std::string& __c : _c.reply() ) {
+            writer.String ( __c.c_str() );
+        }
+    }
+
+    writer.EndArray();
+    response << sb.GetString();
+    response.parameter ( http::header::CONTENT_TYPE, http::mime::mime_type ( http::mime::JSON ) );
     response.parameter ( "Access-Control-Allow-Origin", "*" );
     return http::http_status::OK;
 }

@@ -328,10 +328,36 @@ static void children( redis_ptr redis /** @param redis redis database pointer. *
     }
 }
 
+/** @brief get the node files by type*/
+static void files( redis_ptr redis /** @param redis redis database pointer. */,
+                      const std::string& key /** @param key the file key. */,
+                      const NodeType::Enum type /** @param type the file type. */,
+                      const int& index /** @param index start index. */,
+                      const int& count /** @param count result size. */,
+                      async_fn fn /** @param fn the callback function. */ ) {
+
+    redox::Command< std::vector< std::string > >& _c = redis->commandSync< std::vector< std::string > >(
+        { redis::ZRANGE, data::make_key( key::FS, key, "types" /** TODO */, NodeType::str( type ) ), std::to_string( index ), std::to_string( index + count ) }
+    );
+    if( _c.ok() ) {
+        for( const std::string& __c : _c.reply() ) {
+            fn( __c );
+        }
+    }
+}
+
 /** @brief get the node children count */ //TODO add params sort,order,tags
 static int children_count( redis_ptr redis, const std::string& key ) {
     redox::Command< int >& _c = redis->commandSync< int >(
         { redis::ZCARD, make_key_list( key ) }
+    );
+    return( _c.ok() ? _c.reply() : 0 );
+}
+
+/** @brief get the node children count */ //TODO add params sort,order,tags
+static int files_count( redis_ptr redis, const std::string& key, const NodeType::Enum type ) {
+    redox::Command< int >& _c = redis->commandSync< int >(
+        { redis::ZCARD, make_key( key::FS, key, "types", NodeType::str( type ) ) }
     );
     return( _c.ok() ? _c.reply() : 0 );
 }
@@ -370,11 +396,15 @@ static void rem_types( redis_ptr redis, const std::string& parent, const std::st
 { redis->command( {redis::ZREM, data::make_key_list( parent ), hash( key ) } ); }
 
 /** @brief add node to global nodes list */
-static void add_nodes( redis_ptr redis, NodeType::Enum type, const std::string& key, unsigned long score ) //TODO add score
+static void add_nodes( redis_ptr redis, NodeType::Enum type, const std::string& key, unsigned long score )
 { redis->command( {redis::ZADD,  data::make_key_list( type ), std::to_string( score ), key } ); }
 /** @brief remove node from global nodes list */
 static void rem_nodes( redis_ptr redis, NodeType::Enum type, const std::string& key )
 { redis->command( {redis::ZREM,  data::make_key_list( type ), key } ); }
+
+/** @brief add node to global nodes list */
+static void add_nodes( redis_ptr redis, const std::string& parent, NodeType::Enum type, const std::string& key, unsigned long score )
+{ redis->command( {redis::ZADD,  data::make_key( key::FS, parent, "types", NodeType::str( type ) ), std::to_string( score ), key } ); }
 
 // -----------------------------------------------------------------------------------------------------------
 // --------------------------                      mime type                        --------------------------

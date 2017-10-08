@@ -93,44 +93,46 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
                         { _publisher = _metadata.get ( av::Metadata::PUBLISHER ); }
 
                         auto codec = _format.find_codec ( av::CODEC_TYPE::AUDIO );
-                        redis->command ( {redis::HMSET,  data::make_key_node ( data::hash ( __file[param::PATH] ) ),
-                                        param::PARENT, key,
-                                        param::TITLE, _title,
-                                        param::ALBUM, _album,
-                                        param::ARTIST, _artist,
-                                        param::COMPOSER, _composer,
-                                        param::PERFORMER, _performer,
-                                        param::COMMENT, _comment,
-                                        param::YEAR, _year,
-                                        param::TRACK, _track,
-                                        param::DISC, _disc,
-                                        param::GENRE, _genre,
-                                        param::PUBLISHER, _publisher,
-                                        param::BITRATE, std::to_string ( codec->bitrate() ),
-                                        param::BPS, std::to_string ( codec->bits_per_sample() ),
-                                        param::CHANNELS, std::to_string ( codec->channels() ),
-                                        param::SAMPLERATE, std::to_string ( codec->sample_rate() ),
-                                        param::PLAYTIME, std::to_string ( _format.playtime() )
-                                       } );
-
+                        data::save( redis, data::hash ( __file[param::PATH] ), {
+                            { param::PARENT, key },
+                            { param::TITLE, _title },
+                            { param::ALBUM, _album },
+                            { param::ARTIST, _artist },
+                            { param::COMPOSER, _composer },
+                            { param::PERFORMER, _performer },
+                            { param::COMMENT, _comment },
+                            { param::YEAR, _year },
+                            { param::TRACK, _track },
+                            { param::DISC, _disc },
+                            { param::GENRE, _genre },
+                            { param::PUBLISHER, _publisher },
+                            { param::BITRATE, std::to_string ( codec->bitrate() ) },
+                            { param::BPS, std::to_string ( codec->bits_per_sample() ) },
+                            { param::CHANNELS, std::to_string ( codec->channels() ) },
+                            { param::SAMPLERATE, std::to_string ( codec->sample_rate() ) },
+                            { param::PLAYTIME, std::to_string ( _format.playtime() ) }
+                        });
 
                         //update relation with track as score
-                        redis->command ( {redis::ZADD,
-                                          data::make_key_list ( key ),
-                                          _track,
-                                          data::hash ( __file[param::PATH] ) } );
+// TODO                       redis->command ( {redis::ZADD, //TODO
+//                                          data::make_key_list ( key ),
+//                                          _track,
+//                                          data::hash ( __file[param::PATH] ) } );
+
+                        data::add_types( redis, key, data::hash ( __file[param::PATH] ), data::time_millis() );
+                        data::add_nodes( redis, key, data::NodeType::audio, data::hash ( __file[param::PATH] ), std::stoi( _track ) );
                     }
                 }
 
             } else if ( __type.first == data::NodeType::image ) {
                 for ( auto& __file : __type.second ) {
                     utils::Image image_meta_ ( __file[param::PATH] );
-                    redis->command ( {redis::HMSET,  data::make_key_node ( data::hash ( __file[param::PATH] ) ),
-                                    param::PARENT, key,
-                                    param::CLASS, data::NodeType::str ( data::NodeType::cover ),
-                                    param::WIDTH, std::to_string ( image_meta_.width() ),
-                                    param::HEIGHT, std::to_string ( image_meta_.height() )
-                                   } );
+                    data::save( redis, data::hash ( __file[param::PATH] ), {
+                        { param::PARENT, key },
+                        { param::CLASS, data::NodeType::str ( data::NodeType::cover ) },
+                        { param::WIDTH, std::to_string ( image_meta_.width() ) },
+                        { param::HEIGHT, std::to_string ( image_meta_.height() ) }
+                    });
                     auto _filename = filename ( __file[param::PATH], false );
                     boost::to_lower ( _filename );
 
@@ -138,7 +140,7 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
                     _last_cover = utils::make_cover_uri ( ECoverSizes::TN, data::hash ( __file[param::PATH] ) );
                     if ( std::find (  album_cover_names.begin(),  album_cover_names.end(), _filename ) !=  album_cover_names.end() ) {
                         _cover_found = true;
-                        redis->command ( { redis::HMSET, data::make_key_node ( key ), param::THUMB, _last_cover } );
+                        data::save( redis, key, {{ param::THUMB, _last_cover }} );
                     }
 
                     //scale image
@@ -148,11 +150,13 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
                     data::add_types( redis, key, data::hash( __file[param::PATH] ), 0 );
                     data::rem_types( redis, key, data::hash( __file[param::PATH] ) );
                     data::rem_nodes( redis, data::NodeType::image, data::hash( __file[param::PATH] ) );
+                    data::add_nodes( redis, key, data::NodeType::cover, data::hash ( __file[param::PATH] ),
+                            std::find (  album_cover_names.begin(),  album_cover_names.end(), _filename ) !=  album_cover_names.end() ? 1 : 2 );
                 }
             } else if ( __type.first == data::NodeType::ebook ) {
                 for ( auto& __file : __type.second ) {
                     //delete ebook from new books.
-                    redis->command( {redis::SREM,
+                    redis->command( {redis::SREM, //TODO
                         data::make_key( key::FS, key::NEW, data::NodeType::str( data::NodeType::ebook ) ),
                         data::hash( __file[param::PATH] ) } );
                 }
@@ -185,21 +189,21 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
     }
 }
 
-void ModAlbums::import_files ( data::redis_ptr rdx, const std::string& key, std::map< data::NodeType::Enum, std::vector< data::node_t > >& files ) {
+void ModAlbums::import_files ( data::redis_ptr redis, const std::string& key, std::map< data::NodeType::Enum, std::vector< data::node_t > >& files ) {
 
     //TODO use childs
-    auto& c = rdx->commandSync< data::nodes_t > (
+    auto& c = redis->commandSync< data::nodes_t > (
         { redis::ZRANGE, data::make_key_list ( key ), "0", "-1" } );
 
     if ( c.ok() ) {
         for ( const std::string& __key : c.reply() ) {
-            data::node_t _file = data::node ( rdx, __key );
+            data::node_t _file = data::node ( redis, __key );
 
             if ( _file[param::CLASS] == data::NodeType::str ( data::NodeType::folder ) ) {
-                import_files ( rdx, data::hash( _file[param::PATH] ), files );
+                import_files ( redis, data::hash( _file[param::PATH] ), files );
                 //remove folder and relations
-                data::rem_types( rdx, key, _file[param::PATH] );
-                rdx->command( {redis::DEL,
+                data::rem_types( redis, key, _file[param::PATH] );
+                redis->command( {redis::DEL, //TODO
                     data::make_key_list( data::hash( _file[param::PATH] ) ),
                     data::make_key_node( data::hash( _file[param::PATH] ) ) } );
 
@@ -209,17 +213,17 @@ void ModAlbums::import_files ( data::redis_ptr rdx, const std::string& key, std:
 }
 
 /** @brief import the artist */
-void ModAlbums::import_artist ( data::redis_ptr rdx, const std::string& album_key, const std::string& artist ) {
+void ModAlbums::import_artist ( data::redis_ptr redis, const std::string& album_key, const std::string& artist ) {
 
     auto _clean_string = clean_string ( artist );
-    data::save( rdx, data::hash ( _clean_string ), {
+    data::save( redis, data::hash ( _clean_string ), {
         { param::CLASS, data::NodeType::str ( data::NodeType::artist ) },
         { param::PARENT, album_key },
         { param::NAME, artist },
         { param::CLEAN_STRING, _clean_string }
     });
-    data::add_nodes( rdx, data::NodeType::artist, data::hash ( _clean_string ), data::time_millis() );
-    data::add_types( rdx, data::hash ( _clean_string ), album_key, data::time_millis() );
+    data::add_nodes( redis, data::NodeType::artist, data::hash ( _clean_string ), data::time_millis() );
+    data::add_types( redis, data::hash ( _clean_string ), album_key, data::time_millis() );
 }
 }//namespace mod
 }//namespace cds

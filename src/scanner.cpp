@@ -86,6 +86,7 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
                 _node[param::TIMESTAMP] = std::to_string( boost::filesystem::last_write_time( itr->path() ) );
                 data::save( redis, data::hash( _item_filepath ), _node );
                 data::add_types( redis, data::hash( parent_key ), data::hash( _item_filepath ),  data::time_millis() );
+                data::add_nodes( redis, data::hash( parent_key ), _type, data::hash( _item_filepath ),  data::time_millis() );
                 data::incr_mime ( redis, _mime_type );
                 Scanner::new_item(redis, parent_key, data::hash ( _item_filepath ), _type );
             }
@@ -202,12 +203,12 @@ void Scanner::search_index ( data::redis_ptr redis /** @param redis redis databa
     //TODO add genre
 
     data::children( redis, param::ALBUM, 0, -1, "default", "asc", "", [redis]( const std::string item ) {
+        const std::string _name = data::get( redis, item, param::NAME );
+        const std::string _artist = data::get( redis, item, param::ARTIST );
         redis->command( {"FT.ADD", "idx", item, "1.0", "FIELDS",
-            param::NAME, data::get( redis, item, param::NAME ),
-            param::ARTIST, data::get( redis, item, param::ARTIST ),
-            param::ALBUM, data::get( redis, item, param::NAME ) } );
-        redis->command( {"FT.SUGADD", "autocomplete", data::get( redis, item, param::NAME ), "100" } );
-        redis->command( {"FT.SUGADD", "autocomplete", data::get( redis, item, param::ARTIST ), "100" } );
+            param::ARTIST, _artist, param::ALBUM, _name } );
+        redis->command( {"FT.SUGADD", "autocomplete", _name, "100" } );
+        redis->command( {"FT.SUGADD", "autocomplete", _artist, "100" } );
     });
 }
 
