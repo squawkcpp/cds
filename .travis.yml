@@ -33,11 +33,11 @@ deploy:
     repo: squawkcpp/cds
 
 after_success:
-  - sudo docker --log-level debug login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - sudo docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS hub.docker.com
   - export REPO=squawkcpp/cds
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - sudo docker --log-level debug build -f Dockerfile -t $REPO:$COMMIT .
-  - sudo docker --log-level debug tag $REPO:$COMMIT $REPO:$TAG
-  - sudo docker --log-level debug tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-  - sudo docker --log-level debug push $REPO
+  - sudo docker build -f Dockerfile -t $REPO:$COMMIT .
+  - sudo docker tag $REPO:$COMMIT $REPO:$TAG
+  - sudo docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - sudo docker push $REPO
 
