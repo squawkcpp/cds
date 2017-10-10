@@ -5,7 +5,7 @@ services:
 env:
   global:
     - secure: "PI51PIbYZcLyqgSa0j1Q5+WmKFlV8Q0FxL+7uMvCUN564tdhhOtV/rGP5pSCjwIRHQwfY5fj8rZ4QYFPAWwnOQS9RoCUVGFz7u+6c8UbHS+AxqQLGfY+pkvHJ7a9XXScvXUJ73Iu2HcOS6gxgk9KbKihm+zpIKfia0kr4lresTZiBpK2t5T1yMWCfMIxisWGM8Wesin7A+/jQj3MdOz86++Evzkn+YQncgkBD4rXvDIJB9uO8SSKU2kr5MYi54OI+AvLcHm3xx3l3uW6l7rnhif7DC43V4dkfoqknMgAibOGI/Wv5qA0Z+xNh9qpKY4qzTTOt7OwOFSvy6CDd5tLjtmJgP8tetTV6jTw0t4/+IPDrqnRgc/vFDGS761OlWbMlMeCMdPKCrNGFo6/Sw5k+h9wKqs8NaLbnV699OlhcaeQiatOU2plwvZAcUKLMgpSq74joWHohDXjO1GC+OBLBAO6v7hHAiyW2eyIl8MMLMB1i4O9mjnrH/SGMn5ui7JluDZu38EcQsDidbcKajzy3Xxu5slqXzjO/8XuBjE+OOVA2eStxFGZNPDPC1NWzHFmr8I9sETSUu6Mr+EUQSlO1R6keu0BKlHGhkxlRfuK4/inRJ6AqetdjmQepKb1+Tu7M3cu8Wcf1Rakt0/XBd8WK87qmXRZpLbPcVL4z15DekQ=" # DOCKER_EMAIL
-    - secure: "VOAzt5f6J90NFeWeN5VADfQFzexoNpGjJJrzFknDfFnquZUw4ap8edTOX9A+CL9CxhJSzHUsQQm8pFkrc1Dn/NYc5O3W54IQJSbxx9Nzba1vii83nSQ524Mo4k+kTaJuC8SGNDyR9hH3EELtM9eSct4Ye4NPlozaqcP2iYUKvG0sbkOWUTZdghHu0Vrkk8Cdo5/Wt4HxzqDsjV/cs/CXFWk/+SdtwmhDrD9JXddt3H/pAIRo6gU1uSDQOmgoEGiRIee0q1fLCjQizvhv8wjkNitj3H01hQ6+6A1UWRRqqaElf1zkXXzyLpb0hjPnuT3UQhGXhGiC2zQhKjUX7yiStl3XJZHz+y0PTRArtrW83DGFEzAbxMaBlJNUMU1scfb1l/cDfox7xbLEoTz3ecuiKolw0Wc5Wr1Vi4zJfJeOUNzjW7aDlDe7Y4ky8NEAUa8aaW2DjIyX6n4+CuxU+vs/aJLJDmL483na0DMY9Wg5AFOuR71Sz5MaQbNrizpp3qN85tZpB7w8wurgQFtwhPEg4c3WBtW4xyX9WU1PsiVgEhuoIJ5JBBzkfV2OGplIWQcVUafWoNWmbrNaPunojo1xWTZ07xvJ8wuDcHFcmXq7HLjBRRymx6jQbqtPqarITsrtJSmht54Q25Jd/QWZlK4MSHC29BgrQy29ekXmeKJpFzE=" # DOCKER_USER
+    - secure: "gDDhrr/Ibkx6ETuyRSJOBnhi3h9dogsNKcKMj7a9MoVgDmk19XdDVbUjNzxIMPRZ3vsCLZUTld6NZmsxg/CHWczD1ZDJa1oGhPpeJgxIYG0yjH2Th04Twl86FfXgWoPXWL6oo1rSJVOu6EjPubSaV4WHcL/SAvlRvlnBvBidZ/39yLhaqBjqhFHM80bpo4j7zvqMPlGzsrjFCJkrKl+TtwBroISohu5c7aypiX+mBbXtpraJE1rH9qTDd7Vwr1RAmRJ/emDNfbLKbyj7pV0RUQPp2wAgNNoSW/hIjGEJ8pFHFVfTADJr6wZ955VOSspMMoHG1DgxsbdUdX39GlBfbuO0sJeYszfbBkcVKs07H2XgyO6kFfxM3JeeA5DBX27bsk+IzZxely3xi4Dyhvf4LQmaHNuF/K7gs0nqFq7GTmBSBOdwFWa1EtznRlD+csZeLkjknMwpPmrKQLuquF08CcMRivrNJzlBQQnoy78Pthkyb9+wRCHaanInxlTFn6Bb2//ZuY1jbXAnWiLIhEUKG0+Da8gSfbKOzcbeeHt69hiWXFKUgR6OexdRB8xexw2gJ+SHuegZh+OUpyRs7NxEn4FDIe1ycv1pJvLJhR8g50OZM9/NAHpgGf83E/Fe5FmguCyBzkuKgyAvMjvgtFuI6Wibuor3DaqhqpL9hXMVI1M=" # DOCKER_USER
     - secure: "YZsjKNCh4z3rfZ4kwbFDNJqE0txSnFde1oSmmb7a2dJpPC0HLZzGd5FasSxLL8v2wU2QKeHe6obDhbc8VVKqDSz6KtGs28EojfyYnAoLimEGtK5pdThNrb4AFtBqm3aVc8b0sZBgyFxV8mxlrDHlKjzuBrjIvrnCcXVJccypZch56ds7ibWZabXzCE/HXSgGz2Yf7KXhha1Hw2lbho/8haVnP4yrILV2fhRtC2T6MyamhrXlQVZSY6poFhZUT9fB4LPDVv2FuGlgokZ8U8U9Jk+xM691YRvJzHEt0y0OObpLCmO67wDN/S1cbQEu4hdDXoKgiVe0YLCj7kuEh1A4BgIZPGe1hRbEPx9aVpZEutSdKgVlVnj8KrtY3KKaIcmS+1zo6I3qtcapFTrsNFzBiawEOKOoRToojfAEY6IM6WgpCg3CbhOGuTjBF46z76nFkTzciMa88lJ8GIXKkuIE3rr58OVmwOdYIb0oYmSj0oAzx9rM7o2/ubvfai9HkjuKcCq2rcLaK4C24oLXGpT+h6uU1CV1KEEd8/grxYGypHY/zubAGy/tGOLyJB+kM/CAcgL3Y2x/ANgkQLejSXfnDCPcFh7M8eCg+8/NnEVPv8gWxA6HsDeR/nMC3GYeL+9HzMo1FmNO7hVAmO/jJg6zz1DmrVlBf2vuOSeMJx2Z2nI=" # DOCKER_PASS
     - COMMIT=${TRAVIS_COMMIT::8}
 before_install:
@@ -33,9 +33,8 @@ deploy:
     repo: squawkcpp/cds
 
 after_success:
-  - export HUB="hub.docker.com"
-  - sudo docker login -u $DOCKER_USER -p $DOCKER_PASS $HUB
-  - export REPO=$HUB/squawkcpp/cds
+  - sudo docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=squawk/cds
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - sudo docker build -f Dockerfile -t $REPO:$COMMIT .
   - sudo docker tag $REPO:$COMMIT $REPO:$TAG
