@@ -28,6 +28,9 @@ parameters for the cds server.
 To install the server from source you need cmake and a recent c++ (C++14) compiler installed. The developmeent packages of the
 dependencies must be available to the compiler.
 
+
+docker
+
 ##### install dependencies on ubuntu
 
 ##### get the source
