@@ -22,7 +22,6 @@
 #include "spdlog/spdlog.h"
 #include "rapidjson/document.h"
 
-#include "image.h" //remove
 #include "format.h"
 #include "codec.h"
 
@@ -90,9 +89,12 @@ std::string ModSeries::import_serie ( data::redis_ptr rdx, const config_ptr conf
                     std::string _poster_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[param::POSTER_PATH] ) ),
                                 _backdrop_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[param::BACKDROP_PATH] ) );
                     sleep( SLEEP );
+
                     tmdb_fetch ( __res[param::POSTER_PATH], _poster_path );
-                    image::Image image_meta_ ( _poster_path );
-                    image_meta_.scale ( 160, 160, fmt::format ( "{0}/tn_{1}.jpg", config->tmp_directory, data::hash ( __res[param::POSTER_PATH] ) ) );
+                    utils::Image image_meta_ ( _poster_path );
+                    image_meta_.scale ( config->tmp_directory, ECoverSizes::TN, data::hash ( __res[param::POSTER_PATH] ) );
+                    image_meta_.scale ( config->tmp_directory, ECoverSizes::MED, data::hash ( __res[param::POSTER_PATH] ) );
+
                     tmdb_fetch ( __res[param::BACKDROP_PATH], _backdrop_path );
                     data::save ( rdx,  data::hash ( _clean_string ), {
                         { param::CLASS, data::NodeType::str ( data::NodeType::serie ) },

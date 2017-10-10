@@ -44,7 +44,6 @@ add_custom_target(cds_headers SOURCES ${HeaderFiles})
 # -------------------------------------------------------------------------
 include(ExternalProject)
 include(cmake/external/LibAvCpp.cmake)
-include(cmake/external/LibImageCpp.cmake)
 include(cmake/external/re2.cmake)
 include(cmake/external/gtest.cmake)
 include(cmake/external/asio.cmake)
@@ -60,8 +59,8 @@ include(cmake/external/easyexif.cmake)
 SET( INCLUDES ${INCLUDES} ${GTEST_INCLUDE_DIR} ${FMT_INCLUDE_DIR}
             ${RE2_INCLUDE_DIR} ${ASIO_INCLUDE_DIR} ${LIGHTNING_INCLUDE_DIR}
             ${RAPIDJSON_INCLUDE_DIR} ${RAPIDXML_INCLUDE_DIR} ${LIBAV_INCLUDE_DIR}
-            ${LIB_IMAGE_INCLUDE_DIR} ${CXXOPTS_INCLUDE_DIR} ${REDOX_INCLUDE_DIR}
-            ${SPDLOG_INCLUDE_DIR} ${EXIF_INCLUDE_DIR})
+            ${CXXOPTS_INCLUDE_DIR} ${REDOX_INCLUDE_DIR} ${SPDLOG_INCLUDE_DIR}
+            ${EXIF_INCLUDE_DIR})
 
 # -------------------------------------------------------------------------
 # -----------------------   Find Dependencies       -----------------------
@@ -110,7 +109,7 @@ aux_source_directory( src/utils/ CDS_SOURCES_UTILS )
 include_directories( ${INCLUDES} ${GTEST_INCLUDE_DIR})
 add_executable(cds ${PROJECT_SOURCE_DIR}/main.cpp ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
 target_link_libraries(cds cxxopts re2 lightning redox fmt spdlog exif
-                      asio rapidjson rapidxml LibAvCpp LibImageCpp ${LIBS})
+                      asio rapidjson rapidxml LibAvCpp ${LIBS})
 install(TARGETS cds RUNTIME DESTINATION bin)
 
 # -------------------------------------------------------------------------
@@ -122,7 +121,7 @@ if (build_tests)
     include_directories(${ROOT} ${INCLUDES} ${GTEST_INCLUDE_DIR})
     add_executable(test_cds ${CDS_SOURCES_TEST} ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
     target_link_libraries(test_cds ${GTEST_MAIN_PATH} gtest re2 lightning redox fmt spdlog exif asio
-                                   rapidjson rapidxml LibAvCpp LibImageCpp ${LIBS})
+                                   rapidjson rapidxml LibAvCpp ${LIBS})
     add_test(cds_tests test_cds)
 endif()
 

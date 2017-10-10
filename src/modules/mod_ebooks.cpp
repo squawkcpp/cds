@@ -24,13 +24,12 @@
 #include "poppler/cpp/poppler-page.h"
 #include "re2/re2.h"
 
-#include "image.h"
-
 #include "http/httpclient.h"
 
 #include "../_utils.h"
 #include "../datastore.h"
 #include "../utils/amazon.h"
+#include "../utils/image.h"
 
 namespace cds {
 namespace mod {
@@ -56,17 +55,19 @@ void ModEbooks::import ( data::redis_ptr redis, const config_ptr config, const s
         if ( !_book_meta.empty() ) {
             //save image
             std::string _cover_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( _book_meta[param::COVER] ) );
-            std::string _thumb_path = fmt::format ( "{}/tn_{}.jpg", config->tmp_directory, data::hash ( _book_meta[param::COVER] ) );
             std::ofstream _ofs ( _cover_path, std::ofstream::out );
             http::get ( _book_meta[param::COVER], _ofs );
-            image::Image image_meta_ ( _cover_path );
+
+            utils::Image image_meta_ ( _cover_path );
+            image_meta_.scale ( config->tmp_directory, ECoverSizes::MED, key );
+            image_meta_.scale ( config->tmp_directory, ECoverSizes::TN, key );
+
             data::save ( redis, data::hash ( _cover_path ), {
                 { param::PARENT, key },
                 { param::CLASS, data::NodeType::str ( data::NodeType::cover ) },
                 { param::WIDTH, std::to_string ( image_meta_.width() ) },
                 { param::HEIGHT, std::to_string ( image_meta_.height() ) }
             });
-            image_meta_.scale ( 160, 160, _thumb_path );
     //TODO            redis->command ( { redis::SADD,
     //                             data::make_key_node ( data::hash ( _book_meta[param::COVER] ), "cover" ),
     //                             data::make_key_node ( data::hash ( _cover_path ) )
