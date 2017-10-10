@@ -7,7 +7,7 @@ project( cds )
 
 SET(MAJOR_VERSION "0")
 SET(MINOR_VERSION "1")
-SET(PATCH_VERSION "10" CACHE PATCH_VERSION "The package build number." )
+SET(PATCH_VERSION "11" CACHE PATCH_VERSION "The package build number." )
 SET(CDS_TAG_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
 
 # -------------------------------------------------------------------------
