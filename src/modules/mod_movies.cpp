@@ -98,7 +98,7 @@ void ModMovies::import ( data::redis_ptr redis, const config_ptr config, const s
                     { param::POSTER_PATH, fmt::format ( "/img/{}.jpg", _poster_key ) },
                     { param::DATE, _tmdb_movie.release_date },
                     { param::PLAYTIME, _tmdb_movie.runtime },
-                    { "tagline", _tmdb_movie.tagline }, //TODO
+                    { "tagline", _tmdb_movie.tagline }, //TODO what is the content of the tagline
                     { param::TITLE, _tmdb_movie.title },
                     { param::THUMB, fmt::format ( "/img/tn_{}.jpg", key ) },
                 });

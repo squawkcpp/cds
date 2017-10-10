@@ -102,7 +102,7 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
                             { param::PERFORMER, _performer },
                             { param::COMMENT, _comment },
                             { param::YEAR, _year },
-                            { param::TRACK, _track },
+                            { param::TRACK, clean_track_number( _track ) },
                             { param::DISC, _disc },
                             { param::GENRE, _genre },
                             { param::PUBLISHER, _publisher },
@@ -114,13 +114,10 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
                         });
 
                         //update relation with track as score
-// TODO                       redis->command ( {redis::ZADD, //TODO
-//                                          data::make_key_list ( key ),
-//                                          _track,
-//                                          data::hash ( __file[param::PATH] ) } );
-
                         data::add_types( redis, key, data::hash ( __file[param::PATH] ), data::time_millis() );
-                        data::add_nodes( redis, key, data::NodeType::audio, data::hash ( __file[param::PATH] ), std::stoi( _track ) );
+                        data::add_nodes( redis, key, data::NodeType::audio,
+                                         data::hash ( __file[param::PATH] ),
+                                         std::stoi( clean_track_number( _track ) ) );
                     }
                 }
 
@@ -156,7 +153,7 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
             } else if ( __type.first == data::NodeType::ebook ) {
                 for ( auto& __file : __type.second ) {
                     //delete ebook from new books.
-                    redis->command( {redis::SREM, //TODO
+                    redis->command( {redis::SREM, //TODO eBooks in album are still listed in the ebook list.
                         data::make_key( key::FS, key::NEW, data::NodeType::str( data::NodeType::ebook ) ),
                         data::hash( __file[param::PATH] ) } );
                 }
@@ -190,26 +187,19 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
 }
 
 void ModAlbums::import_files ( data::redis_ptr redis, const std::string& key, std::map< data::NodeType::Enum, std::vector< data::node_t > >& files ) {
+    data::children( redis, key, 0, -1, "default", "asc", "", [&redis,&key,&files](const std::string& __key ) {
+        data::node_t _file = data::node ( redis, __key );
+        if ( _file[param::CLASS] == data::NodeType::str ( data::NodeType::folder ) ) {
+            import_files ( redis, data::hash( _file[param::PATH] ), files );
+            //remove folder and relations
+            //TODO the nodes to this folders still exist
+            data::rem_types( redis, key, _file[param::PATH] );
+            redis->command( {redis::DEL,
+                data::make_key_list( data::hash( _file[param::PATH] ) ),
+                data::make_key_node( data::hash( _file[param::PATH] ) ) } );
 
-    //TODO use childs
-    auto& c = redis->commandSync< data::nodes_t > (
-        { redis::ZRANGE, data::make_key_list ( key ), "0", "-1" } );
-
-    if ( c.ok() ) {
-        for ( const std::string& __key : c.reply() ) {
-            data::node_t _file = data::node ( redis, __key );
-
-            if ( _file[param::CLASS] == data::NodeType::str ( data::NodeType::folder ) ) {
-                import_files ( redis, data::hash( _file[param::PATH] ), files );
-                //remove folder and relations
-                data::rem_types( redis, key, _file[param::PATH] );
-                redis->command( {redis::DEL, //TODO
-                    data::make_key_list( data::hash( _file[param::PATH] ) ),
-                    data::make_key_node( data::hash( _file[param::PATH] ) ) } );
-
-            } else { files[ data::NodeType::parse ( _file[param::CLASS] ) ].push_back ( _file ); }
-        }
-    }
+        } else { files[ data::NodeType::parse ( _file[param::CLASS] ) ].push_back ( _file ); }
+    });
 }
 
 /** @brief import the artist */

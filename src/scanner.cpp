@@ -61,6 +61,7 @@ void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
 //    Scanner::new_items( redis, config, data::NodeType::episode, std::bind( &mod::ModSeries::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
 //    Scanner::new_items( redis, config, data::NodeType::ebook, std::bind( &mod::ModEbooks::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
     Scanner::sweep( redis, param::FILE );
+    data::eval ( redis, LUA_FLUSH, 0, "fs:*:sort:*" );
     data::eval( redis, LUA_INDEX, 0 );
     search_index( redis );
 }
@@ -125,18 +126,21 @@ void Scanner::sweep ( data::redis_ptr redis, const std::string& key ) {
             const std::string _item_path = data::get( redis, item, param::PATH );
             if( !boost::filesystem::exists( _item_path ) ) {
                 SPDLOG_DEBUG(spdlog::get ( LOGGER ), "orphan found (key={}, path={})", item, _item_path );
-                const std::string _item_class = data::get( redis, item, param::CLASS );
+                const std::string _type = data::get( redis, item, param::CLASS );
+                const std::string _parent = data::get( redis, item, param::PARENT );
 
-                //TODO Scanner::flush( redis, data::make_key_node( item ) );
-                redis->command ( {redis::SREM, data::make_key_list( key ), item } );
-                //TODO delete from sort nodes
-                if( data::is_mod( _item_class ) ) {
+                data::rem_types( redis, _parent, item );
+                data::rem_nodes( redis, _parent, data::NodeType::parse( _type ), item );
 
-                    //flush all the child elments
-                }
+                if( data::is_mod( _type ) )
+                { data::rem_nodes( redis, data::NodeType::parse( _type ), item ); }
+
+// TODO delete from artists               if( data::NodeType::parse( _type ) == data::NodeType::audio ) {
+//                    { data::rem_nodes( redis, data::NodeType::parse( _type ), item ); }
+//                }
+                data::eval ( redis, LUA_FLUSH, 0, fmt::format( "fs:{}:*", item ) );
             }
         }
-
     });
 }
 
@@ -198,17 +202,18 @@ void Scanner::save_folder ( data::redis_ptr redis /** @param redis redis databas
 }
 void Scanner::search_index ( data::redis_ptr redis /** @param redis redis database pointer. */ ) {
 
-    redis->command( {"FT.DROP", "idx" } );
-    redis->command( {"FT.CREATE", "idx", "SCHEMA", "name", "TEXT", "WEIGHT", "5.0", "artist", "TEXT", "album", "TEXT" } );
-    //TODO add genre
+    redis->command( {"FT.DROP", "idx" } ); //TODO constants and index name
+    redis->command( {"FT.CREATE", "idx", "SCHEMA", "name", "TEXT", "WEIGHT", "5.0", "artist", "TEXT", "album", "TEXT", "genre", "TEXT" } );
 
     data::children( redis, param::ALBUM, 0, -1, "default", "asc", "", [redis]( const std::string item ) {
         const std::string _name = data::get( redis, item, param::NAME );
         const std::string _artist = data::get( redis, item, param::ARTIST );
+        const std::string _genre = data::get( redis, item, param::GENRE );
         redis->command( {"FT.ADD", "idx", item, "1.0", "FIELDS",
-            param::ARTIST, _artist, param::ALBUM, _name } );
+            param::ARTIST, _artist, param::ALBUM, _name, param::GENRE, _genre } );
         redis->command( {"FT.SUGADD", "autocomplete", _name, "100" } );
         redis->command( {"FT.SUGADD", "autocomplete", _artist, "100" } );
+        redis->command( {"FT.SUGADD", "autocomplete", _genre, "100" } );
     });
 }
 

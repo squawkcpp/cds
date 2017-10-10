@@ -197,7 +197,7 @@ http::http_status Server::sort ( http::Request& request, http::Response& respons
 
     writer.StartArray();
     redox::Command<data::command_t>& _c = redis_->commandSync< data::command_t >(
-        { redis::SMEMBERS, data::make_key( "fs", _key, "list", "sort" ) } );
+        { redis::SMEMBERS, data::make_key( "fs", _key, "list", "sort", "list" ) } );
     if( _c.ok() ) {
         for( const std::string& __c : _c.reply() ) {
             writer.String ( __c.c_str() );
