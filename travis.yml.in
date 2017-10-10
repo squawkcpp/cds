@@ -33,8 +33,9 @@ deploy:
     repo: squawkcpp/cds
 
 after_success:
-  - sudo docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS hub.docker.com
-  - export REPO=squawkcpp/cds
+  - export HUB=hub.docker.com
+  - sudo docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS $HUB
+  - export REPO=$HUB/squawkcpp/cds
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - sudo docker build -f Dockerfile -t $REPO:$COMMIT .
   - sudo docker tag $REPO:$COMMIT $REPO:$TAG
