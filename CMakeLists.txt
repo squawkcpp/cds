@@ -8,12 +8,16 @@ project( cds )
 SET(MAJOR_VERSION "0")
 SET(MINOR_VERSION "1")
 SET(PATCH_VERSION "9" CACHE PATCH_VERSION "The package build number." )
+SET(CDS_TAG_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
 
 # -------------------------------------------------------------------------
 # -----------------------   Options and Parameters  -----------------------
 # -------------------------------------------------------------------------
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 option(build_tests "Build all squawk unit tests." ON)
+
+configure_file(${PROJECT_SOURCE_DIR}/Dockerfile.in ${PROJECT_SOURCE_DIR}/Dockerfile @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/travis.yml.in ${PROJECT_SOURCE_DIR}/.travis.yml @ONLY)
 
 # -------------------------------------------------------------------------
 # -----------------------   Config Toolchain        -----------------------
