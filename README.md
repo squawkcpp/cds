@@ -17,6 +17,12 @@ the squawk content directory server (CDS) serves mediafiles from the local stora
 
 ### use docker image
 
+a prebuild image is available on dockerhub. to install run the docker command with the
+parameters for the cds server.
+
+
+
+
 ### install from source
 
 To install the server from source you need cmake and a recent c++ (C++14) compiler installed. The developmeent packages of the
