@@ -8,7 +8,7 @@
 //namespace data {
 
 TEST(DatastoreTest, key_node ) {
-    EXPECT_EQ( "fs:node_id", data::make_key_node( "node_id" ) );
+    EXPECT_EQ( "fs:node_id:node", data::make_key_node( "node_id" ) );
 }
 TEST(DatastoreTest, key_types ) {
     EXPECT_EQ( "fs:node_id:list", data::make_key_list( "node_id" ) );

@@ -26,11 +26,11 @@
 #include "http/mod/match.h"
 #include "http/mod/method.h"
 
+#include "src/_icons.h"
 #include "src/_utils.h"
 #include "src/config.h"
 #include "src/datastore.h"
 #include "src/server.h"
-#include "src/icons.h"
 
 using namespace std::placeholders;
 
