@@ -108,8 +108,11 @@ aux_source_directory( ${PROJECT_SOURCE_DIR}/src CDS_SOURCES )
 aux_source_directory( src/modules/ CDS_SOURCES_MODULES )
 aux_source_directory( src/utils/ CDS_SOURCES_UTILS )
 include_directories( ${INCLUDES} ${GTEST_INCLUDE_DIR})
-add_executable(cds ${PROJECT_SOURCE_DIR}/main.cpp ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
-target_link_libraries(cds re2 lightning redox fmt spdlog LibAvCpp LibImageCpp exif asio ${LIBS})
+add_library(cds_lib ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
+
+add_executable(cds ${PROJECT_SOURCE_DIR}/main.cpp)
+target_link_libraries(cds cxxopts cds_lib re2 lightning redox fmt spdlog exif
+                      asio rapidjson rapidxml LibAvCpp LibImageCpp ${LIBS})
 install(TARGETS cds RUNTIME DESTINATION bin)
 
 # -------------------------------------------------------------------------
@@ -120,8 +123,8 @@ if (build_tests)
     enable_testing()
     include_directories(${ROOT} ${INCLUDES} ${GTEST_INCLUDE_DIR})
     add_executable(test_cds ${CDS_SOURCES_TEST} ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
-    target_link_libraries(test_cds ${GTEST_MAIN_PATH} cxxopts re2 lightning rapidjson rapidxml
-        LibAvCpp LibImageCpp redox fmt exif spdlog asio gtest ${LIBS} )
+    target_link_libraries(test_cds ${GTEST_MAIN_PATH} gtest cds_lib re2 lightning redox fmt spdlog exif asio
+                                   rapidjson rapidxml LibAvCpp LibImageCpp ${LIBS})
     add_test(cds_tests test_cds)
 endif()
 

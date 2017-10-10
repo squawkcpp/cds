@@ -116,13 +116,8 @@ int main(int argc, char* argv[]) {
     data::config( _container.redox, cds::json( _container.config ) );
 
     /* setup logger */
-#ifdef DEBUG
     spdlog::set_level( spdlog::level::trace );
     auto console = spdlog::stdout_color_mt( cds::LOGGER );
-#else
-    spdlog::set_level( spdlog::level::info );
-    auto console = spdlog::rotating_logger_mt( cds::LOGGER, "/var/log/cds.log" /** TODO make configurable */, 1048576 * 5, 3 );
-#endif
 
     console->info( "Start content directory server ({}:{})",
         _container.config->listen_address, _container.config->http_port );

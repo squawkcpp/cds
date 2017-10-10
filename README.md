@@ -31,6 +31,12 @@ dependencies must be available to the compiler.
 
 docker
 
+<pre>
+sudo docker run -it --link cds-redis --name cds -v $PATH_TO_MEDIAFILES:/srv -e CDS_OPTS=" --redis=cds-redis
+   --redis-port=6379 --amazon-access-key=$KEY$ --amazon-key=$KEY$ --tmdb-key=$KEY$ --directory=/srv --http-port 9001
+   --tmp-directory /var/tmp" -p 9001:9001 squawk/cds
+</pre>
+
 ##### install dependencies on ubuntu
 
 ##### get the source
