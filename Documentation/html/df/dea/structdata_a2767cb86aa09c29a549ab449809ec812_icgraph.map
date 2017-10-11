@@ -1,8 +1,0 @@
-<map id="data::node" name="data::node">
-<area shape="rect" id="node2" href="$d8/d96/classcds_1_1mod_1_1ModAlbums.html#ab5f18f0ed63bbceaf6a149fcb534615e" title="import " alt="" coords="144,5,308,47"/>
-<area shape="rect" id="node5" href="$d6/dc9/classcds_1_1mod_1_1ModImages.html#ae7feff1e10f8a335f27e0bdce723874a" title="import and store image. " alt="" coords="145,71,307,112"/>
-<area shape="rect" id="node6" href="$de/ddd/classcds_1_1Server.html#a2ee5708b9f35871a311feb06fa43a0e1" title="get node list. " alt="" coords="155,137,297,163"/>
-<area shape="rect" id="node7" href="$de/ddd/classcds_1_1Server.html#a8d0f5fcc6bb289bd3d2a1a2df2298e9b" title="get file list. " alt="" coords="163,187,289,214"/>
-<area shape="rect" id="node3" href="$df/d63/classcds_1_1Scanner.html#ad65da450bbf06bb2ad93c2293c092a1f" title="import files " alt="" coords="356,5,511,47"/>
-<area shape="rect" id="node4" href="$de/ddd/classcds_1_1Server.html#aaa29a062d4cac4928dd68a39901af02b" title="get module node list " alt="" coords="559,13,720,39"/>
-</map>

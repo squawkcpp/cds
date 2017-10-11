@@ -1,7 +1,0 @@
-<map id="data::get" name="data::get">
-<area shape="rect" id="node2" href="$d6/dc9/classcds_1_1mod_1_1ModImages.html#ae7feff1e10f8a335f27e0bdce723874a" title="import and store image. " alt="" coords="133,5,296,47"/>
-<area shape="rect" id="node3" href="$df/d63/classcds_1_1Scanner.html#ad65da450bbf06bb2ad93c2293c092a1f" title="import files " alt="" coords="137,71,292,112"/>
-<area shape="rect" id="node5" href="$df/d63/classcds_1_1Scanner.html#ad2edfe5f9d7d538ed0eb52033e335793" title="flush content with the given prefix. " alt="" coords="143,137,286,163"/>
-<area shape="rect" id="node6" href="$de/ddd/classcds_1_1Server.html#ad5fb8a933d0110b1983df7e97c82a63d" title="get the complete path for the given node. " alt="" coords="149,187,280,214"/>
-<area shape="rect" id="node4" href="$de/ddd/classcds_1_1Server.html#aaa29a062d4cac4928dd68a39901af02b" title="get module node list " alt="" coords="344,107,505,134"/>
-</map>
