@@ -105,8 +105,6 @@ inline std::string _get_ip() {
 std::vector< std::error_code > validate ( std::shared_ptr< Config > config ) {
     std::vector< std::error_code > _errors;
 
-    //TODO get home directory
-
     if ( config->amazon_access_key.empty() )
     { _errors.push_back ( make_error_code ( AMAZON_ACCESS_KEY ) ); }
 
@@ -125,8 +123,9 @@ std::vector< std::error_code > validate ( std::shared_ptr< Config > config ) {
     if ( config->listen_address.empty() )
     { config->listen_address = _get_ip(); }
 
+    //TODO get home directory
     if ( config->tmp_directory.empty() )
-    { config->tmp_directory = "/var/tmp/squawk"; }
+    { config->tmp_directory = fmt::format("{}/.squawk/", getenv("HOME") ); }
 
     return _errors;
 }

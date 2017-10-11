@@ -202,18 +202,18 @@ void Scanner::save_folder ( data::redis_ptr redis /** @param redis redis databas
 }
 void Scanner::search_index ( data::redis_ptr redis /** @param redis redis database pointer. */ ) {
 
-    redis->command( {"FT.DROP", "idx" } ); //TODO constants and index name
-    redis->command( {"FT.CREATE", "idx", "SCHEMA", "name", "TEXT", "WEIGHT", "5.0", "artist", "TEXT", "album", "TEXT", "genre", "TEXT" } );
+    redis->command( {redis::FT_DROP, key::INDEX } );
+    redis->command( {redis::FT_CREATE, key::INDEX, "SCHEMA", "name", "TEXT", "WEIGHT", "5.0", "artist", "TEXT", "album", "TEXT", "genre", "TEXT" } );
 
     data::children( redis, param::ALBUM, 0, -1, "default", "asc", "", [redis]( const std::string item ) {
         const std::string _name = data::get( redis, item, param::NAME );
         const std::string _artist = data::get( redis, item, param::ARTIST );
         const std::string _genre = data::get( redis, item, param::GENRE );
-        redis->command( {"FT.ADD", "idx", item, "1.0", "FIELDS",
+        redis->command( {redis::FT_ADD, key::INDEX, item, "1.0", "FIELDS",
             param::ARTIST, _artist, param::ALBUM, _name, param::GENRE, _genre } );
-        redis->command( {"FT.SUGADD", "autocomplete", _name, "100" } );
-        redis->command( {"FT.SUGADD", "autocomplete", _artist, "100" } );
-        redis->command( {"FT.SUGADD", "autocomplete", _genre, "100" } );
+        redis->command( {redis::FT_SUGGADD, key::AUTO, _name, "100" } );
+        redis->command( {redis::FT_SUGGADD, key::AUTO, _artist, "100" } );
+        redis->command( {redis::FT_SUGGADD, key::AUTO, _genre, "100" } );
     });
 }
 

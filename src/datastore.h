@@ -48,6 +48,11 @@ static const std::string ZCARD      = "ZCARD";
 static const std::string ZRANGE     = "ZRANGE";
 static const std::string ZREVRANGE  = "ZREVRANGE";
 static const std::string ZREM       = "ZREM";
+
+static const std::string FT_DROP    = "FT.DROP";
+static const std::string FT_CREATE  = "FT.CREATE";
+static const std::string FT_SUGGADD = "FT.SUGGADD";
+static const std::string FT_ADD     = "FT.ADD";
 }
 
 namespace param {
@@ -114,6 +119,8 @@ static const std::string MIME   = "fs:mime";
 static const std::string NEW    = "new";
 static const std::string TAG    = "tag";
 static const std::string TYPE   = "type";
+static const std::string INDEX  = "cds_index";
+static const std::string AUTO   = "autocomplete";
 }
 
 ///@cond DOC_INTERNAL

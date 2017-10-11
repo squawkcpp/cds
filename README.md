@@ -1,51 +1,22 @@
 [![Build Status](https://travis-ci.org/squawkcpp/cds.svg?branch=master)](https://travis-ci.org/squawkcpp/cds)
 
-
 ** this software is still under development, its not recommended to use it now. **
 
 # Content Directory Server (CDS)
 
-## about
+## About
 
 the squawk content directory server (CDS) serves mediafiles from the local storage. the mediafile are enriched with local and remote metadata.
 
-## install the server
+## Install and run
 
-### install binary package
-
-
-
-### use docker image
-
-a prebuild image is available on dockerhub. to install run the docker command with the
-parameters for the cds server.
-
-
-
-
-### install from source
-
-To install the server from source you need cmake and a recent c++ (C++14) compiler installed. The developmeent packages of the
-dependencies must be available to the compiler.
-
-
-docker
+install on ubuntu:
 
 <pre>
-sudo docker run -it --link cds-redis --name cds -v $PATH_TO_MEDIAFILES:/srv -e CDS_OPTS=" --redis=cds-redis
-   --redis-port=6379 --amazon-access-key=$KEY$ --amazon-key=$KEY$ --tmdb-key=$KEY$ --directory=/srv --http-port 9001
-   --tmp-directory /var/tmp" -p 9001:9001 squawk/cds
+wget <release from github>
+apt-get install -f <release file name>
+apt-get upgrade
 </pre>
-
-##### install dependencies on ubuntu
-
-##### get the source
-
-##### compile
-
-##### install
-
-## usage
 
 start the content directory server from the command line:
 
@@ -67,6 +38,23 @@ name | value | description
 --redis|HOST|Redis Database (default: localhost) (default: localhost)
 --redis-port|PORT|Redis Database port (default: 6379) (default: 6379)
 --help| |Print help
+
+### use docker image
+
+a prebuild image is available on dockerhub. to install run the docker command with the
+parameters for the cds server.
+
+<pre>
+sudo docker run -itd --link <REDIS> --name squawk-cds -v /srv:/srv:ro -p 9001:9001 \
+    -e REDIS=<REDIS>
+    -e AMAZON_ACCESS_KEY=<ACCESS_KEY>
+    -e AMAZON_KEY=<KEY>
+    -e TMDB_KEY=<KEY>
+    -e DIRECTORY=/srv
+    squawk/cds:VERSION
+</pre>
+
+the options are the same as in the command line.
 
 ## api
 
@@ -117,14 +105,14 @@ load the node with the key
  ------------ | ------------- | -------------
  flush | true, false | flush the database before import the files.
 
-## remote metadata providers:
+## Remote metadata providers:
 
 for information retrievel the following database services can be used:
 
 - [amazon]()
 - [tmdb]()
 
-## dependencies:
+## Dependencies:
 
 binary dependencies needs to be installed on the target system.
 
@@ -141,3 +129,16 @@ these libraries will be downloaded and staticaly linked during the compile proce
 - [spdlog](https://github.com/gabime/spdlog), super fast C++ logging library.
 
 ## licence:
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.

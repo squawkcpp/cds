@@ -62,16 +62,16 @@ void ModEbooks::import ( data::redis_ptr redis, const config_ptr config, const s
             image_meta_.scale ( config->tmp_directory, ECoverSizes::MED, key );
             image_meta_.scale ( config->tmp_directory, ECoverSizes::TN, key );
 
+
             data::save ( redis, data::hash ( _cover_path ), {
                 { param::PARENT, key },
                 { param::CLASS, data::NodeType::str ( data::NodeType::cover ) },
                 { param::WIDTH, std::to_string ( image_meta_.width() ) },
                 { param::HEIGHT, std::to_string ( image_meta_.height() ) }
             });
-    //TODO            redis->command ( { redis::SADD,
-    //                             data::make_key_node ( data::hash ( _book_meta[param::COVER] ), "cover" ),
-    //                             data::make_key_node ( data::hash ( _cover_path ) )
-    //                           } );
+            data::add_nodes( redis, data::hash ( _book_meta[param::COVER] ), data::NodeType::cover,
+                             data::make_key_node ( data::hash ( _cover_path ) ), data::time_millis() );
+
             //save ebook
             data::save ( redis, key, {
                 { param::NAME, _book_meta[param::NAME] },
@@ -84,7 +84,7 @@ void ModEbooks::import ( data::redis_ptr redis, const config_ptr config, const s
             });
         }
         auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, param::PATH ) );
-        data::add_nodes( redis, data::NodeType::ebook, key, _last_write_time );
+        data::add_nodes( redis, data::NodeType::ebook, key, static_cast< unsigned long>( _last_write_time ) );
     } catch ( ... ) {
         spdlog::get ( LOGGER )->error ( "exception mod ebooks." );
     }
