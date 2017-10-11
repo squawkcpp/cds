@@ -50,7 +50,7 @@ void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
             { param::CLASS, data::NodeType::str ( data::NodeType::folder ) },
             { param::TIMESTAMP, "0" },
         });
-        data::add_types( redis, param::FILE, data::hash( directory ), boost::filesystem::last_write_time( directory ) );
+        data::add_types( redis, param::FILE, data::hash( directory ), static_cast<unsigned long>( boost::filesystem::last_write_time( directory ) ) );
         import_directory( redis, _magic, directory, directory );
     }
     magic_close ( _magic );

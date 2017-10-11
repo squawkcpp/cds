@@ -27,9 +27,7 @@ fi
 if [ -n "$DIRECTORY" ]; then
     for i in $(echo $DIRECTORY | sed "s/,/ /g")
     do
-        # call your procedure/other scripts here below
-        echo "$i"
-        OPTIONS="$OPTIONS --directory \"$i\""
+        OPTIONS="$OPTIONS --directory $i"
     done
 fi
 
