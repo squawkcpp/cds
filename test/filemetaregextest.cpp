@@ -41,9 +41,6 @@ protected:
 TEST_F( FileMetaRegexTest, parse_path ) {
     std::map< std::string,std::string > _metadata;
     EXPECT_EQ( data::NodeType::audio, cds::FileMetaRegex::parse( "audio/flac", "/foo/bar/ARTIST - 2000 - ALBUM/01 - TRACK.flac", _metadata ) );
-    for( auto& __v : _metadata ) {
-        std::cout << "\t" << __v.first << "=" << __v.second << std::endl;
-    }
     EXPECT_EQ( 5u, _metadata.size() );
     EXPECT_EQ( "ARTIST", _metadata[param::ARTIST] );
     EXPECT_EQ( "2000", _metadata[param::YEAR] );

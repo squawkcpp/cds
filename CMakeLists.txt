@@ -6,16 +6,12 @@ cmake_minimum_required(VERSION 3.3)
 project( cds )
 
 SET(CDS_TAG_VERSION "master" CACHE STRING "The tagged version.")
-MESSAGE( "version: ${CDS_TAG_VERSION}" ) #TODO
 
 # -------------------------------------------------------------------------
 # -----------------------   Options and Parameters  -----------------------
 # -------------------------------------------------------------------------
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 option(build_tests "Build all squawk unit tests." ON)
-
-configure_file(${PROJECT_SOURCE_DIR}/Dockerfile.in ${PROJECT_SOURCE_DIR}/Dockerfile @ONLY)
-configure_file(${PROJECT_SOURCE_DIR}/travis.yml.in ${PROJECT_SOURCE_DIR}/.travis.yml @ONLY)
 
 # -------------------------------------------------------------------------
 # -----------------------   Config Toolchain        -----------------------

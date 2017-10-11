@@ -7,6 +7,11 @@
 ## About
 
 the squawk content directory server (CDS) serves mediafiles from the local storage. the mediafile are enriched with local and remote metadata.
+for information retrievel the following database services can be used:
+
+- [amazon]()
+- [tmdb]()
+
 
 ## Install and run
 
@@ -39,7 +44,7 @@ name | value | description
 --redis-port|PORT|Redis Database port (default: 6379) (default: 6379)
 --help| |Print help
 
-### use docker image
+### Docker image
 
 a prebuild image is available on dockerhub. to install run the docker command with the
 parameters for the cds server.
@@ -56,7 +61,7 @@ sudo docker run -itd --link <REDIS> --name squawk-cds -v /srv:/srv:ro -p 9001:90
 
 the options are the same as in the command line. multiple directories can be listet separated by a comma.
 
-## api
+## Api
 
 all the requests have the base url of your server: `http://<SERVER_IP>:<PORT>`
 
@@ -105,13 +110,6 @@ load the node with the key
  ------------ | ------------- | -------------
  flush | true, false | flush the database before import the files.
 
-## Remote metadata providers:
-
-for information retrievel the following database services can be used:
-
-- [amazon]()
-- [tmdb]()
-
 ## Dependencies:
 
 binary dependencies needs to be installed on the target system.
@@ -128,7 +126,7 @@ these libraries will be downloaded and staticaly linked during the compile proce
 - [redox](https://github.com/hmartiro/redox), modern, asynchronous, and wicked fast C++11 client for Redis
 - [spdlog](https://github.com/gabime/spdlog), super fast C++ logging library.
 
-## licence:
+## Licence:
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

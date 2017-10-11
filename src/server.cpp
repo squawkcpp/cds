@@ -317,7 +317,6 @@ http::http_status Server::files ( http::Request& request, http::Response& respon
 }
 
 http::http_status Server::opds( http::Request& request, http::Response& response ) {
-    std::cout << request << std::endl;
 
     rapidxml_ns::xml_document<> doc_;
     auto  root_node_ = element<rapidxml_ns::xml_node<>>( &doc_, &doc_, "feed", "" );
@@ -393,7 +392,7 @@ http::http_status Server::sug ( http::Request& request, http::Response& response
 }
 
 http::http_status Server::keywords ( http::Request& request, http::Response& response ) {
-    std::cout << "keywords " << request.attribute( key::TYPE ) << "=" << request.attribute ( param::NAME ) << std::endl;
+
     using namespace rapidjson;
     StringBuffer sb;
     PrettyWriter<StringBuffer> writer ( sb );

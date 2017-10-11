@@ -11,7 +11,7 @@ RUN apt-get install -y libpcrecpp0v5 libimlib2 libavcodec-ffmpeg56 libavformat-f
         libcurl3 libhiredis0.13 libev4 libmagic1 libopencv-highgui2.4v5 \
 && dpkg -i /cds_$CDS_TAG_VERSION.deb
 
-ADD script/cds.sh /cds.sh
+ADD docker/cds.sh /cds.sh
 RUN chmod +x /*.sh
 
 EXPOSE 8000
