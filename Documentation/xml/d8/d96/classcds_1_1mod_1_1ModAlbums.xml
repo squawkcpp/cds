@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d8/d96/classcds_1_1mod_1_1ModAlbums" kind="class" language="C++" prot="public">
+    <compoundname>cds::mod::ModAlbums</compoundname>
+    <includes refid="d8/da5/mod__albums_8h" local="no">mod_albums.h</includes>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="d8/d96/classcds_1_1mod_1_1ModAlbums_1ab5f18f0ed63bbceaf6a149fcb534615e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::mod::ModAlbums::import</definition>
+        <argsstring>(data::redis_ptr redis, const config_ptr config, const std::string &amp;key)</argsstring>
+        <name>import</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>redis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>redis database pointer. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const <ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref></type>
+          <declname>config</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>cds configuration pointer. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>import </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_albums.h" line="30" column="1" bodyfile="src/modules/mod_albums.cpp" bodystart="34" bodyend="187"/>
+        <references refid="df/dea/structdata_1a8cfbc54186127ff485d7d1464f6388cd" compoundref="d9/db6/datastore_8h" startline="293" endline="302">data::save</references>
+        <references refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" compoundref="d9/db6/datastore_8h" startline="159" endline="167">data::hash</references>
+        <references refid="df/dea/structdata_1a3e5d28bf1fc99f5389f0eeddb348856e" compoundref="d9/db6/datastore_8h" startline="403" endline="404">data::add_types</references>
+        <references refid="df/dea/structdata_1ad7c44e770e55dacb9c2e62ce30fdbef4" compoundref="d9/db6/datastore_8h" startline="153" endline="157">data::time_millis</references>
+        <references refid="df/dea/structdata_1af449933948671c86a051c08d4876ede4" compoundref="d9/db6/datastore_8h" startline="410" endline="411">data::add_nodes</references>
+        <references refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" compoundref="d9/db6/datastore_8h" startline="174" endline="176">data::NodeType::str</references>
+        <references refid="d8/d79/classutils_1_1Image_1aa1d7f35b3fade6f28dc1ff5502985015" compoundref="db/d11/image_8cpp" startline="35" endline="36">utils::Image::width</references>
+        <references refid="d8/d79/classutils_1_1Image_1a369742a54a5723062d68a051c2e2ce8a" compoundref="db/d11/image_8cpp" startline="37" endline="38">utils::Image::height</references>
+        <references refid="d8/d79/classutils_1_1Image_1adbaa219675b555ef8587a0701b4184e0" compoundref="db/d11/image_8cpp" startline="40" endline="65">utils::Image::scale</references>
+        <references refid="df/dea/structdata_1a1ca7fdb881f181131b61e9429e9c83ec" compoundref="d9/db6/datastore_8h" startline="406" endline="407">data::rem_types</references>
+        <references refid="df/dea/structdata_1a659e370f3ef17b04342b89e8a353cd19" compoundref="d9/db6/datastore_8h" startline="413" endline="414">data::rem_nodes</references>
+        <references refid="df/dea/structdata_1a64d1a0d542b5966540c6297d994c06e5" compoundref="d9/db6/datastore_8h" startline="235" endline="242">data::make_key</references>
+        <references refid="df/dea/structdata_1aef2aa04f31f65b4b41620e2f0f4a97b7" compoundref="d9/db6/datastore_8h" startline="284" endline="290">data::set</references>
+        <references refid="df/dea/structdata_1aed37180149542e4f1d61f376cc57168c" compoundref="d9/db6/datastore_8h" startline="377" endline="387">data::add_tag</references>
+        <references refid="df/dea/structdata_1aeafb3837ce1e2fbfea65c76431ef4fb8" compoundref="d9/db6/datastore_8h" startline="314" endline="340">data::children</references>
+        <references refid="df/dea/structdata_1a2767cb86aa09c29a549ab449809ec812" compoundref="d9/db6/datastore_8h" startline="305" endline="311">data::node</references>
+        <references refid="df/dea/structdata_1ac5ea539bcb81b952a3c5838379937f19" compoundref="d9/db6/datastore_8h" startline="249" endline="251">data::make_key_list</references>
+        <references refid="df/dea/structdata_1adae832d78a0adf2a0b4abca522757126" compoundref="d9/db6/datastore_8h" startline="245" endline="247">data::make_key_node</references>
+        <references refid="df/de0/classdata_1_1NodeType_1ac6fb806749e55ecbd940d721f355a97b" compoundref="d9/db6/datastore_8h" startline="179" endline="211">data::NodeType::parse</references>
+        <referencedby refid="df/d63/classcds_1_1Scanner_1ad65da450bbf06bb2ad93c2293c092a1f" compoundref="d4/d77/scanner_8cpp" startline="40" endline="67">cds::Scanner::import_files</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="d8/d96/classcds_1_1mod_1_1ModAlbums_1a1a2d0da9271f04be3b0086bc0b69919e" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::mod::ModAlbums::import_files</definition>
+        <argsstring>(data::redis_ptr rdx, const std::string &amp;key, std::map&lt; data::NodeType::Enum, std::vector&lt; data::node_t &gt; &gt; &amp;files)</argsstring>
+        <name>import_files</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>rdx</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>std::map&lt; data::NodeType::Enum, std::vector&lt; data::node_t &gt; &gt; &amp;</type>
+          <declname>files</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_albums.h" line="34" column="1" bodyfile="src/modules/mod_albums.cpp" bodystart="189" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d96/classcds_1_1mod_1_1ModAlbums_1a03df4183bc83ae6b4d3cf3687ad7f854" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::mod::ModAlbums::import_artist</definition>
+        <argsstring>(data::redis_ptr rdx, const std::string &amp;album_key, const std::string &amp;artist)</argsstring>
+        <name>import_artist</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>rdx</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>album_key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>artist</declname>
+        </param>
+        <briefdescription>
+<para>import the artist </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_albums.h" line="36" column="1" bodyfile="src/modules/mod_albums.cpp" bodystart="206" bodyend="217"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="d8/d96/classcds_1_1mod_1_1ModAlbums_1aef1ef4b56740d95ce72cee37f74788b2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cds::mod::ModAlbums::ModAlbums</definition>
+        <argsstring>()</argsstring>
+        <name>ModAlbums</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_albums.h" line="38" column="1" bodyfile="src/modules/mod_albums.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Audiofile import module. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/modules/mod_albums.h" line="27" column="1" bodyfile="src/modules/mod_albums.h" bodystart="27" bodyend="39"/>
+    <listofallmembers>
+      <member refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1ab5f18f0ed63bbceaf6a149fcb534615e" prot="public" virt="non-virtual"><scope>cds::mod::ModAlbums</scope><name>import</name></member>
+      <member refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1a03df4183bc83ae6b4d3cf3687ad7f854" prot="private" virt="non-virtual"><scope>cds::mod::ModAlbums</scope><name>import_artist</name></member>
+      <member refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1a1a2d0da9271f04be3b0086bc0b69919e" prot="private" virt="non-virtual"><scope>cds::mod::ModAlbums</scope><name>import_files</name></member>
+      <member refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1aef1ef4b56740d95ce72cee37f74788b2" prot="private" virt="non-virtual"><scope>cds::mod::ModAlbums</scope><name>ModAlbums</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

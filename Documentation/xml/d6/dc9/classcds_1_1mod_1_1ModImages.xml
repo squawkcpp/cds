@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d6/dc9/classcds_1_1mod_1_1ModImages" kind="class" language="C++" prot="public">
+    <compoundname>cds::mod::ModImages</compoundname>
+    <includes refid="db/de2/mod__images_8h" local="no">mod_images.h</includes>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="d6/dc9/classcds_1_1mod_1_1ModImages_1ae7feff1e10f8a335f27e0bdce723874a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::mod::ModImages::import</definition>
+        <argsstring>(data::redis_ptr rdx, const config_ptr config, const std::string &amp;key)</argsstring>
+        <name>import</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>rdx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref></type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>import and store image. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_images.h" line="29" column="1" bodyfile="src/modules/mod_images.cpp" bodystart="24" bodyend="48"/>
+        <references refid="df/dea/structdata_1a2767cb86aa09c29a549ab449809ec812" compoundref="d9/db6/datastore_8h" startline="305" endline="311">data::node</references>
+        <references refid="df/dea/structdata_1a8cfbc54186127ff485d7d1464f6388cd" compoundref="d9/db6/datastore_8h" startline="293" endline="302">data::save</references>
+        <references refid="df/dea/structdata_1af449933948671c86a051c08d4876ede4" compoundref="d9/db6/datastore_8h" startline="410" endline="411">data::add_nodes</references>
+        <references refid="df/dea/structdata_1ad7c44e770e55dacb9c2e62ce30fdbef4" compoundref="d9/db6/datastore_8h" startline="153" endline="157">data::time_millis</references>
+        <references refid="df/dea/structdata_1aed37180149542e4f1d61f376cc57168c" compoundref="d9/db6/datastore_8h" startline="377" endline="387">data::add_tag</references>
+        <references refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" compoundref="d9/db6/datastore_8h" startline="274" endline="281">data::get</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="d6/dc9/classcds_1_1mod_1_1ModImages_1a3a1638f30fb9ccb600e96c4e89ceccf0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cds::mod::ModImages::ModImages</definition>
+        <argsstring>()</argsstring>
+        <name>ModImages</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_images.h" line="31" column="1" bodyfile="src/modules/mod_images.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>load image information. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/modules/mod_images.h" line="26" column="1" bodyfile="src/modules/mod_images.h" bodystart="26" bodyend="32"/>
+    <listofallmembers>
+      <member refid="d6/dc9/classcds_1_1mod_1_1ModImages_1ae7feff1e10f8a335f27e0bdce723874a" prot="public" virt="non-virtual"><scope>cds::mod::ModImages</scope><name>import</name></member>
+      <member refid="d6/dc9/classcds_1_1mod_1_1ModImages_1a3a1638f30fb9ccb600e96c4e89ceccf0" prot="private" virt="non-virtual"><scope>cds::mod::ModImages</scope><name>ModImages</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
+    <compoundname>src</compoundname>
+    <innerdir refid="dir_ddb4d7e95cc2d6c8e1ade10a20d7247d">src/modules</innerdir>
+    <innerdir refid="dir_313caf1132e152dd9b58bea13a4052ca">src/utils</innerdir>
+    <innerfile refid="dc/d3f/__icons_8h">_icons.h</innerfile>
+    <innerfile refid="dc/d45/__lua_8h">_lua.h</innerfile>
+    <innerfile refid="dd/d42/__utils_8h">_utils.h</innerfile>
+    <innerfile refid="df/d59/config_8cpp">config.cpp</innerfile>
+    <innerfile refid="db/d16/config_8h">config.h</innerfile>
+    <innerfile refid="d9/db6/datastore_8h">datastore.h</innerfile>
+    <innerfile refid="df/d5e/filemetaregex_8cpp">filemetaregex.cpp</innerfile>
+    <innerfile refid="d6/d65/filemetaregex_8h">filemetaregex.h</innerfile>
+    <innerfile refid="d4/d77/scanner_8cpp">scanner.cpp</innerfile>
+    <innerfile refid="db/d62/scanner_8h">scanner.h</innerfile>
+    <innerfile refid="df/dd7/server_8cpp">server.cpp</innerfile>
+    <innerfile refid="d8/dc3/server_8h">server.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/"/>
+  </compounddef>
+</doxygen>

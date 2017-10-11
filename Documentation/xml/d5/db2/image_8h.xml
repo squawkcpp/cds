@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d5/db2/image_8h" kind="file" language="C++">
+    <compoundname>image.h</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">opencv2/opencv.hpp</includes>
+    <includes refid="dd/d42/__utils_8h" local="yes">../_utils.h</includes>
+    <includedby refid="d5/d7b/mod__albums_8cpp" local="yes">src/modules/mod_albums.cpp</includedby>
+    <includedby refid="d1/d93/mod__ebooks_8cpp" local="yes">src/modules/mod_ebooks.cpp</includedby>
+    <includedby refid="dc/d37/mod__images_8cpp" local="yes">src/modules/mod_images.cpp</includedby>
+    <includedby refid="d5/d0f/mod__movies_8cpp" local="yes">src/modules/mod_movies.cpp</includedby>
+    <includedby refid="de/d91/mod__series_8cpp" local="yes">src/modules/mod_series.cpp</includedby>
+    <includedby refid="db/d11/image_8cpp" local="yes">src/utils/image.cpp</includedby>
+    <incdepgraph>
+      <node id="607">
+        <label>src/utils/image.h</label>
+        <link refid="image.h"/>
+        <childnode refid="608" relation="include">
+        </childnode>
+        <childnode refid="609" relation="include">
+        </childnode>
+        <childnode refid="610" relation="include">
+        </childnode>
+      </node>
+      <node id="616">
+        <label>boost/algorithm/string.hpp</label>
+      </node>
+      <node id="619">
+        <label>fmt/format.h</label>
+      </node>
+      <node id="609">
+        <label>opencv2/opencv.hpp</label>
+      </node>
+      <node id="608">
+        <label>string</label>
+      </node>
+      <node id="613">
+        <label>map</label>
+      </node>
+      <node id="612">
+        <label>regex</label>
+      </node>
+      <node id="615">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="617">
+        <label>rapidxml_ns.hpp</label>
+      </node>
+      <node id="618">
+        <label>rapidxml_ns_print.hpp</label>
+      </node>
+      <node id="614">
+        <label>vector</label>
+      </node>
+      <node id="610">
+        <label>../_utils.h</label>
+        <link refid="dd/d42/__utils_8h_source"/>
+        <childnode refid="611" relation="include">
+        </childnode>
+        <childnode refid="612" relation="include">
+        </childnode>
+        <childnode refid="613" relation="include">
+        </childnode>
+        <childnode refid="608" relation="include">
+        </childnode>
+        <childnode refid="614" relation="include">
+        </childnode>
+        <childnode refid="609" relation="include">
+        </childnode>
+        <childnode refid="615" relation="include">
+        </childnode>
+        <childnode refid="616" relation="include">
+        </childnode>
+        <childnode refid="617" relation="include">
+        </childnode>
+        <childnode refid="618" relation="include">
+        </childnode>
+        <childnode refid="619" relation="include">
+        </childnode>
+      </node>
+      <node id="611">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="620">
+        <label>src/utils/image.h</label>
+        <link refid="image.h"/>
+        <childnode refid="621" relation="include">
+        </childnode>
+        <childnode refid="622" relation="include">
+        </childnode>
+        <childnode refid="623" relation="include">
+        </childnode>
+        <childnode refid="624" relation="include">
+        </childnode>
+        <childnode refid="625" relation="include">
+        </childnode>
+        <childnode refid="626" relation="include">
+        </childnode>
+      </node>
+      <node id="621">
+        <label>src/modules/mod_albums.cpp</label>
+        <link refid="d5/d7b/mod__albums_8cpp_source"/>
+      </node>
+      <node id="622">
+        <label>src/modules/mod_ebooks.cpp</label>
+        <link refid="d1/d93/mod__ebooks_8cpp_source"/>
+      </node>
+      <node id="623">
+        <label>src/modules/mod_images.cpp</label>
+        <link refid="dc/d37/mod__images_8cpp_source"/>
+      </node>
+      <node id="626">
+        <label>src/utils/image.cpp</label>
+        <link refid="db/d11/image_8cpp_source"/>
+      </node>
+      <node id="625">
+        <label>src/modules/mod_series.cpp</label>
+        <link refid="de/d91/mod__series_8cpp_source"/>
+      </node>
+      <node id="624">
+        <label>src/modules/mod_movies.cpp</label>
+        <link refid="d5/d0f/mod__movies_8cpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="d8/d79/classutils_1_1Image" prot="public">utils::Image</innerclass>
+    <innernamespace refid="d6/d84/namespaceutils">utils</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/><sp/><sp/><sp/>This<sp/>program<sp/>is<sp/>free<sp/>software:<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or<sp/>modify</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/><sp/><sp/><sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>as<sp/>published<sp/>by</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/><sp/><sp/><sp/>the<sp/>Free<sp/>Software<sp/>Foundation,<sp/>either<sp/>version<sp/>3<sp/>of<sp/>the<sp/>License,<sp/>or</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/><sp/><sp/><sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"></highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/><sp/><sp/><sp/>This<sp/>program<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/><sp/><sp/><sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/><sp/><sp/><sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/><sp/><sp/><sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/><sp/><sp/><sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/><sp/><sp/>along<sp/>with<sp/>this<sp/>program.<sp/><sp/>If<sp/>not,<sp/>see<sp/>&lt;http://www.gnu.org/licenses/&gt;.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>IMAGE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>IMAGE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;opencv2/opencv.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../_utils.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="d6/d84/namespaceutils" kindref="compound">utils</ref><sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>image_scale<sp/>(<sp/>cds::ECoverSizes::Enum<sp/>type,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>height<sp/>);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">std::string<sp/>make_cover_uri<sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cds::ECoverSizes::Enum&amp;<sp/>type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="de/db2/namespacekey" kindref="compound">key</ref><sp/>);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">std::string<sp/>make_cover_path<sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cds::ECoverSizes::Enum&amp;<sp/>type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="de/db2/namespacekey" kindref="compound">key</ref><sp/>);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="d8/d79/classutils_1_1Image" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d8/d79/classutils_1_1Image" kindref="compound">Image</ref><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d8/d79/classutils_1_1Image_1a143e2a3fa9c6dbb2f0e70169d7e99671" kindref="member">Image</ref>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path<sp/>);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="d8/d79/classutils_1_1Image_1aa1d7f35b3fade6f28dc1ff5502985015" kindref="member">width</ref>();</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="d8/d79/classutils_1_1Image_1a369742a54a5723062d68a051c2e2ce8a" kindref="member">height</ref>();</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><sp/><ref refid="d8/d79/classutils_1_1Image_1adbaa219675b555ef8587a0701b4184e0" kindref="member">scale</ref>(</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path<sp/>,</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cds::ECoverSizes::Enum&amp;<sp/>type<sp/>,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="de/db2/namespacekey" kindref="compound">key</ref><sp/><sp/>);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::Mat<sp/>image_;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}</highlight><highlight class="comment">//namespace<sp/>utils</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>IMAGE_H</highlight></codeline>
+    </programlisting>
+    <location file="src/utils/image.h"/>
+  </compounddef>
+</doxygen>

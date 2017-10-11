@@ -1,0 +1,448 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.11">
+  <compound refid="db/d6e/classutils_1_1Amazon" kind="class"><name>utils::Amazon</name>
+    <member refid="db/d6e/classutils_1_1Amazon_1a894798ee2af9b4b037c8a0d0b51411b7" kind="variable"><name>data</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1a46bae9a8fbdc4e1e4822a5f10fa64740" kind="function"><name>bookByIsbn</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1a7151a10025bd158d538ba2df177dc155" kind="function"><name>parse</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1a6c93cdd993dd57d108b183e64ac14672" kind="function"><name>writeCallback</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1ab1aa42118b348369bb24e9df5169dd21" kind="function"><name>canonicalize</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1a390a99cf1d3d3dd4adf581ecdf2be689" kind="function"><name>get_utc_time_string</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1ac6ec2eae284e2814415909514f09e677" kind="function"><name>generate_hmac256bit_hash</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1a361bd36f34ace32578905f6d6ce8f8e4" kind="function"><name>base64</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1a3ffc768bbf7ca3edde219fe238b2bd19" kind="function"><name>FRIEND_TEST</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1ae3a8d1f0fdc6d1b41445efdd4a612440" kind="function"><name>FRIEND_TEST</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1af16ddc6363be352aa71266f28bb42a8b" kind="function"><name>FRIEND_TEST</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1ae41d748164c3a7e1b9c212509b621cbf" kind="function"><name>FRIEND_TEST</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1a1cbb26cca932f389e9f92050f3a9ebed" kind="function"><name>FRIEND_TEST</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1a14273ceb2924a13d7abde546d2c2d6d9" kind="function"><name>FRIEND_TEST</name></member>
+    <member refid="db/d6e/classutils_1_1Amazon_1a33e8c951a41e53973d4178cac91165d0" kind="function"><name>Amazon</name></member>
+  </compound>
+  <compound refid="db/d2f/structutils_1_1AmazonResult" kind="struct"><name>utils::AmazonResult</name>
+    <member refid="db/d2f/structutils_1_1AmazonResult_1a9fa1cacdb92be774d0bfcf5f503ed3ff" kind="variable"><name>message</name></member>
+    <member refid="db/d2f/structutils_1_1AmazonResult_1ae3043983582a3e1363189b7886ad1270" kind="variable"><name>status</name></member>
+    <member refid="db/d2f/structutils_1_1AmazonResult_1a2ce9e10c92adb013ae14cc37e00be07f" kind="variable"><name>count</name></member>
+    <member refid="db/d2f/structutils_1_1AmazonResult_1ab4134c731bce0d33edb530fbd39c9f10" kind="variable"><name>results</name></member>
+  </compound>
+  <compound refid="d4/d74/structcds_1_1Config" kind="struct"><name>cds::Config</name>
+    <member refid="d4/d74/structcds_1_1Config_1afa3b801d784f6504d14b4d170f709185" kind="variable"><name>listen_address</name></member>
+    <member refid="d4/d74/structcds_1_1Config_1a37047d6d2dc4ef4bee25028a272ad538" kind="variable"><name>http_port</name></member>
+    <member refid="d4/d74/structcds_1_1Config_1a71bcfcf7b52896db3fb1a0e0ee297b10" kind="variable"><name>tmp_directory</name></member>
+    <member refid="d4/d74/structcds_1_1Config_1a277c9a29db1c09a7e8a6219acd76345b" kind="variable"><name>tmdb_key</name></member>
+    <member refid="d4/d74/structcds_1_1Config_1afba0c2a68f52bade65c00b7e392d446f" kind="variable"><name>amazon_access_key</name></member>
+    <member refid="d4/d74/structcds_1_1Config_1a02b2522ba94c95c9742e05a89e130bdd" kind="variable"><name>amazon_key</name></member>
+    <member refid="d4/d74/structcds_1_1Config_1a70f89a2177a0af7dfa67de525cac3532" kind="variable"><name>media</name></member>
+  </compound>
+  <compound refid="d4/d43/structContainer" kind="struct"><name>Container</name>
+    <member refid="d4/d43/structContainer_1a54f9379db8146c182e32002157a9608e" kind="variable"><name>config</name></member>
+    <member refid="d4/d43/structContainer_1a6cd82f0e931b62fe4c044491a49695b6" kind="variable"><name>redox</name></member>
+    <member refid="d4/d43/structContainer_1aa3f5bef85e70bcb178cac72cac71af48" kind="variable"><name>server</name></member>
+    <member refid="d4/d43/structContainer_1a9521d58ea057ea2f53ea72fefc01bc29" kind="variable"><name>www</name></member>
+  </compound>
+  <compound refid="df/dea/structdata" kind="struct"><name>data</name>
+    <member refid="df/dea/structdata_1a766c39ffada2f9e21fa1fa011160a0d3" kind="typedef"><name>redis_ptr</name></member>
+    <member refid="df/dea/structdata_1a28210400b8733da5ff3933371689bc92" kind="typedef"><name>node_t</name></member>
+    <member refid="df/dea/structdata_1a6b630c97fd83ffc9a45ca139aac2c1e4" kind="typedef"><name>nodes_t</name></member>
+    <member refid="df/dea/structdata_1a6f4ecdac9e16115c8361a4cda208d9c3" kind="typedef"><name>async_fn</name></member>
+    <member refid="df/dea/structdata_1a5a0e9f6f3afe64753354e17a2c3aba29" kind="typedef"><name>command_t</name></member>
+    <member refid="df/dea/structdata_1ad7c44e770e55dacb9c2e62ce30fdbef4" kind="function"><name>time_millis</name></member>
+    <member refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kind="function"><name>hash</name></member>
+    <member refid="df/dea/structdata_1af522b9d33db275e430e18b4725494340" kind="function"><name>is_mod</name></member>
+    <member refid="df/dea/structdata_1a64d1a0d542b5966540c6297d994c06e5" kind="function"><name>make_key</name></member>
+    <member refid="df/dea/structdata_1adae832d78a0adf2a0b4abca522757126" kind="function"><name>make_key_node</name></member>
+    <member refid="df/dea/structdata_1ac5ea539bcb81b952a3c5838379937f19" kind="function"><name>make_key_list</name></member>
+    <member refid="df/dea/structdata_1a57cb94d6ace56a28c6e2749a73ed2773" kind="function"><name>make_key_list</name></member>
+    <member refid="df/dea/structdata_1ae94130e0ed9b83456766145fb3c1c562" kind="function"><name>make_connection</name></member>
+    <member refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" kind="function"><name>get</name></member>
+    <member refid="df/dea/structdata_1aef2aa04f31f65b4b41620e2f0f4a97b7" kind="function"><name>set</name></member>
+    <member refid="df/dea/structdata_1a8cfbc54186127ff485d7d1464f6388cd" kind="function"><name>save</name></member>
+    <member refid="df/dea/structdata_1a2767cb86aa09c29a549ab449809ec812" kind="function"><name>node</name></member>
+    <member refid="df/dea/structdata_1aeafb3837ce1e2fbfea65c76431ef4fb8" kind="function"><name>children</name></member>
+    <member refid="df/dea/structdata_1a0290561be5ee3d258ea2c200d28409e9" kind="function"><name>files</name></member>
+    <member refid="df/dea/structdata_1a15bde8b9a65b4e748f4880b6ed75eea2" kind="function"><name>children_count</name></member>
+    <member refid="df/dea/structdata_1a5630966d8b25205277ba680e158956b5" kind="function"><name>files_count</name></member>
+    <member refid="df/dea/structdata_1aed37180149542e4f1d61f376cc57168c" kind="function"><name>add_tag</name></member>
+    <member refid="df/dea/structdata_1ab9369687e5b0247b92fa21cd6650324a" kind="function"><name>eval</name></member>
+    <member refid="df/dea/structdata_1a3e5d28bf1fc99f5389f0eeddb348856e" kind="function"><name>add_types</name></member>
+    <member refid="df/dea/structdata_1a1ca7fdb881f181131b61e9429e9c83ec" kind="function"><name>rem_types</name></member>
+    <member refid="df/dea/structdata_1af449933948671c86a051c08d4876ede4" kind="function"><name>add_nodes</name></member>
+    <member refid="df/dea/structdata_1a659e370f3ef17b04342b89e8a353cd19" kind="function"><name>rem_nodes</name></member>
+    <member refid="df/dea/structdata_1a7b097698874f8e20d4425c878c7d92bf" kind="function"><name>add_nodes</name></member>
+    <member refid="df/dea/structdata_1a3e5204c13f98bbb71913d9e1078c790a" kind="function"><name>rem_nodes</name></member>
+    <member refid="df/dea/structdata_1a5aa923122403f67c925102e270c37a9d" kind="function"><name>incr_mime</name></member>
+    <member refid="df/dea/structdata_1a2e667bbfd4a9d1abeff95eadfd91a9c8" kind="function"><name>config</name></member>
+    <member refid="df/dea/structdata_1a73c2d6a82c4be44a10c2dcce64241c47" kind="function"><name>config</name></member>
+    <member refid="df/dea/structdata_1ac0cfd0fa39bc3e3bdbd32e08289ddaea" kind="function"><name>config_exists</name></member>
+    <member refid="df/dea/structdata_1a1cf2a3cc9f3778e8c3c0b676631ca974" kind="function"><name>__iterate_key</name></member>
+    <member refid="df/dea/structdata_1addc9f88ae9ca3edab036171238a13ef9" kind="function"><name>__iterate_key</name></member>
+    <member refid="df/dea/structdata_1a3007d494c14ec84997f9e70c75c9ec36" kind="function"><name>to_map</name></member>
+    <member refid="df/dea/structdata_1a07b86f952d91272a52885573847aaa62" kind="function"><name>FRIEND_TEST</name></member>
+  </compound>
+  <compound refid="d5/da6/structcds_1_1ECoverSizes" kind="struct"><name>cds::ECoverSizes</name>
+    <member refid="d5/da6/structcds_1_1ECoverSizes_1adb5560ac09c98372aec204d5cf14afff" kind="enum"><name>Enum</name></member>
+    <member refid="d5/da6/structcds_1_1ECoverSizes_1adb5560ac09c98372aec204d5cf14afffaeeb443f5f80c2a148e210f4139fcf715" kind="enumvalue"><name>TN</name></member>
+    <member refid="d5/da6/structcds_1_1ECoverSizes_1adb5560ac09c98372aec204d5cf14afffa6eacc48caf0f95106a5fbb4772a6ecff" kind="enumvalue"><name>MED</name></member>
+    <member refid="d5/da6/structcds_1_1ECoverSizes_1ac64acdc4af69a070002e58459a599c86" kind="variable"><name>IMAGE_MED_SIZE</name></member>
+    <member refid="d5/da6/structcds_1_1ECoverSizes_1ae6dfc393a88d9b89fd0bb09b08ba0ee8" kind="variable"><name>IMAGE_TN_SIZE</name></member>
+    <member refid="d5/da6/structcds_1_1ECoverSizes_1a7f3d1e73c30fddb25caf9e7733440f8c" kind="function"><name>str</name></member>
+    <member refid="d5/da6/structcds_1_1ECoverSizes_1ab1ab972ceefb5516647be45676dc128a" kind="function"><name>size</name></member>
+  </compound>
+  <compound refid="db/d7b/classcds_1_1FileMetaRegex" kind="class"><name>cds::FileMetaRegex</name>
+    <member refid="db/d7b/classcds_1_1FileMetaRegex_1a74477a7c2ae86dc6d4a4f1b0d9c5a444" kind="variable"><name>rules_</name></member>
+    <member refid="db/d7b/classcds_1_1FileMetaRegex_1a337a38c50294bc5d71c7524c44277565" kind="function"><name>parse</name></member>
+    <member refid="db/d7b/classcds_1_1FileMetaRegex_1a126f47e1fa93093240ebd7dcd714744b" kind="function"><name>FileMetaRegex</name></member>
+  </compound>
+  <compound refid="d8/d79/classutils_1_1Image" kind="class"><name>utils::Image</name>
+    <member refid="d8/d79/classutils_1_1Image_1a1990727569e7dd84a89d9cd27db6c9ca" kind="variable"><name>image_</name></member>
+    <member refid="d8/d79/classutils_1_1Image_1a143e2a3fa9c6dbb2f0e70169d7e99671" kind="function"><name>Image</name></member>
+    <member refid="d8/d79/classutils_1_1Image_1aa1d7f35b3fade6f28dc1ff5502985015" kind="function"><name>width</name></member>
+    <member refid="d8/d79/classutils_1_1Image_1a369742a54a5723062d68a051c2e2ce8a" kind="function"><name>height</name></member>
+    <member refid="d8/d79/classutils_1_1Image_1adbaa219675b555ef8587a0701b4184e0" kind="function"><name>scale</name></member>
+  </compound>
+  <compound refid="d8/d96/classcds_1_1mod_1_1ModAlbums" kind="class"><name>cds::mod::ModAlbums</name>
+    <member refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1ab5f18f0ed63bbceaf6a149fcb534615e" kind="function"><name>import</name></member>
+    <member refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1a1a2d0da9271f04be3b0086bc0b69919e" kind="function"><name>import_files</name></member>
+    <member refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1a03df4183bc83ae6b4d3cf3687ad7f854" kind="function"><name>import_artist</name></member>
+    <member refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1aef1ef4b56740d95ce72cee37f74788b2" kind="function"><name>ModAlbums</name></member>
+  </compound>
+  <compound refid="da/d61/classcds_1_1mod_1_1ModEbooks" kind="class"><name>cds::mod::ModEbooks</name>
+    <member refid="da/d61/classcds_1_1mod_1_1ModEbooks_1aa9d97d48b6606162a8c5d4efeb402661" kind="variable"><name>isbn_regex</name></member>
+    <member refid="da/d61/classcds_1_1mod_1_1ModEbooks_1a666a9e2ad224e2cd5714d142b6dce77a" kind="variable"><name>isbn_number_only_regex</name></member>
+    <member refid="da/d61/classcds_1_1mod_1_1ModEbooks_1abefdc80e166940fef6e968fdbeaf5649" kind="function"><name>import</name></member>
+    <member refid="da/d61/classcds_1_1mod_1_1ModEbooks_1a3361c6f54677eca533045844b8380558" kind="function"><name>ModEbooks</name></member>
+    <member refid="da/d61/classcds_1_1mod_1_1ModEbooks_1ac61203803978e11aed6feee94acc4632" kind="function"><name>parsePdf</name></member>
+    <member refid="da/d61/classcds_1_1mod_1_1ModEbooks_1a19c9c365c677c8cc2012f1c70e0eff31" kind="function"><name>find_isbn</name></member>
+    <member refid="da/d61/classcds_1_1mod_1_1ModEbooks_1a4f5a435dc1d0285fab9ac8296e3faccd" kind="function"><name>remove_special_characters</name></member>
+  </compound>
+  <compound refid="d6/dc9/classcds_1_1mod_1_1ModImages" kind="class"><name>cds::mod::ModImages</name>
+    <member refid="d6/dc9/classcds_1_1mod_1_1ModImages_1ae7feff1e10f8a335f27e0bdce723874a" kind="function"><name>import</name></member>
+    <member refid="d6/dc9/classcds_1_1mod_1_1ModImages_1a3a1638f30fb9ccb600e96c4e89ceccf0" kind="function"><name>ModImages</name></member>
+  </compound>
+  <compound refid="d4/dbb/classcds_1_1mod_1_1ModMovies" kind="class"><name>cds::mod::ModMovies</name>
+    <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a75bd682d5a018bc9394b5f4d90b96131" kind="function"><name>import</name></member>
+    <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a2e2e729bced17bd4f716c027c9cb541a" kind="function"><name>ModMovies</name></member>
+    <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a00f701ae3db98706517b25d29f426c8d" kind="function"><name>FRIEND_TEST</name></member>
+    <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a020c149fccafd85f0b341dcef3eb4cdb" kind="function"><name>FRIEND_TEST</name></member>
+    <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1ad72045c614010ec3d4305623c8ace7ab" kind="function"><name>tmdb_search</name></member>
+    <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a4d8237bdfd18242ce1e4ffe7b71f6846" kind="function"><name>tmdb_movie</name></member>
+    <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a43f84f5828921dfbdc0fcc68d9b662b5" kind="function"><name>tmdb_parse</name></member>
+    <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a130a417900346dd9ba67a7a6c947f983" kind="function"><name>tmdb_parse_movie</name></member>
+    <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a139e7f33552184a9943f7f7a0657113d" kind="function"><name>tmdb_fetch</name></member>
+  </compound>
+  <compound refid="d5/dfb/classcds_1_1mod_1_1ModSeries" kind="class"><name>cds::mod::ModSeries</name>
+    <member refid="d5/dfb/classcds_1_1mod_1_1ModSeries_1aa6b0316ecdb4f3f70695f8726e14673f" kind="function"><name>import</name></member>
+    <member refid="d5/dfb/classcds_1_1mod_1_1ModSeries_1a6e0ff53cc07ad6b5e322aed7748d8f85" kind="function"><name>ModSeries</name></member>
+    <member refid="d5/dfb/classcds_1_1mod_1_1ModSeries_1a9dc5d11ce6d0e31ad8e7f4c904574c8d" kind="function"><name>import_serie</name></member>
+    <member refid="d5/dfb/classcds_1_1mod_1_1ModSeries_1a6df1340f5812619914f42da9e7b7b8a3" kind="function"><name>tmdb_get</name></member>
+    <member refid="d5/dfb/classcds_1_1mod_1_1ModSeries_1aa483ae5b923938fb0bd891e46c8d25aa" kind="function"><name>tmdb_episode</name></member>
+    <member refid="d5/dfb/classcds_1_1mod_1_1ModSeries_1a8630cf0bd201e7b8760388ab06770d99" kind="function"><name>tmdb_parse</name></member>
+    <member refid="d5/dfb/classcds_1_1mod_1_1ModSeries_1a1814f767bf01e431f64bf115c0c5743b" kind="function"><name>tmdb_parse_episode</name></member>
+    <member refid="d5/dfb/classcds_1_1mod_1_1ModSeries_1a902581f28673694dd25607aa345b5567" kind="function"><name>tmdb_fetch</name></member>
+  </compound>
+  <compound refid="df/de0/classdata_1_1NodeType" kind="class"><name>data::NodeType</name>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0d" kind="enum"><name>Enum</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da23e6c4a9b15bc0c9addb5a92746e75dd" kind="enumvalue"><name>folder</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0daaee5722ff5aa3adfffc0225b94b41f83" kind="enumvalue"><name>audio</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da42b71fa6972cf3845f7538a6f2d72098" kind="enumvalue"><name>movie</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0dac18fbf98d0e953b3cca8e4fb807ca27e" kind="enumvalue"><name>serie</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0dab014faaed40cda7b8461afd023ac1a76" kind="enumvalue"><name>image</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da7e59c724013102be65b7608f4894450f" kind="enumvalue"><name>ebook</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0daf2a3e231bade409cbbe0083c589b6faf" kind="enumvalue"><name>file</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da9bee270c273e097758a53cbba31cd97a" kind="enumvalue"><name>album</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da33eb8833275e5d6f96b34e20aa6cdffa" kind="enumvalue"><name>cover</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da1ccc52a32cc37cdd693582a1a8b75f03" kind="enumvalue"><name>episode</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da36ee5868f156a9aa118e11afa2f4130d" kind="enumvalue"><name>artist</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" kind="function"><name>str</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1ac6fb806749e55ecbd940d721f355a97b" kind="function"><name>parse</name></member>
+    <member refid="df/de0/classdata_1_1NodeType_1a43aec7ef58e937efc3d547878572e594" kind="function"><name>valid</name></member>
+  </compound>
+  <compound refid="df/de2/structcds_1_1RuleItem" kind="struct"><name>cds::RuleItem</name>
+    <member refid="df/de2/structcds_1_1RuleItem_1a88cc26be29de9bac84c47aa4b22cc315" kind="variable"><name>type</name></member>
+    <member refid="df/de2/structcds_1_1RuleItem_1aa74c98d1f60351f6509e91812204b345" kind="variable"><name>regex</name></member>
+    <member refid="df/de2/structcds_1_1RuleItem_1aecaf6248ab8e98c0242924cfb45dafbe" kind="variable"><name>names</name></member>
+  </compound>
+  <compound refid="df/d63/classcds_1_1Scanner" kind="class"><name>cds::Scanner</name>
+    <member refid="df/d63/classcds_1_1Scanner_1a1eeb741152660de8dc2420cbfe63751f" kind="variable"><name>_disc_patterns</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1ad65da450bbf06bb2ad93c2293c092a1f" kind="function"><name>import_files</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1ad2edfe5f9d7d538ed0eb52033e335793" kind="function"><name>flush</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1a0557278e5c78f2b5e279742fa48fa9f5" kind="function"><name>Scanner</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1ae9f2e51e71fd1346f82c1feab59112c1" kind="function"><name>FRIEND_TEST</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1a2982347b94a83cd0ab60d32556206ea2" kind="function"><name>import_directory</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1a1cafd206ba910c503209313d89feb31b" kind="function"><name>import_video</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1af9d44ced4927cdb3a5d12806f0af7020" kind="function"><name>import_images</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1a192f0dc786f72f60751ab548a667d71f" kind="function"><name>import_books</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1aaf2454c55a544e5f4f3cca845bfe6f72" kind="function"><name>new_item</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1a4a43f5ca826ec504ed57878c5082ec1f" kind="function"><name>sweep</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1a4e447ae990c2814f848f5c9873e61e68" kind="function"><name>timestamp</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1a7fa969bf6e94c6f7e04548174e3f28ad" kind="function"><name>remove_disc</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1ab407421e5230939c85bafec2427816f1" kind="function"><name>new_items</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1a1cabbbfc26042383539fe507d8105873" kind="function"><name>save_folder</name></member>
+    <member refid="df/d63/classcds_1_1Scanner_1a4dc6e04e5f83502cc7b2fbf1bad61e83" kind="function"><name>search_index</name></member>
+  </compound>
+  <compound refid="de/ddd/classcds_1_1Server" kind="class"><name>cds::Server</name>
+    <member refid="de/ddd/classcds_1_1Server_1a4b79ecb91d8898f27f87a7a33e342294" kind="variable"><name>redis_</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1a3463b4c06c20eeca27185b3c51448976" kind="variable"><name>config_</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1a992eb9b125b18552edefb50bafff8d85" kind="variable"><name>rescanning_</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1aa2a99937662a01cbe7fc1f0d68e56708" kind="variable"><name>scanner_thread_</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1a41511870b19f8462fe988ac034dcc4c8" kind="variable"><name>sub_</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1afbf86e0452ab45fe2f75df1f2adfad4b" kind="function"><name>Server</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1aa86c23ba2b8426c67da83d1d69306569" kind="function"><name>config</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1af2e65c60a5f16e41ebcbc6669be5ffe1" kind="function"><name>rescan</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1a88df24b5970ad18d427315a870e4e944" kind="function"><name>status</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1a226022a43b29123d6fcb845ab5c4713d" kind="function"><name>node</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1a2ee5708b9f35871a311feb06fa43a0e1" kind="function"><name>nodes</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1a8d0f5fcc6bb289bd3d2a1a2df2298e9b" kind="function"><name>files</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1a7a2398284fc075e5325d9ae140afcdb8" kind="function"><name>sort</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1ad5fb8a933d0110b1983df7e97c82a63d" kind="function"><name>path</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1abd16cb6935350e7e0824315f4211ae21" kind="function"><name>sug</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1a8df811f421058612d41d3538f8775750" kind="function"><name>opds</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1aaa29a062d4cac4928dd68a39901af02b" kind="function"><name>keywords</name></member>
+    <member refid="de/ddd/classcds_1_1Server_1a39a9aa36076f8270b100f9519aea9fdf" kind="function"><name>rescan_</name></member>
+  </compound>
+  <compound refid="d4/db2/structcds_1_1mod_1_1TmdbMovie" kind="struct"><name>cds::mod::TmdbMovie</name>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1ade985b76c8a1d03084125435c4a79037" kind="variable"><name>backdrop_path</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1ab6325846dbdacb1dd6832641a5423eb5" kind="variable"><name>genres</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a173fa5a3b0b2acf54eeb657fba521c87" kind="variable"><name>homepage</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a162429fb6ce3da9c69568e9f8b208eaa" kind="variable"><name>id</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a93b7b738f4505e2fc86c4f78ffc3fe7e" kind="variable"><name>imdb_id</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a75abbd911073bee24caf77b5175183cf" kind="variable"><name>original_language</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a15f67ee22da0f3c1dbc6cf6265d172e4" kind="variable"><name>original_title</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a7895b26565a1266a911d16421fffdbb7" kind="variable"><name>overview</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a4043622b31f14e1c3ed42e812a058884" kind="variable"><name>poster_path</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a7542759faa0868caec4b9b6ef52a756a" kind="variable"><name>release_date</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a86d8cec3c749aed1739c58dc9f5fb669" kind="variable"><name>runtime</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a24639337b08dd57d7dc67f7dbf7c801a" kind="variable"><name>tagline</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a122e1d8b7f3285db0b512c1a6f388999" kind="variable"><name>title</name></member>
+    <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a980c0b352c838367636af5ce656109be" kind="friend"><name>operator&lt;&lt;</name></member>
+  </compound>
+  <compound refid="d9/d60/namespacecds" kind="namespace"><name>cds</name>
+    <member refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kind="typedef"><name>config_ptr</name></member>
+    <member refid="d9/d60/namespacecds_1a578eceff7a6b1f2a7c9d1dd3d9b07e58" kind="variable"><name>CDS_DEBUG</name></member>
+    <member refid="d9/d60/namespacecds_1a83688f932b141e2ec9f6a89eb8a771b6" kind="variable"><name>LOGGER</name></member>
+    <member refid="d9/d60/namespacecds_1ac1f06468a56a31265ff9841258304da6" kind="variable"><name>VERSION</name></member>
+    <member refid="d9/d60/namespacecds_1ac890323d37a901478f7aed790764deb9" kind="variable"><name>SLEEP</name></member>
+    <member refid="d9/d60/namespacecds_1a9274c524625742ba46691ede810f25bd" kind="variable"><name>EVENT_SCANNER</name></member>
+    <member refid="d9/d60/namespacecds_1ac56dc232513479ed280b0af8f01cd9be" kind="variable"><name>EVENT_RESCAN</name></member>
+    <member refid="d9/d60/namespacecds_1a9d8b318a21375dbf4eb5f3f636e341d5" kind="variable"><name>EVENT_START</name></member>
+    <member refid="d9/d60/namespacecds_1add32d8ab38600cd334a9383cf06d58ca" kind="variable"><name>EVENT_END</name></member>
+    <member refid="d9/d60/namespacecds_1a4223d43fbc984afbeab487c3309632ed" kind="variable"><name>PARAM_TMP_DIRECTORY</name></member>
+    <member refid="d9/d60/namespacecds_1a6676c932f268f6b08769fe6614648b1b" kind="variable"><name>PARAM_TMDB_KEY</name></member>
+    <member refid="d9/d60/namespacecds_1a96861fbba66539779d0abf465afb758b" kind="variable"><name>PARAM_AMAZON_KEY</name></member>
+    <member refid="d9/d60/namespacecds_1ac44bb14093462c3bf814f8f4f626be4d" kind="variable"><name>PARAM_AMAZON_ACCESS_KEY</name></member>
+    <member refid="d9/d60/namespacecds_1a685abcd2f350d31e64e8fd9a9d90f635" kind="variable"><name>PARAM_REDIS</name></member>
+    <member refid="d9/d60/namespacecds_1ae8ce66107165a1a257a608506846ecb2" kind="variable"><name>PARAM_REDIS_PORT</name></member>
+    <member refid="d9/d60/namespacecds_1a23556bfa1417062c2a54004ad73b373e" kind="variable"><name>PARAM_LISTEN_ADDRESS</name></member>
+    <member refid="d9/d60/namespacecds_1a68dc86c5214930bbd4c4d7e29a80490e" kind="variable"><name>PARAM_HTTP_PORT</name></member>
+    <member refid="d9/d60/namespacecds_1a83acb1a62dce1ec0d9ef86b70a33a97c" kind="variable"><name>PARAM_DIRECTORY</name></member>
+    <member refid="d9/d60/namespacecds_1a6f21b563723611e789a90a79927f4478" kind="function"><name>trash_words</name></member>
+    <member refid="d9/d60/namespacecds_1ac1e9a4c62a2cb05da4bb46b3acb89e21" kind="function"><name>skip_words</name></member>
+    <member refid="d9/d60/namespacecds_1a7fc870a9e2c3f9e851650d3e74505e4f" kind="function"><name>album_cover_names</name></member>
+    <member refid="d9/d60/namespacecds_1a44f6b7f8bb3653557d57f96699d80abf" kind="function"><name>metadata_relations</name></member>
+    <member refid="d9/d60/namespacecds_1ad835190258eeea5e42d8befb389ca889" kind="function"><name>remove_skip_list</name></member>
+    <member refid="d9/d60/namespacecds_1aee68708d1655a665609f0a3fba9f846b" kind="function"><name>clean_string</name></member>
+    <member refid="d9/d60/namespacecds_1a231ab3d6f331e627edb710f422f468b0" kind="function"><name>path</name></member>
+    <member refid="d9/d60/namespacecds_1a74ccf9fd20c7d47abd676c1b26d2c814" kind="function"><name>filename</name></member>
+    <member refid="d9/d60/namespacecds_1a85724d186cb33009a1ed4c09a2020d7c" kind="function"><name>remove_extension</name></member>
+    <member refid="d9/d60/namespacecds_1a6a79fca696161009d2cf2f2aa0944191" kind="function"><name>clean_isbn</name></member>
+    <member refid="d9/d60/namespacecds_1a6a3139ea2f69d87230114368e6677c73" kind="function"><name>clean_track_number</name></member>
+    <member refid="d9/d60/namespacecds_1a064d16872719d08ea5d91365b7ba2476" kind="function"><name>element</name></member>
+    <member refid="d9/d60/namespacecds_1aa0b13d57673d14703380442ac8556bc9" kind="function"><name>attr</name></member>
+    <member refid="d9/d60/namespacecds_1a7dd29918fa489d9bc131ccecb005b73f" kind="function"><name>_get_ip</name></member>
+    <member refid="d9/d60/namespacecds_1ad64f032e28ec0cc0b09c73a48b13eeab" kind="function"><name>validate</name></member>
+    <member refid="d9/d60/namespacecds_1a033625ff6b0a15415bbab3db4c3e1309" kind="function"><name>json</name></member>
+    <member refid="d9/d60/namespacecds_1a1e591d62c9fd08767750288cc7edef77" kind="function"><name>json</name></member>
+    <member refid="d9/d60/namespacecds_1a75d8ab4b7cb64db9480621f17c400183" kind="function"><name>make_error_code</name></member>
+  </compound>
+  <compound refid="d1/d65/namespacecds_1_1mod" kind="namespace"><name>cds::mod</name>
+  </compound>
+  <compound refid="de/db2/namespacekey" kind="namespace"><name>key</name>
+    <member refid="d9/db6/datastore_8h_1a0f11199768b761853f1a52de292eb054" kind="variable"><name>CONFIG</name></member>
+    <member refid="d9/db6/datastore_8h_1ae3a7d76394411538b5f1ed003caa5375" kind="variable"><name>FS</name></member>
+    <member refid="d9/db6/datastore_8h_1ab4eff4028490428769ee80046b63ff07" kind="variable"><name>GENRES</name></member>
+    <member refid="d9/db6/datastore_8h_1a2df6485dcf78fc97bbb82b9edefcae32" kind="variable"><name>KEY</name></member>
+    <member refid="d9/db6/datastore_8h_1af8d7e9b6526b5c6712039f6b0de9d2e0" kind="variable"><name>LIST</name></member>
+    <member refid="d9/db6/datastore_8h_1afa7cde254499bb2156bbf1eeae973f15" kind="variable"><name>MIME</name></member>
+    <member refid="d9/db6/datastore_8h_1ad28be331eeb26aff134f40f90cdcd736" kind="variable"><name>NEW</name></member>
+    <member refid="d9/db6/datastore_8h_1a8907549ac157be1a4d78d6e7af5b25e6" kind="variable"><name>TAG</name></member>
+    <member refid="d9/db6/datastore_8h_1a1ebcce3e05300c12c48d8ff2b1be8eae" kind="variable"><name>TYPE</name></member>
+    <member refid="d9/db6/datastore_8h_1a26c1d432ced178dc2bab0c4071f1bb14" kind="variable"><name>INDEX</name></member>
+    <member refid="d9/db6/datastore_8h_1a4b7571b545ff9c53ddb06eaf054a383c" kind="variable"><name>AUTO</name></member>
+  </compound>
+  <compound refid="dd/d4c/namespaceparam" kind="namespace"><name>param</name>
+    <member refid="d9/db6/datastore_8h_1aca8f79fb69e996bc63601ea8f76f3e16" kind="variable"><name>ALBUM</name></member>
+    <member refid="d9/db6/datastore_8h_1a0f64ab4521d6e1b553d24d1e0d523a79" kind="variable"><name>ARTIST</name></member>
+    <member refid="d9/db6/datastore_8h_1a0eb8602e7fca44fc9b25e4c01d2b4d07" kind="variable"><name>AUTHOR</name></member>
+    <member refid="d9/db6/datastore_8h_1aa96947bf362b48fab5f492eb7937030b" kind="variable"><name>AUDIO</name></member>
+    <member refid="d9/db6/datastore_8h_1a1bd06d29618b3e51ffe90ed545e5e280" kind="variable"><name>BACKDROP_PATH</name></member>
+    <member refid="d9/db6/datastore_8h_1a6ef2859009233149242d5a1419ffb96c" kind="variable"><name>BITRATE</name></member>
+    <member refid="d9/db6/datastore_8h_1a14192b6e52c38d6e9128ef5dde11274b" kind="variable"><name>BPS</name></member>
+    <member refid="d9/db6/datastore_8h_1a6e3e3760c05b25e7e20ec41930f37dfe" kind="variable"><name>CHANNELS</name></member>
+    <member refid="d9/db6/datastore_8h_1a003fa5da93845c631213dc7810c71cbb" kind="variable"><name>CLASS</name></member>
+    <member refid="d9/db6/datastore_8h_1a9320f83cae9675213582c1acbde90f9b" kind="variable"><name>CLEAN_STRING</name></member>
+    <member refid="d9/db6/datastore_8h_1acef1c65ca0a3a10c02b870a675fc4a2e" kind="variable"><name>COMMENT</name></member>
+    <member refid="d9/db6/datastore_8h_1abbc6601ae610a491c8d65781207943ca" kind="variable"><name>COMPOSER</name></member>
+    <member refid="d9/db6/datastore_8h_1acf2285e3e59b6aee10c8d0d3bd70fdeb" kind="variable"><name>COVER</name></member>
+    <member refid="d9/db6/datastore_8h_1ac8d2a1b7372e6b0282db24b0b11bf90d" kind="variable"><name>DATE</name></member>
+    <member refid="d9/db6/datastore_8h_1a94c6848e1f4ffaa0d9b97bdf14f8b198" kind="variable"><name>DISC</name></member>
+    <member refid="d9/db6/datastore_8h_1a33e0f6eb8389cbf904e281cb9e7abb76" kind="variable"><name>EBOOK</name></member>
+    <member refid="d9/db6/datastore_8h_1a338c24e6f696be959d39f04ae7ad131b" kind="variable"><name>EPISODE</name></member>
+    <member refid="d9/db6/datastore_8h_1a438ffde02bf53b1ea0760c0f72ddf7b5" kind="variable"><name>EXT</name></member>
+    <member refid="d9/db6/datastore_8h_1a8d04c67bdf1880b8097ba01fd5fe3486" kind="variable"><name>EXTENSION</name></member>
+    <member refid="d9/db6/datastore_8h_1a79b963e5c7b07d64b7dea5ea00be56b3" kind="variable"><name>FILE</name></member>
+    <member refid="d9/db6/datastore_8h_1a9083a3d694eb0c9ec89bb59dc93d6e11" kind="variable"><name>FOLDER</name></member>
+    <member refid="d9/db6/datastore_8h_1afa83637f5aecb8aaa73343181962ea7b" kind="variable"><name>GENRE</name></member>
+    <member refid="d9/db6/datastore_8h_1ae855480cdd825761b3ad8c615346eb73" kind="variable"><name>HEIGHT</name></member>
+    <member refid="d9/db6/datastore_8h_1a9edc055c38914bdd7d5a88f4e70583f8" kind="variable"><name>HOMEPAGE</name></member>
+    <member refid="d9/db6/datastore_8h_1a64a09732dcc08cb5305cbe3877dfb919" kind="variable"><name>IMDB_ID</name></member>
+    <member refid="d9/db6/datastore_8h_1a5f17484e50835cf662dcb33b82def2dc" kind="variable"><name>IMAGE</name></member>
+    <member refid="d9/db6/datastore_8h_1a2ab5eac1f29a483c62b62bfcf69db18a" kind="variable"><name>ISBN</name></member>
+    <member refid="d9/db6/datastore_8h_1a0863a82c3200bfe8b47e88f74e326b35" kind="variable"><name>LANGUAGE</name></member>
+    <member refid="d9/db6/datastore_8h_1afde361115e6335074997cd366698d6bc" kind="variable"><name>MAKE</name></member>
+    <member refid="d9/db6/datastore_8h_1af6818a59e3364dafdfe25b774ecce7db" kind="variable"><name>MIME_TYPE</name></member>
+    <member refid="d9/db6/datastore_8h_1aa5c9fc0452f8a46bc89ef03401917da5" kind="variable"><name>MOVIE</name></member>
+    <member refid="d9/db6/datastore_8h_1a792d99a29ae9e9356aabdb9494c8eeb5" kind="variable"><name>NAME</name></member>
+    <member refid="d9/db6/datastore_8h_1a778d0f2d71738e3d31adad76d5e59b92" kind="variable"><name>PARENT</name></member>
+    <member refid="d9/db6/datastore_8h_1a38fc40b052e95ffe51dfbf4cdfe7fa3c" kind="variable"><name>PATH</name></member>
+    <member refid="d9/db6/datastore_8h_1a9fcb2442d4073bb2e86842b7ac24e3c8" kind="variable"><name>PERFORMER</name></member>
+    <member refid="d9/db6/datastore_8h_1ab9d9ff65e5858fb63c4521073967bd0e" kind="variable"><name>PLAYTIME</name></member>
+    <member refid="d9/db6/datastore_8h_1ae76e62e11c8e5316aa37065ed6c5c972" kind="variable"><name>POSTER_PATH</name></member>
+    <member refid="d9/db6/datastore_8h_1afad30ec1ccfa8509ab17afa19c178893" kind="variable"><name>PUBLISHER</name></member>
+    <member refid="d9/db6/datastore_8h_1a7815b8bfd7bb55d9082505ecacd1206a" kind="variable"><name>ROOT</name></member>
+    <member refid="d9/db6/datastore_8h_1a7ecf8f52a7b7fd6a95c1842aab9d4643" kind="variable"><name>SAMPLERATE</name></member>
+    <member refid="d9/db6/datastore_8h_1a217f2aaffd19b264ce5226bd9350e9fb" kind="variable"><name>SEASON</name></member>
+    <member refid="d9/db6/datastore_8h_1a699c6f65396810cf119ef7391eb9693f" kind="variable"><name>SERIE</name></member>
+    <member refid="d9/db6/datastore_8h_1af04431a5f8f8a7cd4cbfaba39b65cabe" kind="variable"><name>SIZE</name></member>
+    <member refid="d9/db6/datastore_8h_1a54d59282040c9fe0fc29633d34c0e030" kind="variable"><name>STILL_IMAGE</name></member>
+    <member refid="d9/db6/datastore_8h_1ac31ea425cdc1f2a53f3bf6e70d7e0aa0" kind="variable"><name>THUMB</name></member>
+    <member refid="d9/db6/datastore_8h_1a8a9ccf10cc3b0b8652593b685b405a05" kind="variable"><name>TIMESTAMP</name></member>
+    <member refid="d9/db6/datastore_8h_1a3edfcce87bd89c8d0a1dbc051db7b2c0" kind="variable"><name>TITLE</name></member>
+    <member refid="d9/db6/datastore_8h_1aa9dbd374908189de0101f4645ed40bd1" kind="variable"><name>TMDB_ID</name></member>
+    <member refid="d9/db6/datastore_8h_1adc11bc994a8460844320333de83d815d" kind="variable"><name>TRACK</name></member>
+    <member refid="d9/db6/datastore_8h_1a79c1e08ebd8d84f276e019f37d303c62" kind="variable"><name>WIDTH</name></member>
+    <member refid="d9/db6/datastore_8h_1a18e9cc62ad2015e67c70ef968714be49" kind="variable"><name>YEAR</name></member>
+  </compound>
+  <compound refid="d0/df5/namespaceredis" kind="namespace"><name>redis</name>
+    <member refid="d0/df5/namespaceredis_1a3b7d12853bac5219d143df3f2dab6f61" kind="variable"><name>SADD</name></member>
+    <member refid="d0/df5/namespaceredis_1ab55226e8a368f07c92183ad71525ce33" kind="variable"><name>DEL</name></member>
+    <member refid="d0/df5/namespaceredis_1a9f3bcf512af89af7dbf877da28384848" kind="variable"><name>EXISTS</name></member>
+    <member refid="d0/df5/namespaceredis_1af2a1efdc14baf146475d1c963bcfa8b0" kind="variable"><name>HGET</name></member>
+    <member refid="d0/df5/namespaceredis_1a4e200406d5269e4db3f1f6b1e944fb0a" kind="variable"><name>HGETALL</name></member>
+    <member refid="d0/df5/namespaceredis_1a772387b736b460db838dac42101a7433" kind="variable"><name>HMSET</name></member>
+    <member refid="d0/df5/namespaceredis_1a7fa1c34c9dac2c5bedc3adaa376c34d2" kind="variable"><name>LRANGE</name></member>
+    <member refid="d0/df5/namespaceredis_1a6e96c91c71ef06b5d4a0d526dc7c85ad" kind="variable"><name>SCARD</name></member>
+    <member refid="d0/df5/namespaceredis_1a88fc30a12d05a6fc1e1010e074049790" kind="variable"><name>SMEMBERS</name></member>
+    <member refid="d0/df5/namespaceredis_1a1c69ed2d97f1880f096bcef307fd768a" kind="variable"><name>SUNION</name></member>
+    <member refid="d0/df5/namespaceredis_1ae3ab1db080f924103b3fe978b3020010" kind="variable"><name>SREM</name></member>
+    <member refid="d0/df5/namespaceredis_1a85b5b1fcb0358c9f445e2611b0709589" kind="variable"><name>ZADD</name></member>
+    <member refid="d0/df5/namespaceredis_1a290da67664a58c7fea43f6fee6dd54eb" kind="variable"><name>ZCARD</name></member>
+    <member refid="d0/df5/namespaceredis_1a2b73d774ada7697dcf6b817bc01d2982" kind="variable"><name>ZRANGE</name></member>
+    <member refid="d0/df5/namespaceredis_1aa6e14b4a1f13767d10436503862a790d" kind="variable"><name>ZREVRANGE</name></member>
+    <member refid="d0/df5/namespaceredis_1ab6285758fa4f74ff99f22443347321a7" kind="variable"><name>ZREM</name></member>
+    <member refid="d0/df5/namespaceredis_1adae2c7e854f3d048b255399132a2f722" kind="variable"><name>FT_DROP</name></member>
+    <member refid="d0/df5/namespaceredis_1a268c70a6a31197f6452f18bf78b0465d" kind="variable"><name>FT_CREATE</name></member>
+    <member refid="d0/df5/namespaceredis_1aff678f82620830b4bd2c86cdad5e6834" kind="variable"><name>FT_SUGGADD</name></member>
+    <member refid="d0/df5/namespaceredis_1a8ce27efbd38d402fd164e0b81f91a0f1" kind="variable"><name>FT_ADD</name></member>
+  </compound>
+  <compound refid="dd/d93/namespacestd_1_1placeholders" kind="namespace"><name>std::placeholders</name>
+  </compound>
+  <compound refid="d6/d84/namespaceutils" kind="namespace"><name>utils</name>
+    <member refid="db/d11/image_8cpp_1a2ce3cb6d0187f1b97b2cb7e92dbc9aaa" kind="function"><name>image_scale</name></member>
+    <member refid="db/d11/image_8cpp_1ad87247a8c4af1f511497a7a900172215" kind="function"><name>make_cover_uri</name></member>
+    <member refid="db/d11/image_8cpp_1aa96a322a4fcba1152bb92ef7542373b4" kind="function"><name>make_cover_path</name></member>
+    <member refid="d0/d64/imageexif_8cpp_1a9cf462b687436b4509c45b9db899319d" kind="function"><name>exif</name></member>
+  </compound>
+  <compound refid="df/d0a/main_8cpp" kind="file"><name>main.cpp</name>
+    <member refid="df/d0a/main_8cpp_1a8ee3282bc313e547dbbb8d4f4010db61" kind="function"><name>signalHandler</name></member>
+    <member refid="df/d0a/main_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="dc/d3f/__icons_8h" kind="file"><name>_icons.h</name>
+    <member refid="dc/d3f/__icons_8h_1aabe543ba3366f3f713c1e10c2ff71dd4" kind="variable"><name>squawk120_png</name></member>
+    <member refid="dc/d3f/__icons_8h_1a8fefdae84b2237fd4e952b108c130453" kind="variable"><name>squawk120_png_len</name></member>
+    <member refid="dc/d3f/__icons_8h_1a7189af4c251fdc4f7aa683db597f4549" kind="variable"><name>squawk16_png</name></member>
+    <member refid="dc/d3f/__icons_8h_1abaa9fd6127818543f65490ff04c2bb74" kind="variable"><name>squawk16_png_len</name></member>
+    <member refid="dc/d3f/__icons_8h_1a0e8ed308576a310a049f74073e2ed943" kind="variable"><name>squawk32_png</name></member>
+    <member refid="dc/d3f/__icons_8h_1ac17b787b4615d9638a58dde65ec88540" kind="variable"><name>squawk32_png_len</name></member>
+    <member refid="dc/d3f/__icons_8h_1a06a67971fd8b768a73001b533cbba8d5" kind="variable"><name>squawk48_png</name></member>
+    <member refid="dc/d3f/__icons_8h_1a47f7a496f50fc1dc2dc38f423964ec47" kind="variable"><name>squawk48_png_len</name></member>
+    <member refid="dc/d3f/__icons_8h_1a7b160bb157ebf195bbe8d4a703b45b5c" kind="variable"><name>squawk64_png</name></member>
+    <member refid="dc/d3f/__icons_8h_1ad2866bbe3ad8305a2d14e16b9e57e48d" kind="variable"><name>squawk64_png_len</name></member>
+  </compound>
+  <compound refid="dc/d45/__lua_8h" kind="file"><name>_lua.h</name>
+    <member refid="dc/d45/__lua_8h_1a97e01ed4a4dc5dd5fac4dfe9c4602694" kind="variable"><name>LUA_FLUSH</name></member>
+    <member refid="dc/d45/__lua_8h_1abd6dd9a93bb0f32b4bce62c1bb435ccb" kind="variable"><name>LUA_INDEX</name></member>
+  </compound>
+  <compound refid="dd/d42/__utils_8h" kind="file"><name>_utils.h</name>
+  </compound>
+  <compound refid="df/d59/config_8cpp" kind="file"><name>config.cpp</name>
+  </compound>
+  <compound refid="db/d16/config_8h" kind="file"><name>config.h</name>
+    <member refid="db/d16/config_8h_1a938a8c46255e5666f6a434ca0eb87f25" kind="enum"><name>ERROR_CODES</name></member>
+    <member refid="db/d16/config_8h_1a938a8c46255e5666f6a434ca0eb87f25a6ce26a62afab55d7606ad4e92428b30c" kind="enumvalue"><name>UNKNOWN</name></member>
+    <member refid="db/d16/config_8h_1a938a8c46255e5666f6a434ca0eb87f25a4b39d2ea5dfdca164568a9a9014925e8" kind="enumvalue"><name>LISTEN_ADDRESS</name></member>
+    <member refid="db/d16/config_8h_1a938a8c46255e5666f6a434ca0eb87f25a9679398211931847fcdd651349f60ba7" kind="enumvalue"><name>HTTP_PORT</name></member>
+    <member refid="db/d16/config_8h_1a938a8c46255e5666f6a434ca0eb87f25a2f5b8e9ba436145feafe6bf6707e4117" kind="enumvalue"><name>TMP_DIRECTORY</name></member>
+    <member refid="db/d16/config_8h_1a938a8c46255e5666f6a434ca0eb87f25a913a469c51f5516dc97f747caeaa108a" kind="enumvalue"><name>TMDB_KEY</name></member>
+    <member refid="db/d16/config_8h_1a938a8c46255e5666f6a434ca0eb87f25ac51e5c80f54eadabadc5902a210ca569" kind="enumvalue"><name>AMAZON_ACCESS_KEY</name></member>
+    <member refid="db/d16/config_8h_1a938a8c46255e5666f6a434ca0eb87f25a3aff5f11e5e08bb9e89505fa131c58eb" kind="enumvalue"><name>AMAZON_KEY</name></member>
+    <member refid="db/d16/config_8h_1a938a8c46255e5666f6a434ca0eb87f25a3eb0b3c78d811b28fdb69a414c0881b8" kind="enumvalue"><name>MEDIA</name></member>
+  </compound>
+  <compound refid="d9/db6/datastore_8h" kind="file"><name>datastore.h</name>
+  </compound>
+  <compound refid="df/d5e/filemetaregex_8cpp" kind="file"><name>filemetaregex.cpp</name>
+    <member refid="df/d5e/filemetaregex_8cpp_1a46287c782ae63d70dbe2bbaba37a2f66" kind="define"><name>REG_PRE</name></member>
+    <member refid="df/d5e/filemetaregex_8cpp_1a90555868a99cc2c0665494d74bf13910" kind="define"><name>REG_TRACK</name></member>
+    <member refid="df/d5e/filemetaregex_8cpp_1abb82d6336a6a16336b319b3b5d82243a" kind="define"><name>REG_ARTIST</name></member>
+    <member refid="df/d5e/filemetaregex_8cpp_1a75f90c08abb36343b5c1e25907edec33" kind="define"><name>REG_ALBUM</name></member>
+    <member refid="df/d5e/filemetaregex_8cpp_1ae6770211f0048f1f147e378b4ae5f8ff" kind="define"><name>REG_YEAR</name></member>
+    <member refid="df/d5e/filemetaregex_8cpp_1ae7d55a42f3d48a4fa83bf61d45857478" kind="define"><name>REG_TITLE</name></member>
+    <member refid="df/d5e/filemetaregex_8cpp_1ae4dfd7b0d66121016d6466d2ff10e8ba" kind="define"><name>_</name></member>
+    <member refid="df/d5e/filemetaregex_8cpp_1a92faa1fec9d21d28e8faf31b501076e2" kind="define"><name>_TIT</name></member>
+  </compound>
+  <compound refid="d6/d65/filemetaregex_8h" kind="file"><name>filemetaregex.h</name>
+  </compound>
+  <compound refid="d5/d7b/mod__albums_8cpp" kind="file"><name>mod_albums.cpp</name>
+  </compound>
+  <compound refid="d8/da5/mod__albums_8h" kind="file"><name>mod_albums.h</name>
+  </compound>
+  <compound refid="d1/d93/mod__ebooks_8cpp" kind="file"><name>mod_ebooks.cpp</name>
+  </compound>
+  <compound refid="d7/d3c/mod__ebooks_8h" kind="file"><name>mod_ebooks.h</name>
+  </compound>
+  <compound refid="dc/d37/mod__images_8cpp" kind="file"><name>mod_images.cpp</name>
+  </compound>
+  <compound refid="db/de2/mod__images_8h" kind="file"><name>mod_images.h</name>
+  </compound>
+  <compound refid="d5/d0f/mod__movies_8cpp" kind="file"><name>mod_movies.cpp</name>
+  </compound>
+  <compound refid="df/d7b/mod__movies_8h" kind="file"><name>mod_movies.h</name>
+  </compound>
+  <compound refid="de/d91/mod__series_8cpp" kind="file"><name>mod_series.cpp</name>
+  </compound>
+  <compound refid="df/d15/mod__series_8h" kind="file"><name>mod_series.h</name>
+  </compound>
+  <compound refid="d4/d77/scanner_8cpp" kind="file"><name>scanner.cpp</name>
+  </compound>
+  <compound refid="db/d62/scanner_8h" kind="file"><name>scanner.h</name>
+  </compound>
+  <compound refid="df/dd7/server_8cpp" kind="file"><name>server.cpp</name>
+  </compound>
+  <compound refid="d8/dc3/server_8h" kind="file"><name>server.h</name>
+  </compound>
+  <compound refid="d9/dde/amazon_8cpp" kind="file"><name>amazon.cpp</name>
+  </compound>
+  <compound refid="db/d39/amazon_8h" kind="file"><name>amazon.h</name>
+  </compound>
+  <compound refid="db/d11/image_8cpp" kind="file"><name>image.cpp</name>
+  </compound>
+  <compound refid="d5/db2/image_8h" kind="file"><name>image.h</name>
+  </compound>
+  <compound refid="d0/d64/imageexif_8cpp" kind="file"><name>imageexif.cpp</name>
+  </compound>
+  <compound refid="d1/d2a/imageexif_8h" kind="file"><name>imageexif.h</name>
+  </compound>
+  <compound refid="dir_ddb4d7e95cc2d6c8e1ade10a20d7247d" kind="dir"><name>src/modules</name>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>src</name>
+  </compound>
+  <compound refid="dir_313caf1132e152dd9b58bea13a4052ca" kind="dir"><name>src/utils</name>
+  </compound>
+</doxygenindex>

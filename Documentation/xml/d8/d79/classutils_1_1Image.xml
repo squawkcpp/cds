@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d8/d79/classutils_1_1Image" kind="class" language="C++" prot="public">
+    <compoundname>utils::Image</compoundname>
+    <includes refid="d5/db2/image_8h" local="no">image.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d8/d79/classutils_1_1Image_1a1990727569e7dd84a89d9cd27db6c9ca" prot="private" static="no" mutable="no">
+        <type>cv::Mat</type>
+        <definition>cv::Mat utils::Image::image_</definition>
+        <argsstring></argsstring>
+        <name>image_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/image.h" line="47" column="1" bodyfile="src/utils/image.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="d8/d79/classutils_1_1Image_1a143e2a3fa9c6dbb2f0e70169d7e99671" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>utils::Image::Image</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>Image</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>create a new image object </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/image.h" line="34" column="1" bodyfile="src/utils/image.cpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d79/classutils_1_1Image_1aa1d7f35b3fade6f28dc1ff5502985015" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int utils::Image::width</definition>
+        <argsstring>()</argsstring>
+        <name>width</name>
+        <briefdescription>
+<para>image width </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/image.h" line="37" column="1" bodyfile="src/utils/image.cpp" bodystart="35" bodyend="36"/>
+        <referencedby refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1ab5f18f0ed63bbceaf6a149fcb534615e" compoundref="d5/d7b/mod__albums_8cpp" startline="34" endline="187">cds::mod::ModAlbums::import</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="d8/d79/classutils_1_1Image_1a369742a54a5723062d68a051c2e2ce8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int utils::Image::height</definition>
+        <argsstring>()</argsstring>
+        <name>height</name>
+        <briefdescription>
+<para>image height </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/image.h" line="39" column="1" bodyfile="src/utils/image.cpp" bodystart="37" bodyend="38"/>
+        <referencedby refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1ab5f18f0ed63bbceaf6a149fcb534615e" compoundref="d5/d7b/mod__albums_8cpp" startline="34" endline="187">cds::mod::ModAlbums::import</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="d8/d79/classutils_1_1Image_1adbaa219675b555ef8587a0701b4184e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string utils::Image::scale</definition>
+        <argsstring>(const std::string &amp;path, const cds::ECoverSizes::Enum &amp;type, const std::string &amp;key)</argsstring>
+        <name>scale</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>temporary folder to put images to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const cds::ECoverSizes::Enum &amp;</type>
+          <declname>type</declname>
+          <briefdescription><para>/<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>target the image type </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>storage key </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <briefdescription>
+<para>scale image </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>image uri </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/image.h" line="42" column="1" bodyfile="src/utils/image.cpp" bodystart="40" bodyend="65"/>
+        <referencedby refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1ab5f18f0ed63bbceaf6a149fcb534615e" compoundref="d5/d7b/mod__albums_8cpp" startline="34" endline="187">cds::mod::ModAlbums::import</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>image manipulation utility </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/image.h" line="31" column="1" bodyfile="src/utils/image.h" bodystart="31" bodyend="48"/>
+    <listofallmembers>
+      <member refid="d8/d79/classutils_1_1Image_1a369742a54a5723062d68a051c2e2ce8a" prot="public" virt="non-virtual"><scope>utils::Image</scope><name>height</name></member>
+      <member refid="d8/d79/classutils_1_1Image_1a143e2a3fa9c6dbb2f0e70169d7e99671" prot="public" virt="non-virtual"><scope>utils::Image</scope><name>Image</name></member>
+      <member refid="d8/d79/classutils_1_1Image_1a1990727569e7dd84a89d9cd27db6c9ca" prot="private" virt="non-virtual"><scope>utils::Image</scope><name>image_</name></member>
+      <member refid="d8/d79/classutils_1_1Image_1adbaa219675b555ef8587a0701b4184e0" prot="public" virt="non-virtual"><scope>utils::Image</scope><name>scale</name></member>
+      <member refid="d8/d79/classutils_1_1Image_1aa1d7f35b3fade6f28dc1ff5502985015" prot="public" virt="non-virtual"><scope>utils::Image</scope><name>width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

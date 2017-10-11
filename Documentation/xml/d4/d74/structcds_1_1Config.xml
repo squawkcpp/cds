@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d4/d74/structcds_1_1Config" kind="struct" language="C++" prot="public">
+    <compoundname>cds::Config</compoundname>
+    <includes refid="db/d16/config_8h" local="no">config.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d4/d74/structcds_1_1Config_1afa3b801d784f6504d14b4d170f709185" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::Config::listen_address</definition>
+        <argsstring></argsstring>
+        <name>listen_address</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.h" line="50" column="1" bodyfile="src/config.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d74/structcds_1_1Config_1a37047d6d2dc4ef4bee25028a272ad538" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::Config::http_port</definition>
+        <argsstring></argsstring>
+        <name>http_port</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.h" line="50" column="1" bodyfile="src/config.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d74/structcds_1_1Config_1a71bcfcf7b52896db3fb1a0e0ee297b10" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::Config::tmp_directory</definition>
+        <argsstring></argsstring>
+        <name>tmp_directory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.h" line="50" column="1" bodyfile="src/config.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d74/structcds_1_1Config_1a277c9a29db1c09a7e8a6219acd76345b" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::Config::tmdb_key</definition>
+        <argsstring></argsstring>
+        <name>tmdb_key</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.h" line="51" column="1" bodyfile="src/config.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d74/structcds_1_1Config_1afba0c2a68f52bade65c00b7e392d446f" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::Config::amazon_access_key</definition>
+        <argsstring></argsstring>
+        <name>amazon_access_key</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.h" line="51" column="1" bodyfile="src/config.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d74/structcds_1_1Config_1a02b2522ba94c95c9742e05a89e130bdd" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::Config::amazon_key</definition>
+        <argsstring></argsstring>
+        <name>amazon_key</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.h" line="51" column="1" bodyfile="src/config.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d74/structcds_1_1Config_1a70f89a2177a0af7dfa67de525cac3532" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; cds::Config::media</definition>
+        <argsstring></argsstring>
+        <name>media</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.h" line="52" column="1" bodyfile="src/config.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>cds configuration </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/config.h" line="48" column="1" bodyfile="src/config.h" bodystart="48" bodyend="53"/>
+    <listofallmembers>
+      <member refid="d4/d74/structcds_1_1Config_1afba0c2a68f52bade65c00b7e392d446f" prot="public" virt="non-virtual"><scope>cds::Config</scope><name>amazon_access_key</name></member>
+      <member refid="d4/d74/structcds_1_1Config_1a02b2522ba94c95c9742e05a89e130bdd" prot="public" virt="non-virtual"><scope>cds::Config</scope><name>amazon_key</name></member>
+      <member refid="d4/d74/structcds_1_1Config_1a37047d6d2dc4ef4bee25028a272ad538" prot="public" virt="non-virtual"><scope>cds::Config</scope><name>http_port</name></member>
+      <member refid="d4/d74/structcds_1_1Config_1afa3b801d784f6504d14b4d170f709185" prot="public" virt="non-virtual"><scope>cds::Config</scope><name>listen_address</name></member>
+      <member refid="d4/d74/structcds_1_1Config_1a70f89a2177a0af7dfa67de525cac3532" prot="public" virt="non-virtual"><scope>cds::Config</scope><name>media</name></member>
+      <member refid="d4/d74/structcds_1_1Config_1a277c9a29db1c09a7e8a6219acd76345b" prot="public" virt="non-virtual"><scope>cds::Config</scope><name>tmdb_key</name></member>
+      <member refid="d4/d74/structcds_1_1Config_1a71bcfcf7b52896db3fb1a0e0ee297b10" prot="public" virt="non-virtual"><scope>cds::Config</scope><name>tmp_directory</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

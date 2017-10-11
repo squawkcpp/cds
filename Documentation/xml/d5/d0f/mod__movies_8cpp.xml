@@ -1,0 +1,424 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d5/d0f/mod__movies_8cpp" kind="file" language="C++">
+    <compoundname>mod_movies.cpp</compoundname>
+    <includes refid="df/d7b/mod__movies_8h" local="yes">mod_movies.h</includes>
+    <includes local="no">boost/filesystem.hpp</includes>
+    <includes local="yes">spdlog/spdlog.h</includes>
+    <includes local="yes">rapidjson/document.h</includes>
+    <includes local="yes">format.h</includes>
+    <includes local="yes">codec.h</includes>
+    <includes local="yes">http/httpclient.h</includes>
+    <includes refid="dd/d42/__utils_8h" local="yes">../_utils.h</includes>
+    <includes refid="d9/db6/datastore_8h" local="yes">../datastore.h</includes>
+    <includes refid="d5/db2/image_8h" local="yes">../utils/image.h</includes>
+    <incdepgraph>
+      <node id="367">
+        <label>../utils/image.h</label>
+        <link refid="d5/db2/image_8h_source"/>
+        <childnode refid="340" relation="include">
+        </childnode>
+        <childnode refid="363" relation="include">
+        </childnode>
+        <childnode refid="361" relation="include">
+        </childnode>
+      </node>
+      <node id="364">
+        <label>boost/algorithm/string.hpp</label>
+      </node>
+      <node id="354">
+        <label>system_error</label>
+      </node>
+      <node id="342">
+        <label>functional</label>
+      </node>
+      <node id="349">
+        <label>fmt/format.h</label>
+      </node>
+      <node id="348">
+        <label>boost/functional/hash.hpp</label>
+      </node>
+      <node id="347">
+        <label>boost/tokenizer.hpp</label>
+      </node>
+      <node id="360">
+        <label>http/httpclient.h</label>
+      </node>
+      <node id="358">
+        <label>format.h</label>
+      </node>
+      <node id="346">
+        <label>boost/foreach.hpp</label>
+      </node>
+      <node id="350">
+        <label>redox.hpp</label>
+      </node>
+      <node id="351">
+        <label>gtest/gtest_prod.h</label>
+      </node>
+      <node id="363">
+        <label>opencv2/opencv.hpp</label>
+      </node>
+      <node id="340">
+        <label>string</label>
+      </node>
+      <node id="341">
+        <label>../datastore.h</label>
+        <link refid="d9/db6/datastore_8h_source"/>
+        <childnode refid="342" relation="include">
+        </childnode>
+        <childnode refid="343" relation="include">
+        </childnode>
+        <childnode refid="344" relation="include">
+        </childnode>
+        <childnode refid="340" relation="include">
+        </childnode>
+        <childnode refid="345" relation="include">
+        </childnode>
+        <childnode refid="346" relation="include">
+        </childnode>
+        <childnode refid="347" relation="include">
+        </childnode>
+        <childnode refid="348" relation="include">
+        </childnode>
+        <childnode refid="349" relation="include">
+        </childnode>
+        <childnode refid="350" relation="include">
+        </childnode>
+        <childnode refid="351" relation="include">
+        </childnode>
+      </node>
+      <node id="343">
+        <label>map</label>
+      </node>
+      <node id="344">
+        <label>regex</label>
+      </node>
+      <node id="357">
+        <label>rapidjson/document.h</label>
+      </node>
+      <node id="356">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="359">
+        <label>codec.h</label>
+      </node>
+      <node id="365">
+        <label>rapidxml_ns.hpp</label>
+      </node>
+      <node id="366">
+        <label>rapidxml_ns_print.hpp</label>
+      </node>
+      <node id="352">
+        <label>../config.h</label>
+        <link refid="db/d16/config_8h_source"/>
+        <childnode refid="353" relation="include">
+        </childnode>
+        <childnode refid="340" relation="include">
+        </childnode>
+        <childnode refid="354" relation="include">
+        </childnode>
+        <childnode refid="345" relation="include">
+        </childnode>
+      </node>
+      <node id="345">
+        <label>vector</label>
+      </node>
+      <node id="355">
+        <label>boost/filesystem.hpp</label>
+      </node>
+      <node id="361">
+        <label>../_utils.h</label>
+        <link refid="dd/d42/__utils_8h_source"/>
+        <childnode refid="362" relation="include">
+        </childnode>
+        <childnode refid="344" relation="include">
+        </childnode>
+        <childnode refid="343" relation="include">
+        </childnode>
+        <childnode refid="340" relation="include">
+        </childnode>
+        <childnode refid="345" relation="include">
+        </childnode>
+        <childnode refid="363" relation="include">
+        </childnode>
+        <childnode refid="356" relation="include">
+        </childnode>
+        <childnode refid="364" relation="include">
+        </childnode>
+        <childnode refid="365" relation="include">
+        </childnode>
+        <childnode refid="366" relation="include">
+        </childnode>
+        <childnode refid="349" relation="include">
+        </childnode>
+      </node>
+      <node id="339">
+        <label>mod_movies.h</label>
+        <link refid="df/d7b/mod__movies_8h_source"/>
+        <childnode refid="340" relation="include">
+        </childnode>
+        <childnode refid="341" relation="include">
+        </childnode>
+        <childnode refid="352" relation="include">
+        </childnode>
+        <childnode refid="351" relation="include">
+        </childnode>
+      </node>
+      <node id="338">
+        <label>src/modules/mod_movies.cpp</label>
+        <link refid="mod_movies.cpp"/>
+        <childnode refid="339" relation="include">
+        </childnode>
+        <childnode refid="355" relation="include">
+        </childnode>
+        <childnode refid="356" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+        <childnode refid="358" relation="include">
+        </childnode>
+        <childnode refid="359" relation="include">
+        </childnode>
+        <childnode refid="360" relation="include">
+        </childnode>
+        <childnode refid="361" relation="include">
+        </childnode>
+        <childnode refid="341" relation="include">
+        </childnode>
+        <childnode refid="367" relation="include">
+        </childnode>
+      </node>
+      <node id="362">
+        <label>algorithm</label>
+      </node>
+      <node id="353">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="d9/d60/namespacecds">cds</innernamespace>
+    <innernamespace refid="d1/d65/namespacecds_1_1mod">cds::mod</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/><sp/><sp/><sp/>This<sp/>program<sp/>is<sp/>free<sp/>software:<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or<sp/>modify</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/><sp/><sp/><sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>as<sp/>published<sp/>by</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/><sp/><sp/><sp/>the<sp/>Free<sp/>Software<sp/>Foundation,<sp/>either<sp/>version<sp/>3<sp/>of<sp/>the<sp/>License,<sp/>or</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/><sp/><sp/><sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"></highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/><sp/><sp/><sp/>This<sp/>program<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/><sp/><sp/><sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/><sp/><sp/><sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/><sp/><sp/><sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/><sp/><sp/><sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/><sp/><sp/>along<sp/>with<sp/>this<sp/>program.<sp/><sp/>If<sp/>not,<sp/>see<sp/>&lt;http://www.gnu.org/licenses/&gt;.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;mod_movies.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/filesystem.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spdlog/spdlog.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;rapidjson/document.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;format.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;codec.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;http/httpclient.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../_utils.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../datastore.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../utils/image.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="d9/d60/namespacecds" kindref="compound">cds</ref><sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">mod<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ModMovies::import<sp/>(<sp/>data::redis_ptr<sp/><ref refid="d0/df5/namespaceredis" kindref="compound">redis</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref><sp/>config,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="de/db2/namespacekey" kindref="compound">key</ref><sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data::node_t<sp/>_node<sp/>=<sp/><ref refid="df/dea/structdata_1a2767cb86aa09c29a549ab449809ec812" kindref="member">data::node</ref><sp/>(<sp/>redis,<sp/>key<sp/>);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Get<sp/>the<sp/>track<sp/>information</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>av::Format<sp/>_format<sp/>(<sp/>_node[param::PATH]<sp/>);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>!!_format<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spdlog::get<sp/>(<sp/>LOGGER<sp/>)-&gt;warn<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;Can<sp/>not<sp/>open<sp/>movie<sp/>file:{}<sp/>({})&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_format.errc().message(),</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_node[param::PATH]<sp/>);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//get<sp/>the<sp/>movie<sp/>metadata<sp/>from<sp/>tmdb</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_clean_string<sp/>=<sp/>clean_string<sp/>(<sp/>remove_skip_list<sp/>(<sp/>trash_words,<sp/>_node[param::NAME]<sp/>)<sp/>);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sleep<sp/>(<sp/>SLEEP<sp/>);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_tmdb_result<sp/>=<sp/>tmdb_search(<sp/>config-&gt;tmdb_key,<sp/>_clean_string<sp/>);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_tmdb_movie_list<sp/>=<sp/>tmdb_parse(<sp/>_tmdb_result<sp/>);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>!_tmdb_movie_list.empty()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_found<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>_movie_id;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>__movie<sp/>:<sp/>_tmdb_movie_list<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>__movie.at(<sp/>param::TITLE<sp/>)<sp/>==<sp/>_clean_string<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_found<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie_id<sp/>=<sp/>__movie.at(<sp/></highlight><highlight class="stringliteral">&quot;id&quot;</highlight><highlight class="normal"><sp/>);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>!_found<sp/>)</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_movie_id<sp/>=<sp/>_tmdb_movie_list.at(<sp/>0<sp/>).at(<sp/></highlight><highlight class="stringliteral">&quot;id&quot;</highlight><highlight class="normal"><sp/>);<sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//set<sp/>the<sp/>values<sp/>from<sp/>tmdb<sp/>to<sp/>the<sp/>video<sp/>item.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_tmdb_movie_result<sp/>=<sp/>tmdb_movie(<sp/>config-&gt;tmdb_key,<sp/>_movie_id<sp/>);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_tmdb_movie<sp/>=<sp/>tmdb_parse_movie(<sp/>_tmdb_movie_result<sp/>);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_width<sp/>=<sp/>0,<sp/>_height<sp/>=<sp/>0,<sp/>_playtime<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>codec<sp/>=<sp/>_format.find_codec<sp/>(<sp/>av::CODEC_TYPE::VIDEO<sp/>);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="comment">//TODO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_width<sp/>=<sp/>codec-&gt;width();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_height<sp/>=<sp/>codec-&gt;height();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_playtime<sp/>=<sp/>_format.playtime();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//get<sp/>backdrop<sp/>image</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_backdrop_key<sp/>=<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref><sp/>(<sp/>_tmdb_movie.backdrop_path<sp/>);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_backdrop_path<sp/>=<sp/>fmt::format<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;{}/{}.jpg&quot;</highlight><highlight class="normal">,<sp/>config-&gt;tmp_directory,<sp/>_backdrop_key<sp/>);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmdb_fetch<sp/>(<sp/>_tmdb_movie.backdrop_path,<sp/>_backdrop_path<sp/>);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//get<sp/>poster<sp/>image</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_poster_key<sp/>=<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref><sp/>(<sp/>_tmdb_movie.poster_path<sp/>);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_poster_path<sp/>=<sp/>fmt::format<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;{}/{}.jpg&quot;</highlight><highlight class="normal">,<sp/>config-&gt;tmp_directory,<sp/>_poster_key<sp/>);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmdb_fetch<sp/>(<sp/>_tmdb_movie.poster_path,<sp/>_poster_path<sp/>);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="d8/d79/classutils_1_1Image" kindref="compound">utils::Image</ref><sp/>image_meta_<sp/>(<sp/>_poster_path<sp/>);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>image_meta_.scale<sp/>(<sp/>config-&gt;tmp_directory,<sp/>ECoverSizes::TN,<sp/>key<sp/>);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>image_meta_.scale<sp/>(<sp/>config-&gt;tmp_directory,<sp/>ECoverSizes::MED,<sp/>key<sp/>);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a8cfbc54186127ff485d7d1464f6388cd" kindref="member">data::save</ref><sp/>(<sp/>redis,<sp/>key,<sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::WIDTH,<sp/>std::to_string<sp/>(<sp/>_width<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::HEIGHT,<sp/>std::to_string<sp/>(<sp/>_height<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::PLAYTIME,<sp/>std::to_string<sp/>(<sp/>_playtime<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::BACKDROP_PATH,<sp/>fmt::format<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;/img/{}.jpg&quot;</highlight><highlight class="normal">,<sp/>_backdrop_key<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::HOMEPAGE,<sp/>_tmdb_movie.homepage<sp/>},</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::TMDB_ID,<sp/>_tmdb_movie.id<sp/>},</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::IMDB_ID,<sp/>_tmdb_movie.imdb_id<sp/>},</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::LANGUAGE,<sp/>_tmdb_movie.original_language<sp/>},</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::TITLE,<sp/>_tmdb_movie.original_title<sp/>},</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::COMMENT,<sp/>_tmdb_movie.overview<sp/>},</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::POSTER_PATH,<sp/>fmt::format<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;/img/{}.jpg&quot;</highlight><highlight class="normal">,<sp/>_poster_key<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::DATE,<sp/>_tmdb_movie.release_date<sp/>},</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::PLAYTIME,<sp/>_tmdb_movie.runtime<sp/>},</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight><highlight class="stringliteral">&quot;tagline&quot;</highlight><highlight class="normal">,<sp/>_tmdb_movie.tagline<sp/>},<sp/></highlight><highlight class="comment">//TODO<sp/>what<sp/>is<sp/>the<sp/>content<sp/>of<sp/>the<sp/>tagline</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::TITLE,<sp/>_tmdb_movie.title<sp/>},</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::THUMB,<sp/>fmt::format<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;/img/tn_{}.jpg&quot;</highlight><highlight class="normal">,<sp/>key<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//save<sp/>genre<sp/>tags</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>__tag<sp/>:<sp/>_tmdb_movie.genres<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1aed37180149542e4f1d61f376cc57168c" kindref="member">data::add_tag</ref>(<sp/>redis,<sp/>param::GENRE,<sp/>__tag,<sp/>data::NodeType::movie,<sp/>key,<sp/>0<sp/>);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="comment">//TODO<sp/>get<sp/>cover<sp/>from<sp/>movie</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spdlog::get<sp/>(<sp/>LOGGER<sp/>)-&gt;warn<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;NO<sp/>TMDB_RESULT:<sp/>({})&quot;</highlight><highlight class="normal">,<sp/>_clean_string<sp/>);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_last_write_time<sp/>=<sp/>boost::filesystem::last_write_time(<sp/><ref refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" kindref="member">data::get</ref>(<sp/>redis,<sp/>key,<sp/>param::PATH<sp/>)<sp/>);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1af449933948671c86a051c08d4876ede4" kindref="member">data::add_nodes</ref>(<sp/>redis,<sp/>data::NodeType::movie,<sp/>key,<sp/>_last_write_time<sp/>);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(<sp/>...<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spdlog::get<sp/>(<sp/>LOGGER<sp/>)-&gt;error<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;exception<sp/>mod<sp/>movies.&quot;</highlight><highlight class="normal"><sp/>);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="121"><highlight class="normal">std::string<sp/>ModMovies::tmdb_search<sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>api_key,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>http::HttpClient&lt;<sp/>http::Http&gt;<sp/><sp/>client_<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;api.themoviedb.org&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;http&quot;</highlight><highlight class="normal"><sp/>);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>http::Request<sp/>request_<sp/>(<sp/>fmt::format<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;/3/search/movie?api_key={0}&amp;query={1}&amp;include_adult=true&quot;</highlight><highlight class="normal">,<sp/>api_key,<sp/>http::utils::UrlEscape::urlEncode<sp/>(<sp/>name<sp/>)<sp/>)<sp/>);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>std::stringstream<sp/>_sstream;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>client_.get<sp/>(<sp/>request_,<sp/>_sstream<sp/>);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>SPDLOG_TRACE<sp/>(<sp/>spdlog::get<sp/>(<sp/>LOGGER<sp/>),<sp/></highlight><highlight class="stringliteral">&quot;TMDB<sp/>RESULT:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>_sstream.str()<sp/>);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_sstream.str();</highlight></codeline>
+<codeline lineno="128"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal">std::string<sp/>ModMovies::tmdb_movie<sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>api_key,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>movie_id<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>http::HttpClient&lt;<sp/>http::Http&gt;<sp/><sp/>client_<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;api.themoviedb.org&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;http&quot;</highlight><highlight class="normal"><sp/>);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>http::Request<sp/>request_<sp/>(<sp/>fmt::format<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;/3/movie/{}?api_key={}&quot;</highlight><highlight class="normal">,<sp/>movie_id,<sp/>api_key<sp/>)<sp/>);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>std::stringstream<sp/>_sstream;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>client_.get<sp/>(<sp/>request_,<sp/>_sstream<sp/>);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>SPDLOG_TRACE<sp/>(<sp/>spdlog::get<sp/>(<sp/>LOGGER<sp/>),<sp/></highlight><highlight class="stringliteral">&quot;TMDB<sp/>RESULT:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>_sstream.str()<sp/>);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_sstream.str();</highlight></codeline>
+<codeline lineno="136"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal">std::vector<sp/>&lt;<sp/>std::map&lt;std::string,<sp/>std::string<sp/>&gt;<sp/>&gt;<sp/>ModMovies::tmdb_parse<sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>result<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector<sp/>&lt;<sp/>std::map&lt;std::string,<sp/>std::string<sp/>&gt;<sp/>&gt;<sp/>_movies;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>rapidjson::Document<sp/>document;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>document.Parse<sp/>(<sp/>result.c_str()<sp/>);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>results<sp/>=<sp/>document[<sp/></highlight><highlight class="stringliteral">&quot;results&quot;</highlight><highlight class="normal"><sp/>];</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>assert<sp/>(<sp/>results.IsArray()<sp/>);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>itr<sp/>=<sp/>results.Begin();<sp/>itr<sp/>!=<sp/>results.End();<sp/>++itr<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>std::string<sp/>&gt;<sp/>_movie;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_obj<sp/>=<sp/>itr-&gt;MemberBegin();<sp/>_obj<sp/>!=<sp/>itr-&gt;MemberEnd();<sp/>++_obj<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/><sp/>strcmp<sp/>(<sp/>_obj-&gt;name.GetString(),<sp/></highlight><highlight class="stringliteral">&quot;id&quot;</highlight><highlight class="normal"><sp/>)<sp/>==<sp/>0<sp/>&amp;&amp;<sp/>_obj-&gt;value.IsInt()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie[</highlight><highlight class="stringliteral">&quot;id&quot;</highlight><highlight class="normal">]<sp/>=<sp/>std::to_string(<sp/>_obj-&gt;value.GetInt()<sp/>);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>strcmp<sp/>(<sp/>_obj-&gt;name.GetString(),<sp/>param::TITLE.c_str()<sp/>)<sp/>==<sp/>0<sp/>&amp;&amp;<sp/>_obj-&gt;value.IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie[param::TITLE]<sp/>=<sp/>_obj-&gt;value.GetString();</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movies.push_back<sp/>(<sp/>_movie<sp/>);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_movies;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="160"><highlight class="normal">TmdbMovie<sp/>ModMovies::tmdb_parse_movie<sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>result<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>rapidjson::Document<sp/>document;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>document.Parse<sp/>(<sp/>result.c_str()<sp/>);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>TmdbMovie<sp/>_movie;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/>param::BACKDROP_PATH.c_str()<sp/>)<sp/>&amp;&amp;<sp/>document[param::BACKDROP_PATH.c_str()].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.backdrop_path<sp/>=<sp/>document[param::BACKDROP_PATH.c_str()].GetString();</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/>param::HOMEPAGE.c_str()<sp/>)<sp/>&amp;&amp;<sp/>document[param::HOMEPAGE.c_str()].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.homepage<sp/>=<sp/>document[param::HOMEPAGE.c_str()].GetString();</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;id&quot;</highlight><highlight class="normal"><sp/>)<sp/>&amp;&amp;<sp/>document[</highlight><highlight class="stringliteral">&quot;id&quot;</highlight><highlight class="normal">].IsInt()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.id<sp/>=<sp/>std::to_string(<sp/>document[</highlight><highlight class="stringliteral">&quot;id&quot;</highlight><highlight class="normal">].GetInt()<sp/>);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;imdb_id&quot;</highlight><highlight class="normal"><sp/>)<sp/>&amp;&amp;<sp/>document[</highlight><highlight class="stringliteral">&quot;imdb_id&quot;</highlight><highlight class="normal">].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.imdb_id<sp/>=<sp/>document[</highlight><highlight class="stringliteral">&quot;imdb_id&quot;</highlight><highlight class="normal">].GetString();</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;original_language&quot;</highlight><highlight class="normal"><sp/>)<sp/>&amp;&amp;<sp/>document[</highlight><highlight class="stringliteral">&quot;original_language&quot;</highlight><highlight class="normal">].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.original_language<sp/>=<sp/>document[</highlight><highlight class="stringliteral">&quot;original_language&quot;</highlight><highlight class="normal">].GetString();</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;original_title&quot;</highlight><highlight class="normal"><sp/>)<sp/>&amp;&amp;<sp/>document[</highlight><highlight class="stringliteral">&quot;original_title&quot;</highlight><highlight class="normal">].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.original_title<sp/>=<sp/>document[</highlight><highlight class="stringliteral">&quot;original_title&quot;</highlight><highlight class="normal">].GetString();</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;overview&quot;</highlight><highlight class="normal"><sp/>)<sp/>&amp;&amp;<sp/>document[</highlight><highlight class="stringliteral">&quot;overview&quot;</highlight><highlight class="normal">].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.overview<sp/>=<sp/>document[</highlight><highlight class="stringliteral">&quot;overview&quot;</highlight><highlight class="normal">].GetString();</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;poster_path&quot;</highlight><highlight class="normal"><sp/>)<sp/>&amp;&amp;<sp/>document[</highlight><highlight class="stringliteral">&quot;poster_path&quot;</highlight><highlight class="normal">].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.poster_path<sp/>=<sp/>document[</highlight><highlight class="stringliteral">&quot;poster_path&quot;</highlight><highlight class="normal">].GetString();</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;release_date&quot;</highlight><highlight class="normal"><sp/>)<sp/>&amp;&amp;<sp/>document[</highlight><highlight class="stringliteral">&quot;release_date&quot;</highlight><highlight class="normal">].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.release_date<sp/>=<sp/>document[</highlight><highlight class="stringliteral">&quot;release_date&quot;</highlight><highlight class="normal">].GetString();</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;runtime&quot;</highlight><highlight class="normal"><sp/>)<sp/>&amp;&amp;<sp/>document[</highlight><highlight class="stringliteral">&quot;runtime&quot;</highlight><highlight class="normal">].IsInt()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.runtime<sp/>=<sp/>std::to_string(<sp/>document[</highlight><highlight class="stringliteral">&quot;runtime&quot;</highlight><highlight class="normal">].GetInt()<sp/>);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;tagline&quot;</highlight><highlight class="normal"><sp/>)<sp/>&amp;&amp;<sp/>document[</highlight><highlight class="stringliteral">&quot;tagline&quot;</highlight><highlight class="normal">].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.tagline<sp/>=<sp/>document[</highlight><highlight class="stringliteral">&quot;tagline&quot;</highlight><highlight class="normal">].GetString();</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/>param::TITLE.c_str()<sp/>)<sp/>&amp;&amp;<sp/>document[param::TITLE.c_str()].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.title<sp/>=<sp/>document[param::TITLE.c_str()].GetString();</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>document.HasMember<sp/>(<sp/>key::GENRES.c_str()<sp/>)<sp/>&amp;&amp;<sp/>document[key::GENRES.c_str()].IsArray()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>__genre<sp/>:<sp/>document[key::GENRES.c_str()].GetArray()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>__genre.HasMember<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;name&quot;</highlight><highlight class="normal"><sp/>)<sp/>&amp;&amp;<sp/>__genre[</highlight><highlight class="stringliteral">&quot;name&quot;</highlight><highlight class="normal">].IsString()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_movie.genres.push_back(<sp/>__genre[</highlight><highlight class="stringliteral">&quot;name&quot;</highlight><highlight class="normal">].GetString()<sp/>);</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_movie;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ModMovies::tmdb_fetch<sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>uri,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>std::ofstream<sp/>_sstream<sp/>(<sp/>path<sp/>);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/>http::get<sp/>(<sp/>fmt::format<sp/>(<sp/></highlight><highlight class="stringliteral">&quot;http://image.tmdb.org/t/p/original{}&quot;</highlight><highlight class="normal">,<sp/>uri<sp/>),<sp/>_sstream<sp/>);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal">}</highlight><highlight class="comment">//namespace<sp/>mod</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal">}</highlight><highlight class="comment">//namespace<sp/>cds</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/modules/mod_movies.cpp"/>
+  </compounddef>
+</doxygen>

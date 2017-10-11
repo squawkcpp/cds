@@ -1,0 +1,535 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="df/d63/classcds_1_1Scanner" kind="class" language="C++" prot="public">
+    <compoundname>cds::Scanner</compoundname>
+    <includes refid="db/d62/scanner_8h" local="no">scanner.h</includes>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="df/d63/classcds_1_1Scanner_1a1eeb741152660de8dc2420cbfe63751f" prot="private" static="yes" mutable="no">
+        <type>const std::array&lt; std::regex, 3 &gt;</type>
+        <definition>const std::array&lt; std::regex, 3 &gt; cds::Scanner::_disc_patterns</definition>
+        <argsstring></argsstring>
+        <name>_disc_patterns</name>
+        <initializer>{
+    {std::regex(&quot;(/.*)/CD[0-9]*&quot;, std::regex_constants::icase ),
+    std::regex(&quot;(/.*)/DISC[0-9]*&quot;, std::regex_constants::icase ),
+    std::regex(&quot;(/.*)/DISK[0-9]*&quot;, std::regex_constants::icase )}
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="41" column="1" bodyfile="src/scanner.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1ad65da450bbf06bb2ad93c2293c092a1f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::Scanner::import_files</definition>
+        <argsstring>(data::redis_ptr redis, const config_ptr config)</argsstring>
+        <name>import_files</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>redis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to redis database object. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const <ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref></type>
+          <declname>config</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to configuration object. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <briefdescription>
+<para>import files </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="33" column="1" bodyfile="src/scanner.cpp" bodystart="40" bodyend="67"/>
+        <references refid="df/dea/structdata_1a8cfbc54186127ff485d7d1464f6388cd" compoundref="d9/db6/datastore_8h" startline="293" endline="302">data::save</references>
+        <references refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" compoundref="d9/db6/datastore_8h" startline="159" endline="167">data::hash</references>
+        <references refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" compoundref="d9/db6/datastore_8h" startline="174" endline="176">data::NodeType::str</references>
+        <references refid="df/dea/structdata_1a3e5d28bf1fc99f5389f0eeddb348856e" compoundref="d9/db6/datastore_8h" startline="403" endline="404">data::add_types</references>
+        <references refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1ab5f18f0ed63bbceaf6a149fcb534615e" compoundref="d5/d7b/mod__albums_8cpp" startline="34" endline="187">cds::mod::ModAlbums::import</references>
+        <references refid="df/dea/structdata_1ab9369687e5b0247b92fa21cd6650324a" compoundref="d9/db6/datastore_8h" startline="391" endline="396">data::eval</references>
+        <references refid="db/d7b/classcds_1_1FileMetaRegex_1a337a38c50294bc5d71c7524c44277565" compoundref="df/d5e/filemetaregex_8cpp" startline="39" endline="87">cds::FileMetaRegex::parse</references>
+        <references refid="df/dea/structdata_1ad7c44e770e55dacb9c2e62ce30fdbef4" compoundref="d9/db6/datastore_8h" startline="153" endline="157">data::time_millis</references>
+        <references refid="df/dea/structdata_1af449933948671c86a051c08d4876ede4" compoundref="d9/db6/datastore_8h" startline="410" endline="411">data::add_nodes</references>
+        <references refid="df/dea/structdata_1a5aa923122403f67c925102e270c37a9d" compoundref="d9/db6/datastore_8h" startline="428" endline="434">data::incr_mime</references>
+        <references refid="df/dea/structdata_1a64d1a0d542b5966540c6297d994c06e5" compoundref="d9/db6/datastore_8h" startline="235" endline="242">data::make_key</references>
+        <references refid="df/dea/structdata_1aeafb3837ce1e2fbfea65c76431ef4fb8" compoundref="d9/db6/datastore_8h" startline="314" endline="340">data::children</references>
+        <references refid="df/dea/structdata_1af522b9d33db275e430e18b4725494340" compoundref="d9/db6/datastore_8h" startline="224" endline="231">data::is_mod</references>
+        <references refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" compoundref="d9/db6/datastore_8h" startline="274" endline="281">data::get</references>
+        <references refid="df/dea/structdata_1a1ca7fdb881f181131b61e9429e9c83ec" compoundref="d9/db6/datastore_8h" startline="406" endline="407">data::rem_types</references>
+        <references refid="df/dea/structdata_1a659e370f3ef17b04342b89e8a353cd19" compoundref="d9/db6/datastore_8h" startline="413" endline="414">data::rem_nodes</references>
+        <references refid="df/de0/classdata_1_1NodeType_1ac6fb806749e55ecbd940d721f355a97b" compoundref="d9/db6/datastore_8h" startline="179" endline="211">data::NodeType::parse</references>
+        <references refid="df/dea/structdata_1adae832d78a0adf2a0b4abca522757126" compoundref="d9/db6/datastore_8h" startline="245" endline="247">data::make_key_node</references>
+        <referencedby refid="de/ddd/classcds_1_1Server_1aaa29a062d4cac4928dd68a39901af02b" compoundref="df/dd7/server_8cpp" startline="394" endline="415">cds::Server::keywords</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1ad2edfe5f9d7d538ed0eb52033e335793" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::Scanner::flush</definition>
+        <argsstring>(data::redis_ptr redis)</argsstring>
+        <name>flush</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>redis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the database pointer. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <briefdescription>
+<para>flush content with the given prefix. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="36" column="1" bodyfile="src/scanner.cpp" bodystart="180" bodyend="188"/>
+        <references refid="df/dea/structdata_1ab9369687e5b0247b92fa21cd6650324a" compoundref="d9/db6/datastore_8h" startline="391" endline="396">data::eval</references>
+        <references refid="df/dea/structdata_1a3e5d28bf1fc99f5389f0eeddb348856e" compoundref="d9/db6/datastore_8h" startline="403" endline="404">data::add_types</references>
+        <references refid="df/dea/structdata_1ad7c44e770e55dacb9c2e62ce30fdbef4" compoundref="d9/db6/datastore_8h" startline="153" endline="157">data::time_millis</references>
+        <references refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" compoundref="d9/db6/datastore_8h" startline="174" endline="176">data::NodeType::str</references>
+        <references refid="df/dea/structdata_1a8cfbc54186127ff485d7d1464f6388cd" compoundref="d9/db6/datastore_8h" startline="293" endline="302">data::save</references>
+        <references refid="df/dea/structdata_1aeafb3837ce1e2fbfea65c76431ef4fb8" compoundref="d9/db6/datastore_8h" startline="314" endline="340">data::children</references>
+        <references refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" compoundref="d9/db6/datastore_8h" startline="274" endline="281">data::get</references>
+        <referencedby refid="de/ddd/classcds_1_1Server_1aaa29a062d4cac4928dd68a39901af02b" compoundref="df/dd7/server_8cpp" startline="394" endline="415">cds::Server::keywords</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1a0557278e5c78f2b5e279742fa48fa9f5" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cds::Scanner::Scanner</definition>
+        <argsstring>()</argsstring>
+        <name>Scanner</name>
+        <briefdescription>
+<para>hide constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="40" column="1" bodyfile="src/scanner.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1ae9f2e51e71fd1346f82c1feab59112c1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>cds::Scanner::FRIEND_TEST</definition>
+        <argsstring>(ScannerTest, remove_disc)</argsstring>
+        <name>FRIEND_TEST</name>
+        <param>
+          <type>ScannerTest</type>
+        </param>
+        <param>
+          <type>remove_disc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="55" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1a2982347b94a83cd0ab60d32556206ea2" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::Scanner::import_directory</definition>
+        <argsstring>(data::redis_ptr redis, magic_t &amp;_magic, const std::string &amp;parent_key, const std::string &amp;path)</argsstring>
+        <name>import_directory</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+        </param>
+        <param>
+          <type>magic_t &amp;</type>
+          <declname>_magic</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>parent_key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="43" column="1" bodyfile="src/scanner.cpp" bodystart="68" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1a1cafd206ba910c503209313d89feb31b" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void cds::Scanner::import_video</definition>
+        <argsstring>(data::redis_ptr redis)</argsstring>
+        <name>import_video</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="44" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1af9d44ced4927cdb3a5d12806f0af7020" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void cds::Scanner::import_images</definition>
+        <argsstring>(data::redis_ptr redis)</argsstring>
+        <name>import_images</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="45" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1a192f0dc786f72f60751ab548a667d71f" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void cds::Scanner::import_books</definition>
+        <argsstring>(data::redis_ptr redis)</argsstring>
+        <name>import_books</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1aaf2454c55a544e5f4f3cca845bfe6f72" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::Scanner::new_item</definition>
+        <argsstring>(data::redis_ptr redis, const std::string &amp;parent, const std::string &amp;key, const data::NodeType::Enum type)</argsstring>
+        <name>new_item</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>redis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>redis database pointer. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>parent</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parent path for audiofiles. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>key of the node. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const data::NodeType::Enum</type>
+          <declname>type</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of the node. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="47" column="1" bodyfile="src/scanner.cpp" bodystart="111" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1a4a43f5ca826ec504ed57878c5082ec1f" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::Scanner::sweep</definition>
+        <argsstring>(data::redis_ptr redis, const std::string &amp;key)</argsstring>
+        <name>sweep</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="51" column="1" bodyfile="src/scanner.cpp" bodystart="121" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1a4e447ae990c2814f848f5c9873e61e68" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool cds::Scanner::timestamp</definition>
+        <argsstring>(data::redis_ptr redis, const std::string &amp;key, unsigned long timestamp)</argsstring>
+        <name>timestamp</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>redis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>redis database pointer. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>key of the node. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>unsigned long</type>
+          <declname>timestamp</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timestamp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the last write timestamp. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="52" column="1" bodyfile="src/scanner.cpp" bodystart="147" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1a7fa969bf6e94c6f7e04548174e3f28ad" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::Scanner::remove_disc</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>remove_disc</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="56" column="1" bodyfile="src/scanner.cpp" bodystart="156" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1ab407421e5230939c85bafec2427816f1" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::Scanner::new_items</definition>
+        <argsstring>(data::redis_ptr redis, const config_ptr config, data::NodeType::Enum type, std::function&lt; void(data::redis_ptr, const config_ptr, const std::string &amp;) &gt; fn)</argsstring>
+        <name>new_items</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref></type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>data::NodeType::Enum</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(data::redis_ptr, const <ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref>, const std::string &amp;) &gt;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="58" column="1" bodyfile="src/scanner.cpp" bodystart="165" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1a1cabbbfc26042383539fe507d8105873" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::Scanner::save_folder</definition>
+        <argsstring>(data::redis_ptr redis, const std::string &amp;key, const std::string &amp;name, const std::string &amp;parent)</argsstring>
+        <name>save_folder</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>redis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>redis database pointer. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>path of the node. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the node. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>parent</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parent key. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <briefdescription>
+<para>store folder </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="61" column="1" bodyfile="src/scanner.cpp" bodystart="191" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d63/classcds_1_1Scanner_1a4dc6e04e5f83502cc7b2fbf1bad61e83" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::Scanner::search_index</definition>
+        <argsstring>(data::redis_ptr redis)</argsstring>
+        <name>search_index</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>redis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>redis database pointer. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.h" line="66" column="1" bodyfile="src/scanner.cpp" bodystart="203" bodyend="218"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Scan media directory and add to store. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/scanner.h" line="30" column="1" bodyfile="src/scanner.h" bodystart="30" bodyend="67"/>
+    <listofallmembers>
+      <member refid="df/d63/classcds_1_1Scanner_1a1eeb741152660de8dc2420cbfe63751f" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>_disc_patterns</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1ad2edfe5f9d7d538ed0eb52033e335793" prot="public" virt="non-virtual"><scope>cds::Scanner</scope><name>flush</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1ae9f2e51e71fd1346f82c1feab59112c1" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>FRIEND_TEST</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1a192f0dc786f72f60751ab548a667d71f" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>import_books</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1a2982347b94a83cd0ab60d32556206ea2" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>import_directory</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1ad65da450bbf06bb2ad93c2293c092a1f" prot="public" virt="non-virtual"><scope>cds::Scanner</scope><name>import_files</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1af9d44ced4927cdb3a5d12806f0af7020" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>import_images</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1a1cafd206ba910c503209313d89feb31b" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>import_video</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1aaf2454c55a544e5f4f3cca845bfe6f72" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>new_item</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1ab407421e5230939c85bafec2427816f1" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>new_items</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1a7fa969bf6e94c6f7e04548174e3f28ad" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>remove_disc</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1a1cabbbfc26042383539fe507d8105873" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>save_folder</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1a0557278e5c78f2b5e279742fa48fa9f5" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>Scanner</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1a4dc6e04e5f83502cc7b2fbf1bad61e83" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>search_index</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1a4a43f5ca826ec504ed57878c5082ec1f" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>sweep</name></member>
+      <member refid="df/d63/classcds_1_1Scanner_1a4e447ae990c2814f848f5c9873e61e68" prot="private" virt="non-virtual"><scope>cds::Scanner</scope><name>timestamp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

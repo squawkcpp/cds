@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_313caf1132e152dd9b58bea13a4052ca" kind="dir">
+    <compoundname>src/utils</compoundname>
+    <innerfile refid="d9/dde/amazon_8cpp">amazon.cpp</innerfile>
+    <innerfile refid="db/d39/amazon_8h">amazon.h</innerfile>
+    <innerfile refid="db/d11/image_8cpp">image.cpp</innerfile>
+    <innerfile refid="d5/db2/image_8h">image.h</innerfile>
+    <innerfile refid="d0/d64/imageexif_8cpp">imageexif.cpp</innerfile>
+    <innerfile refid="d1/d2a/imageexif_8h">imageexif.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/"/>
+  </compounddef>
+</doxygen>

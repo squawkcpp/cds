@@ -1,0 +1,651 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d9/d60/namespacecds" kind="namespace" language="C++">
+    <compoundname>cds</compoundname>
+    <innerclass refid="d4/d74/structcds_1_1Config" prot="public">cds::Config</innerclass>
+    <innerclass refid="d5/da6/structcds_1_1ECoverSizes" prot="public">cds::ECoverSizes</innerclass>
+    <innerclass refid="db/d7b/classcds_1_1FileMetaRegex" prot="public">cds::FileMetaRegex</innerclass>
+    <innerclass refid="df/de2/structcds_1_1RuleItem" prot="public">cds::RuleItem</innerclass>
+    <innerclass refid="df/d63/classcds_1_1Scanner" prot="public">cds::Scanner</innerclass>
+    <innerclass refid="de/ddd/classcds_1_1Server" prot="public">cds::Server</innerclass>
+    <innernamespace refid="d1/d65/namespacecds_1_1mod">cds::mod</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="d4/d74/structcds_1_1Config" kindref="compound">Config</ref> &gt;</type>
+        <definition>typedef std::shared_ptr&lt; Config &gt; cds::config_ptr</definition>
+        <argsstring></argsstring>
+        <name>config_ptr</name>
+        <briefdescription>
+<para>configuration ptr </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.h" line="83" column="1" bodyfile="src/config.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a578eceff7a6b1f2a7c9d1dd3d9b07e58" prot="public" static="yes" mutable="no">
+        <type>const bool</type>
+        <definition>const bool cds::CDS_DEBUG</definition>
+        <argsstring></argsstring>
+        <name>CDS_DEBUG</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="39" column="1" bodyfile="src/_utils.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a83688f932b141e2ec9f6a89eb8a771b6" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string cds::LOGGER</definition>
+        <argsstring></argsstring>
+        <name>LOGGER</name>
+        <initializer>= &quot;cds&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="42" column="1" bodyfile="src/_utils.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1ac1f06468a56a31265ff9841258304da6" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string cds::VERSION</definition>
+        <argsstring></argsstring>
+        <name>VERSION</name>
+        <initializer>= CDS_VERSION</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="43" column="1" bodyfile="src/_utils.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1ac890323d37a901478f7aed790764deb9" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int cds::SLEEP</definition>
+        <argsstring></argsstring>
+        <name>SLEEP</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="45" column="1" bodyfile="src/_utils.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a9274c524625742ba46691ede810f25bd" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string cds::EVENT_SCANNER</definition>
+        <argsstring></argsstring>
+        <name>EVENT_SCANNER</name>
+        <initializer>= &quot;cds:scanner&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="47" column="1" bodyfile="src/_utils.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1ac56dc232513479ed280b0af8f01cd9be" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string cds::EVENT_RESCAN</definition>
+        <argsstring></argsstring>
+        <name>EVENT_RESCAN</name>
+        <initializer>= &quot;cds:rescan&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="48" column="1" bodyfile="src/_utils.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a9d8b318a21375dbf4eb5f3f636e341d5" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string cds::EVENT_START</definition>
+        <argsstring></argsstring>
+        <name>EVENT_START</name>
+        <initializer>= &quot;start&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="49" column="1" bodyfile="src/_utils.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1add32d8ab38600cd334a9383cf06d58ca" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string cds::EVENT_END</definition>
+        <argsstring></argsstring>
+        <name>EVENT_END</name>
+        <initializer>= &quot;end&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="50" column="1" bodyfile="src/_utils.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a4223d43fbc984afbeab487c3309632ed" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* cds::PARAM_TMP_DIRECTORY</definition>
+        <argsstring></argsstring>
+        <name>PARAM_TMP_DIRECTORY</name>
+        <initializer>= &quot;tmp-directory&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="52" column="1" bodyfile="src/_utils.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a6676c932f268f6b08769fe6614648b1b" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* cds::PARAM_TMDB_KEY</definition>
+        <argsstring></argsstring>
+        <name>PARAM_TMDB_KEY</name>
+        <initializer>= &quot;tmdb-key&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="53" column="1" bodyfile="src/_utils.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a96861fbba66539779d0abf465afb758b" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* cds::PARAM_AMAZON_KEY</definition>
+        <argsstring></argsstring>
+        <name>PARAM_AMAZON_KEY</name>
+        <initializer>= &quot;amazon-key&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="54" column="1" bodyfile="src/_utils.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1ac44bb14093462c3bf814f8f4f626be4d" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* cds::PARAM_AMAZON_ACCESS_KEY</definition>
+        <argsstring></argsstring>
+        <name>PARAM_AMAZON_ACCESS_KEY</name>
+        <initializer>= &quot;amazon-access-key&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="55" column="1" bodyfile="src/_utils.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a685abcd2f350d31e64e8fd9a9d90f635" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* cds::PARAM_REDIS</definition>
+        <argsstring></argsstring>
+        <name>PARAM_REDIS</name>
+        <initializer>= &quot;redis&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="56" column="1" bodyfile="src/_utils.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1ae8ce66107165a1a257a608506846ecb2" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* cds::PARAM_REDIS_PORT</definition>
+        <argsstring></argsstring>
+        <name>PARAM_REDIS_PORT</name>
+        <initializer>= &quot;redis-port&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="57" column="1" bodyfile="src/_utils.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a23556bfa1417062c2a54004ad73b373e" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* cds::PARAM_LISTEN_ADDRESS</definition>
+        <argsstring></argsstring>
+        <name>PARAM_LISTEN_ADDRESS</name>
+        <initializer>= &quot;listen&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="58" column="1" bodyfile="src/_utils.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a68dc86c5214930bbd4c4d7e29a80490e" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* cds::PARAM_HTTP_PORT</definition>
+        <argsstring></argsstring>
+        <name>PARAM_HTTP_PORT</name>
+        <initializer>= &quot;http-port&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="59" column="1" bodyfile="src/_utils.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d60/namespacecds_1a83acb1a62dce1ec0d9ef86b70a33a97c" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* cds::PARAM_DIRECTORY</definition>
+        <argsstring></argsstring>
+        <name>PARAM_DIRECTORY</name>
+        <initializer>= &quot;directory&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="60" column="1" bodyfile="src/_utils.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="d9/d60/namespacecds_1a6f21b563723611e789a90a79927f4478" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>static std::vector&lt; std::string &gt; cds::trash_words</definition>
+        <argsstring>({&quot;flac&quot;,&quot;24bit&quot;,&quot;720p&quot;,&quot;1080p&quot;,&quot;amzn&quot;,&quot;webrip&quot;,&quot;dd5.1&quot;,&quot;x264&quot;,&quot;mkv&quot;,&quot;hdtv&quot;,&quot;web-dl&quot;,&quot;h264&quot;,&quot;bdrip&quot;,&quot;dts&quot;,&quot;bluray&quot;,&quot;-hdc&quot;,&quot;mp4&quot;,&quot;-2hd&quot;,&quot;-rarbg&quot;,&quot;[rarbg]&quot;,&quot;-fgt&quot;,&quot;-japhson&quot;,&quot;-fgt&quot;,&quot;-ntb&quot;,&quot;-moritz&quot;,&quot;-avs&quot;,&quot;-dumbension&quot;,&quot;-it00nz&quot;,&quot;-cravers&quot;,&quot;-rovers&quot;,&quot;-sparks&quot;,&quot;[96-24]&quot;,&quot;audio fidelity&quot;,&quot;180g lp&quot;,&quot;24-96&quot;})</argsstring>
+        <name>trash_words</name>
+        <param>
+          <type>{&quot;flac&quot;,&quot;24bit&quot;,&quot;720p&quot;,&quot;1080p&quot;,&quot;amzn&quot;,&quot;webrip&quot;,&quot;dd5.1&quot;,&quot;x264&quot;,&quot;mkv&quot;,&quot;hdtv&quot;,&quot;web-dl&quot;,&quot;h264&quot;,&quot;bdrip&quot;,&quot;dts&quot;,&quot;bluray&quot;,&quot;-hdc&quot;,&quot;mp4&quot;,&quot;-2hd&quot;,&quot;-rarbg&quot;,&quot;[rarbg]&quot;,&quot;-fgt&quot;,&quot;-japhson&quot;,&quot;-fgt&quot;,&quot;-ntb&quot;,&quot;-moritz&quot;,&quot;-avs&quot;,&quot;-dumbension&quot;,&quot;-it00nz&quot;,&quot;-cravers&quot;,&quot;-rovers&quot;,&quot;-sparks&quot;,&quot;[96-24]&quot;,&quot;audio fidelity&quot;,&quot;180g lp&quot;,&quot;24-96&quot;}</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="62" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1ac1e9a4c62a2cb05da4bb46b3acb89e21" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>static std::vector&lt; std::string &gt; cds::skip_words</definition>
+        <argsstring>({&quot;the &quot;,&quot;der &quot;,&quot;die &quot;,&quot;das &quot;})</argsstring>
+        <name>skip_words</name>
+        <param>
+          <type>{&quot;the &quot;,&quot;der &quot;,&quot;die &quot;,&quot;das &quot;}</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="70" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a7fc870a9e2c3f9e851650d3e74505e4f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::array&lt; std::string, 3 &gt;</type>
+        <definition>static std::array&lt; std::string, 3 &gt; cds::album_cover_names</definition>
+        <argsstring>({{&quot;cover&quot;,&quot;front&quot;,&quot;folder&quot;}})</argsstring>
+        <name>album_cover_names</name>
+        <param>
+          <type>{{&quot;cover&quot;,&quot;front&quot;,&quot;folder&quot;}}</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="73" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a44f6b7f8bb3653557d57f96699d80abf" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::array&lt; std::string, 6 &gt;</type>
+        <definition>static std::array&lt; std::string, 6 &gt; cds::metadata_relations</definition>
+        <argsstring>({{&quot;allmusic&quot;,&quot;IMDb&quot;,&quot;official homepage&quot;,&quot;image&quot;,&quot;wikipedia&quot;,&quot;discogs&quot;}})</argsstring>
+        <name>metadata_relations</name>
+        <param>
+          <type>{{&quot;allmusic&quot;,&quot;IMDb&quot;,&quot;official homepage&quot;,&quot;image&quot;,&quot;wikipedia&quot;,&quot;discogs&quot;}}</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="76" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1ad835190258eeea5e42d8befb389ca889" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::remove_skip_list</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;words, const std::string &amp;s)</argsstring>
+        <name>remove_skip_list</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>words</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="98" column="1" bodyfile="src/_utils.h" bodystart="98" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1aee68708d1655a665609f0a3fba9f846b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::clean_string</definition>
+        <argsstring>(const std::string &amp;s)</argsstring>
+        <name>clean_string</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="122" column="1" bodyfile="src/_utils.h" bodystart="122" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a231ab3d6f331e627edb710f422f468b0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::path</definition>
+        <argsstring>(const std::string &amp;filename)</argsstring>
+        <name>path</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="136" column="1" bodyfile="src/_utils.h" bodystart="136" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a74ccf9fd20c7d47abd676c1b26d2c814" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::filename</definition>
+        <argsstring>(const std::string &amp;filename, bool extension=true)</argsstring>
+        <name>filename</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>extension</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="147" column="1" bodyfile="src/_utils.h" bodystart="147" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a85724d186cb33009a1ed4c09a2020d7c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::remove_extension</definition>
+        <argsstring>(const std::string &amp;file)</argsstring>
+        <name>remove_extension</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>file</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="164" column="1" bodyfile="src/_utils.h" bodystart="164" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a6a79fca696161009d2cf2f2aa0944191" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::clean_isbn</definition>
+        <argsstring>(std::string isbn)</argsstring>
+        <name>clean_isbn</name>
+        <param>
+          <type>std::string</type>
+          <declname>isbn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="172" column="1" bodyfile="src/_utils.h" bodystart="172" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a6a3139ea2f69d87230114368e6677c73" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::clean_track_number</definition>
+        <argsstring>(const std::string &amp;track)</argsstring>
+        <name>clean_track_number</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>track</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="189" column="1" bodyfile="src/_utils.h" bodystart="189" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a064d16872719d08ea5d91365b7ba2476" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>rapidxml_ns::xml_node *</type>
+        <definition>rapidxml_ns::xml_node* cds::element</definition>
+        <argsstring>(rapidxml_ns::xml_document&lt;&gt; *doc, T *parent, const std::string &amp;name, const std::string &amp;value)</argsstring>
+        <name>element</name>
+        <param>
+          <type>rapidxml_ns::xml_document&lt;&gt; *</type>
+          <declname>doc</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="196" column="1" bodyfile="src/_utils.h" bodystart="196" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1aa0b13d57673d14703380442ac8556bc9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cds::attr</definition>
+        <argsstring>(rapidxml_ns::xml_document&lt;&gt; *doc, T *parent, const std::string &amp;name, const std::string &amp;value)</argsstring>
+        <name>attr</name>
+        <param>
+          <type>rapidxml_ns::xml_document&lt;&gt; *</type>
+          <declname>doc</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/_utils.h" line="204" column="1" bodyfile="src/_utils.h" bodystart="204" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a7dd29918fa489d9bc131ccecb005b73f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::_get_ip</definition>
+        <argsstring>()</argsstring>
+        <name>_get_ip</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.cpp" line="84" column="1" bodyfile="src/config.cpp" bodystart="84" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1ad64f032e28ec0cc0b09c73a48b13eeab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::error_code &gt;</type>
+        <definition>DOC_INTERNAL std::vector&lt; std::error_code &gt; cds::validate</definition>
+        <argsstring>(std::shared_ptr&lt; Config &gt; config)</argsstring>
+        <name>validate</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="d4/d74/structcds_1_1Config" kindref="compound">Config</ref> &gt;</type>
+          <declname>config</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration to validate </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <briefdescription>
+<para>validate cds config </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.cpp" line="105" column="1" bodyfile="src/config.cpp" bodystart="105" bodyend="131"/>
+        <references refid="d9/d60/namespacecds_1a75d8ab4b7cb64db9480621f17c400183" compoundref="db/d16/config_8h" startline="56" endline="70">make_error_code</references>
+        <referencedby refid="d9/d60/namespacecds_1a75d8ab4b7cb64db9480621f17c400183" compoundref="db/d16/config_8h" startline="56" endline="70">make_error_code</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a033625ff6b0a15415bbab3db4c3e1309" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::json</definition>
+        <argsstring>(std::shared_ptr&lt; Config &gt; config)</argsstring>
+        <name>json</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="d4/d74/structcds_1_1Config" kindref="compound">Config</ref> &gt;</type>
+          <declname>config</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration to output </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <briefdescription>
+<para>config to json </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.cpp" line="133" column="1" bodyfile="src/config.cpp" bodystart="133" bodyend="158"/>
+        <referencedby refid="d9/d60/namespacecds_1a75d8ab4b7cb64db9480621f17c400183" compoundref="db/d16/config_8h" startline="56" endline="70">make_error_code</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a1e591d62c9fd08767750288cc7edef77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="d4/d74/structcds_1_1Config" kindref="compound">Config</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; Config &gt; cds::json</definition>
+        <argsstring>(const std::string &amp;config)</argsstring>
+        <name>json</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>config</declname>
+          <briefdescription><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration string to parse </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para></briefdescription>
+        </param>
+        <briefdescription>
+<para>json to config </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.cpp" line="159" column="1" bodyfile="src/config.cpp" bodystart="159" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d60/namespacecds_1a75d8ab4b7cb64db9480621f17c400183" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::error_code</type>
+        <definition>std::error_code cds::make_error_code</definition>
+        <argsstring>(int error)</argsstring>
+        <name>make_error_code</name>
+        <param>
+          <type>int</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>make cds config error code </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/config.h" line="56" column="1" bodyfile="src/config.h" bodystart="56" bodyend="70"/>
+        <references refid="d9/d60/namespacecds_1a75d8ab4b7cb64db9480621f17c400183" compoundref="db/d16/config_8h" startline="56" endline="70">make_error_code</references>
+        <references refid="d9/d60/namespacecds_1ad64f032e28ec0cc0b09c73a48b13eeab" compoundref="df/d59/config_8cpp" startline="105" endline="131">validate</references>
+        <references refid="d9/d60/namespacecds_1a033625ff6b0a15415bbab3db4c3e1309" compoundref="df/d59/config_8cpp" startline="133" endline="158">json</references>
+        <referencedby refid="d9/d60/namespacecds_1ad64f032e28ec0cc0b09c73a48b13eeab" compoundref="df/d59/config_8cpp" startline="105" endline="131">validate</referencedby>
+        <referencedby refid="d9/d60/namespacecds_1a75d8ab4b7cb64db9480621f17c400183" compoundref="db/d16/config_8h" startline="56" endline="70">make_error_code</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Content Directory <ref refid="de/ddd/classcds_1_1Server" kindref="compound">Server</ref> (CDS) and API implementation. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/_utils.h" line="34" column="1"/>
+  </compounddef>
+</doxygen>

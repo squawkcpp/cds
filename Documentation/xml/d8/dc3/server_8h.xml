@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d8/dc3/server_8h" kind="file" language="C++">
+    <compoundname>server.h</compoundname>
+    <includes local="no">memory</includes>
+    <includes local="no">mutex</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">redox.hpp</includes>
+    <includes local="yes">http/server.h</includes>
+    <includes local="yes">http/httpserver.h</includes>
+    <includes refid="db/d16/config_8h" local="yes">config.h</includes>
+    <includes refid="d9/db6/datastore_8h" local="yes">datastore.h</includes>
+    <includedby refid="df/d0a/main_8cpp" local="yes">main.cpp</includedby>
+    <includedby refid="df/dd7/server_8cpp" local="yes">src/server.cpp</includedby>
+    <incdepgraph>
+      <node id="543">
+        <label>system_error</label>
+      </node>
+      <node id="545">
+        <label>functional</label>
+      </node>
+      <node id="551">
+        <label>fmt/format.h</label>
+      </node>
+      <node id="550">
+        <label>boost/functional/hash.hpp</label>
+      </node>
+      <node id="549">
+        <label>boost/tokenizer.hpp</label>
+      </node>
+      <node id="548">
+        <label>boost/foreach.hpp</label>
+      </node>
+      <node id="539">
+        <label>redox.hpp</label>
+      </node>
+      <node id="552">
+        <label>gtest/gtest_prod.h</label>
+      </node>
+      <node id="537">
+        <label>string</label>
+      </node>
+      <node id="544">
+        <label>datastore.h</label>
+        <link refid="d9/db6/datastore_8h_source"/>
+        <childnode refid="545" relation="include">
+        </childnode>
+        <childnode refid="546" relation="include">
+        </childnode>
+        <childnode refid="547" relation="include">
+        </childnode>
+        <childnode refid="537" relation="include">
+        </childnode>
+        <childnode refid="538" relation="include">
+        </childnode>
+        <childnode refid="548" relation="include">
+        </childnode>
+        <childnode refid="549" relation="include">
+        </childnode>
+        <childnode refid="550" relation="include">
+        </childnode>
+        <childnode refid="551" relation="include">
+        </childnode>
+        <childnode refid="539" relation="include">
+        </childnode>
+        <childnode refid="552" relation="include">
+        </childnode>
+      </node>
+      <node id="546">
+        <label>map</label>
+      </node>
+      <node id="547">
+        <label>regex</label>
+      </node>
+      <node id="542">
+        <label>config.h</label>
+        <link refid="db/d16/config_8h_source"/>
+        <childnode refid="535" relation="include">
+        </childnode>
+        <childnode refid="537" relation="include">
+        </childnode>
+        <childnode refid="543" relation="include">
+        </childnode>
+        <childnode refid="538" relation="include">
+        </childnode>
+      </node>
+      <node id="538">
+        <label>vector</label>
+      </node>
+      <node id="540">
+        <label>http/server.h</label>
+      </node>
+      <node id="536">
+        <label>mutex</label>
+      </node>
+      <node id="534">
+        <label>src/server.h</label>
+        <link refid="server.h"/>
+        <childnode refid="535" relation="include">
+        </childnode>
+        <childnode refid="536" relation="include">
+        </childnode>
+        <childnode refid="537" relation="include">
+        </childnode>
+        <childnode refid="538" relation="include">
+        </childnode>
+        <childnode refid="539" relation="include">
+        </childnode>
+        <childnode refid="540" relation="include">
+        </childnode>
+        <childnode refid="541" relation="include">
+        </childnode>
+        <childnode refid="542" relation="include">
+        </childnode>
+        <childnode refid="544" relation="include">
+        </childnode>
+      </node>
+      <node id="541">
+        <label>http/httpserver.h</label>
+      </node>
+      <node id="535">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="555">
+        <label>src/server.cpp</label>
+        <link refid="df/dd7/server_8cpp_source"/>
+      </node>
+      <node id="554">
+        <label>main.cpp</label>
+        <link refid="df/d0a/main_8cpp_source"/>
+      </node>
+      <node id="553">
+        <label>src/server.h</label>
+        <link refid="server.h"/>
+        <childnode refid="554" relation="include">
+        </childnode>
+        <childnode refid="555" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="de/ddd/classcds_1_1Server" prot="public">cds::Server</innerclass>
+    <innernamespace refid="d9/d60/namespacecds">cds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/><sp/><sp/><sp/>This<sp/>program<sp/>is<sp/>free<sp/>software:<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or<sp/>modify</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/><sp/><sp/><sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>as<sp/>published<sp/>by</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/><sp/><sp/><sp/>the<sp/>Free<sp/>Software<sp/>Foundation,<sp/>either<sp/>version<sp/>3<sp/>of<sp/>the<sp/>License,<sp/>or</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/><sp/><sp/><sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"></highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/><sp/><sp/><sp/>This<sp/>program<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/><sp/><sp/><sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/><sp/><sp/><sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/><sp/><sp/><sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/><sp/><sp/><sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/><sp/><sp/>along<sp/>with<sp/>this<sp/>program.<sp/><sp/>If<sp/>not,<sp/>see<sp/>&lt;http://www.gnu.org/licenses/&gt;.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SERVER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SERVER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;redox.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;http/server.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;http/httpserver.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;config.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;datastore.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="d9/d60/namespacecds" kindref="compound">cds</ref><sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="de/ddd/classcds_1_1Server" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="de/ddd/classcds_1_1Server" kindref="compound">Server</ref><sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="de/ddd/classcds_1_1Server_1afbf86e0452ab45fe2f75df1f2adfad4b" kindref="member">Server</ref><sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="d0/df5/namespaceredis" kindref="compound">redis</ref>,<sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>port<sp/><sp/>);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/><ref refid="de/ddd/classcds_1_1Server_1aa86c23ba2b8426c67da83d1d69306569" kindref="member">config</ref><sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/><ref refid="de/ddd/classcds_1_1Server_1af2e65c60a5f16e41ebcbc6669be5ffe1" kindref="member">rescan</ref><sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/><ref refid="de/ddd/classcds_1_1Server_1a88df24b5970ad18d427315a870e4e944" kindref="member">status</ref><sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/><ref refid="de/ddd/classcds_1_1Server_1a226022a43b29123d6fcb845ab5c4713d" kindref="member">node</ref><sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/><ref refid="de/ddd/classcds_1_1Server_1a2ee5708b9f35871a311feb06fa43a0e1" kindref="member">nodes</ref><sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/><ref refid="de/ddd/classcds_1_1Server_1a8d0f5fcc6bb289bd3d2a1a2df2298e9b" kindref="member">files</ref><sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/><ref refid="de/ddd/classcds_1_1Server_1a7a2398284fc075e5325d9ae140afcdb8" kindref="member">sort</ref><sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/><ref refid="de/ddd/classcds_1_1Server_1ad5fb8a933d0110b1983df7e97c82a63d" kindref="member">path</ref><sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/><ref refid="de/ddd/classcds_1_1Server_1abd16cb6935350e7e0824315f4211ae21" kindref="member">sug</ref><sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/>opds(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>/**<sp/>@brief<sp/>get<sp/>module<sp/>node<sp/>list<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>http::http_status<sp/>mod<sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>http::http_status<sp/><ref refid="de/ddd/classcds_1_1Server_1aaa29a062d4cac4928dd68a39901af02b" kindref="member">keywords</ref><sp/>(<sp/>http::Request&amp;<sp/>request,<sp/>http::Response&amp;<sp/>response<sp/>);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>data::redis_ptr<sp/>redis_;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref><sp/>config_;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>std::atomic&lt;bool&gt;<sp/>rescanning_;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unique_ptr&lt;<sp/>std::thread<sp/>&gt;<sp/>scanner_thread_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>redox::Subscriber<sp/>sub_;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>rescan_<sp/>(<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>flush,<sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<sp/>std::error_code&amp;<sp/>)&gt;<sp/>fn<sp/>);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="82"><highlight class="normal">}</highlight><highlight class="comment">//namespace<sp/>cds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>SERVER_H</highlight></codeline>
+    </programlisting>
+    <location file="src/server.h"/>
+  </compounddef>
+</doxygen>

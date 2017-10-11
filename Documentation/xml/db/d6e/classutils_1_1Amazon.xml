@@ -1,0 +1,393 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="db/d6e/classutils_1_1Amazon" kind="class" language="C++" prot="public">
+    <compoundname>utils::Amazon</compoundname>
+    <includes refid="db/d39/amazon_8h" local="no">amazon.h</includes>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="db/d6e/classutils_1_1Amazon_1a894798ee2af9b4b037c8a0d0b51411b7" prot="private" static="yes" mutable="no">
+        <type>std::string</type>
+        <definition>std::string utils::Amazon::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="63" column="1" bodyfile="src/utils/amazon.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1a46bae9a8fbdc4e1e4822a5f10fa64740" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="db/d2f/structutils_1_1AmazonResult" kindref="compound">AmazonResult</ref></type>
+        <definition>AmazonResult utils::Amazon::bookByIsbn</definition>
+        <argsstring>(const std::string &amp;access_key, const std::string &amp;key, const std::string &amp;isbn)</argsstring>
+        <name>bookByIsbn</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>access_key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>isbn</declname>
+        </param>
+        <briefdescription>
+<para>bookByIsbn </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>access_key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>isbn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="45" column="1" bodyfile="src/utils/amazon.cpp" bodystart="48" bodyend="97"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1a7151a10025bd158d538ba2df177dc155" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="db/d2f/structutils_1_1AmazonResult" kindref="compound">AmazonResult</ref></type>
+        <definition>AmazonResult utils::Amazon::parse</definition>
+        <argsstring>(const std::string &amp;response)</argsstring>
+        <name>parse</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>parse the response xml </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the result </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="53" column="1" bodyfile="src/utils/amazon.cpp" bodystart="139" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1a6c93cdd993dd57d108b183e64ac14672" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t utils::Amazon::writeCallback</definition>
+        <argsstring>(char *buf, size_t size, size_t nmemb, void *up)</argsstring>
+        <name>writeCallback</name>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>nmemb</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>up</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="64" column="1" bodyfile="src/utils/amazon.cpp" bodystart="37" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1ab1aa42118b348369bb24e9df5169dd21" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string utils::Amazon::canonicalize</definition>
+        <argsstring>(const std::map&lt; std::string, std::string &gt; &amp;sortedParamMap)</argsstring>
+        <name>canonicalize</name>
+        <param>
+          <type>const std::map&lt; std::string, std::string &gt; &amp;</type>
+          <declname>sortedParamMap</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Canonicalize the query string as required by <ref refid="db/d6e/classutils_1_1Amazon" kindref="compound">Amazon</ref>.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sortedParamMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parameter name-value pairs in lexicographical order. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Canonical form of query string. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="72" column="1" bodyfile="src/utils/amazon.cpp" bodystart="248" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1a390a99cf1d3d3dd4adf581ecdf2be689" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string utils::Amazon::get_utc_time_string</definition>
+        <argsstring>()</argsstring>
+        <name>get_utc_time_string</name>
+        <briefdescription>
+<para>get_utc_time_string </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="77" column="1" bodyfile="src/utils/amazon.cpp" bodystart="263" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1ac6ec2eae284e2814415909514f09e677" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string utils::Amazon::generate_hmac256bit_hash</definition>
+        <argsstring>(const char *message, const char *key_buf)</argsstring>
+        <name>generate_hmac256bit_hash</name>
+        <param>
+          <type>const char *</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>key_buf</declname>
+        </param>
+        <briefdescription>
+<para>generate_hmac256bit_hash </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="84" column="1" bodyfile="src/utils/amazon.cpp" bodystart="98" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1a361bd36f34ace32578905f6d6ce8f8e4" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char * utils::Amazon::base64</definition>
+        <argsstring>(const unsigned char *input, int length)</argsstring>
+        <name>base64</name>
+        <param>
+          <type>const unsigned char *</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>base64 </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="91" column="1" bodyfile="src/utils/amazon.cpp" bodystart="117" bodyend="138"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1a3ffc768bbf7ca3edde219fe238b2bd19" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>utils::Amazon::FRIEND_TEST</definition>
+        <argsstring>(AmazonTest, TestParseWithoutReviews)</argsstring>
+        <name>FRIEND_TEST</name>
+        <param>
+          <type>AmazonTest</type>
+        </param>
+        <param>
+          <type>TestParseWithoutReviews</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="55" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1ae3a8d1f0fdc6d1b41445efdd4a612440" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>utils::Amazon::FRIEND_TEST</definition>
+        <argsstring>(AmazonTest, EmptyResult)</argsstring>
+        <name>FRIEND_TEST</name>
+        <param>
+          <type>AmazonTest</type>
+        </param>
+        <param>
+          <type>EmptyResult</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="56" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1af16ddc6363be352aa71266f28bb42a8b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>utils::Amazon::FRIEND_TEST</definition>
+        <argsstring>(AmazonTest, TestCanonicalize)</argsstring>
+        <name>FRIEND_TEST</name>
+        <param>
+          <type>AmazonTest</type>
+        </param>
+        <param>
+          <type>TestCanonicalize</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="57" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1ae41d748164c3a7e1b9c212509b621cbf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>utils::Amazon::FRIEND_TEST</definition>
+        <argsstring>(AmazonTest, TestMac)</argsstring>
+        <name>FRIEND_TEST</name>
+        <param>
+          <type>AmazonTest</type>
+        </param>
+        <param>
+          <type>TestMac</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="58" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1a1cbb26cca932f389e9f92050f3a9ebed" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>utils::Amazon::FRIEND_TEST</definition>
+        <argsstring>(AmazonTest, TestParseResponse)</argsstring>
+        <name>FRIEND_TEST</name>
+        <param>
+          <type>AmazonTest</type>
+        </param>
+        <param>
+          <type>TestParseResponse</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="59" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1a14273ceb2924a13d7abde546d2c2d6d9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>utils::Amazon::FRIEND_TEST</definition>
+        <argsstring>(AmazonTest, TestParseErrorResponse)</argsstring>
+        <name>FRIEND_TEST</name>
+        <param>
+          <type>AmazonTest</type>
+        </param>
+        <param>
+          <type>TestParseErrorResponse</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="60" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d6e/classutils_1_1Amazon_1a33e8c951a41e53973d4178cac91165d0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>utils::Amazon::Amazon</definition>
+        <argsstring>()</argsstring>
+        <name>Amazon</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/amazon.h" line="62" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="db/d6e/classutils_1_1Amazon" kindref="compound">Amazon</ref> class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/amazon.h" line="36" column="1" bodyfile="src/utils/amazon.h" bodystart="36" bodyend="92"/>
+    <listofallmembers>
+      <member refid="db/d6e/classutils_1_1Amazon_1a33e8c951a41e53973d4178cac91165d0" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>Amazon</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1a361bd36f34ace32578905f6d6ce8f8e4" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>base64</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1a46bae9a8fbdc4e1e4822a5f10fa64740" prot="public" virt="non-virtual"><scope>utils::Amazon</scope><name>bookByIsbn</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1ab1aa42118b348369bb24e9df5169dd21" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>canonicalize</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1a894798ee2af9b4b037c8a0d0b51411b7" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>data</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1a3ffc768bbf7ca3edde219fe238b2bd19" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>FRIEND_TEST</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1ae3a8d1f0fdc6d1b41445efdd4a612440" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>FRIEND_TEST</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1af16ddc6363be352aa71266f28bb42a8b" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>FRIEND_TEST</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1ae41d748164c3a7e1b9c212509b621cbf" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>FRIEND_TEST</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1a1cbb26cca932f389e9f92050f3a9ebed" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>FRIEND_TEST</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1a14273ceb2924a13d7abde546d2c2d6d9" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>FRIEND_TEST</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1ac6ec2eae284e2814415909514f09e677" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>generate_hmac256bit_hash</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1a390a99cf1d3d3dd4adf581ecdf2be689" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>get_utc_time_string</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1a7151a10025bd158d538ba2df177dc155" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>parse</name></member>
+      <member refid="db/d6e/classutils_1_1Amazon_1a6c93cdd993dd57d108b183e64ac14672" prot="private" virt="non-virtual"><scope>utils::Amazon</scope><name>writeCallback</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
