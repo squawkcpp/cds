@@ -25,4 +25,4 @@ if [ -n "$DIRECTORY" ]; then
 fi
 
 echo "start /usr/local/bin/cds $OPTIONS"
-#/usr/local/bin/cds $OPTIONS
+/usr/local/bin/cds $OPTIONS
