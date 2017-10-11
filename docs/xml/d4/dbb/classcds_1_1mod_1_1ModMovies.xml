@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d4/dbb/classcds_1_1mod_1_1ModMovies" kind="class" language="C++" prot="public">
+    <compoundname>cds::mod::ModMovies</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="d4/dbb/classcds_1_1mod_1_1ModMovies_1a75bd682d5a018bc9394b5f4d90b96131" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::mod::ModMovies::import</definition>
+        <argsstring>(data::redis_ptr redis, const config_ptr config, const std::string &amp;key)</argsstring>
+        <name>import</name>
+        <param>
+          <type>data::redis_ptr</type>
+          <declname>redis</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref></type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="71" column="1" bodyfile="src/modules/mod_movies.cpp" bodystart="32" bodyend="120"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="d4/dbb/classcds_1_1mod_1_1ModMovies_1a2e2e729bced17bd4f716c027c9cb541a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cds::mod::ModMovies::ModMovies</definition>
+        <argsstring>()</argsstring>
+        <name>ModMovies</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="74" column="1" bodyfile="src/modules/mod_movies.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/dbb/classcds_1_1mod_1_1ModMovies_1a00f701ae3db98706517b25d29f426c8d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>cds::mod::ModMovies::FRIEND_TEST</definition>
+        <argsstring>(ModMoviesTest, tmdb_parse)</argsstring>
+        <name>FRIEND_TEST</name>
+        <param>
+          <type>ModMoviesTest</type>
+        </param>
+        <param>
+          <type>tmdb_parse</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="77" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/dbb/classcds_1_1mod_1_1ModMovies_1a020c149fccafd85f0b341dcef3eb4cdb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>cds::mod::ModMovies::FRIEND_TEST</definition>
+        <argsstring>(ModMoviesTest, tmdb_parse_movie)</argsstring>
+        <name>FRIEND_TEST</name>
+        <param>
+          <type>ModMoviesTest</type>
+        </param>
+        <param>
+          <type>tmdb_parse_movie</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="79" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="d4/dbb/classcds_1_1mod_1_1ModMovies_1ad72045c614010ec3d4305623c8ace7ab" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::mod::ModMovies::tmdb_search</definition>
+        <argsstring>(const std::string &amp;api_key, const std::string &amp;name)</argsstring>
+        <name>tmdb_search</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>api_key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="75" column="1" bodyfile="src/modules/mod_movies.cpp" bodystart="121" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/dbb/classcds_1_1mod_1_1ModMovies_1a4d8237bdfd18242ce1e4ffe7b71f6846" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string cds::mod::ModMovies::tmdb_movie</definition>
+        <argsstring>(const std::string &amp;api_key, const std::string &amp;movie_id)</argsstring>
+        <name>tmdb_movie</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>api_key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>movie_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="76" column="1" bodyfile="src/modules/mod_movies.cpp" bodystart="129" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/dbb/classcds_1_1mod_1_1ModMovies_1a43f84f5828921dfbdc0fcc68d9b662b5" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::map&lt; std::string, std::string &gt; &gt;</type>
+        <definition>std::vector&lt; std::map&lt; std::string, std::string &gt; &gt; cds::mod::ModMovies::tmdb_parse</definition>
+        <argsstring>(const std::string &amp;result)</argsstring>
+        <name>tmdb_parse</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="78" column="1" bodyfile="src/modules/mod_movies.cpp" bodystart="137" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/dbb/classcds_1_1mod_1_1ModMovies_1a130a417900346dd9ba67a7a6c947f983" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="d4/db2/structcds_1_1mod_1_1TmdbMovie" kindref="compound">TmdbMovie</ref></type>
+        <definition>TmdbMovie cds::mod::ModMovies::tmdb_parse_movie</definition>
+        <argsstring>(const std::string &amp;result)</argsstring>
+        <name>tmdb_parse_movie</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="80" column="1" bodyfile="src/modules/mod_movies.cpp" bodystart="160" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/dbb/classcds_1_1mod_1_1ModMovies_1a139e7f33552184a9943f7f7a0657113d" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cds::mod::ModMovies::tmdb_fetch</definition>
+        <argsstring>(const std::string &amp;uri, const std::string &amp;path)</argsstring>
+        <name>tmdb_fetch</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>uri</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="81" column="1" bodyfile="src/modules/mod_movies.cpp" bodystart="210" bodyend="213"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/modules/mod_movies.h" line="69" column="1" bodyfile="src/modules/mod_movies.h" bodystart="69" bodyend="82"/>
+    <listofallmembers>
+      <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a00f701ae3db98706517b25d29f426c8d" prot="private" virt="non-virtual"><scope>cds::mod::ModMovies</scope><name>FRIEND_TEST</name></member>
+      <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a020c149fccafd85f0b341dcef3eb4cdb" prot="private" virt="non-virtual"><scope>cds::mod::ModMovies</scope><name>FRIEND_TEST</name></member>
+      <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a75bd682d5a018bc9394b5f4d90b96131" prot="public" virt="non-virtual"><scope>cds::mod::ModMovies</scope><name>import</name></member>
+      <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a2e2e729bced17bd4f716c027c9cb541a" prot="private" virt="non-virtual"><scope>cds::mod::ModMovies</scope><name>ModMovies</name></member>
+      <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a139e7f33552184a9943f7f7a0657113d" prot="private" virt="non-virtual"><scope>cds::mod::ModMovies</scope><name>tmdb_fetch</name></member>
+      <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a4d8237bdfd18242ce1e4ffe7b71f6846" prot="private" virt="non-virtual"><scope>cds::mod::ModMovies</scope><name>tmdb_movie</name></member>
+      <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a43f84f5828921dfbdc0fcc68d9b662b5" prot="private" virt="non-virtual"><scope>cds::mod::ModMovies</scope><name>tmdb_parse</name></member>
+      <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1a130a417900346dd9ba67a7a6c947f983" prot="private" virt="non-virtual"><scope>cds::mod::ModMovies</scope><name>tmdb_parse_movie</name></member>
+      <member refid="d4/dbb/classcds_1_1mod_1_1ModMovies_1ad72045c614010ec3d4305623c8ace7ab" prot="private" virt="non-virtual"><scope>cds::mod::ModMovies</scope><name>tmdb_search</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

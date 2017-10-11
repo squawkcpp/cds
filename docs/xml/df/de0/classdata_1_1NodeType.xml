@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="df/de0/classdata_1_1NodeType" kind="class" language="C++" prot="public">
+    <compoundname>data::NodeType</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0d" prot="public" static="no">
+        <name>Enum</name>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da23e6c4a9b15bc0c9addb5a92746e75dd" prot="public">
+          <name>folder</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0daaee5722ff5aa3adfffc0225b94b41f83" prot="public">
+          <name>audio</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da42b71fa6972cf3845f7538a6f2d72098" prot="public">
+          <name>movie</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0dac18fbf98d0e953b3cca8e4fb807ca27e" prot="public">
+          <name>serie</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0dab014faaed40cda7b8461afd023ac1a76" prot="public">
+          <name>image</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da7e59c724013102be65b7608f4894450f" prot="public">
+          <name>ebook</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0daf2a3e231bade409cbbe0083c589b6faf" prot="public">
+          <name>file</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da9bee270c273e097758a53cbba31cd97a" prot="public">
+          <name>album</name>
+          <initializer>= 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da33eb8833275e5d6f96b34e20aa6cdffa" prot="public">
+          <name>cover</name>
+          <initializer>= 8</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da1ccc52a32cc37cdd693582a1a8b75f03" prot="public">
+          <name>episode</name>
+          <initializer>= 9</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da36ee5868f156a9aa118e11afa2f4130d" prot="public">
+          <name>artist</name>
+          <initializer>= 10</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/datastore.h" line="171" column="1" bodyfile="src/datastore.h" bodystart="171" bodyend="171"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string data::NodeType::str</definition>
+        <argsstring>(const Enum type)</argsstring>
+        <name>str</name>
+        <param>
+          <type>const Enum</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>node type as string. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/datastore.h" line="174" column="1" bodyfile="src/datastore.h" bodystart="174" bodyend="176"/>
+        <referencedby refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1ab5f18f0ed63bbceaf6a149fcb534615e" compoundref="d5/d7b/mod__albums_8cpp" startline="34" endline="187">cds::mod::ModAlbums::import</referencedby>
+        <referencedby refid="df/d63/classcds_1_1Scanner_1ad65da450bbf06bb2ad93c2293c092a1f" compoundref="d4/d77/scanner_8cpp" startline="40" endline="67">cds::Scanner::import_files</referencedby>
+        <referencedby refid="df/d63/classcds_1_1Scanner_1ad2edfe5f9d7d538ed0eb52033e335793" compoundref="d4/d77/scanner_8cpp" startline="180" endline="188">cds::Scanner::flush</referencedby>
+        <referencedby refid="de/ddd/classcds_1_1Server_1a8d0f5fcc6bb289bd3d2a1a2df2298e9b" compoundref="df/dd7/server_8cpp" startline="268" endline="317">cds::Server::files</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="df/de0/classdata_1_1NodeType_1ac6fb806749e55ecbd940d721f355a97b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Enum</type>
+        <definition>static Enum data::NodeType::parse</definition>
+        <argsstring>(const std::string &amp;type)</argsstring>
+        <name>parse</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>get type from string. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/datastore.h" line="179" column="1" bodyfile="src/datastore.h" bodystart="179" bodyend="211"/>
+        <referencedby refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1ab5f18f0ed63bbceaf6a149fcb534615e" compoundref="d5/d7b/mod__albums_8cpp" startline="34" endline="187">cds::mod::ModAlbums::import</referencedby>
+        <referencedby refid="df/d63/classcds_1_1Scanner_1ad65da450bbf06bb2ad93c2293c092a1f" compoundref="d4/d77/scanner_8cpp" startline="40" endline="67">cds::Scanner::import_files</referencedby>
+        <referencedby refid="de/ddd/classcds_1_1Server_1a8d0f5fcc6bb289bd3d2a1a2df2298e9b" compoundref="df/dd7/server_8cpp" startline="268" endline="317">cds::Server::files</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="df/de0/classdata_1_1NodeType_1a43aec7ef58e937efc3d547878572e594" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool data::NodeType::valid</definition>
+        <argsstring>(const std::string &amp;type)</argsstring>
+        <name>valid</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>is the type string valid. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/datastore.h" line="214" column="1" bodyfile="src/datastore.h" bodystart="214" bodyend="216"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/datastore.h" line="169" column="1" bodyfile="src/datastore.h" bodystart="169" bodyend="217"/>
+    <listofallmembers>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da9bee270c273e097758a53cbba31cd97a" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>album</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da36ee5868f156a9aa118e11afa2f4130d" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>artist</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0daaee5722ff5aa3adfffc0225b94b41f83" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>audio</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da33eb8833275e5d6f96b34e20aa6cdffa" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>cover</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da7e59c724013102be65b7608f4894450f" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>ebook</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0d" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>Enum</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da1ccc52a32cc37cdd693582a1a8b75f03" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>episode</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0daf2a3e231bade409cbbe0083c589b6faf" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>file</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da23e6c4a9b15bc0c9addb5a92746e75dd" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>folder</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0dab014faaed40cda7b8461afd023ac1a76" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>image</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0da42b71fa6972cf3845f7538a6f2d72098" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>movie</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1ac6fb806749e55ecbd940d721f355a97b" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>parse</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a1f149440634c4c8ef9d3777c796a6f0dac18fbf98d0e953b3cca8e4fb807ca27e" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>serie</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>str</name></member>
+      <member refid="df/de0/classdata_1_1NodeType_1a43aec7ef58e937efc3d547878572e594" prot="public" virt="non-virtual"><scope>data::NodeType</scope><name>valid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

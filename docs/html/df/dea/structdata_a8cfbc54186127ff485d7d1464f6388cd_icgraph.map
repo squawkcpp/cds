@@ -1,0 +1,7 @@
+<map id="data::save" name="data::save">
+<area shape="rect" id="node2" href="$d8/d96/classcds_1_1mod_1_1ModAlbums.html#ab5f18f0ed63bbceaf6a149fcb534615e" title="import " alt="" coords="143,5,307,47"/>
+<area shape="rect" id="node3" href="$df/d63/classcds_1_1Scanner.html#ad65da450bbf06bb2ad93c2293c092a1f" title="import files " alt="" coords="355,64,509,105"/>
+<area shape="rect" id="node5" href="$d6/dc9/classcds_1_1mod_1_1ModImages.html#ae7feff1e10f8a335f27e0bdce723874a" title="import and store image. " alt="" coords="143,123,306,164"/>
+<area shape="rect" id="node6" href="$df/d63/classcds_1_1Scanner.html#ad2edfe5f9d7d538ed0eb52033e335793" title="flush content with the given prefix. " alt="" coords="361,159,503,186"/>
+<area shape="rect" id="node4" href="$de/ddd/classcds_1_1Server.html#aaa29a062d4cac4928dd68a39901af02b" title="get module node list " alt="" coords="557,101,719,127"/>
+</map>

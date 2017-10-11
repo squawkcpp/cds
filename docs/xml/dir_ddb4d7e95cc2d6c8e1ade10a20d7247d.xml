@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_ddb4d7e95cc2d6c8e1ade10a20d7247d" kind="dir">
+    <compoundname>src/modules</compoundname>
+    <innerfile refid="d5/d7b/mod__albums_8cpp">mod_albums.cpp</innerfile>
+    <innerfile refid="d8/da5/mod__albums_8h">mod_albums.h</innerfile>
+    <innerfile refid="d1/d93/mod__ebooks_8cpp">mod_ebooks.cpp</innerfile>
+    <innerfile refid="d7/d3c/mod__ebooks_8h">mod_ebooks.h</innerfile>
+    <innerfile refid="dc/d37/mod__images_8cpp">mod_images.cpp</innerfile>
+    <innerfile refid="db/de2/mod__images_8h">mod_images.h</innerfile>
+    <innerfile refid="d5/d0f/mod__movies_8cpp">mod_movies.cpp</innerfile>
+    <innerfile refid="df/d7b/mod__movies_8h">mod_movies.h</innerfile>
+    <innerfile refid="de/d91/mod__series_8cpp">mod_series.cpp</innerfile>
+    <innerfile refid="df/d15/mod__series_8h">mod_series.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/modules/"/>
+  </compounddef>
+</doxygen>

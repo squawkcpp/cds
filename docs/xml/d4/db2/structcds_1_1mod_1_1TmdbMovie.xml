@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d4/db2/structcds_1_1mod_1_1TmdbMovie" kind="struct" language="C++" prot="public">
+    <compoundname>cds::mod::TmdbMovie</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1ade985b76c8a1d03084125435c4a79037" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::backdrop_path</definition>
+        <argsstring></argsstring>
+        <name>backdrop_path</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="30" column="1" bodyfile="src/modules/mod_movies.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1ab6325846dbdacb1dd6832641a5423eb5" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; cds::mod::TmdbMovie::genres</definition>
+        <argsstring></argsstring>
+        <name>genres</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="31" column="1" bodyfile="src/modules/mod_movies.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a173fa5a3b0b2acf54eeb657fba521c87" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::homepage</definition>
+        <argsstring></argsstring>
+        <name>homepage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="32" column="1" bodyfile="src/modules/mod_movies.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a162429fb6ce3da9c69568e9f8b208eaa" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="33" column="1" bodyfile="src/modules/mod_movies.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a93b7b738f4505e2fc86c4f78ffc3fe7e" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::imdb_id</definition>
+        <argsstring></argsstring>
+        <name>imdb_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="34" column="1" bodyfile="src/modules/mod_movies.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a75abbd911073bee24caf77b5175183cf" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::original_language</definition>
+        <argsstring></argsstring>
+        <name>original_language</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="35" column="1" bodyfile="src/modules/mod_movies.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a15f67ee22da0f3c1dbc6cf6265d172e4" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::original_title</definition>
+        <argsstring></argsstring>
+        <name>original_title</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="36" column="1" bodyfile="src/modules/mod_movies.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a7895b26565a1266a911d16421fffdbb7" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::overview</definition>
+        <argsstring></argsstring>
+        <name>overview</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="37" column="1" bodyfile="src/modules/mod_movies.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a4043622b31f14e1c3ed42e812a058884" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::poster_path</definition>
+        <argsstring></argsstring>
+        <name>poster_path</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="38" column="1" bodyfile="src/modules/mod_movies.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a7542759faa0868caec4b9b6ef52a756a" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::release_date</definition>
+        <argsstring></argsstring>
+        <name>release_date</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="39" column="1" bodyfile="src/modules/mod_movies.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a86d8cec3c749aed1739c58dc9f5fb669" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::runtime</definition>
+        <argsstring></argsstring>
+        <name>runtime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="40" column="1" bodyfile="src/modules/mod_movies.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a24639337b08dd57d7dc67f7dbf7c801a" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::tagline</definition>
+        <argsstring></argsstring>
+        <name>tagline</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="41" column="1" bodyfile="src/modules/mod_movies.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a122e1d8b7f3285db0b512c1a6f388999" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string cds::mod::TmdbMovie::title</definition>
+        <argsstring></argsstring>
+        <name>title</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="42" column="1" bodyfile="src/modules/mod_movies.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a980c0b352c838367636af5ce656109be" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;os, const TmdbMovie &amp;obj)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d4/db2/structcds_1_1mod_1_1TmdbMovie" kindref="compound">TmdbMovie</ref> &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/modules/mod_movies.h" line="44" column="1" bodyfile="src/modules/mod_movies.h" bodystart="44" bodyend="66"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/modules/mod_movies.h" line="28" column="1" bodyfile="src/modules/mod_movies.h" bodystart="28" bodyend="67"/>
+    <listofallmembers>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1ade985b76c8a1d03084125435c4a79037" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>backdrop_path</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1ab6325846dbdacb1dd6832641a5423eb5" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>genres</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a173fa5a3b0b2acf54eeb657fba521c87" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>homepage</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a162429fb6ce3da9c69568e9f8b208eaa" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>id</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a93b7b738f4505e2fc86c4f78ffc3fe7e" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>imdb_id</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a980c0b352c838367636af5ce656109be" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>operator&lt;&lt;</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a75abbd911073bee24caf77b5175183cf" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>original_language</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a15f67ee22da0f3c1dbc6cf6265d172e4" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>original_title</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a7895b26565a1266a911d16421fffdbb7" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>overview</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a4043622b31f14e1c3ed42e812a058884" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>poster_path</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a7542759faa0868caec4b9b6ef52a756a" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>release_date</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a86d8cec3c749aed1739c58dc9f5fb669" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>runtime</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a24639337b08dd57d7dc67f7dbf7c801a" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>tagline</name></member>
+      <member refid="d4/db2/structcds_1_1mod_1_1TmdbMovie_1a122e1d8b7f3285db0b512c1a6f388999" prot="public" virt="non-virtual"><scope>cds::mod::TmdbMovie</scope><name>title</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

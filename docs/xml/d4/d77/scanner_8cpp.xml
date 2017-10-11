@@ -1,0 +1,487 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="d4/d77/scanner_8cpp" kind="file" language="C++">
+    <compoundname>scanner.cpp</compoundname>
+    <includes refid="db/d62/scanner_8h" local="yes">scanner.h</includes>
+    <includes local="no">boost/filesystem.hpp</includes>
+    <includes local="yes">spdlog/spdlog.h</includes>
+    <includes refid="dd/d42/__utils_8h" local="yes">_utils.h</includes>
+    <includes refid="d9/db6/datastore_8h" local="yes">datastore.h</includes>
+    <includes refid="d6/d65/filemetaregex_8h" local="yes">filemetaregex.h</includes>
+    <includes refid="dc/d45/__lua_8h" local="yes">_lua.h</includes>
+    <includes refid="d8/da5/mod__albums_8h" local="yes">modules/mod_albums.h</includes>
+    <includes refid="d7/d3c/mod__ebooks_8h" local="yes">modules/mod_ebooks.h</includes>
+    <includes refid="db/de2/mod__images_8h" local="yes">modules/mod_images.h</includes>
+    <includes refid="df/d7b/mod__movies_8h" local="yes">modules/mod_movies.h</includes>
+    <includes refid="df/d15/mod__series_8h" local="yes">modules/mod_series.h</includes>
+    <incdepgraph>
+      <node id="464">
+        <label>boost/algorithm/string.hpp</label>
+      </node>
+      <node id="447">
+        <label>system_error</label>
+      </node>
+      <node id="450">
+        <label>functional</label>
+      </node>
+      <node id="456">
+        <label>fmt/format.h</label>
+      </node>
+      <node id="455">
+        <label>boost/functional/hash.hpp</label>
+      </node>
+      <node id="469">
+        <label>modules/mod_albums.h</label>
+        <link refid="d8/da5/mod__albums_8h_source"/>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="445" relation="include">
+        </childnode>
+        <childnode refid="449" relation="include">
+        </childnode>
+      </node>
+      <node id="444">
+        <label>magic.h</label>
+      </node>
+      <node id="454">
+        <label>boost/tokenizer.hpp</label>
+      </node>
+      <node id="453">
+        <label>boost/foreach.hpp</label>
+      </node>
+      <node id="457">
+        <label>redox.hpp</label>
+      </node>
+      <node id="458">
+        <label>gtest/gtest_prod.h</label>
+      </node>
+      <node id="463">
+        <label>opencv2/opencv.hpp</label>
+      </node>
+      <node id="443">
+        <label>string</label>
+      </node>
+      <node id="449">
+        <label>datastore.h</label>
+        <link refid="d9/db6/datastore_8h_source"/>
+        <childnode refid="450" relation="include">
+        </childnode>
+        <childnode refid="451" relation="include">
+        </childnode>
+        <childnode refid="452" relation="include">
+        </childnode>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="448" relation="include">
+        </childnode>
+        <childnode refid="453" relation="include">
+        </childnode>
+        <childnode refid="454" relation="include">
+        </childnode>
+        <childnode refid="455" relation="include">
+        </childnode>
+        <childnode refid="456" relation="include">
+        </childnode>
+        <childnode refid="457" relation="include">
+        </childnode>
+        <childnode refid="458" relation="include">
+        </childnode>
+      </node>
+      <node id="451">
+        <label>map</label>
+      </node>
+      <node id="471">
+        <label>modules/mod_images.h</label>
+        <link refid="db/de2/mod__images_8h_source"/>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="445" relation="include">
+        </childnode>
+        <childnode refid="449" relation="include">
+        </childnode>
+      </node>
+      <node id="452">
+        <label>regex</label>
+      </node>
+      <node id="470">
+        <label>modules/mod_ebooks.h</label>
+        <link refid="d7/d3c/mod__ebooks_8h_source"/>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="445" relation="include">
+        </childnode>
+        <childnode refid="449" relation="include">
+        </childnode>
+      </node>
+      <node id="442">
+        <label>scanner.h</label>
+        <link refid="db/d62/scanner_8h_source"/>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="444" relation="include">
+        </childnode>
+        <childnode refid="445" relation="include">
+        </childnode>
+        <childnode refid="449" relation="include">
+        </childnode>
+        <childnode refid="458" relation="include">
+        </childnode>
+      </node>
+      <node id="467">
+        <label>filemetaregex.h</label>
+        <link refid="d6/d65/filemetaregex_8h_source"/>
+        <childnode refid="451" relation="include">
+        </childnode>
+        <childnode refid="452" relation="include">
+        </childnode>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="448" relation="include">
+        </childnode>
+        <childnode refid="449" relation="include">
+        </childnode>
+      </node>
+      <node id="468">
+        <label>_lua.h</label>
+        <link refid="dc/d45/__lua_8h_source"/>
+        <childnode refid="443" relation="include">
+        </childnode>
+      </node>
+      <node id="460">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="465">
+        <label>rapidxml_ns.hpp</label>
+      </node>
+      <node id="466">
+        <label>rapidxml_ns_print.hpp</label>
+      </node>
+      <node id="445">
+        <label>config.h</label>
+        <link refid="db/d16/config_8h_source"/>
+        <childnode refid="446" relation="include">
+        </childnode>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="447" relation="include">
+        </childnode>
+        <childnode refid="448" relation="include">
+        </childnode>
+      </node>
+      <node id="448">
+        <label>vector</label>
+      </node>
+      <node id="459">
+        <label>boost/filesystem.hpp</label>
+      </node>
+      <node id="441">
+        <label>src/scanner.cpp</label>
+        <link refid="scanner.cpp"/>
+        <childnode refid="442" relation="include">
+        </childnode>
+        <childnode refid="459" relation="include">
+        </childnode>
+        <childnode refid="460" relation="include">
+        </childnode>
+        <childnode refid="461" relation="include">
+        </childnode>
+        <childnode refid="449" relation="include">
+        </childnode>
+        <childnode refid="467" relation="include">
+        </childnode>
+        <childnode refid="468" relation="include">
+        </childnode>
+        <childnode refid="469" relation="include">
+        </childnode>
+        <childnode refid="470" relation="include">
+        </childnode>
+        <childnode refid="471" relation="include">
+        </childnode>
+        <childnode refid="472" relation="include">
+        </childnode>
+        <childnode refid="473" relation="include">
+        </childnode>
+      </node>
+      <node id="461">
+        <label>_utils.h</label>
+        <link refid="dd/d42/__utils_8h_source"/>
+        <childnode refid="462" relation="include">
+        </childnode>
+        <childnode refid="452" relation="include">
+        </childnode>
+        <childnode refid="451" relation="include">
+        </childnode>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="448" relation="include">
+        </childnode>
+        <childnode refid="463" relation="include">
+        </childnode>
+        <childnode refid="460" relation="include">
+        </childnode>
+        <childnode refid="464" relation="include">
+        </childnode>
+        <childnode refid="465" relation="include">
+        </childnode>
+        <childnode refid="466" relation="include">
+        </childnode>
+        <childnode refid="456" relation="include">
+        </childnode>
+      </node>
+      <node id="472">
+        <label>modules/mod_movies.h</label>
+        <link refid="df/d7b/mod__movies_8h_source"/>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="449" relation="include">
+        </childnode>
+        <childnode refid="445" relation="include">
+        </childnode>
+        <childnode refid="458" relation="include">
+        </childnode>
+      </node>
+      <node id="462">
+        <label>algorithm</label>
+      </node>
+      <node id="473">
+        <label>modules/mod_series.h</label>
+        <link refid="df/d15/mod__series_8h_source"/>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="445" relation="include">
+        </childnode>
+        <childnode refid="449" relation="include">
+        </childnode>
+      </node>
+      <node id="446">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="d9/d60/namespacecds">cds</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/><sp/><sp/><sp/>This<sp/>program<sp/>is<sp/>free<sp/>software:<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or<sp/>modify</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/><sp/><sp/><sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>as<sp/>published<sp/>by</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/><sp/><sp/><sp/>the<sp/>Free<sp/>Software<sp/>Foundation,<sp/>either<sp/>version<sp/>3<sp/>of<sp/>the<sp/>License,<sp/>or</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/><sp/><sp/><sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"></highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/><sp/><sp/><sp/>This<sp/>program<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/><sp/><sp/><sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/><sp/><sp/><sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/><sp/><sp/><sp/>GNU<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/><sp/><sp/><sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/><sp/><sp/>along<sp/>with<sp/>this<sp/>program.<sp/><sp/>If<sp/>not,<sp/>see<sp/>&lt;http://www.gnu.org/licenses/&gt;.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;scanner.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/filesystem.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spdlog/spdlog.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;_utils.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;datastore.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;filemetaregex.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;_lua.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;modules/mod_albums.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;modules/mod_ebooks.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;modules/mod_images.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;modules/mod_movies.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;modules/mod_series.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="d9/d60/namespacecds" kindref="compound">cds</ref><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::array&lt;<sp/>std::regex,<sp/>3<sp/>&gt;<sp/>Scanner::_disc_patterns<sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>{std::regex(</highlight><highlight class="stringliteral">&quot;(/.*)/CD[0-9]*&quot;</highlight><highlight class="normal">,<sp/>std::regex_constants::icase<sp/>),</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>std::regex(</highlight><highlight class="stringliteral">&quot;(/.*)/DISC[0-9]*&quot;</highlight><highlight class="normal">,<sp/>std::regex_constants::icase<sp/>),</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>std::regex(</highlight><highlight class="stringliteral">&quot;(/.*)/DISK[0-9]*&quot;</highlight><highlight class="normal">,<sp/>std::regex_constants::icase<sp/>)}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="df/d63/classcds_1_1Scanner_1ad65da450bbf06bb2ad93c2293c092a1f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="df/d63/classcds_1_1Scanner_1ad65da450bbf06bb2ad93c2293c092a1f" kindref="member">Scanner::import_files</ref><sp/>(<sp/>data::redis_ptr<sp/><ref refid="d0/df5/namespaceredis" kindref="compound">redis</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref><sp/>config<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>magic_t<sp/>_magic<sp/>=<sp/>magic_open<sp/>(<sp/>MAGIC_MIME_TYPE<sp/>);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>magic_load<sp/>(<sp/>_magic,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>directory<sp/>:<sp/>config-&gt;media<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a8cfbc54186127ff485d7d1464f6388cd" kindref="member">data::save</ref>(<sp/>redis,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>directory<sp/>),<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::NAME,<sp/>filename<sp/>(<sp/>directory,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::PARENT,<sp/>param::FILE<sp/>},</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::PATH,<sp/>directory<sp/>},</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::CLASS,<sp/><ref refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" kindref="member">data::NodeType::str</ref><sp/>(<sp/>data::NodeType::folder<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::TIMESTAMP,<sp/></highlight><highlight class="stringliteral">&quot;0&quot;</highlight><highlight class="normal"><sp/>},</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a3e5d28bf1fc99f5389f0eeddb348856e" kindref="member">data::add_types</ref>(<sp/>redis,<sp/>param::FILE,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>directory<sp/>),<sp/>static_cast&lt;unsigned<sp/>long&gt;(<sp/>boost::filesystem::last_write_time(<sp/>directory<sp/>)<sp/>)<sp/>);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>import_directory(<sp/>redis,<sp/>_magic,<sp/>directory,<sp/>directory<sp/>);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>magic_close<sp/>(<sp/>_magic<sp/>);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>Scanner::new_items(<sp/>redis,<sp/>config,<sp/>data::NodeType::audio,<sp/>std::bind(<sp/>&amp;<ref refid="d8/d96/classcds_1_1mod_1_1ModAlbums_1ab5f18f0ed63bbceaf6a149fcb534615e" kindref="member">mod::ModAlbums::import</ref>,<sp/>std::placeholders::_1,<sp/>std::placeholders::_2,<sp/>std::placeholders::_3<sp/>)<sp/>);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>Scanner::new_items(<sp/>redis,<sp/>config,<sp/>data::NodeType::image,<sp/>std::bind(<sp/>&amp;mod::ModImages::import,<sp/>std::placeholders::_1,<sp/>std::placeholders::_2,<sp/>std::placeholders::_3<sp/>)<sp/>);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>Scanner::new_items(<sp/>redis,<sp/>config,<sp/>data::NodeType::movie,<sp/>std::bind(<sp/>&amp;mod::ModMovies::import,<sp/>std::placeholders::_1,<sp/>std::placeholders::_2,<sp/>std::placeholders::_3<sp/>)<sp/>);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>Scanner::new_items(<sp/>redis,<sp/>config,<sp/>data::NodeType::episode,<sp/>std::bind(<sp/>&amp;mod::ModSeries::import,<sp/>std::placeholders::_1,<sp/>std::placeholders::_2,<sp/>std::placeholders::_3<sp/>)<sp/>);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>Scanner::new_items(<sp/>redis,<sp/>config,<sp/>data::NodeType::ebook,<sp/>std::bind(<sp/>&amp;mod::ModEbooks::import,<sp/>std::placeholders::_1,<sp/>std::placeholders::_2,<sp/>std::placeholders::_3<sp/>)<sp/>);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>Scanner::sweep(<sp/>redis,<sp/>param::FILE<sp/>);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1ab9369687e5b0247b92fa21cd6650324a" kindref="member">data::eval</ref><sp/>(<sp/>redis,<sp/>LUA_FLUSH,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;fs:*:sort:*&quot;</highlight><highlight class="normal"><sp/>);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1ab9369687e5b0247b92fa21cd6650324a" kindref="member">data::eval</ref>(<sp/>redis,<sp/>LUA_INDEX,<sp/>0<sp/>);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>search_index(<sp/>redis<sp/>);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Scanner::import_directory<sp/>(<sp/>data::redis_ptr<sp/><ref refid="d0/df5/namespaceredis" kindref="compound">redis</ref>,<sp/>magic_t&amp;<sp/>_magic,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>parent_key,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//get<sp/>files<sp/>in<sp/>folder</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>boost::filesystem::path<sp/>_fs_path<sp/>(<sp/>path<sp/>);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>boost::filesystem::directory_iterator<sp/>end_itr;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<sp/>boost::filesystem::directory_iterator<sp/>itr<sp/>(<sp/>_fs_path<sp/>);<sp/>itr<sp/>!=<sp/>end_itr;<sp/>++itr<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>_item_filepath<sp/>=<sp/>path<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/&quot;</highlight><highlight class="normal"><sp/>+<sp/>itr-&gt;path().filename().string();</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>boost::filesystem::is_regular_file<sp/>(<sp/>itr-&gt;status()<sp/>)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>!<sp/>Scanner::timestamp(<sp/>redis,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref><sp/>(<sp/>_item_filepath<sp/>),<sp/>boost::filesystem::last_write_time(<sp/>itr-&gt;path()<sp/>)<sp/>)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>_mime_type<sp/>=<sp/>magic_file<sp/>(<sp/>_magic,<sp/>_item_filepath.c_str()<sp/>);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data::node_t<sp/>_node;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data::NodeType::Enum<sp/>_type<sp/>=<sp/><ref refid="db/d7b/classcds_1_1FileMetaRegex_1a337a38c50294bc5d71c7524c44277565" kindref="member">FileMetaRegex::parse</ref><sp/>(<sp/>_mime_type,<sp/>_item_filepath.c_str(),<sp/>_node<sp/>);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_node[param::CLEAN_STRING]<sp/>=<sp/>clean_string(<sp/>_node[param::NAME]<sp/>);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_node[param::PARENT]<sp/>=<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>parent_key<sp/>);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_node[param::PATH]<sp/>=<sp/>_item_filepath;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_node[param::CLASS]<sp/>=<sp/><ref refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" kindref="member">data::NodeType::str</ref><sp/>(<sp/>_type<sp/>);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_node[param::EXTENSION]<sp/>=<sp/>boost::filesystem::extension<sp/>(<sp/>itr-&gt;path()<sp/>);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_node[param::SIZE]<sp/>=<sp/>std::to_string<sp/>(<sp/>boost::filesystem::file_size<sp/>(<sp/>itr-&gt;path()<sp/>)<sp/>);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_node[param::MIME_TYPE]<sp/>=<sp/>_mime_type;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_node[param::TIMESTAMP]<sp/>=<sp/>std::to_string(<sp/>boost::filesystem::last_write_time(<sp/>itr-&gt;path()<sp/>)<sp/>);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a8cfbc54186127ff485d7d1464f6388cd" kindref="member">data::save</ref>(<sp/>redis,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>_item_filepath<sp/>),<sp/>_node<sp/>);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a3e5d28bf1fc99f5389f0eeddb348856e" kindref="member">data::add_types</ref>(<sp/>redis,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>parent_key<sp/>),<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>_item_filepath<sp/>),<sp/><sp/><ref refid="df/dea/structdata_1ad7c44e770e55dacb9c2e62ce30fdbef4" kindref="member">data::time_millis</ref>()<sp/>);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1af449933948671c86a051c08d4876ede4" kindref="member">data::add_nodes</ref>(<sp/>redis,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>parent_key<sp/>),<sp/>_type,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>_item_filepath<sp/>),<sp/><sp/><ref refid="df/dea/structdata_1ad7c44e770e55dacb9c2e62ce30fdbef4" kindref="member">data::time_millis</ref>()<sp/>);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a5aa923122403f67c925102e270c37a9d" kindref="member">data::incr_mime</ref><sp/>(<sp/>redis,<sp/>_mime_type<sp/>);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Scanner::new_item(redis,<sp/>parent_key,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref><sp/>(<sp/>_item_filepath<sp/>),<sp/>_type<sp/>);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>boost::filesystem::is_directory<sp/>(<sp/>itr-&gt;status()<sp/>)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>!<sp/>Scanner::timestamp(<sp/>redis,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref><sp/>(<sp/>_item_filepath<sp/>),<sp/>boost::filesystem::last_write_time(<sp/>itr-&gt;path()<sp/>)<sp/>)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a8cfbc54186127ff485d7d1464f6388cd" kindref="member">data::save</ref>(<sp/>redis,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>_item_filepath<sp/>),<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::NAME,<sp/>filename<sp/>(<sp/>_item_filepath,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::CLEAN_STRING,<sp/>clean_string(<sp/>filename<sp/>(<sp/>_item_filepath,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>)<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::PARENT,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>path<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::PATH,<sp/>_item_filepath<sp/>},</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::CLASS,<sp/><ref refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" kindref="member">data::NodeType::str</ref><sp/>(<sp/>data::NodeType::folder<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::TIMESTAMP,<sp/>std::to_string(<sp/>boost::filesystem::last_write_time(<sp/>itr-&gt;path()<sp/>)<sp/>)<sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a3e5d28bf1fc99f5389f0eeddb348856e" kindref="member">data::add_types</ref>(<sp/>redis,<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>parent_key<sp/>),<sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>_item_filepath<sp/>),<sp/><sp/><ref refid="df/dea/structdata_1ad7c44e770e55dacb9c2e62ce30fdbef4" kindref="member">data::time_millis</ref>()<sp/>);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>import_directory<sp/>(<sp/>redis,<sp/>_magic,<sp/>_item_filepath,<sp/>_item_filepath<sp/>);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Scanner::new_item(<sp/>data::redis_ptr<sp/>redis,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>parent,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="de/db2/namespacekey" kindref="compound">key</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>data::NodeType::Enum<sp/>type<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>type<sp/>==<sp/>data::NodeType::audio<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>redis-&gt;command(<sp/>{redis::SADD,</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a64d1a0d542b5966540c6297d994c06e5" kindref="member">data::make_key</ref>(<sp/>key::FS,<sp/>key::NEW,<sp/><ref refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" kindref="member">data::NodeType::str</ref>(<sp/>type<sp/>)<sp/>),</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a5a12735de2028ea715d62b3b41c6ce4b" kindref="member">data::hash</ref>(<sp/>Scanner::remove_disc(<sp/>parent<sp/>)<sp/>)<sp/>}<sp/>);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>redis-&gt;command(<sp/>{redis::SADD,<sp/><sp/><ref refid="df/dea/structdata_1a64d1a0d542b5966540c6297d994c06e5" kindref="member">data::make_key</ref>(<sp/>key::FS,<sp/>key::NEW,<sp/><ref refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" kindref="member">data::NodeType::str</ref>(<sp/>type<sp/>)<sp/>),<sp/>key}<sp/>);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Scanner::sweep<sp/>(<sp/>data::redis_ptr<sp/>redis,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>key<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1aeafb3837ce1e2fbfea65c76431ef4fb8" kindref="member">data::children</ref>(<sp/>redis,<sp/>key,<sp/>0,<sp/>-1,<sp/></highlight><highlight class="stringliteral">&quot;default&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;asc&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">,<sp/>[redis,key](<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>item<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sweep(<sp/>redis,<sp/>item<sp/>);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>!<ref refid="df/dea/structdata_1af522b9d33db275e430e18b4725494340" kindref="member">data::is_mod</ref>(<sp/>item<sp/>)<sp/>&amp;&amp;<sp/>item<sp/>!=<sp/>param::ROOT<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>_item_path<sp/>=<sp/><ref refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" kindref="member">data::get</ref>(<sp/>redis,<sp/>item,<sp/>param::PATH<sp/>);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>!boost::filesystem::exists(<sp/>_item_path<sp/>)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SPDLOG_DEBUG(spdlog::get<sp/>(<sp/>LOGGER<sp/>),<sp/></highlight><highlight class="stringliteral">&quot;orphan<sp/>found<sp/>(key={},<sp/>path={})&quot;</highlight><highlight class="normal">,<sp/>item,<sp/>_item_path<sp/>);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>_type<sp/>=<sp/><ref refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" kindref="member">data::get</ref>(<sp/>redis,<sp/>item,<sp/>param::CLASS<sp/>);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>_parent<sp/>=<sp/><ref refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" kindref="member">data::get</ref>(<sp/>redis,<sp/>item,<sp/>param::PARENT<sp/>);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a1ca7fdb881f181131b61e9429e9c83ec" kindref="member">data::rem_types</ref>(<sp/>redis,<sp/>_parent,<sp/>item<sp/>);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a659e370f3ef17b04342b89e8a353cd19" kindref="member">data::rem_nodes</ref>(<sp/>redis,<sp/>_parent,<sp/><ref refid="df/de0/classdata_1_1NodeType_1ac6fb806749e55ecbd940d721f355a97b" kindref="member">data::NodeType::parse</ref>(<sp/>_type<sp/>),<sp/>item<sp/>);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/><ref refid="df/dea/structdata_1af522b9d33db275e430e18b4725494340" kindref="member">data::is_mod</ref>(<sp/>_type<sp/>)<sp/>)</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/><ref refid="df/dea/structdata_1a659e370f3ef17b04342b89e8a353cd19" kindref="member">data::rem_nodes</ref>(<sp/>redis,<sp/><ref refid="df/de0/classdata_1_1NodeType_1ac6fb806749e55ecbd940d721f355a97b" kindref="member">data::NodeType::parse</ref>(<sp/>_type<sp/>),<sp/>item<sp/>);<sp/>}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="comment">//<sp/>TODO<sp/>delete<sp/>from<sp/>artists<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if(<sp/>data::NodeType::parse(<sp/>_type<sp/>)<sp/>==<sp/>data::NodeType::audio<sp/>)<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>data::rem_nodes(<sp/>redis,<sp/>data::NodeType::parse(<sp/>_type<sp/>),<sp/>item<sp/>);<sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1ab9369687e5b0247b92fa21cd6650324a" kindref="member">data::eval</ref><sp/>(<sp/>redis,<sp/>LUA_FLUSH,<sp/>0,<sp/>fmt::format(<sp/></highlight><highlight class="stringliteral">&quot;fs:{}:*&quot;</highlight><highlight class="normal">,<sp/>item<sp/>)<sp/>);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="145"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Scanner::timestamp(<sp/>data::redis_ptr<sp/>redis,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>key,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>timestamp<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>_exist<sp/>=<sp/>redis-&gt;commandSync&lt;<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&gt;<sp/>(<sp/>{<sp/>redis::EXISTS,<sp/><ref refid="df/dea/structdata_1adae832d78a0adf2a0b4abca522757126" kindref="member">data::make_key_node</ref><sp/>(<sp/>key<sp/>)<sp/>}<sp/>);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>_exist.ok()<sp/>&amp;&amp;<sp/>_exist.reply()<sp/>==<sp/>1<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_timestamp<sp/>=<sp/>std::stoul(<sp/><ref refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" kindref="member">data::get</ref>(<sp/>redis,<sp/>key,<sp/>param::TIMESTAMP<sp/>)<sp/>);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>_exist.ok()<sp/>&amp;&amp;<sp/>_timestamp<sp/>==<sp/>timestamp<sp/>)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal">std::string<sp/>Scanner::remove_disc(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>_regex<sp/>:<sp/>Scanner::_disc_patterns<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::smatch<sp/>matches;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>std::regex_search(<sp/>path,<sp/>matches,<sp/>_regex<sp/>)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>matches[1];</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>path;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Scanner::new_items<sp/>(<sp/>data::redis_ptr<sp/>redis,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref><sp/>config,<sp/>data::NodeType::Enum<sp/>type,</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(data::redis_ptr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d9/d60/namespacecds_1a06113560522abea20f7bdceb55de2bbc" kindref="member">config_ptr</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;)<sp/>&gt;<sp/>fn<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>_c<sp/>=<sp/>redis-&gt;commandSync&lt;<sp/>data::nodes_t<sp/>&gt;(</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{redis::SMEMBERS,<sp/><ref refid="df/dea/structdata_1a64d1a0d542b5966540c6297d994c06e5" kindref="member">data::make_key</ref>(<sp/>key::FS,<sp/>key::NEW,<sp/><ref refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" kindref="member">data::NodeType::str</ref>(<sp/>type<sp/>)<sp/>)<sp/>}<sp/>);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>_c.ok()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>__c<sp/>:<sp/>_c.reply()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fn(<sp/>redis,<sp/>config,<sp/>__c<sp/>);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>redis-&gt;command(<sp/>{redis::SREM,<sp/><ref refid="df/dea/structdata_1a64d1a0d542b5966540c6297d994c06e5" kindref="member">data::make_key</ref>(<sp/>key::FS,<sp/>key::NEW,<sp/><ref refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" kindref="member">data::NodeType::str</ref>(<sp/>type<sp/>)<sp/>),<sp/>__c<sp/>}<sp/>);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180" refid="df/d63/classcds_1_1Scanner_1ad2edfe5f9d7d538ed0eb52033e335793" refkind="member"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="df/d63/classcds_1_1Scanner_1ad2edfe5f9d7d538ed0eb52033e335793" kindref="member">Scanner::flush</ref>(<sp/>data::redis_ptr<sp/>redis<sp/><sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1ab9369687e5b0247b92fa21cd6650324a" kindref="member">data::eval</ref><sp/>(<sp/>redis,<sp/>LUA_FLUSH,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;fs:*&quot;</highlight><highlight class="normal"><sp/>);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//create<sp/>the<sp/>content<sp/>nodes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>save_folder(<sp/>redis,<sp/>param::ROOT,<sp/>param::ROOT,<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal"><sp/>);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>__mod<sp/>:<sp/>_internal::menu<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>save_folder(<sp/>redis,<sp/>__mod.at(<sp/>key::TYPE<sp/>),<sp/>__mod.at(<sp/>param::NAME<sp/>),<sp/>param::ROOT<sp/>);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a3e5d28bf1fc99f5389f0eeddb348856e" kindref="member">data::add_types</ref>(<sp/>redis,<sp/>param::ROOT,<sp/>__mod.at(<sp/>key::TYPE<sp/>),<sp/><ref refid="df/dea/structdata_1ad7c44e770e55dacb9c2e62ce30fdbef4" kindref="member">data::time_millis</ref>()<sp/>);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="188"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Scanner::save_folder<sp/>(<sp/>data::redis_ptr<sp/>redis<sp/>,</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>key<sp/>,</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name<sp/>,</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>parent<sp/><sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>data::node_t<sp/>_node<sp/>{</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::NAME,<sp/>name<sp/>},</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::PARENT,<sp/>parent<sp/>},</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::CLASS,<sp/><ref refid="df/de0/classdata_1_1NodeType_1ad33d2fbcfb0f4b4736449adc92da8650" kindref="member">data::NodeType::str</ref><sp/>(<sp/>data::NodeType::folder<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>param::TIMESTAMP,<sp/>std::to_string(<sp/><ref refid="df/dea/structdata_1ad7c44e770e55dacb9c2e62ce30fdbef4" kindref="member">data::time_millis</ref>()<sp/>)<sp/>},</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1a8cfbc54186127ff485d7d1464f6388cd" kindref="member">data::save</ref>(<sp/>redis,<sp/>key,<sp/>_node<sp/>);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Scanner::search_index<sp/>(<sp/>data::redis_ptr<sp/>redis<sp/><sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>redis-&gt;command(<sp/>{redis::FT_DROP,<sp/>key::INDEX<sp/>}<sp/>);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>redis-&gt;command(<sp/>{redis::FT_CREATE,<sp/>key::INDEX,<sp/></highlight><highlight class="stringliteral">&quot;SCHEMA&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;name&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;TEXT&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;WEIGHT&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;5.0&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;artist&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;TEXT&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;album&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;TEXT&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;genre&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;TEXT&quot;</highlight><highlight class="normal"><sp/>}<sp/>);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="df/dea/structdata_1aeafb3837ce1e2fbfea65c76431ef4fb8" kindref="member">data::children</ref>(<sp/>redis,<sp/>param::ALBUM,<sp/>0,<sp/>-1,<sp/></highlight><highlight class="stringliteral">&quot;default&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;asc&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">,<sp/>[redis](<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>item<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>_name<sp/>=<sp/><ref refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" kindref="member">data::get</ref>(<sp/>redis,<sp/>item,<sp/>param::NAME<sp/>);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>_artist<sp/>=<sp/><ref refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" kindref="member">data::get</ref>(<sp/>redis,<sp/>item,<sp/>param::ARTIST<sp/>);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>_genre<sp/>=<sp/><ref refid="df/dea/structdata_1a547f7721fc58fce2b5c27e4c4c226fca" kindref="member">data::get</ref>(<sp/>redis,<sp/>item,<sp/>param::GENRE<sp/>);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>redis-&gt;command(<sp/>{redis::FT_ADD,<sp/>key::INDEX,<sp/>item,<sp/></highlight><highlight class="stringliteral">&quot;1.0&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;FIELDS&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>param::ARTIST,<sp/>_artist,<sp/>param::ALBUM,<sp/>_name,<sp/>param::GENRE,<sp/>_genre<sp/>}<sp/>);</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>redis-&gt;command(<sp/>{redis::FT_SUGGADD,<sp/>key::AUTO,<sp/>_name,<sp/></highlight><highlight class="stringliteral">&quot;100&quot;</highlight><highlight class="normal"><sp/>}<sp/>);</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>redis-&gt;command(<sp/>{redis::FT_SUGGADD,<sp/>key::AUTO,<sp/>_artist,<sp/></highlight><highlight class="stringliteral">&quot;100&quot;</highlight><highlight class="normal"><sp/>}<sp/>);</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>redis-&gt;command(<sp/>{redis::FT_SUGGADD,<sp/>key::AUTO,<sp/>_genre,<sp/></highlight><highlight class="stringliteral">&quot;100&quot;</highlight><highlight class="normal"><sp/>}<sp/>);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="218"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal">}</highlight><highlight class="comment">//namespace<sp/>cds</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/scanner.cpp"/>
+  </compounddef>
+</doxygen>
