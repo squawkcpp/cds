@@ -54,7 +54,7 @@ sudo docker run -itd --link <REDIS> --name squawk-cds -v /srv:/srv:ro -p 9001:90
     squawk/cds:VERSION
 </pre>
 
-the options are the same as in the command line.
+the options are the same as in the command line. multiple directories can be listet separated by a comma.
 
 ## api
 
