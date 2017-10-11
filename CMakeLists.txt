@@ -65,37 +65,29 @@ SET( INCLUDES ${INCLUDES} ${GTEST_INCLUDE_DIR} ${FMT_INCLUDE_DIR}
 # -------------------------------------------------------------------------
 find_package(Boost 1.54.0 COMPONENTS filesystem system)
 find_package(CURL REQUIRED)
-find_package(PCRE++ REQUIRED)
-find_package(Imlib2 REQUIRED)
 find_package(LibAVCodec COMPONENTS avformat avcodec avfilter avresample avutil )
 find_package(Poppler REQUIRED cpp)
 find_package(OpenSSL REQUIRED)
-find_package(Flac++ REQUIRED)
 find_package(LibArchive REQUIRED)
 find_package(OpenCV REQUIRED )
 find_package(Hiredis)
 find_package(Libev)
 find_package(LibMagic)
-# find_package(Musicbrainz5)
 
 SET( LIBS ${LIBS}
-    ${Boost_LIBRARIES} ${CURL_LIBRARIES} ${IMLIB2_LIBRARIES}
-    ${AVCODEC_LIBRARIES} ${POPPLER_LIBRARIES} ${OPENSSL_LIBRARIES}
-    ${FLAC++_LIBRARIES} ${LIBSIGCXX2_LIBRARIES} ${LibArchive_LIBRARIES}
-    ${CPP_REDIS_LIBRARIES} ${LIBHIREDIS_LIBRARIES} ${LIBEV_LIBRARIES}
-    ${LibMagic_LIBRARY} ${OpenCV_LIBS} #${MUSICBRAINZ5_LIBRARIES}
-    -lpcrecpp -lpthread -luuid -lswresample -lm -lz
+    ${Boost_LIBRARIES} ${CURL_LIBRARIES} ${AVCODEC_LIBRARIES}
+    ${POPPLER_LIBRARIES} ${OPENSSL_LIBRARIES} ${LibArchive_LIBRARIES}
+    ${OpenCV_LIBS} ${LIBHIREDIS_LIBRARIES} ${LIBEV_LIBRARIES}
+    ${LibMagic_LIBRARY} -lpthread
 )
 if(build_tests)
     SET( LIBS ${LIBS} gtest)
 endif()
 
 SET( INCLUDES ${INCLUDES}
-    ${Boost_INCLUDE_DIRS} ${LIBXML2_INCLUDE_DIR} ${CURL_INCLUDE_DIRS}
-    ${SQLITE3_INCLUDE_DIR} ${IMLIB2_INCLUDE_DIR} ${AVCODEC_INCLUDES}
-    ${OPENSSL_INCLUDES} ${FLAC++_INCLUDE_DIR} ${PCREPP_INCLUDE_DIR}
-    ${LIBSIGCXX2_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS}
-    ${LibMagic_INCLUDE_DIR} #${MUSICBRAINZ5_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS} ${CURL_INCLUDE_DIRS} ${AVCODEC_INCLUDES}
+    ${POPPLER_INCLUDES} ${OPENSSL_INCLUDES} ${LibArchive_INCLUDE_DIRS}
+    ${OpenCV_INCLUDES} ${LibMagic_INCLUDE_DIR}
 )
 
 # -------------------------------------------------------------------------
