@@ -39,7 +39,7 @@ sudo docker run -itd --link <REDIS> --name squawk-cds -v /srv:/srv:ro \
     squawk/cds:&lt;TAG&gt;
 </pre>
 
-The options are the same as for the command line, exept the handling of directories. 
+The options are the same as for the command line, except the handling of directories. 
 Multiple directories are set as list with the path items separated by a comma. If you plan to reuse the
 datas accross multiple images you will have to share the tmp directory. 
 Mount the tmp directory to the docker image and configure cds accordingly.
