@@ -34,12 +34,13 @@ sudo docker run -itd --link <REDIS> --name squawk-cds -v /srv:/srv:ro \
     -e AMAZON_ACCESS_KEY=<ACCESS_KEY> \
     -e AMAZON_KEY=<KEY> \
     -e TMDB_KEY=<KEY> \
-    -e DIRECTORY=/var/tmp/cds \
+    -e DIRECTORY=/foo,/bar \
+    -e TMP_DIRECTORY=/var/tmp/cds \
     squawk/cds:&lt;TAG&gt;
 </pre>
 
-the options are the same as in the command line exept the handling of directories. 
-multiple directories are listet separated by a comma. If you plan to resuse the
+The options are the same as for the command line, exept the handling of directories. 
+Multiple directories are set as list with the path items separated by a comma. If you plan to reuse the
 datas accross multiple images you will have to share the tmp directory. 
 Mount the tmp directory to the docker image and configure cds accordingly.
 
@@ -51,7 +52,7 @@ cds [OPTION...]
 
 ##### options
 
-name | value | description
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | value | description
 ------------ | ------------- | -------------
 --directory|PATH|path to the directory with the mediafiles. Multiple entries will result in a list containing all directories.
 --listen|IP|API Webserver IP-Adress to bind to.
@@ -64,7 +65,7 @@ name | value | description
 --redis-port|PORT|Redis Database port (default: 6379) (default: 6379)
 --help| |Print help
 
-## Api
+## API
 
 all the requests have the base url of your server: `http://<SERVER_IP>:<PORT>`
 
