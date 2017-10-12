@@ -52,7 +52,7 @@ cds [OPTION...]
 
 ##### options
 
-name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | value | description
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | value | description
 ------------ | ------------- | -------------
 --directory|PATH|path to the directory with the mediafiles. Multiple entries will result in a list containing all directories.
 --listen|IP|API Webserver IP-Adress to bind to.
