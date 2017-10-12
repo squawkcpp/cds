@@ -1,29 +1,51 @@
 [![Build Status](https://travis-ci.org/squawkcpp/cds.svg?branch=master)](https://travis-ci.org/squawkcpp/cds)
+[![GitHub version](https://badge.fury.io/gh/squawkcpp%2Fcds.svg)](https://badge.fury.io/gh/squawkcpp%2Fcds)
 
 ** this software is still under development, its not recommended to use it now. **
 
 # Content Directory Server (CDS)
 
-## About
+Squawk Content Directory Server (CDS) is a service for indexing mediafiles on your local storage and expose the information to the network as RESTful API. The index is stored in a redis database. Names and metadata from the files are used to create the index. This data is enriched with reomote information from  [amazon](https://aws.amazon.com/de/api-gateway/) and [tmdb (https://www.themoviedb.org/documentation/api).
 
-the squawk content directory server (CDS) serves mediafiles from the local storage. the mediafile are enriched with local and remote metadata.
-for information retrievel the following database services can be used:
+## Installation
 
-- [amazon]()
-- [tmdb]()
+### Install Ubuntu Package
 
-
-## Install and run
-
-install on ubuntu:
+A prebuild Ubuntu package is available as github release:
 
 <pre>
-wget <release from github>
-apt-get install -f <release file name>
-apt-get upgrade
+% wget https://github.com/squawkcpp/cds/releases/download/<TAG>/cds_<TAG>.deb
+% sudo dpkg -i cds_<TAG>.deb
+dpkg: dependency problems prevent ... 
+[additional messages]
+% sudo apt-get -f install
+[apt messages]
+Setting up [dependency]...
+Setting up package_with_unsatisfied_dependencies...
 </pre>
 
-start the content directory server from the command line:
+### Use Docker Image
+
+Install and run the docker command with the parameters for the cds server.
+
+<pre>
+sudo docker run -itd --link <REDIS> --name squawk-cds -v /srv:/srv:ro \
+    -v TMP_DIRECTORY=/var/tmp/cds 
+    -p 9001:9001 \
+    -e REDIS=<REDIS> \
+    -e AMAZON_ACCESS_KEY=<ACCESS_KEY> \
+    -e AMAZON_KEY=<KEY> \
+    -e TMDB_KEY=<KEY> \
+    -e DIRECTORY=/var/tmp/cds \
+    squawk/cds:<TAG>
+</pre>
+
+the options are the same as in the command line exept the handling of directories. 
+multiple directories are listet separated by a comma. If you plan to resuse the
+datas accross multiple images you will have to share the tmp directory. 
+Mount the tmp directory to the docker image and configure cds accordingly.
+
+## Usage
 
 ```
 cds [OPTION...]
@@ -43,23 +65,6 @@ name | value | description
 --redis|HOST|Redis Database (default: localhost) (default: localhost)
 --redis-port|PORT|Redis Database port (default: 6379) (default: 6379)
 --help| |Print help
-
-### Docker image
-
-a prebuild image is available on dockerhub. to install run the docker command with the
-parameters for the cds server.
-
-<pre>
-sudo docker run -itd --link <REDIS> --name squawk-cds -v /srv:/srv:ro -p 9001:9001 \
-    -e REDIS=<REDIS>
-    -e AMAZON_ACCESS_KEY=<ACCESS_KEY>
-    -e AMAZON_KEY=<KEY>
-    -e TMDB_KEY=<KEY>
-    -e DIRECTORY=/srv
-    squawk/cds:VERSION
-</pre>
-
-the options are the same as in the command line. multiple directories can be listet separated by a comma.
 
 ## Api
 
