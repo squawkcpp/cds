@@ -1,11 +1,9 @@
 [![Build Status](https://travis-ci.org/squawkcpp/cds.svg?branch=master)](https://travis-ci.org/squawkcpp/cds)
 [![GitHub version](https://badge.fury.io/gh/squawkcpp%2Fcds.svg)](https://badge.fury.io/gh/squawkcpp%2Fcds)
 
-** this software is still under development, its not recommended to use it now. **
-
 # Content Directory Server (CDS)
 
-Squawk Content Directory Server (CDS) is a service for indexing mediafiles on your local storage and expose the information to the network as RESTful API. The index is stored in a redis database. Names and metadata from the files are used to create the index. This data is enriched with reomote information from  [amazon](https://aws.amazon.com/de/api-gateway/) and [tmdb (https://www.themoviedb.org/documentation/api).
+Squawk Content Directory Server (CDS) is a service for indexing mediafiles on your local storage and expose the information to the network as RESTful API. Names and metadatas from the files are the main source to create the index. Additionally the index is enriched with reomote information from  [amazon](https://aws.amazon.com/de/api-gateway/) and [tmdb(https://www.themoviedb.org/documentation/api).
 
 ## Installation
 
