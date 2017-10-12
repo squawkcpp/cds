@@ -24,7 +24,7 @@ Setting up package_with_unsatisfied_dependencies...
 
 ### Use Docker Image
 
-Install and run the docker command with the parameters for the cds server.
+Install and run the docker image with the parameters for the cds server.
 
 <pre>
 sudo docker run -itd --link <REDIS> --name squawk-cds -v /srv:/srv:ro \
