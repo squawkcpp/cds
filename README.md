@@ -12,8 +12,8 @@ Squawk Content Directory Server (CDS) is a service for indexing mediafiles on yo
 A prebuild Ubuntu package is available as github release:
 
 <pre>
-% wget https://github.com/squawkcpp/cds/releases/download/&gt;TAG\>/cds_\<TAG\>.deb
-% sudo dpkg -i cds_<TAG>.deb
+% wget https://github.com/squawkcpp/cds/releases/download/&lt;TAG&gt;/cds_&lt;TAG&gt;.deb
+% sudo dpkg -i cds_&lt;TAG&gt;.deb
 dpkg: dependency problems prevent ... 
 [additional messages]
 % sudo apt-get -f install
@@ -35,7 +35,7 @@ sudo docker run -itd --link <REDIS> --name squawk-cds -v /srv:/srv:ro \
     -e AMAZON_KEY=<KEY> \
     -e TMDB_KEY=<KEY> \
     -e DIRECTORY=/var/tmp/cds \
-    squawk/cds:<TAG>
+    squawk/cds:&lt;TAG&gt;
 </pre>
 
 the options are the same as in the command line exept the handling of directories. 
