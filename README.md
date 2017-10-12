@@ -12,7 +12,7 @@ Squawk Content Directory Server (CDS) is a service for indexing mediafiles on yo
 A prebuild Ubuntu package is available as github release:
 
 <pre>
-% wget https://github.com/squawkcpp/cds/releases/download/<TAG>/cds_<TAG>.deb
+% wget https://github.com/squawkcpp/cds/releases/download/\<TAG\>/cds_\<TAG\>.deb
 % sudo dpkg -i cds_<TAG>.deb
 dpkg: dependency problems prevent ... 
 [additional messages]
