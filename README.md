@@ -3,7 +3,7 @@
 
 # Content Directory Server (CDS)
 
-Squawk Content Directory Server (CDS) is a service for indexing mediafiles on your local storage and expose the information to the network as RESTful API. Names and metadatas from the files are the main source to create the index. Additionally the index is enriched with reomote information from  [amazon](https://aws.amazon.com/de/api-gateway/) and [tmdb](https://www.themoviedb.org/documentation/api).
+Squawk Content Directory Server (CDS) is a service for indexing mediafiles on your local storage and expose the information to the network as RESTful API. Names and metadatas from the files are the main source to create the index. Additionally the index is enriched with remote information from  [amazon](https://aws.amazon.com/de/api-gateway/) and [tmdb](https://www.themoviedb.org/documentation/api).
 
 ## Installation
 
