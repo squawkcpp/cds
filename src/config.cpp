@@ -17,6 +17,8 @@
 #include <arpa/inet.h>
 #include <ifaddrs.h>
 
+#include <boost/filesystem.hpp>
+
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
@@ -118,14 +120,15 @@ std::vector< std::error_code > validate ( std::shared_ptr< Config > config ) {
     { _errors.push_back ( make_error_code ( TMDB_KEY ) ); }
 
     if ( config->http_port.empty() )
-    { config->http_port = "8081"; }
+    { config->http_port = "9001"; }
 
     if ( config->listen_address.empty() )
     { config->listen_address = _get_ip(); }
 
-    //TODO get home directory
     if ( config->tmp_directory.empty() )
     { config->tmp_directory = fmt::format("{}/.squawk/", getenv("HOME") ); }
+    if( !boost::filesystem::exists( config->tmp_directory ) )
+    { boost::filesystem::create_directories( config->tmp_directory ); }
 
     return _errors;
 }

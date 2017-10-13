@@ -206,7 +206,7 @@ void ModAlbums::import_files ( data::redis_ptr redis, const std::string& key, st
 void ModAlbums::import_artist ( data::redis_ptr redis, const std::string& album_key, const std::string& artist ) {
 
     auto _clean_string = clean_string ( artist );
-    data::save( redis, data::hash ( _clean_string ), {
+    data::save( redis, data::make_key_node( data::hash ( _clean_string ) ), {
         { param::CLASS, data::NodeType::str ( data::NodeType::artist ) },
         { param::PARENT, album_key },
         { param::NAME, artist },

@@ -51,7 +51,7 @@ static const std::string ZREM       = "ZREM";
 
 static const std::string FT_DROP    = "FT.DROP";
 static const std::string FT_CREATE  = "FT.CREATE";
-static const std::string FT_SUGGADD = "FT.SUGGADD";
+static const std::string FT_SUGGADD = "FT.SUGADD";
 static const std::string FT_ADD     = "FT.ADD";
 }
 
@@ -158,8 +158,7 @@ static unsigned long time_millis() {
 /** @brief hash create a hash of the input string. */
 static std::string hash ( const std::string& in /** @param in string to hash. */ ) {
     static boost::hash<std::string> _hash;
-    //TODO why slash or fs?
-    if ( in == "/" || in == key::FS || is_mod ( in ) ) {
+    if ( in == "root" || is_mod ( in ) ) {
         return in;
     } else {
         return std::to_string ( _hash ( in ) );
@@ -400,8 +399,8 @@ static void eval(  redis_ptr redis /** @param redis the database pointer. */,
 // -----------------------------------------------------------------------------------------------------------
 
 /** @brief add node to parents type list */
-static void add_types( redis_ptr redis, const std::string& path, const std::string& key, const unsigned long& score )
-{ redis->command( {redis::ZADD, data::make_key_list( path ), std::to_string( score ), key } ); }
+static void add_types( redis_ptr redis, const std::string& parent, const std::string& key, const unsigned long& score )
+{ redis->command( {redis::ZADD, data::make_key_list( parent ), std::to_string( score ), key } ); }
 /** @brief remove node from parents type list */
 static void rem_types( redis_ptr redis, const std::string& parent, const std::string& key )
 { redis->command( {redis::ZREM, data::make_key_list( parent ), hash( key ) } ); }

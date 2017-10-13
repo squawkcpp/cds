@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
         ( cds::PARAM_DIRECTORY, "path to the directory with the mediafiles. Multiple entries will result in a list containing all directories.",
           cxxopts::value<std::vector<std::string>>(), "PATH" )
         ( cds::PARAM_LISTEN_ADDRESS, "API Webserver IP-Adress to bind to.", cxxopts::value<std::string>(), "IP" )
-        ( cds::PARAM_HTTP_PORT, "API Webserver IP Port to bind to.", cxxopts::value<std::string>(), "PORT" )
+        ( cds::PARAM_HTTP_PORT, "API Webserver IP Port to bind to.", cxxopts::value<std::string>()->default_value("9001"), "PORT" )
         ( cds::PARAM_TMP_DIRECTORY, "temporary folder for the thumbnails.", cxxopts::value<std::string>(), "PATH" )
         ( cds::PARAM_TMDB_KEY, "API key for tmdb.", cxxopts::value<std::string>(), "KEY" )
         ( cds::PARAM_AMAZON_ACCESS_KEY, "Access key for amazon.", cxxopts::value<std::string>(), "KEY" )

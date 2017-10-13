@@ -29,6 +29,8 @@
 #include "modules/mod_movies.h"
 #include "modules/mod_series.h"
 
+//TODO folder experimental can not be parsed.
+
 namespace cds {
 
 const std::array< std::regex, 3 > Scanner::_disc_patterns {
@@ -56,14 +58,14 @@ void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
     magic_close ( _magic );
 
     Scanner::new_items( redis, config, data::NodeType::audio, std::bind( &mod::ModAlbums::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
-//    Scanner::new_items( redis, config, data::NodeType::image, std::bind( &mod::ModImages::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
-//    Scanner::new_items( redis, config, data::NodeType::movie, std::bind( &mod::ModMovies::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
-//    Scanner::new_items( redis, config, data::NodeType::episode, std::bind( &mod::ModSeries::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
-//    Scanner::new_items( redis, config, data::NodeType::ebook, std::bind( &mod::ModEbooks::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
+    Scanner::new_items( redis, config, data::NodeType::image, std::bind( &mod::ModImages::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
+    Scanner::new_items( redis, config, data::NodeType::movie, std::bind( &mod::ModMovies::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
+    Scanner::new_items( redis, config, data::NodeType::episode, std::bind( &mod::ModSeries::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
+    Scanner::new_items( redis, config, data::NodeType::ebook, std::bind( &mod::ModEbooks::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
     Scanner::sweep( redis, param::FILE );
     data::eval ( redis, LUA_FLUSH, 0, "fs:*:sort:*" );
     data::eval( redis, LUA_INDEX, 0 );
-    search_index( redis );
+    Scanner::search_index( redis );
 }
 void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const std::string& parent_key, const std::string& path ) {
     //get files in folder
@@ -73,7 +75,8 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
     for ( boost::filesystem::directory_iterator itr ( _fs_path ); itr != end_itr; ++itr ) {
         const std::string _item_filepath = path + "/" + itr->path().filename().string();
         if ( boost::filesystem::is_regular_file ( itr->status() ) ) {
-            if( ! Scanner::timestamp( redis, data::hash ( _item_filepath ), boost::filesystem::last_write_time( itr->path() ) ) ) {
+            if( ! Scanner::timestamp( redis, data::hash ( _item_filepath ),
+                                      static_cast<unsigned long>( boost::filesystem::last_write_time( itr->path() ) ) ) ) {
                 const char* _mime_type = magic_file ( _magic, _item_filepath.c_str() );
                 data::node_t _node;
                 data::NodeType::Enum _type = FileMetaRegex::parse ( _mime_type, _item_filepath.c_str(), _node );
@@ -89,7 +92,7 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
                 data::add_types( redis, data::hash( parent_key ), data::hash( _item_filepath ),  data::time_millis() );
                 data::add_nodes( redis, data::hash( parent_key ), _type, data::hash( _item_filepath ),  data::time_millis() );
                 data::incr_mime ( redis, _mime_type );
-                Scanner::new_item(redis, parent_key, data::hash ( _item_filepath ), _type );
+                Scanner::new_item(redis, parent_key /* TODO new */, data::hash ( _item_filepath ), _type );
             }
         } else if ( boost::filesystem::is_directory ( itr->status() ) ) {
             if( ! Scanner::timestamp( redis, data::hash ( _item_filepath ), boost::filesystem::last_write_time( itr->path() ) ) ) {
@@ -178,7 +181,7 @@ void Scanner::new_items ( data::redis_ptr redis, const config_ptr config, data::
 
 /** @brief flush content with the given prefix. */
 void Scanner::flush( data::redis_ptr redis /** @param redis the database pointer. */ ) {
-    data::eval ( redis, LUA_FLUSH, 0, "fs:*" );
+    data::eval ( redis, LUA_FLUSH, 1, "fs:*" );
     //create the content nodes
     save_folder( redis, param::ROOT, param::ROOT, "" );
     for ( auto& __mod : _internal::menu ) {
