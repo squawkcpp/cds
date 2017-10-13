@@ -86,6 +86,7 @@ static const std::string IMAGE          = "image";
 static const std::string ISBN           = "isbn";
 static const std::string LANGUAGE       = "language";
 static const std::string MAKE           = "Make";
+static const std::string MED            = "med";
 static const std::string MIME_TYPE      = "mimeType";
 static const std::string MOVIE          = "movie";
 static const std::string NAME           = "name";

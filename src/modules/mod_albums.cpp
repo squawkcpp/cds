@@ -135,9 +135,11 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
 
                     //store cover uri in redis map
                     _last_cover = utils::make_cover_uri ( ECoverSizes::TN, data::hash ( __file[param::PATH] ) );
+                    const std::string _med_cover = utils::make_cover_uri ( ECoverSizes::MED, data::hash ( __file[param::PATH] ) );
                     if ( std::find (  album_cover_names.begin(),  album_cover_names.end(), _filename ) !=  album_cover_names.end() ) {
                         _cover_found = true;
                         data::save( redis, key, {{ param::THUMB, _last_cover }} );
+                        data::save( redis, key, {{ param::MED, _med_cover }} );
                     }
 
                     //scale image
