@@ -181,7 +181,7 @@ void Scanner::new_items ( data::redis_ptr redis, const config_ptr config, data::
 
 /** @brief flush content with the given prefix. */
 void Scanner::flush( data::redis_ptr redis /** @param redis the database pointer. */ ) {
-    data::eval ( redis, LUA_FLUSH, 1, "fs:*" );
+    data::eval ( redis, LUA_FLUSH, 0, "fs:*" );
     //create the content nodes
     save_folder( redis, param::ROOT, param::ROOT, "" );
     for ( auto& __mod : _internal::menu ) {

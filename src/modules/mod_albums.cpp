@@ -117,7 +117,7 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
                         data::add_types( redis, key, data::hash ( __file[param::PATH] ), data::time_millis() );
                         data::add_nodes( redis, key, data::NodeType::audio,
                                          data::hash ( __file[param::PATH] ),
-                                         std::stoi( clean_track_number( _track ) ) );
+                                         std::stoul( clean_track_number( _track ) ) );
                     }
                 }
 
