@@ -153,10 +153,18 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
             } else if ( __type.first == data::NodeType::ebook ) {
                 for ( auto& __file : __type.second ) {
                     //delete ebook from new books.
+                    SPDLOG_TRACE ( spdlog::get ( LOGGER ), "found ebook: {}", __file.at( param::PATH) );
                     redis->command( {redis::SREM, //TODO eBooks in album are still listed in the ebook list.
                         data::make_key( key::FS, key::NEW, data::NodeType::str( data::NodeType::ebook ) ),
                         data::hash( __file[param::PATH] ) } );
                 }
+
+            } else if ( __type.first == data::NodeType::file ) {
+                for ( auto& __file : __type.second ) {
+                    //get other file
+                    SPDLOG_TRACE ( spdlog::get ( LOGGER ), "found file: {}", __file.at( param::PATH) );
+                }
+
             } else { spdlog::get ( LOGGER )->debug ( "OTHER TYPE: {}", data::NodeType::str ( __type.first ) ); }
         }
 

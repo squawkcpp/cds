@@ -49,10 +49,11 @@ static const std::string ZRANGE     = "ZRANGE";
 static const std::string ZREVRANGE  = "ZREVRANGE";
 static const std::string ZREM       = "ZREM";
 
-static const std::string FT_DROP    = "FT.DROP";
-static const std::string FT_CREATE  = "FT.CREATE";
-static const std::string FT_SUGGADD = "FT.SUGADD";
 static const std::string FT_ADD     = "FT.ADD";
+static const std::string FT_CREATE  = "FT.CREATE";
+static const std::string FT_DROP    = "FT.DROP";
+static const std::string FT_SEARCH  = "FT.SEARCH";
+static const std::string FT_SUGGADD = "FT.SUGADD";
 }
 
 namespace param {
@@ -151,9 +152,9 @@ typedef std::vector< std::string > command_t;
 
 /** @brief current timestamp in millis. */
 static unsigned long time_millis() {
-    return
+    return static_cast<unsigned long>(
         std::chrono::system_clock::now().time_since_epoch() /
-        std::chrono::milliseconds(1);
+        std::chrono::milliseconds(1) );
 }
 /** @brief hash create a hash of the input string. */
 static std::string hash ( const std::string& in /** @param in string to hash. */ ) {
@@ -324,7 +325,7 @@ static void children( redis_ptr redis /** @param redis redis database pointer. *
 
     command_t _redis_command;
     if( !filter.empty() ) {
-        _redis_command = { "FT.SEARCH", "idx", filter, "NOCONTENT", "LIMIT", std::to_string( index ), std::to_string( index + count ) };
+        _redis_command = { redis::FT_SEARCH, key::INDEX, filter, "NOCONTENT", "LIMIT", std::to_string( index ), std::to_string( index + count ) };
     } else if( sort == "default" ) {
         _redis_command = { (order=="desc"?redis::ZREVRANGE:redis::ZRANGE), make_key_list( key ), std::to_string( index ), std::to_string( index + count ) };
     } else {
