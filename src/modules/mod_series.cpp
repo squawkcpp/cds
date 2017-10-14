@@ -49,10 +49,10 @@ void ModSeries::import ( data::redis_ptr redis, const config_ptr config, const s
                                            _file[param::PATH] );
         } else {
 
-            //construct the episode name if empty
             std::string _episode_name = _file[param::SERIE];
             std::string _tmdb_id;
             std::map<std::string, std::string > _episodes;
+            //construct the episode name if empty
             if( _episode_name.empty() ) {
                 _episode_name.append ( " S" ).append ( _file[param::SEASON] )
                 .append ( " E" ).append ( _file[param::EPISODE] );
