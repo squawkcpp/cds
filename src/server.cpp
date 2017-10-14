@@ -316,7 +316,7 @@ http::http_status Server::files ( http::Request& request, http::Response& respon
     return http::http_status::OK;
 }
 
-http::http_status Server::opds( http::Request& request, http::Response& response ) {
+http::http_status Server::opds( http::Request&, http::Response& response ) {
 
     rapidxml_ns::xml_document<> doc_;
     auto  root_node_ = element<rapidxml_ns::xml_node<>>( &doc_, &doc_, "feed", "" );
@@ -399,7 +399,7 @@ http::http_status Server::keywords ( http::Request& request, http::Response& res
     writer.StartArray();
 
     auto& _c = redis_->commandSync< std::set< std::string > > (
-        { redis::ZRANGE, data::make_key ( key::FS, key::TAG, request.attribute ( param::NAME ) ), "0", "-1" } );
+        { redis::ZRANGE, data::make_key ( key::FS, request.attribute ( key::TYPE ), key::TAG, request.attribute ( param::NAME ) ), "0", "-1" } );
 
     if ( _c.ok() ) {
         for ( const std::string& __c : _c.reply() ) {

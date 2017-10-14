@@ -106,7 +106,7 @@ void ModMovies::import ( data::redis_ptr redis, const config_ptr config, const s
 
                 //save genre tags
                 for( auto& __tag : _tmdb_movie.genres ) {
-                    data::add_tag( redis, param::GENRE, __tag, data::NodeType::movie, key, 0 );
+                    data::add_tag( redis, data::NodeType::movie, param::GENRE, __tag, key, 0 );
                 }
 
             } else { //TODO get cover from movie

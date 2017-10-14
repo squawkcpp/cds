@@ -186,7 +186,8 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
             { param::GENRE, _genre }
         } );
         //create genre tag for album
-        data::add_tag( redis, param::GENRE, _genre, data::NodeType::movie, key, 0 );
+        data::add_tag( redis, data::NodeType::album, param::GENRE, _genre, key, 0 );
+        data::add_tag( redis, data::NodeType::album, param::YEAR, _year, key, 0 );
         //add album relation
         data::add_nodes( redis, data::NodeType::album, key, data::time_millis() );
         import_artist ( redis, key, _artist );

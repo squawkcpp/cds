@@ -39,9 +39,9 @@ void ModImages::import ( data::redis_ptr redis, const config_ptr config, const s
 
         //save camera keyword
         if( _node.find( param::MAKE ) != _node.end() && !_node[param::MAKE].empty() )
-        { data::add_tag( redis, param::MAKE, _node[param::MAKE], data::NodeType::image, key, 0 ); }
+        { data::add_tag( redis, data::NodeType::image, param::MAKE, _node[param::MAKE], key, 0 ); }
         //save parent name keyword
-        data::add_tag( redis, param::NAME, data::get( redis, _node[param::PARENT], param::NAME ), data::NodeType::image, key, 0 );
+        data::add_tag( redis, data::NodeType::image, param::NAME, data::get( redis, _node[param::PARENT], param::NAME ), key, 0 );
     } catch ( ... ) {
         spdlog::get ( LOGGER )->error ( "exception mod images." );
     }
