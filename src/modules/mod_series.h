@@ -23,9 +23,13 @@
 namespace cds {
 namespace mod {
 
+/** @brief TV Serie import module. */
 class ModSeries {
 public:
-    static void import ( data::redis_ptr rdx, const config_ptr config, const std::string& key );
+    /** @brief import */
+    static void import ( data::redis_ptr redis /** @param redis redis database pointer. */,
+                         const config_ptr config /** @param config cds configuration pointer. */,
+                         const std::string& key /** @param key the file database key **/ );
 
 private:
     ModSeries() {}

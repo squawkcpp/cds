@@ -42,7 +42,7 @@ static const bool CDS_DEBUG = false;
 static const std::string LOGGER = "cds";
 static const std::string VERSION = CDS_VERSION;
 
-static const int SLEEP = 2;
+static const int SLEEP = 10;
 
 static const std::string EVENT_SCANNER = "cds:scanner";
 static const std::string EVENT_RESCAN = "cds:rescan";

@@ -101,6 +101,7 @@ void ModMovies::import ( data::redis_ptr redis, const config_ptr config, const s
                     { "tagline", _tmdb_movie.tagline }, //TODO what is the content of the tagline
                     { param::TITLE, _tmdb_movie.title },
                     { param::THUMB, fmt::format ( "/img/tn_{}.jpg", key ) },
+                    { param::MED, fmt::format ( "/img/med_{}.jpg", key ) },
                 });
 
                 //save genre tags
@@ -112,7 +113,7 @@ void ModMovies::import ( data::redis_ptr redis, const config_ptr config, const s
                 spdlog::get ( LOGGER )->warn ( "NO TMDB_RESULT: ({})", _clean_string );
             }
             auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, param::PATH ) );
-            data::add_nodes( redis, data::NodeType::movie, key, _last_write_time );
+            data::add_nodes( redis, data::NodeType::movie, key, static_cast<unsigned long>( _last_write_time ) );
         }
     } catch ( ... ) {
         spdlog::get ( LOGGER )->error ( "exception mod movies." );
