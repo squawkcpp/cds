@@ -92,10 +92,11 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
                 data::add_types( redis, data::hash( parent_key ), data::hash( _item_filepath ),  data::time_millis() );
                 data::add_nodes( redis, data::hash( parent_key ), _type, data::hash( _item_filepath ),  data::time_millis() );
                 data::incr_mime ( redis, _mime_type );
-                Scanner::new_item(redis, parent_key /* TODO new */, data::hash ( _item_filepath ), _type );
+                Scanner::new_item(redis, parent_key, data::hash ( _item_filepath ), _type );
             }
         } else if ( boost::filesystem::is_directory ( itr->status() ) ) {
-            if( ! Scanner::timestamp( redis, data::hash ( _item_filepath ), boost::filesystem::last_write_time( itr->path() ) ) ) {
+            if( ! Scanner::timestamp( redis, data::hash ( _item_filepath ),
+                                      static_cast< size_t >( boost::filesystem::last_write_time( itr->path() ) ) ) ) {
                 data::save( redis, data::hash( _item_filepath ), {
                     { param::NAME, filename ( _item_filepath, false ) },
                     { param::CLEAN_STRING, clean_string( filename ( _item_filepath, false ) ) },

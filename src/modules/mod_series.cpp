@@ -63,7 +63,13 @@ void ModSeries::import ( data::redis_ptr redis, const config_ptr config, const s
                 //load episode from tmdb
                 sleep( SLEEP );
                 auto _tmdb_result = tmdb_episode ( config->tmdb_key, _tmdb_id, _file[param::SEASON], _file[param::EPISODE] );
-                _episodes = tmdb_parse_episode ( config, _tmdb_result );
+                if( std::get<0>(_tmdb_result) == http::http_status::OK ) {
+                    _episodes = tmdb_parse_episode ( config, std::get<1>(_tmdb_result) );
+                } else {
+                    spdlog::get ( LOGGER )->warn ( "error get serie from tmdb: (tmdb_id:{}, s{}, e{} -> {})",
+                            _tmdb_id, _file[param::SEASON], _file[param::EPISODE],
+                            static_cast< int >( std::get<0>(_tmdb_result) ) );
+                }
             }
 
             //save the episode to the database
@@ -152,13 +158,19 @@ std::string ModSeries::tmdb_get ( const std::string& api_key, const std::string&
     SPDLOG_TRACE ( spdlog::get ( LOGGER ), "TMDB RESULT: {}", _sstream.str() );
     return _sstream.str();
 }
-std::string ModSeries::tmdb_episode ( const std::string& api_key, const std::string& serie_id, const std::string& season, const std::string& episode ) {
-    http::HttpClient< http::Http>  client_ ( "api.themoviedb.org", "http" );
-    http::Request request_ ( fmt::format ( "/3/tv/{}/season/{}/episode/{}?api_key={}", serie_id, season, episode, api_key ) );
+std::tuple< http::http_status, std::string > ModSeries::tmdb_episode ( const std::string& api_key, const std::string& serie_id, const std::string& season, const std::string& episode ) {
     std::stringstream _sstream;
-    client_.get ( request_, _sstream );
-    SPDLOG_TRACE ( spdlog::get ( LOGGER ), "TMDB RESULT: {}", _sstream.str() );
-    return _sstream.str();
+    auto _response = http::get(
+        fmt::format ( "http://api.themoviedb.org/3/tv/{}/season/{}/episode/{}?api_key={}",
+                      serie_id, season, episode, api_key ), _sstream );
+
+    return( std::tuple< http::http_status, std::string >( _response.status(), _sstream.str() ) );
+//    http::HttpClient< http::Http>  client_ ( "api.themoviedb.org", "http" );
+//    http::Request request_ ( fmt::format ( "/3/tv/{}/season/{}/episode/{}?api_key={}", serie_id, season, episode, api_key ) );
+//    std::stringstream _sstream;
+//    client_.get ( request_, _sstream );
+//    SPDLOG_TRACE ( spdlog::get ( LOGGER ), "TMDB RESULT: {}", _sstream.str() );
+//    return _sstream.str();
 }
 
 std::vector < std::map<std::string, std::string > > ModSeries::tmdb_parse ( const std::string& result ) {
