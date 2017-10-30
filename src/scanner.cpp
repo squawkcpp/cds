@@ -34,9 +34,9 @@
 namespace cds {
 
 const std::array< std::regex, 3 > Scanner::_disc_patterns {
-    {std::regex("(/.*)/CD[0-9]*", std::regex_constants::icase ),
-    std::regex("(/.*)/DISC[0-9]*", std::regex_constants::icase ),
-    std::regex("(/.*)/DISK[0-9]*", std::regex_constants::icase )}
+    {std::regex("^(/.*)/CD[0-9]+$", std::regex_constants::icase ),
+    std::regex("^(/.*)/DISC[0-9]+$", std::regex_constants::icase ),
+    std::regex("^(/.*)/DISK[0-9]+$", std::regex_constants::icase )}
 };
 
 void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
@@ -114,6 +114,8 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
 
 void Scanner::new_item( data::redis_ptr redis, const std::string& parent, const std::string& key, const data::NodeType::Enum type ) {
     if( type == data::NodeType::audio ) {
+        std::cout << "N:" << Scanner::remove_disc( parent ) << " --> " << parent << std::endl;
+
         redis->command( {redis::SADD,
                          data::make_key( key::FS, key::NEW, data::NodeType::str( type ) ),
                          data::hash( Scanner::remove_disc( parent ) ) } );
@@ -133,16 +135,21 @@ void Scanner::sweep ( data::redis_ptr redis, const std::string& key ) {
                 const std::string _type = data::get( redis, item, param::CLASS );
                 const std::string _parent = data::get( redis, item, param::PARENT );
 
+                std::cout << "rem types" << std::endl;
                 data::rem_types( redis, _parent, item );
+                std::cout << "rem nodes" << std::endl;
                 data::rem_nodes( redis, _parent, data::NodeType::parse( _type ), item );
 
+                std::cout << "is mod" << std::endl;
                 if( data::is_mod( _type ) )
                 { data::rem_nodes( redis, data::NodeType::parse( _type ), item ); }
 
 // TODO delete from artists               if( data::NodeType::parse( _type ) == data::NodeType::audio ) {
 //                    { data::rem_nodes( redis, data::NodeType::parse( _type ), item ); }
 //                }
+                std::cout << "flush" << std::endl;
                 data::eval ( redis, LUA_FLUSH, 0, fmt::format( "fs:{}:*", item ) );
+                std::cout << "end" << std::endl;
             }
         }
     });

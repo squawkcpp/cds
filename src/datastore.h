@@ -324,11 +324,12 @@ static void children( redis_ptr redis /** @param redis redis database pointer. *
     //TODO sort and filter
 
 
+    int _end_pos = ( count > 0 ? index + count -1 : count );
     command_t _redis_command;
     if( !filter.empty() && filter != "*" ) {
         _redis_command = { redis::FT_SEARCH, key::INDEX, filter, "NOCONTENT", "LIMIT", std::to_string( index ), std::to_string( index + count - 1 ) };
     } else if( sort == "default" ) {
-        _redis_command = { (order=="desc"?redis::ZREVRANGE:redis::ZRANGE), make_key_list( key ), std::to_string( index ), std::to_string( index + count - 1 ) };
+        _redis_command = { (order=="desc"?redis::ZREVRANGE:redis::ZRANGE), make_key_list( key ), std::to_string( index ), std::to_string( _end_pos ) };
     } else {
         _redis_command ={ redis::LRANGE, make_key( make_key_list( key ), "sort", sort, order ), std::to_string( index ), std::to_string( index + count - 1 ) };
     }
