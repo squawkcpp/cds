@@ -147,7 +147,7 @@ void ModAlbums::import ( data::redis_ptr redis, const config_ptr config, const s
                     image_meta_.scale ( config->tmp_directory, ECoverSizes::TN, data::hash( __file[param::PATH] ) );
 
                     data::add_types( redis, key, data::hash( __file[param::PATH] ), 0 );
-                    data::rem_types( redis, key, data::hash( __file[param::PATH] ) );
+                    data::rem_types( redis, key, data::hash( data::hash( __file[param::PATH] ) ) );
                     data::rem_nodes( redis, data::NodeType::image, data::hash( __file[param::PATH] ) );
                     data::add_nodes( redis, key, data::NodeType::cover, data::hash ( __file[param::PATH] ),
                             std::find (  album_cover_names.begin(),  album_cover_names.end(), _filename ) !=  album_cover_names.end() ? 1 : 2 );
@@ -204,7 +204,7 @@ void ModAlbums::import_files ( data::redis_ptr redis, const std::string& key, st
             import_files ( redis, data::hash( _file[param::PATH] ), files );
             //remove folder and relations
             //TODO the nodes to this folders still exist
-            data::rem_types( redis, key, _file[param::PATH] );
+            data::rem_types( redis, key, data::hash( _file[param::PATH] ) );
             redis->command( {redis::DEL,
                 data::make_key_list( data::hash( _file[param::PATH] ) ),
                 data::make_key_node( data::hash( _file[param::PATH] ) ) } );

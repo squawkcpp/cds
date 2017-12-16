@@ -401,12 +401,18 @@ static void eval(  redis_ptr redis /** @param redis the database pointer. */,
 // --------------------------                  content relations                    --------------------------
 // -----------------------------------------------------------------------------------------------------------
 
+/** @brief check if a node exists in the database. */
+static bool exists ( redis_ptr redis /** @param redis redox database pointer. */,
+                     const std::string key  /** @param the node key. */) {
+    redox::Command<int>& c = redis->commandSync<int> ( { redis::EXISTS, key } );
+    return ( c.ok() && c.reply() );
+}
 /** @brief add node to parents type list */
 static void add_types( redis_ptr redis, const std::string& parent, const std::string& key, const unsigned long& score )
 { redis->command( {redis::ZADD, data::make_key_list( parent ), std::to_string( score ), key } ); }
 /** @brief remove node from parents type list */
 static void rem_types( redis_ptr redis, const std::string& parent, const std::string& key )
-{ redis->command( {redis::ZREM, data::make_key_list( parent ), hash( key ) } ); }
+{ redis->command( {redis::ZREM, data::make_key_list( parent ), key } ); }
 
 /** @brief add node to global nodes list */
 static void add_nodes( redis_ptr redis, NodeType::Enum type, const std::string& key, unsigned long score )

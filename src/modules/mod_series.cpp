@@ -36,7 +36,7 @@ namespace mod {
 
 void ModSeries::import ( data::redis_ptr redis, const config_ptr config, const std::string& key ) {
     try {
-
+        std::cout << "import serie: " << key << std::endl;
         //load the node from the database
         data::node_t _file = data::node ( redis, key );
 
@@ -94,6 +94,7 @@ void ModSeries::import ( data::redis_ptr redis, const config_ptr config, const s
     } catch( ... ) {
         spdlog::get ( LOGGER )->warn ( "other error in parse series" );
     }
+    std::cout << "<import serie" << std::endl;
 }
 
 std::string ModSeries::import_serie ( data::redis_ptr redis, const config_ptr config, const std::string& serie_key, const std::string& serie ) {
@@ -107,9 +108,10 @@ std::string ModSeries::import_serie ( data::redis_ptr redis, const config_ptr co
         //loop and find result
         if( !_res.empty() ) {
             for ( auto& __res : _res ) {
+                std::cout << "result: " << __res[param::NAME] << std::endl;
                 //TODO serie realtion has wrong key, is this executed?
                 if ( clean_string ( __res[param::NAME] ) == _clean_string ) {
-                    SPDLOG_TRACE ( spdlog::get ( LOGGER ), "found serie: {}", _clean_string );
+                    SPDLOG_DEBUG ( spdlog::get ( LOGGER ), "found serie: {}", _clean_string );
                     std::string _poster_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[param::POSTER_PATH] ) ),
                                 _backdrop_path = fmt::format ( "{}/{}.jpg", config->tmp_directory, data::hash ( __res[param::BACKDROP_PATH] ) );
 
@@ -138,6 +140,7 @@ std::string ModSeries::import_serie ( data::redis_ptr redis, const config_ptr co
                 }
             }
         } else {
+            std::cout << "NO TMDB_RESULT: " << serie << std::endl;
             spdlog::get ( LOGGER )->warn ( "NO TMDB_RESULT: ({})", serie );
             data::save ( redis, data::hash ( _clean_string ), {
                 { param::CLASS, data::NodeType::str ( data::NodeType::serie ) },

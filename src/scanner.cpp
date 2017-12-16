@@ -63,6 +63,8 @@ void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
     Scanner::new_items( redis, config, data::NodeType::episode, std::bind( &mod::ModSeries::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
     Scanner::new_items( redis, config, data::NodeType::ebook, std::bind( &mod::ModEbooks::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
     Scanner::sweep( redis, param::FILE );
+    Scanner::sweep_ref( redis , data::NodeType::artist );
+    //Scanner::sweep_ref( redis , data::NodeType::serie );
     data::eval ( redis, LUA_FLUSH, 0, "fs:*:sort:*" );
     data::eval( redis, LUA_INDEX, 0 );
     Scanner::search_index( redis );
@@ -127,31 +129,37 @@ void Scanner::new_item( data::redis_ptr redis, const std::string& parent, const 
 void Scanner::sweep ( data::redis_ptr redis, const std::string& key ) {
     data::children( redis, key, 0, -1, "default", "asc", "", [redis,key]( const std::string& item ) {
         sweep( redis, item );
-
         if( !data::is_mod( item ) && item != param::ROOT ) {
             const std::string _item_path = data::get( redis, item, param::PATH );
             if( !boost::filesystem::exists( _item_path ) ) {
                 SPDLOG_DEBUG(spdlog::get ( LOGGER ), "orphan found (key={}, path={})", item, _item_path );
                 const std::string _type = data::get( redis, item, param::CLASS );
-                const std::string _parent = data::get( redis, item, param::PARENT );
 
-                std::cout << "rem types" << std::endl;
-                data::rem_types( redis, _parent, item );
-                std::cout << "rem nodes" << std::endl;
-                data::rem_nodes( redis, _parent, data::NodeType::parse( _type ), item );
+                data::rem_types( redis, key, item );
+                data::rem_nodes( redis, key, data::NodeType::parse( _type ), item );
 
-                std::cout << "is mod" << std::endl;
-                if( data::is_mod( _type ) )
-                { data::rem_nodes( redis, data::NodeType::parse( _type ), item ); }
-
-// TODO delete from artists               if( data::NodeType::parse( _type ) == data::NodeType::audio ) {
-//                    { data::rem_nodes( redis, data::NodeType::parse( _type ), item ); }
-//                }
                 std::cout << "flush" << std::endl;
                 data::eval ( redis, LUA_FLUSH, 0, fmt::format( "fs:{}:*", item ) );
                 std::cout << "end" << std::endl;
             }
         }
+    });
+}
+
+void Scanner::sweep_ref ( data::redis_ptr redis, const data::NodeType::Enum ref ) {
+    data::children( redis, data::NodeType::str( ref ), 0, -1, "default", "asc", "", [redis,&ref]( const std::string& artist ) {
+        int found = 0;
+        data::children( redis, artist, 0, -1, "default", "asc", "", [redis,&artist,&found]( const std::string& item ) {
+            if( !data::exists( redis, item ) ) {
+                data::rem_types( redis, artist, item );
+                std::cout << "flush" << std::endl;
+                data::eval ( redis, LUA_FLUSH, 0, fmt::format( "fs:{}:*", item ) );
+                std::cout << "end" << std::endl;
+            }
+            else ++found;
+        });
+        if( found == 0 )
+        { data::rem_nodes( redis, ref, artist ); }
     });
 }
 
