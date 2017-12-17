@@ -48,9 +48,9 @@ private:
                           const std::string& parent /** @param parent parent path for audiofiles. */,
                           const std::string& key /** @param key key of the node. */,
                           const data::NodeType::Enum type /** @param type type of the node. */ );
-    static void sweep ( data::redis_ptr redis, const std::string& key );
+    static void sweep_files ( data::redis_ptr redis /** @param redis redis database pointer. */ );
     static void sweep_ref ( data::redis_ptr redis /** @param redis redis database pointer. */,
-                            data::NodeType::Enum type /** param type the node type */ );
+                            const std::string&  type /** param type the node type */ );
     static bool timestamp( data::redis_ptr redis /** @param redis redis database pointer. */,
                            const std::string& key /** @param key key of the node. */,
                            unsigned long timestamp /** @param timestamp the last write timestamp. */ );
@@ -66,6 +66,16 @@ private:
                               const std::string& parent /** @param parent parent key. */ );
 
     static void search_index ( data::redis_ptr redis /** @param redis redis database pointer. */ );
+
+    FRIEND_TEST( ScannerTest, key );
+    static std::string key( const std::string& path ) {
+        if( path.find_first_of( ':' ) != std::string::npos ) {
+            const std::string _token = path.substr( path.find( ':' )+1, path.size() );
+            if( _token.find_first_of( ':' ) != std::string::npos ) {
+                return( _token.substr( 0, _token.find( ':' ) ) );
+            } else return _token;
+        } else return path;
+    };
 };
 }//namespace cds
 #endif // SCANNER_H

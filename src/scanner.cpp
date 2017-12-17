@@ -62,8 +62,22 @@ void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
     Scanner::new_items( redis, config, data::NodeType::movie, std::bind( &mod::ModMovies::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
     Scanner::new_items( redis, config, data::NodeType::episode, std::bind( &mod::ModSeries::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
     Scanner::new_items( redis, config, data::NodeType::ebook, std::bind( &mod::ModEbooks::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
-    Scanner::sweep( redis, param::FILE );
-    Scanner::sweep_ref( redis , data::NodeType::artist );
+    Scanner::sweep_files( redis ); //check if the file for the node exists.
+    Scanner::sweep_ref( redis , "list" );
+    Scanner::sweep_ref( redis , "types" );
+
+    auto _ref_list = data::eval ( redis, LUA_REDIS_KEY, 0,  "fs:*:node" );
+    for( auto& __r : _ref_list ) {
+        auto& _item = redis->commandSync< std::string > ( {redis::HGET, __r, param::CLASS } );
+        if( _item.reply() == "album" ) {
+            const std::string key = Scanner::key( __r );
+            auto& _count = redis->commandSync<int> ( { "ZCARD", data::make_key_list( key ) } );
+            if( !_count.ok() || _count.reply() == 0 ) {
+                std::cout << "!!! node without ref: " << __r << ", " << key << std::endl;
+            }
+        }
+    }
+
     //Scanner::sweep_ref( redis , data::NodeType::serie );
     data::eval ( redis, LUA_FLUSH, 0, "fs:*:sort:*" );
     data::eval( redis, LUA_INDEX, 0 );
@@ -116,51 +130,66 @@ void Scanner::import_directory ( data::redis_ptr redis, magic_t& _magic, const s
 
 void Scanner::new_item( data::redis_ptr redis, const std::string& parent, const std::string& key, const data::NodeType::Enum type ) {
     if( type == data::NodeType::audio ) {
-        std::cout << "N:" << Scanner::remove_disc( parent ) << " --> " << parent << std::endl;
-
+        SPDLOG_TRACE(spdlog::get ( LOGGER ), "New Audio:{} --> {}", Scanner::remove_disc( parent ), key );
         redis->command( {redis::SADD,
                          data::make_key( key::FS, key::NEW, data::NodeType::str( type ) ),
                          data::hash( Scanner::remove_disc( parent ) ) } );
     } else {
+        SPDLOG_TRACE(spdlog::get ( LOGGER ), "New {}:{} --> {}", data::NodeType::str( type ), parent, key );
         redis->command( {redis::SADD,  data::make_key( key::FS, key::NEW, data::NodeType::str( type ) ), key} );
     }
 }
 
-void Scanner::sweep ( data::redis_ptr redis, const std::string& key ) {
-    data::children( redis, key, 0, -1, "default", "asc", "", [redis,key]( const std::string& item ) {
-        sweep( redis, item );
-        if( !data::is_mod( item ) && item != param::ROOT ) {
-            const std::string _item_path = data::get( redis, item, param::PATH );
-            if( !boost::filesystem::exists( _item_path ) ) {
-                SPDLOG_DEBUG(spdlog::get ( LOGGER ), "orphan found (key={}, path={})", item, _item_path );
-                const std::string _type = data::get( redis, item, param::CLASS );
-
-                data::rem_types( redis, key, item );
-                data::rem_nodes( redis, key, data::NodeType::parse( _type ), item );
-
-                std::cout << "flush" << std::endl;
-                data::eval ( redis, LUA_FLUSH, 0, fmt::format( "fs:{}:*", item ) );
-                std::cout << "end" << std::endl;
+void Scanner::sweep_files ( data::redis_ptr redis ) {
+    auto _ref_list = data::eval ( redis, LUA_REDIS_KEY, 0,  "fs:*:node" );
+    for( auto& __r : _ref_list ) {
+        const std::string key = Scanner::key( __r );
+        const std::string cls = data::get( redis, key, param::CLASS );
+        if( ! data::is_mod( key ) && key != "root" && cls != "artist" && cls != "cover" && cls != "serie" ) {
+            if( !boost::filesystem::exists( data::get( redis, key, param::PATH ) ) ) {
+                SPDLOG_DEBUG(spdlog::get ( LOGGER ), "orphan found (key={}, path={})", key, data::get( redis, key, param::PATH ) );
+                const std::string parent = data::get( redis, key, param::PARENT );
+                data::rem_types( redis, parent, key );
+                data::rem_nodes( redis, parent, data::NodeType::parse( cls ), key );
+                data::eval ( redis, LUA_FLUSH, 0, fmt::format( "fs:{}:*", key ) );
             }
         }
-    });
+    }
 }
 
-void Scanner::sweep_ref ( data::redis_ptr redis, const data::NodeType::Enum ref ) {
-    data::children( redis, data::NodeType::str( ref ), 0, -1, "default", "asc", "", [redis,&ref]( const std::string& artist ) {
-        int found = 0;
-        data::children( redis, artist, 0, -1, "default", "asc", "", [redis,&artist,&found]( const std::string& item ) {
-            if( !data::exists( redis, item ) ) {
-                data::rem_types( redis, artist, item );
-                std::cout << "flush" << std::endl;
-                data::eval ( redis, LUA_FLUSH, 0, fmt::format( "fs:{}:*", item ) );
-                std::cout << "end" << std::endl;
-            }
-            else ++found;
-        });
-        if( found == 0 )
-        { data::rem_nodes( redis, ref, artist ); }
-    });
+void Scanner::sweep_ref ( data::redis_ptr redis, const std::string& ref ) {
+    auto _ref_list = data::eval ( redis, LUA_REDIS_KEY, 0,  fmt::format( "fs:*:{}", ref ) );
+    for( auto& __r : _ref_list ) {
+        auto& _type = redis->commandSync<std::string> ( { "TYPE", __r } );
+        if( _type.ok() && _type.reply() == "zset" ) {
+            auto& _count = redis->commandSync<int> ( { "ZCARD", __r } );
+            if( _count.ok() && _count.reply() == 0 ) {
+                std::cout << "!! reflist empty: " << __r << std::endl;
+            } else {
+                auto& _set = redis->commandSync< std::vector< std::string > > ( {redis::ZRANGE, __r, "0", "-1" } );
+                if( _set.ok() ) {
+                    for( auto& __set_item : _set.reply() ) {
+                        if( !data::exists( redis, data::make_key( key::FS, __set_item, "node" ) ) ) {
+                            std::cout << "!! node does not exist: " << data::make_key( key::FS, __set_item, "node" ) << std::endl;
+                             redis->command( { "ZREM", __r, __set_item } );
+                         }
+                     }
+                 }
+             }
+         }
+     }
+//    }
+//    data::children( redis, data::NodeType::str( ref ), 0, -1, "default", "asc", "", [redis,&ref]( const std::string& artist ) {
+//        int found = 0;
+//        data::children( redis, artist, 0, -1, "default", "asc", "", [redis,&artist,&found]( const std::string& item ) {
+//            if( !data::exists( redis, item ) ) {
+//                data::rem_types( redis, artist, item );
+//            }
+//            else ++found;
+//        });
+//        if( found == 0 )
+//        { data::rem_nodes( redis, ref, artist ); }
+//    });
 }
 
 bool Scanner::timestamp( data::redis_ptr redis, const std::string& key, unsigned long timestamp ) {

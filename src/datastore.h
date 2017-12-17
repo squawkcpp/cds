@@ -390,11 +390,12 @@ static void add_tag( redis_ptr redis /** @param redis redis database pointer. */
 
 /** @brief evaluate the lua script. */
 template< class... ARGS>
-static void eval(  redis_ptr redis /** @param redis the database pointer. */,
+static std::vector< std::string > eval(  redis_ptr redis /** @param redis the database pointer. */,
                    const std::string& script,
                    int argc,
                    ARGS... argv ) {
-    redis->command ( { "EVAL", script, std::to_string( argc ), argv... } );
+    auto& _result = redis->commandSync<std::vector< std::string >> ( { "EVAL", script, std::to_string( argc ), argv... } );
+    return _result.reply();
 }
 
 // -----------------------------------------------------------------------------------------------------------

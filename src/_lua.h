@@ -5,6 +5,8 @@
 
 static const std::string LUA_FLUSH = "local keys = redis.call('keys', ARGV[1]) \n for i=1,#keys,5000 do \n redis.call('del', unpack(keys, i, math.min(i+4999, #keys))) \n end \n return keys";
 
+static const std::string LUA_REDIS_KEY = "local count  = {}\n local results = redis.call('keys', ARGV[1]) \n for i=1,#results do \n local key = unpack(results, i, math.min(i, #results)) \n table.insert( count,key ) \n end \n return count";
+
 static const std::string LUA_INDEX = "local matches = redis.call('KEYS', 'fs:*:list')\n" \
 "local results = {};\n" \
 "for _,key in ipairs(matches) do\n" \
@@ -26,5 +28,5 @@ static const std::string LUA_INDEX = "local matches = redis.call('KEYS', 'fs:*:l
 "    elseif _parent_cls == 'movie' then\n" \
 "    end\n" \
 "end\n" \
-"return 0\n";
+"return results\n";
 #endif // _LUA_H

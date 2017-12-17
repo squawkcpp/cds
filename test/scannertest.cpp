@@ -18,4 +18,11 @@ TEST( ScannerTest, remove_disc ) {
                Scanner::remove_disc( "/srv/Downloads/Diskaholics Anonymous Trio - 2006 - Live In Japan Vol. 1" ) );
 
 }
+TEST( ScannerTest, key ) {
+    EXPECT_EQ( "123", Scanner::key( "fs:123:node" ) );
+    EXPECT_EQ( "123", Scanner::key( "fs:123:sort:asc" ) );
+    EXPECT_EQ( "123", Scanner::key( "fs:123" ) );
+    EXPECT_EQ( "123", Scanner::key( "123" ) );
+}
+
 }//namespace cds
