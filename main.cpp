@@ -62,26 +62,27 @@ int main(int argc, char* argv[]) {
         ( cds::PARAM_REDIS_PORT, "Redis Database port (default: 6379)", cxxopts::value<std::string>()->default_value("6379"), "PORT" )
         ( "help", "Print help")
       ;
-    options.parse(argc, argv);
 
-    if( options.count( "help" ) ) {
+    auto result = options.parse(argc, argv);
+
+    if( result.count( "help" ) ) {
          std::cout << options.help({"", "Group"}) << std::endl;
          exit(0);
     }
 
     Container _container;
 
-    auto& _redis_server = options[cds::PARAM_REDIS].as<std::string>();
-    auto& _redis_port = options[cds::PARAM_REDIS_PORT].as<std::string>();
+    auto& _redis_server = result[cds::PARAM_REDIS].as<std::string>();
+    auto& _redis_port = result[cds::PARAM_REDIS_PORT].as<std::string>();
     _container.redox = data::make_connection( _redis_server, std::stoi( _redis_port ) );
     //load config from database
     if( data::config_exists( _container.redox ) ) {
         _container.config = cds::json( data::config( _container.redox ) );
     } else _container.config = std::make_shared< cds::Config >();
 
-    if ( options.count( cds::PARAM_DIRECTORY ) ) {
+    if ( result.count( cds::PARAM_DIRECTORY ) ) {
         _container.config->media.clear();
-        auto& ff = options[cds::PARAM_DIRECTORY].as<std::vector<std::string>>();
+        auto& ff = result[cds::PARAM_DIRECTORY].as<std::vector<std::string>>();
         for (const auto& f : ff) {
             if( boost::filesystem::is_directory( f ) ) {
                 _container.config->media.push_back( f );
@@ -92,18 +93,18 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    if ( options.count( cds::PARAM_TMP_DIRECTORY ) )
-    { _container.config->tmp_directory =  options[cds::PARAM_TMP_DIRECTORY].as<std::string>(); }
-    if ( options.count( cds::PARAM_TMDB_KEY ) )
-    { _container.config->tmdb_key =  options[cds::PARAM_TMDB_KEY].as<std::string>(); }
-    if ( options.count( cds::PARAM_AMAZON_ACCESS_KEY ) )
-    { _container.config->amazon_access_key =  options[cds::PARAM_AMAZON_ACCESS_KEY].as<std::string>(); }
-    if ( options.count( cds::PARAM_AMAZON_KEY ) )
-    { _container.config->amazon_key =  options[cds::PARAM_AMAZON_KEY].as<std::string>(); }
-    if ( options.count( cds::PARAM_LISTEN_ADDRESS ) )
-    { _container.config->listen_address =  options[cds::PARAM_LISTEN_ADDRESS].as<std::string>(); }
-    if ( options.count( cds::PARAM_HTTP_PORT ) )
-    { _container.config->http_port = options[cds::PARAM_HTTP_PORT].as<std::string>(); }
+    if ( result.count( cds::PARAM_TMP_DIRECTORY ) )
+    { _container.config->tmp_directory =  result[cds::PARAM_TMP_DIRECTORY].as<std::string>(); }
+    if ( result.count( cds::PARAM_TMDB_KEY ) )
+    { _container.config->tmdb_key =  result[cds::PARAM_TMDB_KEY].as<std::string>(); }
+    if ( result.count( cds::PARAM_AMAZON_ACCESS_KEY ) )
+    { _container.config->amazon_access_key =  result[cds::PARAM_AMAZON_ACCESS_KEY].as<std::string>(); }
+    if ( result.count( cds::PARAM_AMAZON_KEY ) )
+    { _container.config->amazon_key =  result[cds::PARAM_AMAZON_KEY].as<std::string>(); }
+    if ( result.count( cds::PARAM_LISTEN_ADDRESS ) )
+    { _container.config->listen_address =  result[cds::PARAM_LISTEN_ADDRESS].as<std::string>(); }
+    if ( result.count( cds::PARAM_HTTP_PORT ) )
+    { _container.config->http_port = result[cds::PARAM_HTTP_PORT].as<std::string>(); }
 
     //store configuration
     auto _config_e = cds::validate( _container.config );
