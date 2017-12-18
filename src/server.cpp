@@ -49,23 +49,19 @@ Server::Server ( const std::string& redis, /** @param redis redis host */
                  const short port /** @param port the redis port. */ )
     : redis_ ( data::make_connection ( redis, port ) ), config_ ( json ( data::config ( redis_ ) ) ) {
     if ( !sub_.connect( redis, port ) ) {
-        spdlog::get ( LOGGER )->error ( "can not subscribe to redis queue" );
+        spdlog::get ( LOGGER )->warn ( "can not subscribe to redis queue" );
     } else {
-        sub_.subscribe ( EVENT_SCANNER, [] ( const std::string & topic, const std::string & msg ) {
-            spdlog::get ( LOGGER )->debug ( "EVENT:{}:{}", topic, msg );
-        } );
         sub_.subscribe ( EVENT_RESCAN, [this] ( const std::string & topic, const std::string & msg ) {
-            spdlog::get ( LOGGER )->debug ( "COMMAND:{}:{}", topic, msg );
+            spdlog::get ( LOGGER )->info ( "COMMAND:{}:{}", topic, msg );
             if( !rescanning_ ) {
                 rescanning_ = true;
-                redis_->publish ( EVENT_SCANNER, EVENT_START );
-                scanner_thread_ = std::make_unique< std::thread >( &Server::rescan_, this, msg == "true", [this]( std::error_code& errc ) {
-                    spdlog::get( LOGGER )->debug( "scanner fisnished: {}", errc.message() );
-                    redis_->publish ( EVENT_SCANNER, EVENT_END );
+                scanner_thread_ = std::make_unique< std::thread >( &Server::rescan_, this, msg == "true",
+                                                                   [this]( std::error_code& errc ) {
+                    spdlog::get( LOGGER )->info( "scanner fisnished: {}", errc.message() );
                     rescanning_ = false;
             });
             scanner_thread_->detach();
-            } else spdlog::get( LOGGER )->debug( "scanner already running." );
+            } else spdlog::get( LOGGER )->info( "scanner already running." );
         } );
     }
 }

@@ -44,10 +44,7 @@ static const std::string VERSION = CDS_VERSION;
 
 static const int SLEEP = 10;
 
-static const std::string EVENT_SCANNER = "cds:scanner";
 static const std::string EVENT_RESCAN = "cds:rescan";
-static const std::string EVENT_START = "start";
-static const std::string EVENT_END = "end";
 
 static const char* PARAM_TMP_DIRECTORY      = "tmp-directory";
 static const char* PARAM_TMDB_KEY           = "tmdb-key";
@@ -64,7 +61,7 @@ static std::vector< std::string > trash_words ( {
     "hdtv", "web-dl", "h264", "bdrip", "dts", "bluray", "-hdc", "mp4", "-2hd",
     "-rarbg", "[rarbg]", "-fgt", "-japhson", "-fgt", "-ntb", "-moritz", "-avs",
     "-dumbension", "-it00nz", "-cravers", "-rovers", "-sparks", "[96-24]", "audio fidelity",
-                                                    "180g lp", "24-96"
+                                                    "180g lp", "24-96", "-hdma5", "-chd"
 });
 
 static std::vector< std::string > skip_words (

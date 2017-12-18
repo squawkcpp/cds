@@ -49,8 +49,10 @@ private:
                           const std::string& key /** @param key key of the node. */,
                           const data::NodeType::Enum type /** @param type type of the node. */ );
     static void sweep_files ( data::redis_ptr redis /** @param redis redis database pointer. */ );
-    static void sweep_ref ( data::redis_ptr redis /** @param redis redis database pointer. */,
-                            const std::string&  type /** param type the node type */ );
+    static int sweep_nodes ( data::redis_ptr /** @param redis redis database pointer. */ );
+
+    static int sweep_ref ( data::redis_ptr redis /** @param redis redis database pointer. */,
+                           const std::string&  type /** param type the node type */ );
     static bool timestamp( data::redis_ptr redis /** @param redis redis database pointer. */,
                            const std::string& key /** @param key key of the node. */,
                            unsigned long timestamp /** @param timestamp the last write timestamp. */ );
