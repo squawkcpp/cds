@@ -188,6 +188,15 @@ inline std::string clean_track_number( const std::string& track ) {
     _track.erase( _track.begin(), std::find_if( _track.begin(), _track.end(), std::bind1st( std::not_equal_to<char>(), '0' ) ) );
     return _track;
 }
+inline unsigned long rank( const std::string& disc, const std::string& track ) {
+    std::string _res;
+    if( !disc.empty() ) {
+        if( disc.find( '/' ) != std::string::npos ) {
+            _res = disc.substr( 0, disc.find( '/' ) );
+        } else _res = disc;
+    }
+    return std::stoul( fmt::format( "{0}{1:#03}", std::stoi( _res ), std::stoi( clean_track_number( track ) ) ) );
+}
 
 template< class T >
 inline rapidxml_ns::xml_node<>* element( rapidxml_ns::xml_document<>* doc, T* parent, const std::string& name, const std::string& value ) {

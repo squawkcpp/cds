@@ -58,4 +58,11 @@ TEST( UtilsTest, clean_track_number ) {
     EXPECT_EQ( "1", clean_track_number( "01" ) );
     EXPECT_EQ( "1", clean_track_number( "01/13" ) );
 }
+TEST( UtilsTest, rank ) {
+
+    EXPECT_EQ( 1001U, rank( "1", clean_track_number( "1" ) ) );
+    EXPECT_EQ( 1001U, rank( "01", clean_track_number( "01" ) ) );
+    EXPECT_EQ( 1001U, rank( "01/13", clean_track_number( "01/13" ) ) );
+}
+
 }//namespace cds
