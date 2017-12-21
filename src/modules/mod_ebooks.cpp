@@ -59,8 +59,8 @@ void ModEbooks::import ( data::redis_ptr redis, const config_ptr config, const s
             http::get ( _book_meta[param::COVER], _ofs );
 
             utils::Image image_meta_ ( _cover_path );
-            image_meta_.scale ( config->tmp_directory, ECoverSizes::MED, key );
-            image_meta_.scale ( config->tmp_directory, ECoverSizes::TN, key );
+            image_meta_.scale ( config->tmp_directory, ECoverSizes::MED, data::hash ( _book_meta[param::COVER] ) );
+            image_meta_.scale ( config->tmp_directory, ECoverSizes::TN, data::hash ( _book_meta[param::COVER] ) );
 
 
             data::save ( redis, data::hash ( _cover_path ), {
@@ -80,7 +80,7 @@ void ModEbooks::import ( data::redis_ptr redis, const config_ptr config, const s
                 { param::DATE, _book_meta[param::DATE] },
                 { param::ISBN, _book_meta[param::ISBN] },
                 { param::AUTHOR, _book_meta[param::AUTHOR] },
-                { param::THUMB, fmt::format ( "/img/tn_{}.jpg", data::hash ( _book_meta[param::COVER] ) ) },
+                { param::THUMB, utils::make_cover_uri ( ECoverSizes::TN, data::hash ( _book_meta[param::COVER] ) ) },
             });
         }
         auto _last_write_time = boost::filesystem::last_write_time( data::get( redis, key, param::PATH ) );
