@@ -43,14 +43,14 @@ void ModEbooks::import ( data::redis_ptr redis, const config_ptr config, const s
 
         // we have to wait some time, otherwise amazon blocks the requests.
         sleep ( SLEEP );
-        auto _res = utils::Amazon::bookByIsbn ( config->amazon_access_key, config->amazon_key, _isbn );
+        //TODO auto _res = utils::Amazon::bookByIsbn ( config->amazon_access_key, config->amazon_key, _isbn );
         data::node_t _book_meta;
 
-        for ( auto& __j : _res.results ) {
-            if ( _book_meta.empty() || __j[param::NAME] == _file[param::NAME] ) {
-                _book_meta = __j;
-            }
-        }
+//TODO        for ( auto& __j : _res.results ) {
+//            if ( _book_meta.empty() || __j[param::NAME] == _file[param::NAME] ) {
+//                _book_meta = __j;
+//            }
+//        }
 
         if ( !_book_meta.empty() ) {
             //save image
