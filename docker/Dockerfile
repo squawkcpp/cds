@@ -1,15 +1,13 @@
 # Dockerfile to install content directory server (CDS)
-FROM ubuntu:xenial
+FROM base/archlinux:latest
 
 ARG CDS_TAG_VERSION=master
 
-RUN apt-get -y update
+RUN pacman -Syu --noconfirm && \
+    pacman --noconfirm -S boost poppler opencv doxygen hiredis libev hdf5 make   
 
-ADD build/cds_$CDS_TAG_VERSION.deb /cds_$CDS_TAG_VERSION.deb
-
-RUN apt-get install -y libpcrecpp0v5 libimlib2 libavcodec-ffmpeg56 libavformat-ffmpeg56 libavutil-ffmpeg54 libpoppler-cpp0 libboost-filesystem1.58.0 \
-        libcurl3 libhiredis0.13 libev4 libmagic1 libopencv-highgui2.4v5 \
-&& dpkg -i /cds_$CDS_TAG_VERSION.deb
+ADD build/cds_$CDS_TAG_VERSION.tar.gz /cds_$CDS_TAG_VERSION.tar.gz
+RUN tar xfz /cds_$CDS_TAG_VERSION.tar.gz -C /
 
 ADD docker/cds.sh /cds.sh
 RUN chmod +x /*.sh
