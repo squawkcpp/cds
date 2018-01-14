@@ -21,7 +21,7 @@
 #include <string>
 #include <vector>
 
-#include <opencv2/opencv.hpp>
+//TODO #include <opencv2/opencv.hpp>
 #include "spdlog/spdlog.h"
 
 #include <boost/algorithm/string.hpp>

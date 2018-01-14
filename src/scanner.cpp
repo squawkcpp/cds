@@ -61,7 +61,7 @@ void Scanner::import_files ( data::redis_ptr redis, const config_ptr config ) {
     Scanner::new_items( redis, config, data::NodeType::image, std::bind( &mod::ModImages::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
     Scanner::new_items( redis, config, data::NodeType::movie, std::bind( &mod::ModMovies::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
     Scanner::new_items( redis, config, data::NodeType::episode, std::bind( &mod::ModSeries::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
-    Scanner::new_items( redis, config, data::NodeType::ebook, std::bind( &mod::ModEbooks::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
+    //TODO Scanner::new_items( redis, config, data::NodeType::ebook, std::bind( &mod::ModEbooks::import, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) );
 
     //remove orphan nodes where file does not exist
     Scanner::sweep_files( redis );

@@ -18,8 +18,8 @@
 #include "spdlog/spdlog.h"
 #include "rapidjson/document.h"
 
-#include "format.h"
-#include "codec.h"
+#include "libavcpp/format.h"
+#include "libavcpp/codec.h"
 
 #include "http/httpclient.h"
 

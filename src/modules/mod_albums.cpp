@@ -18,8 +18,8 @@
 
 #include "spdlog/spdlog.h"
 
-#include "format.h"
-#include "codec.h"
+#include "libavcpp/format.h"
+#include "libavcpp/codec.h"
 
 #include "rapidxml_ns.hpp"
 

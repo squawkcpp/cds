@@ -20,7 +20,7 @@
 
 #include <boost/algorithm/string.hpp>
 
-#include "format.h"
+#include "libavcpp/format.h"
 
 #include "_utils.h"
 #include "datastore.h"

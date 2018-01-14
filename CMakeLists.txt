@@ -7,96 +7,116 @@ project( cds )
 
 SET(CDS_TAG_VERSION "master" CACHE STRING "The tagged version.")
 
-# -------------------------------------------------------------------------
 # -----------------------   Options and Parameters  -----------------------
-# -------------------------------------------------------------------------
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-option(build_tests "Build all squawk unit tests." ON)
+option(build_tests "Build all squawk unit tests." OFF)
 
-# -------------------------------------------------------------------------
 # -----------------------   Config Toolchain        -----------------------
-# -------------------------------------------------------------------------
-if(CMAKE_COMPILER_IS_GNUCXX)
-    add_definitions(-std=c++14)
-endif()
 
-add_definitions(-DASIO_STANDALONE)
-add_definitions(-DCDS_VERSION="${CDS_TAG_VERSION}")
+include(CTest)
+
+set (CMAKE_CXX_STANDARD 14)
+set (CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set (THREADS_PREFER_PTHREAD_FLAG ON)
+find_package (Threads REQUIRED)
+
+link_libraries("-static")
+
+find_program(CCACHE_FOUND ccache)
+if(CCACHE_FOUND)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+endif(CCACHE_FOUND)
+
+add_definitions( -DHTTP_BUFFER_SIZE=4096 -DHTTP_CLIENT_TIMEOUT=5
+                 -DHTTP_SERVER_THREAD_POOL_SIZE=10 -DASIO_STANDALONE
+                 -DCDS_VERSION="${CDS_TAG_VERSION}" -DSPDLOG_FMT_EXTERNAL
+                 -DFMT_HEADER_ONLY)
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     add_definitions(-DSPDLOG_TRACE_ON)
     add_definitions(-DSPDLOG_DEBUG_ON)
-    add_definitions(-DDEBUG)
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 
-#add headers for editor
-FILE(GLOB_RECURSE HeaderFiles "${PROJECT_SOURCE_DIR}/src/*.h")
-add_custom_target(cds_headers SOURCES ${HeaderFiles})
-
-# -------------------------------------------------------------------------
 # ---------------------   External Dependencies       ---------------------
-# -------------------------------------------------------------------------
-include(ExternalProject)
-include(cmake/external/LibAvCpp.cmake)
-include(cmake/external/re2.cmake)
-include(cmake/external/gtest.cmake)
-include(cmake/external/asio.cmake)
-include(cmake/external/fmt.cmake)
-include(cmake/external/lightning.cmake)
-include(cmake/external/rapidjson.cmake)
-include(cmake/external/rapidxml_ns.cmake)
-include(cmake/external/cxxopts.cmake)
-include(cmake/external/redox.cmake)
-include(cmake/external/spdlog.cmake)
-include(cmake/external/easyexif.cmake)
 
-SET( INCLUDES ${INCLUDES} ${GTEST_INCLUDE_DIR} ${FMT_INCLUDE_DIR}
-            ${RE2_INCLUDE_DIR} ${ASIO_INCLUDE_DIR} ${LIGHTNING_INCLUDE_DIR}
-            ${RAPIDJSON_INCLUDE_DIR} ${RAPIDXML_INCLUDE_DIR} ${LIBAV_INCLUDE_DIR}
-            ${CXXOPTS_INCLUDE_DIR} ${REDOX_INCLUDE_DIR} ${SPDLOG_INCLUDE_DIR}
-            ${EXIF_INCLUDE_DIR})
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
+
+#include(ExternalProject)
+#include(cmake/openssl.cmake)
+#include(cmake/external/boost.cmake)
+#include(cmake/external/libev.cmake)
+#include(cmake/hiredis.cmake)
+#include(cmake/external/redox.cmake)
+
+##include(cmake/external/LibAvCpp.cmake)
+#include(cmake/external/re2.cmake)
+#include(cmake/external/gtest.cmake)
+#include(cmake/external/asio.cmake)
+#include(cmake/external/fmt.cmake)
+#include(cmake/external/lightning.cmake)
+#include(cmake/external/rapidjson.cmake)
+#include(cmake/external/rapidxml_ns.cmake)
+#include(cmake/external/cxxopts.cmake)
+#include(cmake/external/spdlog.cmake)
+#include(cmake/opencv2.cmake)
+#include(cmake/poppler.cmake)
+#include(cmake/external/easyexif.cmake)
+
+#SET(IMPORTED_INCLUDES
+#    ${OPENSSL_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${LIBEV_INCLUDE_DIR}
+#    ${HIREDIS_INCLUDE_DIR} ${REDOX_INCLUDE_DIR} ${RE2_INCLUDE_DIR}
+#    ${GTEST_INCLUDE_DIR} ${ASIO_INCLUDE_DIR} ${FMT_INCLUDE_DIR}
+#    ${LIGHTNING_INCLUDE_DIR} ${RAPIDXML_INCLUDE_DIR} ${RAPIDJSON_INCLUDE_DIR}
+#    ${CXXOPTS_INCLUDE_DIR} ${SPDLOG_INCLUDE_DIR} ${OPENCV2_INCLUDE_DIR}
+#    ${POPPLER_INCLUDE_DIR} ${EXIF_INCLUDE_DIR})
 
 # -------------------------------------------------------------------------
 # -----------------------   Find Dependencies       -----------------------
 # -------------------------------------------------------------------------
-find_package(Boost 1.54.0 COMPONENTS filesystem system)
-find_package(CURL REQUIRED)
-find_package(LibAVCodec COMPONENTS avformat avcodec avfilter avresample avutil )
-find_package(Poppler REQUIRED cpp)
-find_package(OpenSSL REQUIRED)
-find_package(LibArchive REQUIRED)
-find_package(OpenCV REQUIRED )
-find_package(Hiredis)
-find_package(Libev)
-find_package(LibMagic)
+#find_package(Boost 1.54.0 COMPONENTS filesystem system)
+#find_package(CURL REQUIRED)
+#find_package(LibAVCodec COMPONENTS avformat avcodec avfilter avresample avutil )
+#find_package(Poppler REQUIRED cpp)
+#find_package(OpenSSL REQUIRED)
+#find_package(LibArchive REQUIRED)
+#find_package(OpenCV REQUIRED )
+#find_package(Hiredis)
+#find_package(Libev)
+#find_package(LibMagic)
 
-SET( LIBS ${LIBS}
-    ${Boost_LIBRARIES} ${CURL_LIBRARIES} ${AVCODEC_LIBRARIES}
-    ${POPPLER_LIBRARIES} ${OPENSSL_LIBRARIES} ${LibArchive_LIBRARIES}
-    ${OpenCV_LIBS} ${LIBHIREDIS_LIBRARIES} ${LIBEV_LIBRARIES}
-    ${LibMagic_LIBRARY} -lpthread
-)
-if(build_tests)
-    SET( LIBS ${LIBS} gtest)
-endif()
+#SET( LIBS ${LIBS}
+#    ${Boost_LIBRARIES} ${CURL_LIBRARIES} ${AVCODEC_LIBRARIES}
+#    ${POPPLER_LIBRARIES} ${OPENSSL_LIBRARIES} ${LibArchive_LIBRARIES}
+#    ${OpenCV_LIBS} ${LIBHIREDIS_LIBRARIES} ${LIBEV_LIBRARIES}
+#    ${LibMagic_LIBRARY} -lpthread
+#)
+#if(build_tests)
+#    SET( LIBS ${LIBS} gtest)
+#endif()
 
-SET( INCLUDES ${INCLUDES}
-    ${Boost_INCLUDE_DIRS} ${CURL_INCLUDE_DIRS} ${AVCODEC_INCLUDES}
-    ${POPPLER_INCLUDES} ${OPENSSL_INCLUDES} ${LibArchive_INCLUDE_DIRS}
-    ${OpenCV_INCLUDES} ${LibMagic_INCLUDE_DIR}
-)
+#SET( INCLUDES ${INCLUDES}
+#    ${Boost_INCLUDE_DIRS} ${CURL_INCLUDE_DIRS} ${AVCODEC_INCLUDES}
+#    ${POPPLER_INCLUDES} ${OPENSSL_INCLUDES} ${LibArchive_INCLUDE_DIRS}
+#    ${OpenCV_INCLUDES} ${LibMagic_INCLUDE_DIR}
+#)
 
-# -------------------------------------------------------------------------
 # -----------------------   Compile Binary          -----------------------
-# -------------------------------------------------------------------------
-aux_source_directory( ${PROJECT_SOURCE_DIR}/src CDS_SOURCES )
-aux_source_directory( src/modules/ CDS_SOURCES_MODULES )
-aux_source_directory( src/utils/ CDS_SOURCES_UTILS )
-include_directories( ${INCLUDES} ${GTEST_INCLUDE_DIR})
-add_executable(cds ${PROJECT_SOURCE_DIR}/main.cpp ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
-target_link_libraries(cds cxxopts re2 lightning redox fmt spdlog exif
-                      asio rapidjson rapidxml LibAvCpp ${LIBS})
-install(TARGETS cds RUNTIME DESTINATION bin)
+
+add_subdirectory(src)
+
+#aux_source_directory( ${PROJECT_SOURCE_DIR}/src CDS_SOURCES )
+#aux_source_directory( src/modules/ CDS_SOURCES_MODULES )
+#aux_source_directory( src/utils/ CDS_SOURCES_UTILS )
+
+#include_directories( ${IMPORTED_INCLUDES})
+#add_executable(cds ${PROJECT_SOURCE_DIR}/main.cpp)
+#target_link_libraries(cds cxxopts cds_app)
+#install(TARGETS cds RUNTIME DESTINATION bin)
 
 # -------------------------------------------------------------------------
 # -----------------------   Manage Test Cases       -----------------------
@@ -114,14 +134,14 @@ endif()
 # -------------------------------------------------------------------------
 # -----------------------   Doxygen                 -----------------------
 # -------------------------------------------------------------------------
-find_package(Doxygen)
-if(DOXYGEN_FOUND)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-add_custom_target(doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-    COMMENT "Generating API documentation with Doxygen" VERBATIM
-)
-endif(DOXYGEN_FOUND)
+#find_package(Doxygen)
+#if(DOXYGEN_FOUND)
+#configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+#add_custom_target(doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+#    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+#    COMMENT "Generating API documentation with Doxygen" VERBATIM
+#)
+#endif(DOXYGEN_FOUND)
 
 # -------------------------------------------------------------------------
 # -----------------------   Generate Package        -----------------------
