@@ -1,4 +1,4 @@
-#! /bin/bash -e
+#! /bin/sh -e
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 
