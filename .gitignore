@@ -11,3 +11,4 @@ CMakeLists.txt.user
 *.autosave
 *.bak
 *.orig
+.build

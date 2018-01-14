@@ -3,7 +3,7 @@
 # -------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.3)
 
-project( cds )
+project( squawk-cds )
 
 SET(CDS_TAG_VERSION "master" CACHE STRING "The tagged version.")
 
