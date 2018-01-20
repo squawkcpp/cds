@@ -11,9 +11,4 @@ aux_source_directory( ${PROJECT_SOURCE_DIR}/utils/ CDS_SOURCES_UTILS )
 
 include_directories( ${IMPORTED_INCLUDES} ${GTEST_INCLUDE_DIR})
 add_library(${PROJECT_NAME} ${CDS_SOURCES} ${CDS_SOURCES_MODULES} ${CDS_SOURCES_UTILS})
-target_link_libraries(${PROJECT_NAME}
-    re2 lightning spdlog fmt asio
-    pplr opencv rapidjson rapidxml redox
-    ${CURL_LIBRARIES} ${LIBEV_LIBRARIES}
-    hredis libev boost filesystem system ssl crypto Threads::Threads -ldl
-)
+target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS} Threads::Threads -ldl)

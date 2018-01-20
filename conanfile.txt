@@ -12,8 +12,7 @@ Redox/master@conan-cpp/latest
 Cxxopts/master@conan-cpp/latest
 LibAvCpp/master@conan-cpp/latest
 lightningcpp/master@conan-cpp/latest
-OpenCV/3.4.0@conan-cpp/latest
-Easyexif/master@conan-cpp/latest
+OpenCV/3.2.0@conan-cpp/latest
 Magic/5.32@conan-cpp/latest
 
 [generators]

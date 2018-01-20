@@ -27,7 +27,7 @@ void ModImages::import ( data::redis_ptr redis, const config_ptr config, const s
         auto _image = utils::Image( _node[param::PATH] );
 
         //store values
-        utils::exif( _node );
+        //TODO utils::exif( _node );
 
         _node[param::WIDTH] = std::to_string ( _image.width() );
         _node[param::HEIGHT] = std::to_string ( _image.height() );
