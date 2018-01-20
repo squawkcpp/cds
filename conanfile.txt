@@ -54,3 +54,6 @@ Boost:without_timer=False
 Boost:without_type_erasure=False
 Boost:without_wave=False
 
+[imports]
+share/misc, *.mgc -> ./share/misc
+
